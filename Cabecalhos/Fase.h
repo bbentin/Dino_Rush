@@ -12,5 +12,6 @@ public:
     virtual void executar() = 0;
     void gerenciar_colisoes();
     virtual void gerar_fase() = 0;
+    void imprimirse();
 };
 

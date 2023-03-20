@@ -8,3 +8,8 @@
 7 - Fase 1
 8 - Fase 2
 9 - Menu
+
+
+########## Funcionamento de Colisões ###########
+Inimigos irão ter funções para colidir com: Obstáculos, Jogadores, Inimigos(?).
+Jogadores irão ter funções para colidir com: Obstáculos, Inimigos, Projéteis. 
