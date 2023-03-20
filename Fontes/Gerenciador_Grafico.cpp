@@ -1,4 +1,4 @@
-#include "Gerenciador_Grafico.h"
+#include "../Cabecalhos/Gerenciador_Grafico.h"
 
 Gerenciadores::Gerenciador_Grafico::Gerenciador_Grafico() :Tela(sf::VideoMode(900,900),"Jogo") {
 

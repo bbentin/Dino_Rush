@@ -18,7 +18,6 @@ public:
 
 	virtual void incializar() = 0;
 	virtual void executar() = 0;
-	void imprimirse();
-	
+	void set_Gerenciador(Gerenciadores::Gerenciador_Grafico* gerenciador);
 };
 
