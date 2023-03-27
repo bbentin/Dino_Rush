@@ -10,6 +10,7 @@ protected:
 	int id;
 	sf::Sprite corpo;
 	Gerenciadores::Gerenciador_Grafico* Grafico;
+	const sf::Vector2f Nulo2f;
 
 public:
 
