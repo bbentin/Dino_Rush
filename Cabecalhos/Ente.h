@@ -5,11 +5,12 @@
 using namespace std;
 
 class Ente{
+private:
+	static Gerenciadores::Gerenciador_Grafico* Grafico;
 protected:
 
 	int id;
 	sf::Sprite corpo;
-	Gerenciadores::Gerenciador_Grafico* Grafico;
 	const sf::Vector2f Nulo2f;
 
 public:
@@ -20,6 +21,8 @@ public:
 	virtual void incializar() = 0;
 	virtual void executar() = 0;
 	void imprimirse();
-	
+	void static setGerenciador(Gerenciadores::Gerenciador_Grafico* Gra);
+
+
 };
 

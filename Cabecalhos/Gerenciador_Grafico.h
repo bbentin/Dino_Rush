@@ -15,8 +15,8 @@ namespace Gerenciadores {
 		void Gerar_Obstaculo();
 		void Gerar_Projetil();
 		void Gerar_Menu();
-		void Gerar();
 		void Imprimir(sf::Sprite body);
+		void Executar();
 
 	};
 }
