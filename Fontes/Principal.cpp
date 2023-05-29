@@ -1,17 +1,23 @@
 #include "../Cabecalhos/Principal.h"
 
-Principal::Principal() :relogio_global(), GGrafico() {
-	Ente::setGerenciador(getGrafico());
+Principal::Principal():GGrafico(),Primeiro(),Segundo(){
+	Primeira_fase = nullptr;
+	Ente::setGerenciador(&GGrafico);
+	GEventos.Singleton();
+	GEventos.setTela(GGrafico.getTela());
+	GEventos.setJogador(&Primeiro); GEventos.setJogador(&Segundo);
 }
 Principal::~Principal() {
 }
-
-sf::Clock* Principal::getRelogio() {
-	return &relogio_global;
-}
-
 Gerenciadores::Gerenciador_Grafico* Principal::getGrafico(){
 	return &GGrafico;
 }
 
+void Principal::Executar() {
+	while (true) {
+		GGrafico.Limpar_Tela();
+		GEventos.executar_fases();
+		GGrafico.Exibir();
+	}
+}
 

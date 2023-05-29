@@ -1,0 +1,17 @@
+Como o gerenciador gráfico irá funcionar
+Preenchimento do .doc
+
+
+
+
+ajustar posicções no gerenciador de colisões 
+
+Gerenciador de eventos -> pollEventos dentro do gerenciador -> fila de eventos 
+menu -> usar state, cada fase e menu seriam estados 
+classe estado usando ponteiros para alterar estado atual
+desing pattern state machine 
+Inimigos e obstaculos diferentes 
+Menu com botões 
+Projetil também tem de ter gravidade
+Não deletar o projétil - reutilizar 
+Força de empuxo -> plataforma 

@@ -5,6 +5,10 @@
 4 - Projétil 
 5 - Obstáculo 1 
 6 - Obstáculo 2
-7 - Fase 1
+7 - Caverna
 8 - Fase 2
 9 - Menu
+
+
+ordem de excução:
+executar, colidir, desenhar

@@ -12,6 +12,7 @@ namespace Entidades {
 			int num_vidas;
 			float Poder;
 			bool flag_pulo;
+			static const int forca_movimento;
 		public:
 			void pular();
 			void alterar_pulo();
@@ -19,7 +20,11 @@ namespace Entidades {
 			void mover_esquerda();
 			void causa_dano(Personagem* afetado);
 			void recebe_dano(int dano);
-			Personagem();
+			virtual void executar() = 0;
+			
+
+
+			Personagem(const int i = 0,sf::Vector2f posi = sf::Vector2f(0,0));
 			~Personagem();
 		};
 	

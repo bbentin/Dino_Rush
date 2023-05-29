@@ -67,8 +67,6 @@ namespace Listas {
 				}
 				pAux = pAux->getProx();
 			}
-
-
 		}
 
 		void LimpaLista();
