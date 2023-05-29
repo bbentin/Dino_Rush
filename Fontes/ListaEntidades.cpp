@@ -1,1 +1,28 @@
 #include "../Cabecalhos/ListaEntidades.h"
+
+Listas::ListaEntidades::ListaEntidades():LEs(){
+}
+
+Listas::ListaEntidades::~ListaEntidades(){
+}
+
+bool Listas::ListaEntidades::InserirEntidade(Entidades::Entidade* inserida){
+	return LEs.InserirElemento(inserida);
+}
+
+bool Listas::ListaEntidades::RemoverEntidade(Entidades::Entidade* removida) {
+	return LEs.RemoverElemento(removida);
+}
+
+void Listas::ListaEntidades::executar(){
+	Listas::Lista<Entidades::Entidade>::Elemento<Entidades::Entidade>* pAux = LEs.getPrimeiro();
+
+	if (pAux != nullptr) {
+		while (pAux != LEs.getAtual()){
+			pAux->getInfo()->executar();
+			pAux = pAux->getProx();
+		}
+	}
+}
+
+

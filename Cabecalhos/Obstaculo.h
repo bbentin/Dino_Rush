@@ -7,8 +7,10 @@ namespace Entidades {
 			public Entidade {
 
 		public:
-			Obstaculo();
+			Obstaculo(const int i = 0);
 			~Obstaculo();
+
+			void executar();
 		};
 	}
 }

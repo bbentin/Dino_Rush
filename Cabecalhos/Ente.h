@@ -1,24 +1,27 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <iostream>
-#include "Gerenciador_Grafico.h"
 using namespace std;
-
+#include "Gerenciador_Grafico.h"
 class Ente{
-protected:
+private:
 
-	int id;
-	sf::Sprite corpo;
-	Gerenciadores::Gerenciador_Grafico* Grafico;
+protected:
+	const int id;
+	sf::Sprite Imagem;
 	const sf::Vector2f Nulo2f;
+	static Gerenciadores::Gerenciador_Grafico* Grafico;
 
 public:
 
-	Ente();
+	Ente(const int i = 0);
 	~Ente();
 
-	virtual void incializar() = 0;
 	virtual void executar() = 0;
-	void set_Gerenciador(Gerenciadores::Gerenciador_Grafico* gerenciador);
+	const int getId();
+	void desenhar();
+	sf::Sprite getSprite();
+	static void setGerenciador(Gerenciadores::Gerenciador_Grafico* Gra);
+
 };
 
