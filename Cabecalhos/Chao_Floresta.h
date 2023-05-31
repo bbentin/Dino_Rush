@@ -1,18 +1,17 @@
 #pragma once
-#include "./Cabecalhos/Obstaculo.h"
-
+#include "Obstaculo.h"
 
 namespace Entidades {
     namespace Obstaculos {
-        class Lama :
+        class Chao_Floresta :
             public Obstaculo {
-
         private:
 
         public:
-            Lama();
-            ~Lama();
-            void desacelera();
+            Chao_Floresta();
+            ~Chao_Floresta();
+
+            void executar();
         };
     }
 }

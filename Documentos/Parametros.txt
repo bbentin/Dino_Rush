@@ -1,14 +1,34 @@
 ########### Lista de id's ###########
 1 - Jogador
-2 - Inimigo 1
-3 - Inimigo 2
-4 - Projétil 
-5 - Obstáculo 1 
-6 - Obstáculo 2
-7 - Caverna
-8 - Fase 2
-9 - Menu
+2 - Jogador2
+3 - Gosma
+4 - Decapitado 
+5 - Mosca 
+6 - Chefao
+7 - Espinhos
+8 - Lama
+9 - Chao_Deserto
+10 - Chao_Floresta 
+11 - Deserto
+12 - Floresta
+13 - Projetil
+14 - Menu
 
+
+############ Caracteres para criar Entidades ###########
+1 - Jogador
+2 - Jogador2
+3 - Gosma
+4 - Decapitado
+5 - Mosca 
+6 - Chefao
+7 - Espinhos
+8 - Lama
+9 - Chao_Deserto
+A - Chao_Floresta
+
+
+Tamano tela (1504,928)
 
 ordem de excução:
 executar, colidir, desenhar

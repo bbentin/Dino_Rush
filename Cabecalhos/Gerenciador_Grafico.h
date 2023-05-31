@@ -4,23 +4,25 @@ namespace Gerenciadores {
 	class Gerenciador_Grafico {
 	private:
 		sf::RenderWindow Tela;
-		sf::Image Jogador1, Jogador2, Inimigo1, Inimigo2, Caverna,
-				  Inimigo3, Obstaculo1, Obstaculo2, Projetil, Menu;
+		sf::Image Jogador1, Jogador2, Mosca, Gosma, Deserto, Floresta, Chao_Floresta, Chao_Deserto, Lama,
+			Decapitado, Chefao, Espinhos, Obstaculo2, Projetil, Menu;
 	public:
 
 		Gerenciador_Grafico();
 		~Gerenciador_Grafico();
+		
+		void Exibir();
+		void Fecha_Tela();
+		void Gerar_Menu();
+		void Gerar_Fases();
+		void Limpar_Tela();
 		void Gerar_Jogador();
 		void Gerar_Inimigos();
-		void Gerar_Obstaculos();
 		void Gerar_Projetil();
-		void Gerar_Menu();
-		void DesenharEnte(sf::Sprite sprite);
-		void Exibir();
-		void Limpar_Tela();
-		void Fecha_Tela();
+		void Gerar_Obstaculos();
 		sf::RenderWindow* getTela();
-
+		void DesenharEnte(sf::Sprite sprite);
+		sf::Image getImagem(int identificador);
 		
 
 	};

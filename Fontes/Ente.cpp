@@ -1,4 +1,4 @@
-#include "../Cabecalhos/Ente.h"
+#include"../Cabecalhos/Ente.h"
 
 Ente::Ente(const int i):id(i),Nulo2f(0.0, 0.0) {
 }
@@ -22,6 +22,11 @@ void Ente::setGerenciador(Gerenciadores::Gerenciador_Grafico* Gra){
 
 const int Ente::getId() {
 	return id;
+}
+
+void Ente::Inicializa() {
+	Textura.loadFromImage(Grafico->getImagem(getId()));
+	Imagem.setTexture(Textura);
 }
 
 Gerenciadores::Gerenciador_Grafico* Ente::Grafico = nullptr;
