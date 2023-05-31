@@ -2,8 +2,6 @@
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi):Personagem(i,posi),pontos(0),andar_direita(false),andar_esquerda(false) {
 	num_vidas = 5; 
-	Textura.loadFromFile("C:/Users/rbben/Documents/Projetos/Jogo_C++/Jogo/Jogo_Simao/Imagens/Jogador/Dino1_estatico.png");
-	Imagem.setTexture(Textura);
 	setPosi(50, 400);
 	if (!Jogador2) {
 		Jogador2 = true;
@@ -35,6 +33,7 @@ bool Entidades::Personagens::Jogador::Colisoes(Entidade* colidida) {
 	return bateu; //retora se houve colisão 
 }
 
+
 void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* odiada) {
 	Colide(odiada);
 }
@@ -62,6 +61,7 @@ void Entidades::Personagens::Jogador::executar() {
 	else if (andar_esquerda) {
 		soma_forca(sf::Vector2f(-10, 0));
 	}
+////	soma_forca(sf::Vector2f(10, 0));
 	Aplicar_Forca();
 	desenhar();
 }
