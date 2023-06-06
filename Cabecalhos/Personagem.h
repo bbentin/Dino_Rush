@@ -20,7 +20,7 @@ namespace Entidades {
 			void mover_esquerda();
 			void causa_dano(Personagem* afetado);
 			void recebe_dano(int dano);
-			virtual void executar() = 0;
+			virtual void executar();
 			
 
 
