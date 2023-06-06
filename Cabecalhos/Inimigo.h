@@ -13,7 +13,8 @@ namespace Entidades {
 			Inimigo(const int i = 0, sf::Vector2f posi = sf::Vector2f(0,0));
 			~Inimigo();
 
-			virtual void executar();
+
+			void executar();
 		};
 	}
 }

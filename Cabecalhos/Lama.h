@@ -9,6 +9,7 @@ namespace Entidades {
 		public:
 			Lama();
 			~Lama();
+
 			void desacelerar();
 			void executar();
 		};

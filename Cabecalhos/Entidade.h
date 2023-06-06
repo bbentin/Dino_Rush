@@ -2,6 +2,8 @@
 #include "Ente.h"
 #include <stdlib.h>
 namespace Entidades {
+
+
 	class Entidade :
 		public Ente {
 	private:
@@ -11,7 +13,8 @@ namespace Entidades {
 		static float intervalo;
 		static const sf::Vector2f Gravidade;
 		sf::Vector2f posicao;
-
+		sf::Texture Textura;
+		
 		void reseta_forca_res();
 		void Aplicar_Forca();
 		void Aplicar_Gravidade();
@@ -23,16 +26,16 @@ namespace Entidades {
 		bool Colide(Entidade* colidida);
 
 	public:
-		Entidade(const int i = 0, sf::Vector2f posi = sf::Vector2f(0, 0));
+		Entidade(const int i = 0,sf::Vector2f posi = sf::Vector2f(0,0));
 		~Entidade();
 		sf::Vector2f getPosicao();
 		sf::Vector2f getTamanho();
-		virtual void executar();
+		virtual void executar() = 0;
 		void setPosi(sf::Vector2f arrumada);
 		void setPosi(float a, float b);
 		void parar_movimento();
 		static void setIntervalo(float tempo);
-
 	};
+
 
 }

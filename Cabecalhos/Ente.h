@@ -10,7 +10,6 @@ protected:
 	const int id;
 	sf::Sprite Imagem;
 	const sf::Vector2f Nulo2f;
-	sf::Texture Textura;
 	static Gerenciadores::Gerenciador_Grafico* Grafico;
 
 public:
@@ -23,6 +22,6 @@ public:
 	void desenhar();
 	sf::Sprite getSprite();
 	static void setGerenciador(Gerenciadores::Gerenciador_Grafico* Gra);
-	virtual void Inicializa();
+
 };
 
