@@ -1,14 +1,15 @@
 #pragma once
 #include "Fase.h"
 namespace Fases {
-    class Caverna :
+    class Deserto :
         public Fase {
 
     private:
 
     public:
 
-        Caverna();
-        ~Caverna();
+        Deserto();
+        ~Deserto();
+        void executar();
     };
 }
