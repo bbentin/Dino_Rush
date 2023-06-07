@@ -1,6 +1,7 @@
 #pragma once
 #include "Ente.h"
 #include <stdlib.h>
+
 namespace Entidades {
 	class Entidade :
 		public Ente {
@@ -10,28 +11,38 @@ namespace Entidades {
 		int massa;
 		static float intervalo;
 		static const sf::Vector2f Gravidade;
-		sf::Vector2f posicao;
-
+		sf::Vector2f posicao,velocidade;
+		bool no_ar;
 		void reseta_forca_res();
-		void Aplicar_Forca();
+		void reseta_forca_res_x();
+		void reseta_forca_res_y();
 		void Aplicar_Gravidade();
 		void soma_forca(sf::Vector2f forza);
+		void set_velocidade(sf::Vector2f vel);
 		void Calc_Posicao(sf::Vector2f Velocidade);
 		sf::Vector2f Calc_Aceleracao(sf::Vector2f forca_r);
 		sf::Vector2f Calc_Velocidade(sf::Vector2f Aceleracao);
 		sf::Vector2f Limitar_Velocidade(sf::Vector2f Velocidade);
-		bool Colide(Entidade* colidida);
 
 	public:
 		Entidade(const int i = 0, sf::Vector2f posi = sf::Vector2f(0, 0));
 		~Entidade();
+
+
+		sf::Vector2f Colide(Entidade* proxima);
+		sf::Vector2f Get_Velocidade();
 		sf::Vector2f getPosicao();
 		sf::Vector2f getTamanho();
-		virtual void executar();
+		
+		void setVelo(sf::Vector2f velo);
 		void setPosi(sf::Vector2f arrumada);
 		void setPosi(float a, float b);
+		void Calc_Fisica();;
 		void parar_movimento();
+		
 		static void setIntervalo(float tempo);
+		virtual void Colisao(Entidade* colidida,sf::Vector2f limites) = 0;
+		virtual void executar();
 
 	};
 

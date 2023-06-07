@@ -12,6 +12,7 @@ namespace Entidades {
             ~Gosma();
             void padrao_acao();
             void executar();
+            void Colisao(Entidade* colidida, sf::Vector2f limites);
         };
     }
 }

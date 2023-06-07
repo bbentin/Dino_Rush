@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Gerenciador_Eventos.h"
 
-Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos():evento() {
+Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos() {
 	Jogador1 = nullptr; Jogador2 = nullptr; Unico = nullptr; PTela = nullptr;
 }
 Gerenciadores::Gerenciador_Eventos::~Gerenciador_Eventos() {
@@ -35,59 +35,64 @@ void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Joga
 	}
 }
 
-void Gerenciadores::Gerenciador_Eventos::executar_fases(){
-	PTela->pollEvent(evento);
 
-	if (evento.type == sf::Event::KeyPressed) {
-		switch (evento.key.code) {
-		case sf::Keyboard::A:
-			Jogador1->setMovimento_esquerda(true);
-			break;
-		case sf::Keyboard::D :
-			Jogador1->setMovimento_direita(true);
-			break;
-		case sf::Keyboard::W :
-			Jogador1->pular();
-			break;
-		case sf::Keyboard::Up :
-			if (Entidades::Personagens::Jogador::Jogador2) {
-				Jogador2->pular();
+void Gerenciadores::Gerenciador_Eventos::executar_fases() {
+	sf::Event evento;
+	while (PTela->pollEvent(evento)){
+		if (evento.type == sf::Event::KeyPressed) {
+			switch (evento.key.code) {
+			case sf::Keyboard::A:
+				Jogador1->setMovimento_esquerda(true);
+				break;
+			case sf::Keyboard::D:
+				Jogador1->setMovimento_direita(true);
+				break;
+			case sf::Keyboard::W:
+				Jogador1->pular();
+				break;
+			case sf::Keyboard::Up:
+				if (Entidades::Personagens::Jogador::Jogador2) {
+					Jogador2->pular();
+				}
+				break;
+			case sf::Keyboard::Left:
+				if (Entidades::Personagens::Jogador::Jogador2) {
+					Jogador2->setMovimento_esquerda(true);
+				}
+				break;
+			case sf::Keyboard::Right:
+				if (Entidades::Personagens::Jogador::Jogador2) {
+					Jogador2->setMovimento_direita(true);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case sf::Keyboard::Left :
-			if (Entidades::Personagens::Jogador::Jogador2) {
-				Jogador2->setMovimento_esquerda(true);
-			}
-			break;
-		case sf::Keyboard::Right :
-			if (Entidades::Personagens::Jogador::Jogador2) {
-				Jogador2->setMovimento_direita(true);
-			}
-			break;
-		default:
-		break;
 		}
-	}
-	else if (evento.type == sf::Event::KeyReleased) {
-		switch (evento.key.code){
-		case sf::Keyboard::A:
-			Jogador1->setMovimento_esquerda(false);
-			break;
-		case sf::Keyboard::D:
-			Jogador1->setMovimento_direita(false);
-			break;
-		case sf::Keyboard::Left:
-			if (Entidades::Personagens::Jogador::Jogador2) {
-				Jogador2->setMovimento_esquerda(false);
+		else if (evento.type == sf::Event::KeyReleased) {
+			switch (evento.key.code) {
+			case sf::Keyboard::A:
+				Jogador1->setMovimento_esquerda(false);
+				break;
+			case sf::Keyboard::D:
+				Jogador1->setMovimento_direita(false);
+				break;
+			case sf::Keyboard::Left:
+				if (Entidades::Personagens::Jogador::Jogador2) {
+					Jogador2->setMovimento_esquerda(false);
+				}
+				break;
+			case sf::Keyboard::Right:
+				if (Entidades::Personagens::Jogador::Jogador2) {
+					Jogador2->setMovimento_direita(false);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case sf::Keyboard::Right:
-			if (Entidades::Personagens::Jogador::Jogador2) {
-				Jogador2->setMovimento_direita(false);
-			}
-			break;
-		default:
-			break;
+		}
+		else if (evento.type == sf::Event::Closed) {
+			PTela->close();
 		}
 	}
 }

@@ -1,17 +1,17 @@
 #pragma once
-#include "Obstaculo.h"
-
+#include "Inimigo.h"
 namespace Entidades {
-    namespace Obstaculos {
-        class Chao_Floresta :
-            public Obstaculo {
+    namespace Personagens {
+        class Moscona :
+            public Inimigo {
         private:
 
         public:
-            Chao_Floresta();
-            ~Chao_Floresta();
+            Moscona();
+            ~Moscona();
 
             void executar();
+            void padrao_acao();
             void Colisao(Entidade* colidida, sf::Vector2f limites);
         };
     }

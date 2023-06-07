@@ -1,6 +1,10 @@
 #include "../Cabecalhos/Personagem.h"
 
-Entidades::Personagens::Personagem::Personagem(const int i,sf::Vector2f posi):Entidade(i,posi),Poder(2.5),num_vidas(3),flag_pulo(false),Dano(1){
+void Entidades::Personagens::Personagem::operator--(){
+	num_vidas--;
+}
+
+Entidades::Personagens::Personagem::Personagem(const int i,sf::Vector2f posi):Entidade(i,posi),num_vidas(3),Dano(1){
 }
 Entidades::Personagens::Personagem::~Personagem(){
 }
@@ -14,11 +18,11 @@ void Entidades::Personagens::Personagem::mover_direita() {
 }
 
 void Entidades::Personagens::Personagem::pular(){
-	if (!flag_pulo) {
-		soma_forca(sf::Vector2f(0.0, forca_movimento));
-		alterar_pulo();
+	if (!no_ar) {
+		soma_forca(sf::Vector2f(0.0, -500));
+		no_ar = true;
 	}
-	else {}
+	else { return; }
 }
 
 void Entidades::Personagens::Personagem::causa_dano(Personagem* afetado){
@@ -33,8 +37,4 @@ void Entidades::Personagens::Personagem::executar(){
 }
 
 
-void Entidades::Personagens::Personagem::alterar_pulo() {
-	flag_pulo ? false : true;
-}
-
-const int Entidades::Personagens::Personagem::forca_movimento = 3.0;
+const int Entidades::Personagens::Personagem::forca_movimento = 4.0;
