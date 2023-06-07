@@ -10,7 +10,7 @@ void Entidades::Obstaculos::Obstaculo::Inicializa(){
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
 	if (getId() != 7) {
-		Imagem.setScale(0.25, 0.25);
+		Imagem.setScale(0.5, 0.5);
 	}
 }
 

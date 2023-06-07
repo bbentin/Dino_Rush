@@ -9,11 +9,12 @@
 8 - Lama
 9 - Chao_Deserto
 10 - Chao_Floresta 
-11 - Deserto
-12 - Floresta
+11 - Floresta
+12 - Deserto
 13 - Projetil
 14 - Menu
-
+15 - Gosmona
+16 - Moscona
 
 ############ Caracteres para criar Entidades ###########
 1 - Jogador
@@ -26,9 +27,14 @@
 8 - Lama
 9 - Chao_Deserto
 A - Chao_Floresta
+B - Moscona
+C - Gosmona
 
 
 Tamano tela (1504,928)
 
 ordem de excução:
 executar, colidir, desenhar
+
+
+Quando for salvar, salvar os ID's e posições de entidades vivas

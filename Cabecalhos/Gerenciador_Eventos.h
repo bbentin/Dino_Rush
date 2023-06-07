@@ -10,7 +10,6 @@ namespace Gerenciadores {
 		Entidades::Personagens::Jogador* Jogador1;
 		Entidades::Personagens::Jogador* Jogador2;
 		sf::RenderWindow* PTela;
-		sf::Event evento;
 	public:
 
 		~Gerenciador_Eventos();

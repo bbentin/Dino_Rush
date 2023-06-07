@@ -5,7 +5,7 @@ namespace Gerenciadores {
 	private:
 		sf::RenderWindow Tela;
 		sf::Image Jogador1, Jogador2, Mosca, Gosma, Deserto, Floresta, Chao_Floresta, Chao_Deserto, Lama,
-			Decapitado, Chefao, Espinhos, Obstaculo2, Projetil, Menu;
+			Decapitado, Chefao, Espinhos, Obstaculo2, Projetil, Menu, Gosmona, Moscona;
 	public:
 
 		Gerenciador_Grafico();

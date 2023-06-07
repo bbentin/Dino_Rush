@@ -4,13 +4,16 @@
 #include "Gerenciador_Eventos.h"
 #include "ListaEntidades.h"
 #include "Deserto.h"
+#include "Floresta.h"
 #include <iostream>
 class Principal{
 private:
 	Gerenciadores::Gerenciador_Grafico GGrafico;
 	Gerenciadores::Gerenciador_Eventos GEventos;
-	Fases::Deserto* Primeira_fase;
+	Fases::Deserto* Segunda_fase;
+	Fases::Floresta* Primeira_fase;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
+	enum estado{menu,fase1,fase2,menu_salvar};
 
 public:
 	Principal();

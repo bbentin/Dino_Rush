@@ -10,5 +10,8 @@ void Entidades::Obstaculos::Lama::desacelerar() {
 }
 
 void Entidades::Obstaculos::Lama::executar() {
+	desenhar();
+}
 
+void Entidades::Obstaculos::Lama::Colisao(Entidade* colidida, sf::Vector2f limites){
 }

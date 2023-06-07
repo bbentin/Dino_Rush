@@ -1,19 +1,22 @@
 #include "../Cabecalhos/Gerenciador_Grafico.h"
-Gerenciadores::Gerenciador_Grafico::Gerenciador_Grafico():Tela(sf::VideoMode(1504,928),"Jogo"),
-Jogador1() {
+Gerenciadores::Gerenciador_Grafico::Gerenciador_Grafico():Tela(sf::VideoMode(1280,960),"Jogo"),
+Jogador1() {Tela.setFramerateLimit(100);
 	Gerar_Inimigos();	Gerar_Menu();	Gerar_Jogador();	Gerar_Obstaculos(); Gerar_Projetil();	Gerar_Fases();
 }
 Gerenciadores::Gerenciador_Grafico::~Gerenciador_Grafico() {
 }
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Jogador(){
-	Jogador1.loadFromFile("C:/Users/rbben/Documents/Projetos/Jogo_C++/Jogo/Jogo_Simao/Imagens/Jogador/Dino1_estatico.png");
+	Jogador1.loadFromFile("Imagens/Jogador/Dino1_estatico.png");
 }
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Inimigos(){
 	Decapitado.loadFromFile("Imagens/Inimigos/Decapitado/Decapitado.png");
 	Mosca.loadFromFile("Imagens/Inimigos/Mosca/Mosca.png");
+	Gosma.loadFromFile("Imagens/Inimigos/Gosma/Gosma.png");
 	Chefao.loadFromFile("Imagens/Inimigos/Chefao/Chefao.png");
+	Gosmona.loadFromFile("Imagens/Inimigos/Gosmona/Gosmona.png");
+	Moscona.loadFromFile("Imagens/Inimigos/Moscona/Moscona.png");
 }
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Obstaculos(){
@@ -25,14 +28,14 @@ void Gerenciadores::Gerenciador_Grafico::Gerar_Obstaculos(){
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Fases() {
 	Deserto.loadFromFile("Imagens/Fase/Deserto/Deserto.png");
-	Deserto.loadFromFile("Imagens/Fase/Floresta/Floresta.png");
+	Floresta.loadFromFile("Imagens/Fase/Floresta/Floresta.png");
 }
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Menu() {
 }
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Projetil() {
-
+	Projetil.loadFromFile("Imagens/Projetil/Projetil.png");
 }
 
 void Gerenciadores::Gerenciador_Grafico::DesenharEnte(sf::Sprite sprite) {
@@ -89,10 +92,10 @@ sf::Image Gerenciadores::Gerenciador_Grafico::getImagem(int identificacao){
 		return Chao_Floresta;
 			break;
 	case 11:
-		return Deserto;
+		return Floresta;
 			break;
 	case 12:
-		return Floresta;
+		return Deserto;
 			break;
 	case 13:
 		return Projetil;
@@ -100,8 +103,15 @@ sf::Image Gerenciadores::Gerenciador_Grafico::getImagem(int identificacao){
 	case 14:
 		return Menu;
 		break;
+	case 15:
+		return Moscona;
+		break;
+	case 16:
+		return Gosmona;
+		break;
 	default:
 		break;
 	}
 
 }
+

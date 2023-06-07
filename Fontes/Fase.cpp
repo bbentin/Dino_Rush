@@ -64,12 +64,12 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos){
 	switch (leitura) {
 	case '1':
 		if (Player1) {
-			Player1->setPosi(pos.x / 2, pos.y / 2);
+			Player1->setPosi(pos.x * 16, pos.y * 16);
 		}
 		break;
 	case '2':
 		if (Player2) {
-			Player2->setPosi(pos.x / 2, pos.y / 2);
+			Player2->setPosi(pos.x * 16, pos.y * 16);
 		}
 		break;
 	case '3':
@@ -96,6 +96,12 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos){
 	case 'A':
 		CriarObstaculo(4, pos);
 		break;
+	case 'B':
+		CriarInimigo(5, pos);
+		break;
+	case 'C':
+		CriarInimigo(6, pos);
+		break;
 	default:
 		std::cout << "Caracter invalido" << std::endl;
 		break;
@@ -106,24 +112,34 @@ void Fases::Fase::CriarInimigo(int tipo_ini, sf::Vector2f pos){
 	
 	switch (tipo_ini){
 	case 1: {
-		Gosma* pGosma = new Gosma();	pGosma->setPosi(pos.x / 2, pos.y / 2);
-		G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosma));
-		LEs.InserirEntidade(static_cast<Entidade*> (pGosma)); pGosma->Inicializa();
+	Gosma* pGosma = new Gosma();	pGosma->setPosi(pos.x * 16, pos.y * 16);
+	G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosma));
+	LEs.InserirEntidade(static_cast<Entidade*> (pGosma)); 
 	}break;
-	case 2:
-	{Decapitado* pDecapitado = new Decapitado();	pDecapitado->setPosi(pos);
+	case 2:{
+	Decapitado* pDecapitado = new Decapitado();	pDecapitado->setPosi(pos.x *16, pos.y * 16);
 	G_Colisoes.addInimigo(static_cast<Inimigo*>(pDecapitado));
-	LEs.InserirEntidade(static_cast<Entidade*> (pDecapitado));	pDecapitado->Inicializa();
+	LEs.InserirEntidade(static_cast<Entidade*> (pDecapitado));	
 	}break;
-	case 3:
-	{Mosca* pMosca = new Mosca(); pMosca->setPosi(pos);
+	case 3:{
+	Mosca* pMosca = new Mosca(); pMosca->setPosi(pos.x * 16, pos.y * 16);
 	G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
-	LEs.InserirEntidade(static_cast<Entidade*> (pMosca));	pMosca->Inicializa();
+	LEs.InserirEntidade(static_cast<Entidade*> (pMosca));	
 	}break;
-	case 4:
-	{Chefao* pChefao = new Chefao(); 	pChefao->setPosi(pos);
+	case 4:{
+	Chefao* pChefao = new Chefao(); 	pChefao->setPosi(pos.x * 16, pos.y * 16);
 	G_Colisoes.addInimigo(static_cast<Inimigo*>(pChefao));
-	LEs.InserirEntidade(static_cast<Entidade*> (pChefao));	pChefao->Inicializa();
+	LEs.InserirEntidade(static_cast<Entidade*> (pChefao));
+	}break;
+	case 5: {
+	Moscona* pMoscona = new Moscona();	pMoscona->setPosi(pos.x * 16, pos.y * 16);
+	G_Colisoes.addInimigo(static_cast<Inimigo*>(pMoscona));
+	LEs.InserirEntidade(static_cast<Entidade*> (pMoscona));
+	}break;
+	case 6: {
+	Gosmona* pGosmona = new Gosmona; pGosmona->setPosi(pos.x * 16, pos.y * 16);
+	G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosmona));
+	LEs.InserirEntidade(static_cast<Entidade*> (pGosmona));
 	}break;
 	default:
 		std::cout << "Inimigo invalido" << std::endl;
@@ -134,33 +150,39 @@ void Fases::Fase::CriarInimigo(int tipo_ini, sf::Vector2f pos){
 void Fases::Fase::CriarObstaculo(int tipo_obs, sf::Vector2f pos) {
 	switch (tipo_obs){
 	case 1: {
-		Espinhos* pEspinhos = new Espinhos();	pEspinhos->setPosi(pos);
+		Espinhos* pEspinhos = new Espinhos();	pEspinhos->setPosi(pos.x * 16, pos.y * 16);
 		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pEspinhos));
-		LEs.InserirEntidade(static_cast<Entidade*> (pEspinhos));	pEspinhos->Inicializa();
+		LEs.InserirEntidade(static_cast<Entidade*> (pEspinhos));
 	}
 		break;
 	case 2 :
-	{Lama* pLama = new Lama(); 	pLama->setPosi(pos);
+	{Lama* pLama = new Lama(); 	pLama->setPosi(pos.x * 16, pos.y * 16);
 	G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
-	LEs.InserirEntidade(static_cast<Entidade*> (pLama));	pLama->Inicializa();
+	LEs.InserirEntidade(static_cast<Entidade*> (pLama));
 	}break;
 	case 3 :
-	{Chao_Deserto* pCh_Deserto = new Chao_Deserto();  	pCh_Deserto->setPosi(pos);
+	{Chao_Deserto* pCh_Deserto = new Chao_Deserto();  	pCh_Deserto->setPosi(pos.x *16, pos.y * 16);
 	G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
-	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Deserto));	pCh_Deserto->Inicializa();
+	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Deserto));
 	}break;
 	case 4 :
-	{Chao_Floresta* pCh_Floresta = new Chao_Floresta();  	pCh_Floresta->setPosi(pos);
+	{Chao_Floresta* pCh_Floresta = new Chao_Floresta();  	pCh_Floresta->setPosi(pos.x *16, pos.y *16);
 	G_Colisoes.addObstaculo(pCh_Floresta);
-	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Floresta));	pCh_Floresta->Inicializa();
+	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Floresta));
 	}break;
 	default:
 		std::cout << "Obstaculo Invalido" << std::endl;
 	}
 }
 
+
+
+
 void Fases::Fase::Inicializa() {
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
+	G_Colisoes.addJogador(Player1);
 	gerar_fase(k_fase);
+	LEs.Inicializar();
+	Player1->Inicializa();
 }

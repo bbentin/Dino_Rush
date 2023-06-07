@@ -11,6 +11,7 @@ namespace Entidades {
             ~Espinhos();
 
             void executar();
+            void Colisao(Entidade* colidida, sf::Vector2f limites);
         };
     }
 }

@@ -13,6 +13,8 @@
 #include "Lama.h"
 #include "Mosca.h"
 #include "Projetil.h"
+#include "Moscona.h"
+#include "Gosmona.h"
 using namespace Entidades;
 using namespace Personagens;
 using namespace Obstaculos;
