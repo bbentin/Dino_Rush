@@ -15,3 +15,6 @@ void Entidades::Personagens::Decapitado::padrao_acao() {
 
 void Entidades::Personagens::Decapitado::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
+
+void Entidades::Personagens::Decapitado::danar(Entidade* Afetada){
+}

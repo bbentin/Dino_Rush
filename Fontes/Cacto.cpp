@@ -12,3 +12,6 @@ void Entidades::Obstaculos::Cacto::executar(){
 
 void Entidades::Obstaculos::Cacto::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
+
+void Entidades::Obstaculos::Cacto::obstacular(Entidade* obstaculada){
+}

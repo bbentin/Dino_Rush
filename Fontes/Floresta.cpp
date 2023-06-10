@@ -1,6 +1,8 @@
 #include "../Cabecalhos/Floresta.h"
 
-Fases::Floresta::Floresta():Fase(11,1) {
+Fases::Floresta::Floresta() :Fase(11, 1), pos_Cactos{3,25}, pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,49,51,60} {
+	num_Gosmas = rand() % 5 + 3;
+	num_Moscas = rand() % 5 + 3;
 }
 
 Fases::Floresta::~Floresta(){

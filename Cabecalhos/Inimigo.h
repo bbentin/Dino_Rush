@@ -14,6 +14,7 @@ namespace Entidades {
 			~Inimigo();
 
 			virtual void executar();
+			virtual void danar(Entidade* Afetada) = 0;
 		};
 	}
 }

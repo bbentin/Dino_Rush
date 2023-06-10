@@ -28,7 +28,7 @@ void Gerenciadores::Gerenciador_Colisoes::addObstaculo(Entidades::Obstaculos::Ob
 		LOs.push_back(pObs);
 	}
 }
-
+/*
 void Gerenciadores::Gerenciador_Colisoes::ajustaPosicao(Entidades::Entidade* intrometida,Entidades::Entidade* invadida, sf::Vector2f limites){
 	sf::Vector2f pos1, pos2, vel_intro;
 	vel_intro = intrometida->Get_Velocidade();
@@ -55,15 +55,17 @@ void Gerenciadores::Gerenciador_Colisoes::ajustaPosicao(Entidades::Entidade* int
 	}
 	intrometida->setVelo(vel_intro);
 	intrometida->setPosi(pos1);
-}
+}*/
 
 
 void Gerenciadores::Gerenciador_Colisoes::executar() {
 	int N_Obs = LOs.size();
 	int N_Pers = LPersonagens.size();
+	int k;
 
-	for (int i = 0; i < N_Pers - 1; i++) {
-		Entidades::Entidade* primeira = LPersonagens[i];
+	for (int i = 0; i < N_Pers ; i++) {
+	Entidades::Entidade* primeira = LPersonagens[i];
+		
 		for (int j = i + 1; j < N_Pers; j++) {
 			Entidades::Entidade* segunda = LPersonagens[j];
 			sf::Vector2f coli = primeira->Colide(segunda);
@@ -71,13 +73,12 @@ void Gerenciadores::Gerenciador_Colisoes::executar() {
 				primeira->Colisao(segunda,coli);
 			}
 		}
-		for (int k = 0; k < N_Obs; k++) {
-			Entidades::Entidade* segunda = LOs[k];
+		for (k = 0; k < N_Obs; k++) {
+			Entidades::Entidade* segunda = static_cast<Entidades::Entidade*>(LOs[k]);
 			sf::Vector2f coli = primeira->Colide(segunda);
 			if (coli.x < 0 && coli.y < 0) {
 				primeira->Colisao(segunda,coli);
 			}
 		}
-
 	}
 }

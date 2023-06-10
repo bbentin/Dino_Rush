@@ -17,3 +17,6 @@ void Entidades::Personagens::Moscona::padrao_acao() {
 
 void Entidades::Personagens::Moscona::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
+
+void Entidades::Personagens::Moscona::danar(Entidade* Afetada){
+}

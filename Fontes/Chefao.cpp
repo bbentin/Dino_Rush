@@ -15,3 +15,6 @@ void Entidades::Personagens::Chefao::padrao_acao() {
 
 void Entidades::Personagens::Chefao::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
+
+void Entidades::Personagens::Chefao::danar(Entidade* Afetada){
+}

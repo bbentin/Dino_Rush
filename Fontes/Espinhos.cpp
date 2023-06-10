@@ -12,3 +12,6 @@ void Entidades::Obstaculos::Espinhos::executar(){
 
 void Entidades::Obstaculos::Espinhos::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
+
+void Entidades::Obstaculos::Espinhos::obstacular(Entidade* obstaculada){
+}
