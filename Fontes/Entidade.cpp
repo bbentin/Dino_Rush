@@ -28,7 +28,12 @@ sf::Vector2f Entidades::Entidade::Limitar_Velocidade(sf::Vector2f Velocidade) {
 	if (Velocidade.y > 30) {
 		Velocidade_condizente.y = 30;
 	}
-
+	if (Velocidade.x < -30) {
+		Velocidade_condizente.x = -30;
+	}
+	if (Velocidade.y < -400) {
+		Velocidade_condizente.y = -400;
+	}
 	return Velocidade_condizente;
 }
 
@@ -107,9 +112,7 @@ void Entidades::Entidade::Aplicar_Gravidade() {
 }
 
 void Entidades::Entidade::Calc_Fisica(){
-	if (no_ar) {
-		Aplicar_Gravidade();
-	}
+	Aplicar_Gravidade();
 	velocidade = Calc_Velocidade(Calc_Aceleracao(forca_resultante));
 	Calc_Posicao(velocidade);
 	setPosi(posicao);
@@ -139,5 +142,5 @@ void Entidades::Entidade::set_velocidade(sf::Vector2f vel){
 	velocidade = vel;
 }
 
-const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,4.0f);
+const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,3.5f);
 float Entidades::Entidade::intervalo = 0.0;

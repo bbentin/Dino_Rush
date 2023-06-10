@@ -13,6 +13,7 @@ namespace Entidades {
 
 			void Inicializa();
 			void executar();
+			virtual void obstacular(Entidade* obstaculada) = 0;
 		};
 	}
 }

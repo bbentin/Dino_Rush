@@ -31,6 +31,9 @@ B - Moscona
 C - Gosmona
 
 
+Floresta possui : Gosma, Gosmona, Cacto, Lama
+Deserto Possui: Mosca, Moscona, Chefao, Lama, Espinhos
+
 Tamano tela (1504,928)
 
 ordem de excução:

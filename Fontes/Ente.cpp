@@ -27,6 +27,7 @@ const int Ente::getId() {
 void Ente::Inicializa() {
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
+	Imagem.setScale(2.0, 2.0);
 }
 
 Gerenciadores::Gerenciador_Grafico* Ente::Grafico = nullptr;

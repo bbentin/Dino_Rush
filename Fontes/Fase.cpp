@@ -161,12 +161,12 @@ void Fases::Fase::CriarObstaculo(int tipo_obs, sf::Vector2f pos) {
 	LEs.InserirEntidade(static_cast<Entidade*> (pLama));
 	}break;
 	case 3 :
-	{Chao_Deserto* pCh_Deserto = new Chao_Deserto();  	pCh_Deserto->setPosi(pos.x *16, pos.y * 16);
+	{Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y * 16);  	pCh_Deserto->setPosi(pos.x *16, pos.y);
 	G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
 	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Deserto));
 	}break;
 	case 4 :
-	{Chao_Floresta* pCh_Floresta = new Chao_Floresta();  	pCh_Floresta->setPosi(pos.x *16, pos.y *16);
+	{Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y *16);  	pCh_Floresta->setPosi(pos.x *16, pos.y);
 	G_Colisoes.addObstaculo(pCh_Floresta);
 	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Floresta));
 	}break;

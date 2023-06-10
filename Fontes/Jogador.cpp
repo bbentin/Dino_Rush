@@ -17,21 +17,6 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 	int verificador = colidida->getId();
 	
 	switch (verificador){
-	case 3:
-		Colisao_Gosma(colidida,limites);
-		break;
-	case 4:
-		Colisao_Mosca(colidida,limites);
-		break;
-	case 5:
-		Colisao_Moscona(colidida,limites);
-		break;
-	case 6:
-		break;
-	case 7:
-		break;
-	case 8:
-		break;
 	case 9:
 		Colisao_Deserto(colidida,limites);
 		break;
@@ -45,33 +30,9 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 }
 
 
-void Entidades::Personagens::Jogador::Colisao_Mosca(Entidade* odiada, sf::Vector2f limites) {
-	operator--();
-}
-
-void Entidades::Personagens::Jogador::Colisao_Moscona(Entidade* parada, sf::Vector2f limites) {
-	operator--();
-}
-
-void Entidades::Personagens::Jogador::Colisao_Gosma(Entidade* atirada, sf::Vector2f limites) {
-	
-}
-
-void Entidades::Personagens::Jogador::Colisao_Decapitado(Entidade* decapitado, sf::Vector2f limites){
-}
-
-void Entidades::Personagens::Jogador::Colisao_Chefao(Entidade* chefao, sf::Vector2f limites){
-}
-
-void Entidades::Personagens::Jogador::Colisao_Espinhos(Entidade* espinhos, sf::Vector2f limites){
-}
-
-void Entidades::Personagens::Jogador::Colisao_Lama(Entidade* lama, sf::Vector2f limites){
-}
-
 void Entidades::Personagens::Jogador::Colisao_Deserto(Entidade* deserto, sf::Vector2f limites){
 	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y - (deserto->getTamanho().y / 16 - getTamanho().y/2));
+		setPosi(getPosicao().x, getPosicao().y - ((deserto->getTamanho().y / 200) - (getTamanho().y/200)));
 		reseta_forca_res_y();
 		no_ar = false;
 	}
@@ -80,7 +41,7 @@ void Entidades::Personagens::Jogador::Colisao_Deserto(Entidade* deserto, sf::Vec
 
 void Entidades::Personagens::Jogador::Colisao_Floresta(Entidade* floresta, sf::Vector2f limites){
 	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y - (floresta->getTamanho().y / 16 - getTamanho().y / 2));
+		setPosi(getPosicao().x, getPosicao().y - ((floresta->getTamanho().y / 200) + (getTamanho().y / 200)));
 		reseta_forca_res_y();
 		no_ar = false;
 	}

@@ -20,3 +20,6 @@ void Entidades::Personagens::Gosmona::atirar(){
 
 void Entidades::Personagens::Gosmona::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
+
+void Entidades::Personagens::Gosmona::danar(Entidade* Afetada){
+}

@@ -18,7 +18,7 @@ namespace Gerenciadores {
 		void addInimigo(Entidades::Personagens::Inimigo* pIni);
 		void addJogador(Entidades::Personagens::Jogador* pJog);
 		void addObstaculo(Entidades::Obstaculos::Obstaculo* pObs);
-		void ajustaPosicao(Entidades::Entidade* intrometida, Entidades::Entidade*  invadida, sf::Vector2f limites);
+		//void ajustaPosicao(Entidades::Entidade* intrometida, Entidades::Entidade*  invadida, sf::Vector2f limites);
 		void executar();
 	};
 }

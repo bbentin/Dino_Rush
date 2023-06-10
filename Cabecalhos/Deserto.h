@@ -11,5 +11,8 @@ namespace Fases {
         Deserto();
         ~Deserto();
         void executar();
+        void CriarInimigosDificeis();
+        void CriarInimigosFaceis();
+        void CriarObstaculos();
     };
 }

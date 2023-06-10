@@ -15,3 +15,6 @@ void Entidades::Obstaculos::Lama::executar() {
 
 void Entidades::Obstaculos::Lama::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
+
+void Entidades::Obstaculos::Lama::obstacular(Entidade* obstaculada){
+}
