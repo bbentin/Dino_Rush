@@ -13,6 +13,7 @@ namespace Listas {
 
 		bool InserirEntidade(Entidades::Entidade* inserida);
 		bool RemoverEntidade(Entidades::Entidade* removida);
+		void VerificarMortos();
 		void executar();
 		void Inicializar();
 	};

@@ -1,14 +1,16 @@
 #pragma once
 #include "Fase.h"
+#include "Mosca.h"
+#include "Espinhos.h"
+#include "Gosma.h"
 namespace Fases {
     class Floresta :
         public Fase {
 
     private:
-        const int pos_Moscas[5];
-        const int pos_Gosmas[5];
-        const int pos_Cactos[2];
-        int num_Moscas,num_Gosmas;
+        const int pos_Moscas[5], pos_Gosmas[5];
+        const int pos_Espinhos[5], pos_Lamas[5];
+        int num_Moscas,num_Gosmas,num_Espinhos,num_Lamas;
     public:
 
         Floresta();
@@ -16,8 +18,11 @@ namespace Fases {
         void executar();
 
         void CriarInimigos();
-        void CriarInimigosDificeis();
-        void CriarInimigosFaceis();
+        void CriarMoscas();
+        void CriarGosmas();
         void CriarObstaculos();
+        void CriarEspinhos();
+        void CriarLamas();
+        void Inicializa();
     };
 }

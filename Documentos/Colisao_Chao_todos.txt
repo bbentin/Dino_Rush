@@ -1,0 +1,15 @@
+int verificador = colidida->getId();
+	if (verificador != 9 && verificador != 10) {
+		if (limites.y < 0) {
+			colidida->setPosi(colidida->getPosicao().x, colidida->getPosicao().y + (limites.y));
+			colidida->reseta_forca_res_y();
+			colidida->setNoAr(false);
+		}
+		else if (limites.x < 0) {
+			if (getPosicao().x < colidida->getPosicao().y) {
+				colidida->setPosi(colidida->getPosicao().x + limites.x, colidida->getPosicao().y);
+			}
+			else if (getPosicao().x > colidida->getPosicao().x) {
+				colidida->setPosi(colidida->getPosicao().x - limites.x, colidida->getPosicao().y);
+			}
+	

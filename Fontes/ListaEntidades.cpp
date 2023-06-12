@@ -15,8 +15,20 @@ bool Listas::ListaEntidades::RemoverEntidade(Entidades::Entidade* removida) {
 	return LEs.RemoverElemento(removida);
 }
 
+void Listas::ListaEntidades::VerificarMortos(){
+	Listas::Lista<Entidades::Entidade>::Elemento<Entidades::Entidade>* pAux = LEs.getPrimeiro();
+
+		while (pAux != LEs.getAtual()) {
+			if (pAux->getInfo() == nullptr) {
+				RemoverEntidade(pAux->getInfo());
+			}
+			pAux = pAux->getProx();
+		}
+}
+
 void Listas::ListaEntidades::executar(){
 	Listas::Lista<Entidades::Entidade>::Elemento<Entidades::Entidade>* pAux = LEs.getPrimeiro();
+	VerificarMortos();
 
 	if (pAux != nullptr) {
 		while (pAux != LEs.getAtual()){

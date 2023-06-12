@@ -3,18 +3,10 @@
 #include "Gerenciador_Colisoes.h"
 #include "ListaEntidades.h"
 #include <fstream>
+#include "Lama.h"
 #include "Chao_Deserto.h"
 #include "Chao_Floresta.h"
-#include "Chefao.h"
-#include "Cacto.h"
-#include "Decapitado.h"
-#include "Espinhos.h"
-#include "Gosma.h"
-#include "Lama.h"
-#include "Mosca.h"
-#include "Projetil.h"
-#include "Moscona.h"
-#include "Gosmona.h"
+
 using namespace Entidades;
 using namespace Personagens;
 using namespace Obstaculos;
@@ -28,7 +20,7 @@ namespace Fases{
         Listas::ListaEntidades LEs;
         Entidades::Personagens::Jogador* Player1;
         Entidades::Personagens::Jogador* Player2;
-        const int k_fase;
+        const int k_fase,altura_spawn_inimigos,altura_spawn_obstaculos;
     public:
 
         Fase(const int i = 0, const int k = 0);
@@ -40,9 +32,8 @@ namespace Fases{
         void setJogador(Entidades::Personagens::Jogador* inserido);
         void gerar_fase(int fase);
         void CriarEntidades(char leitura, sf::Vector2f pos);
-        void CriarInimigo(int i, sf::Vector2f pos);
-        void CriarObstaculo(int i, sf::Vector2f pos);
-        void Inicializa();
+        void CriarChao(int i, sf::Vector2f pos);
+        virtual void Inicializa();
         
     };
 }

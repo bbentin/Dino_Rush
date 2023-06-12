@@ -13,12 +13,7 @@ namespace Entidades {
 		static const sf::Vector2f Gravidade;
 		sf::Vector2f posicao,velocidade;
 		bool no_ar;
-		void reseta_forca_res();
-		void reseta_forca_res_x();
-		void reseta_forca_res_y();
 		void Aplicar_Gravidade();
-		void soma_forca(sf::Vector2f forza);
-		void set_velocidade(sf::Vector2f vel);
 		void Calc_Posicao(sf::Vector2f Velocidade);
 		sf::Vector2f Calc_Aceleracao(sf::Vector2f forca_r);
 		sf::Vector2f Calc_Velocidade(sf::Vector2f Aceleracao);
@@ -31,9 +26,14 @@ namespace Entidades {
 
 		sf::Vector2f Colide(Entidade* proxima);
 		sf::Vector2f Get_Velocidade();
-		sf::Vector2f getPosicao();
-		sf::Vector2f getTamanho();
+		const sf::Vector2f getPosicao();
+		const sf::Vector2f getTamanho();
 		
+		void soma_forca(sf::Vector2f forza);
+		void setNoAr(bool ar);
+		void reseta_forca_res();
+		void reseta_forca_res_x();
+		void reseta_forca_res_y();
 		void setVelo(sf::Vector2f velo);
 		void setPosi(sf::Vector2f arrumada);
 		void setPosi(float a, float b);

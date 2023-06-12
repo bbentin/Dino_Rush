@@ -1,7 +1,6 @@
 #include "../Cabecalhos/Principal.h"
 
-Principal::Principal():GGrafico(), Primeiro(), Segundo(){
-	Primeira_fase = nullptr;
+Principal::Principal():GGrafico(), Primeiro(), Segundo(),Primeira_fase(nullptr),Segunda_fase(nullptr) {
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
 	GEventos.setTela(GGrafico.getTela());

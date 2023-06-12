@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu() :Ente(14),selecao(-1) {
+Menu::Menu() :Ente(13),selecao(-1) {
 
 }
 Menu::~Menu() {
