@@ -1,7 +1,8 @@
 #include "../Cabecalhos/Chao_Floresta.h"
 
 
-Entidades::Obstaculos::Chao_Floresta::Chao_Floresta(const int limit):Obstaculo(10),limite_altura(limit) {
+Entidades::Obstaculos::Chao_Floresta::Chao_Floresta(const int limit):Obstaculo(9),limite_altura(limit) {
+	massa = 2;
 }
 Entidades::Obstaculos::Chao_Floresta::~Chao_Floresta() {
 }
@@ -10,9 +11,11 @@ void Entidades::Obstaculos::Chao_Floresta::executar(){
 	desenhar();
 	if (getPosicao().y >= limite_altura) {
 		setPosi(getPosicao().x, limite_altura);
-		no_ar = false;
+		no_ar = false; 
 	}
-	Calc_Fisica();
+	else {
+		Calc_Fisica();
+	}
 }
 
 void Entidades::Obstaculos::Chao_Floresta::Colisao(Entidade* colidida, sf::Vector2f limites){

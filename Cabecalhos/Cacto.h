@@ -6,6 +6,7 @@ namespace Entidades {
         class Cacto :
             public Obstaculo {
         private:
+            int tamanho;
         public:
             Cacto();
             ~Cacto();

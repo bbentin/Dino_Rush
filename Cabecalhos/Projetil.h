@@ -1,10 +1,9 @@
 #pragma once
-#include "../Cabecalhos/Entidade.h"
+#include "Personagem.h"
 
 namespace Entidades {
 	class Projetil :public Entidade {
 	private:
-		int dano;
 		bool visivel;
 		Entidade* dono;
 	public:
@@ -13,8 +12,12 @@ namespace Entidades {
 
 		void reseta_posicao();
 		void Colisao(Entidade* colidida, sf::Vector2f limites);
+		void ColisaoPersonagem(Entidade* colidida);
+		void ColisaoObstaculo(Entidade* colidida);
 		void executar();
 		void atirada();
 		void setDono(Entidade* Dono);
+
+		bool GetVisibilidade() const;
 	};
 }

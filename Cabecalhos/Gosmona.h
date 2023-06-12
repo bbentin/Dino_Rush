@@ -13,8 +13,8 @@ namespace Entidades {
 
             void executar();
             void padrao_acao();
-            void atirar();
             void Colisao(Entidade* colidida, sf::Vector2f limites);
+            void Colisao_Chao(Entidade* Chao, sf::Vector2f limites);
             void danar(Entidade* Afetada);
         };
     }

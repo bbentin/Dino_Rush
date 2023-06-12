@@ -1,38 +1,34 @@
 ########### Lista de id's ###########
 1 - Jogador
 2 - Jogador2
-3 - Gosma
-4 - Decapitado 
-5 - Mosca 
-6 - Chefao
-7 - Espinhos
-8 - Lama
-9 - Chao_Deserto
-10 - Chao_Floresta 
-11 - Floresta
-12 - Deserto
-13 - Projetil
-14 - Menu
-15 - Gosmona
-16 - Moscona
+3 - Gosma - OK
+4 - Chefao
+5 - Mosca - OK
+6 - Gosmona - OK
+7 - Lama - OK
+8 - Chao_Deserto - OK
+9 - Chao_Floresta - OK
+10 - Espinho
+11 - Deserto
+12 - Projetil- OK
+13 - Menu
+14 - Floresta - OK
+
 
 ############ Caracteres para criar Entidades ###########
 1 - Jogador
 2 - Jogador2
 3 - Gosma
-4 - Decapitado
-5 - Mosca 
-6 - Chefao
-7 - Espinhos
-8 - Lama
-9 - Chao_Deserto
-A - Chao_Floresta
-B - Moscona
-C - Gosmona
+4 - Chefao
+5 - Espinhos
+6 - Lama
+7 - Chao_Deserto
+8 - Chao_Floresta
+9 - Gosmona
+A - Mosca
 
-
-Floresta possui : Gosma, Gosmona, Cacto, Lama
-Deserto Possui: Mosca, Moscona, Chefao, Lama, Espinhos
+Floresta possui : Gosma, Mosca, Espinhos, Lama
+Deserto Possui: Gosmona, Mosca, Chefao, Lama, Cacto
 
 Tamano tela (1504,928)
 
@@ -41,3 +37,10 @@ executar, colidir, desenhar
 
 
 Quando for salvar, salvar os ID's e posições de entidades vivas
+
+
+Ações dos inimigos :
+Mosca: anda entre direita e esquerda
+Gosma: pula pra cima e para esquerda
+Gosmona: pula para cima e para baixo
+Chefao:Solta projetil

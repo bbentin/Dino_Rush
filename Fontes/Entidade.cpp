@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Entidade.h"
 
-Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),massa(5),forca_resultante(0,0),no_ar(true) {
+Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),massa(10),forca_resultante(0,0),no_ar(true) {
 	posicao = posi; Imagem.setPosition(posicao);
 }
 
@@ -38,14 +38,14 @@ sf::Vector2f Entidades::Entidade::Limitar_Velocidade(sf::Vector2f Velocidade) {
 }
 
 
-sf::Vector2f Entidades::Entidade::getPosicao(){
+const sf::Vector2f Entidades::Entidade::getPosicao(){
 	return posicao;
 }
 
-sf::Vector2f Entidades::Entidade::getTamanho(){
+const sf::Vector2f Entidades::Entidade::getTamanho(){
 	sf::Vector2f tam;
-	tam.x = Imagem.getTextureRect().width;
-	tam.y = Imagem.getTextureRect().height;
+	tam.x = Imagem.getTextureRect().width * Imagem.getScale().x;
+	tam.y = Imagem.getTextureRect().height * Imagem.getScale().y;
 	return tam;
 }
 
@@ -120,6 +120,10 @@ void Entidades::Entidade::Calc_Fisica(){
 }
 
 
+void Entidades::Entidade::setNoAr(bool ar){
+	no_ar = ar;
+}
+
 void Entidades::Entidade::reseta_forca_res() {
 	forca_resultante.x = 0; forca_resultante.y = 0;
 	velocidade.x = 0; velocidade.y = 0;
@@ -138,9 +142,6 @@ void Entidades::Entidade::soma_forca(sf::Vector2f forza) {
 	forca_resultante += forza;
 }
 
-void Entidades::Entidade::set_velocidade(sf::Vector2f vel){
-	velocidade = vel;
-}
 
-const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,3.5f);
+const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,6.0f);
 float Entidades::Entidade::intervalo = 0.0;

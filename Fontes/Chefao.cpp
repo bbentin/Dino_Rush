@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Chefao.h"
 
-Entidades::Personagens::Chefao::Chefao() :Inimigo(6) {
+Entidades::Personagens::Chefao::Chefao() :Inimigo(4) {
 	num_vidas = 10;
 }
 Entidades::Personagens::Chefao::~Chefao() {

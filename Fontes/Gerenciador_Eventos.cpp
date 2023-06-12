@@ -8,7 +8,7 @@ Gerenciadores::Gerenciador_Eventos::~Gerenciador_Eventos() {
 }
 
 Gerenciadores::Gerenciador_Eventos* Gerenciadores::Gerenciador_Eventos::Singleton(){
-	if (Unico = nullptr) {
+	if (Unico == nullptr) {
 		Unico  = new Gerenciador_Eventos();
 	}
 	return Unico;
@@ -49,6 +49,9 @@ void Gerenciadores::Gerenciador_Eventos::executar_fases() {
 				break;
 			case sf::Keyboard::W:
 				Jogador1->pular();
+				break;
+			case sf::Keyboard::LAlt:
+				Jogador1->atirar();
 				break;
 			case sf::Keyboard::Up:
 				if (Entidades::Personagens::Jogador::Jogador2) {

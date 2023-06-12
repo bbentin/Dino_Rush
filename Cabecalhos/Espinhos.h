@@ -5,7 +5,7 @@ namespace Entidades {
         class Espinhos :
             public Obstaculo {
         private:
-            int dano();
+            const int dano;
         public:
             Espinhos();
             ~Espinhos();

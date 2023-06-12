@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Gerenciador_Grafico.h"
 Gerenciadores::Gerenciador_Grafico::Gerenciador_Grafico():Tela(sf::VideoMode(1280,960),"Jogo"),
-Jogador1() {Tela.setFramerateLimit(100);
+Jogador1() {Tela.setFramerateLimit(60);
 	Gerar_Inimigos();	Gerar_Menu();	Gerar_Jogador();	Gerar_Obstaculos(); Gerar_Projetil();	Gerar_Fases();
 }
 Gerenciadores::Gerenciador_Grafico::~Gerenciador_Grafico() {
@@ -71,43 +71,37 @@ sf::Image Gerenciadores::Gerenciador_Grafico::getImagem(int identificacao){
 		return Gosma;
 		break;
 	case 4:
-		return Decapitado;
+		return Chefao;
 			break;
 	case 5:
 		return Mosca;
 			break;
 	case 6:
-		return Chefao;
+		return Gosmona;
 			break;
 	case 7:
-		return Espinhos;
-			break;
-	case 8:
 		return Lama;
 			break;
-	case 9:
+	case 8:
 		return Chao_Deserto;
 			break;
-	case 10:
+	case 9:
 		return Chao_Floresta;
 			break;
-	case 11:
-		return Floresta;
+	case 10:
+		return Espinhos;
 			break;
-	case 12:
+	case 11:
 		return Deserto;
 			break;
-	case 13:
+	case 12:
 		return Projetil;
-		break;
-	case 14:
+			break;
+	case 13:
 		return Menu;
 		break;
-	case 15:
-		return Moscona;
-		break;
-	case 16:
-		return Gosmona;
+	case 14:
+		return Floresta;
 		break;
 	default:
 		break;
