@@ -6,7 +6,6 @@ namespace Entidades {
         class Gosmona :
             public Inimigo {
         private:
-            Projetil meleca;
         public:
             Gosmona();
             ~Gosmona();

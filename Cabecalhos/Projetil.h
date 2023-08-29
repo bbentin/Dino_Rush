@@ -16,6 +16,7 @@ namespace Entidades {
 		void ColisaoObstaculo(Entidade* colidida);
 		void executar();
 		void atirada();
+		void avanca();
 		void setDono(Entidade* Dono);
 
 		bool GetVisibilidade() const;

@@ -21,6 +21,5 @@ void Entidades::Obstaculos::Lama::Colisao(Entidade* colidida, sf::Vector2f limit
 }
 
 void Entidades::Obstaculos::Lama::obstacular(Entidade* obstaculada){
-obstaculada->soma_forca(sf::Vector2f(-5,0));
 
 }

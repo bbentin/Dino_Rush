@@ -4,7 +4,7 @@ using namespace std;
 namespace Listas {
 	template<class TL>class Lista {
 	public:
-		template<class TE>class Elemento {
+		template<class TE>class Elemento {// Classe Elemento aninhada na classe Lista
 		private:
 			Elemento<TE>* pProx;
 			TE* pInfo;
@@ -21,14 +21,18 @@ namespace Listas {
 				return pProx;
 			}
 			void setProx(Elemento<TE>* Prox) {
-				pProx = Prox;
+				if (Prox != nullptr) {
+					pProx = Prox;
+				}
 			}
 			TE* getInfo() {
 				return pInfo;
 			}
 
 			void setInfo(TE* info) {
-				pInfo = info;
+				if (info != nullptr) {
+					pInfo = info;
+				}
 			}
 
 		};
@@ -51,26 +55,37 @@ namespace Listas {
 		}
 
 		bool RemoverElemento(TL* Elemen) {
+		
 			if (Elemen == nullptr) {
 				cout << "Elemento invalido" << endl;
 				return false;
 			}
 
-			Elemento<TL>* pAux = pPrimeiro;
+			if (pPrimeiro->getInfo() == Elemen) { // Remoção para caso o elemento a ser retirado coincida com primeiro.
+				pPrimeiro = pPrimeiro->getProx();
+				return true;
+				cout << "Elemento removido da Lista.h com sucesso" << endl;
+			}
+		
 
+			Elemento<TL>* pAux = pPrimeiro;
+			Elemento<TL>* pAux2 = nullptr;
 			while (pAux != pAtual) {
-				if (pAux->getProx()->getInfo() == Elemen) {
-					delete pAux->getProx();
-					pAux->setProx(pAux->getProx()->getProx());
-					cout << "Elemento removido com sucesso" << endl;
+				pAux2 = pAux->getProx();
+				if (pAux2->getInfo() == Elemen) {
+					pAux->setProx(pAux2->getProx());
+					if (pAux2 == pAtual) { // Remoção para caso o elemento a ser retirado coincida com o Ultimo.
+						pAtual = pAux;
+					}
+					delete pAux2;
 					return true;
+					cout << "Elemento removido da Lista.h com sucesso" << endl;
 				}
 				pAux = pAux->getProx();
 			}
 		}
 
 		void LimpaLista();
-
 	};
 
 	template<class TL>
@@ -98,6 +113,7 @@ namespace Listas {
 			else {
 				pAtual->setProx(pAux);
 				pAtual = pAux;
+				return true;
 			}
 
 		}
@@ -109,7 +125,7 @@ namespace Listas {
 
 	template<class TL>
 	inline void Lista<TL>::LimpaLista() {
-		Elemento<TL>* aux;
+		Elemento<TL>* aux = nullptr;
 
 		while (pPrimeiro != nullptr) {
 			aux = pPrimeiro->getProx();

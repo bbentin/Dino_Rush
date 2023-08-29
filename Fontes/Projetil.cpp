@@ -1,14 +1,13 @@
 #include "../Cabecalhos/Projetil.h"
 
 Entidades::Projetil::Projetil():Entidade(12),visivel(false),dono(nullptr) {
-	massa = 10;
 }
 
 Entidades::Projetil::~Projetil(){
 }
 
 void Entidades::Projetil::reseta_posicao(){
-	setPosi(dono->getPosicao().x + 10, dono->getPosicao().y);
+	setPosi(dono->getPosicao().x + 10, dono->getPosicao().y+8);
 }
 
 void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites){
@@ -39,13 +38,16 @@ void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites){
 			break;
 		}
 	}
-	else if (IdDono == 5) {
+	else if (IdDono == 4) {
 		switch (IdColidida){
 		case 1:
 			ColisaoPersonagem(colidida);
 			break;
 		case 2:
 			ColisaoPersonagem(colidida);
+			break;
+		case 8:
+			ColisaoObstaculo(colidida);
 			break;
 		default:
 			break;
@@ -67,6 +69,27 @@ void Entidades::Projetil::atirada(){
 	visivel = true;
 }
 
+void Entidades::Projetil::avanca(){
+	if (dono->getId() == 1) {
+		if (visivel) {
+			Soma_Velocidade(sf::Vector2f(40.0, -5));
+			Calc_Fisica();
+			desenhar();
+		}
+		else { reseta_posicao(); }
+	}
+	else if (dono->getId() == 4) {
+		if (visivel) {
+			Calc_Fisica();
+			desenhar();
+		}
+		else { reseta_posicao(); }
+	}
+	if (getPosicao().x > 1300 || getPosicao().x < 0) {
+		reseta_posicao(); visivel = false;
+	} 
+}
+
 void Entidades::Projetil::setDono(Entidade* Dono){
 	if (Dono != nullptr) {
 		dono = Dono;
@@ -79,10 +102,5 @@ bool Entidades::Projetil::GetVisibilidade() const{
 }
 
 void Entidades::Projetil::executar() {
-	if (visivel) {
-		soma_forca(sf::Vector2f(30, 0));
-		Calc_Fisica();
-		desenhar();
-	}
-	else { reseta_posicao(); }
+	avanca();
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include "Lista.h"
-#include "Entidade.h"
+#include "Personagem.h"
 
 namespace Listas {
 	class ListaEntidades {
@@ -13,7 +13,7 @@ namespace Listas {
 
 		bool InserirEntidade(Entidades::Entidade* inserida);
 		bool RemoverEntidade(Entidades::Entidade* removida);
-		void VerificarMortos();
+		void executar_entidades();
 		void executar();
 		void Inicializar();
 	};

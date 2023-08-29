@@ -1,10 +1,11 @@
+
 #pragma once
 #include "Gerenciador_Grafico.h"
-#include "Jogador.h"
 #include "Gerenciador_Eventos.h"
 #include "ListaEntidades.h"
 #include "Deserto.h"
 #include "Floresta.h"
+#include "Menu.h"
 #include <iostream>
 class Principal{
 private:
@@ -12,8 +13,9 @@ private:
 	Gerenciadores::Gerenciador_Eventos GEventos;
 	Fases::Deserto* Segunda_fase;
 	Fases::Floresta* Primeira_fase;
+	Menu menu;
+	int estado;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
-	enum estado{menu,fase1,fase2,menu_salvar};
 
 public:
 	Principal();
@@ -21,5 +23,7 @@ public:
 
 	Gerenciadores::Gerenciador_Grafico* getGrafico();
 	void Executar();
+	void verifica_estado();
+	void Inicializar();
 };
 

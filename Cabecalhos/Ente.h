@@ -19,7 +19,7 @@ public:
 	~Ente();
 
 	virtual void executar() = 0;
-	const int getId();
+	const int getId() const;
 	void desenhar();
 	sf::Sprite getSprite();
 	static void setGerenciador(Gerenciadores::Gerenciador_Grafico* Gra);
