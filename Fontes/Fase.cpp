@@ -1,7 +1,7 @@
 #include"../Cabecalhos/Fase.h"
 
 Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),Player1(nullptr),Player2(nullptr),k_fase(k)
-,altura_spawn_inimigos(160),altura_spawn_obstaculos(240) {
+,altura_spawn_inimigos(400),altura_spawn_obstaculos(740) {
 
 }
 
@@ -20,6 +20,7 @@ void Fases::Fase::setJogador(Entidades::Personagens::Jogador* inserido){
 	}
 	else if (!Player2) {
 		Player2 = inserido;
+		LEs.InserirEntidade(static_cast<Entidade*>(Player1));
 		LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
 	}
 }
@@ -31,7 +32,7 @@ sf::Clock* Fases::Fase::getRelogio() {
 void Fases::Fase::gerar_fase(int num) {	
 	std::fstream arquivo;
 	if (num == 2) {
-		arquivo.open("C:/Users/rbben/Documents/Projetos/Jogo_C++/Jogo/Jogo_Simao/Imagens/Fase/Deserto/Deserto.txt");
+		arquivo.open("C:/Users/rbben/Documents/Faculdade/2023-2/Tec_Prog/APS/Jogo_Simao/Imagens/Fase/Deserto/Deserto.txt");
 		string linha;
 		if (!arquivo.is_open()) {
 				std::cout << "Nao abriu o Arquivo de Deserto" << std::endl;
@@ -48,9 +49,9 @@ void Fases::Fase::gerar_fase(int num) {
 	}
 	else if (num == 1) {
 		string linha;
-		arquivo.open("C:/Users/rbben/Documents/Projetos/Jogo_C++/Jogo/Jogo_Simao/Imagens/Fase/Floresta/Floresta.txt");
+		arquivo.open("C:/Users/rbben/Documents/Faculdade/2023-2/Tec_Prog/APS/Jogo_Simao/Imagens/Fase/Floresta/Floresta.txt");
 		if (!arquivo.is_open()) {
-			std::cout << "Nao abriu" << std::endl;
+			std::cout << "Nao abriu o arquivo de Floresta" << std::endl;
 		}
 		int j = 0;
 		while (getline(arquivo, linha)) {
@@ -91,12 +92,12 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos){
 void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos) {
 	switch (tipo_obs){
 	case 1 :
-	{Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y *16);  	pCh_Floresta->setPosi(pos.x *16, 500);
+	{Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y *16);  	pCh_Floresta->setPosi(pos.x *16, pos.y *16);
 	G_Colisoes.addObstaculo(pCh_Floresta);
 	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Floresta));
 	}break;
 	case 2 :
-	{Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y * 16);  	pCh_Deserto->setPosi(pos.x *16, 500);
+	{Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y * 16);  	pCh_Deserto->setPosi(pos.x *16, pos.y * 16);
 	G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
 	LEs.InserirEntidade(static_cast<Entidade*> (pCh_Deserto));
 	}break;
@@ -105,7 +106,12 @@ void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos) {
 	}
 }
 
-
+void Fases::Fase::VerificaMortos(){
+	Entidades::Entidade* pMorto = G_Colisoes.VerificaMortos();
+	if (pMorto != nullptr) {
+		LEs.RemoverEntidade(pMorto);
+	}
+}
 
 
 void Fases::Fase::Inicializa() {

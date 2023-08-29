@@ -20,7 +20,7 @@ void Ente::setGerenciador(Gerenciadores::Gerenciador_Grafico* Gra){
 	Grafico = Gra;
 }
 
-const int Ente::getId() {
+const int Ente::getId() const {
 	return id;
 }
 

@@ -10,16 +10,16 @@ namespace Gerenciadores {
 		Entidades::Personagens::Jogador* Jogador1;
 		Entidades::Personagens::Jogador* Jogador2;
 		sf::RenderWindow* PTela;
+		int state;
 	public:
 
 		~Gerenciador_Eventos();
 		Gerenciador_Eventos();
 		Gerenciador_Eventos* Singleton();
-		void Leitura_teclado();
 		void setTela(sf::RenderWindow* Tela);
-		void executar_fases();
-		void executar_menu();
+		void executar();
 		void setJogador(Entidades::Personagens::Jogador* Player);
+		int getstate();
 	};
 
 }

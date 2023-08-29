@@ -33,19 +33,36 @@ void Gerenciadores::Gerenciador_Colisoes::addObstaculo(Entidades::Obstaculos::Ob
 	}
 }
 
-void Gerenciadores::Gerenciador_Colisoes::VerificarMortos(){
-	int N_Pers = LPersonagens.size();
-	for(int i = 0; i < N_Pers; i ++){
-		Entidades::Entidade* verificada = LPersonagens[i];
-		if (LPersonagens[i]->getId() != 12) {
-			if (static_cast<Entidades::Personagens::Personagem*>(verificada)->getVidas() < 0) {
-				LPersonagens.erase(LPersonagens.begin() + i);
-				N_Pers = LPersonagens.size();
+void Gerenciadores::Gerenciador_Colisoes::removeObstaculo(Entidades::Entidade* pRemovido){
+	if (pRemovido != nullptr) {
+		int i = 0;
+		while (i < LOs.size()) {
+			if (pRemovido == LOs.at(i)) {
+				LOs.erase(LOs.begin() + i);
+				cout << "Entidade removida do vetor no gerenciador de colisoes" << endl;
+				return;
 			}
+			i++;
 		}
 	}
 }
 
+Entidades::Entidade* Gerenciadores::Gerenciador_Colisoes::VerificaMortos(){
+	int i = 0;
+	Entidades::Entidade* pMorto;
+	while (i < LPersonagens.size()) {
+
+		if (LPersonagens[i]->getId() < 7) {
+			if (static_cast<Entidades::Personagens::Personagem*>(LPersonagens[i])->getVidas() <= 0) {
+				pMorto = LPersonagens[i];
+				LPersonagens.erase(LPersonagens.begin() + i);
+				return pMorto;
+			}
+		}
+		i++;
+	}
+
+}
 
 void Gerenciadores::Gerenciador_Colisoes::executar() {
 	int N_Obs = LOs.size();
@@ -57,18 +74,17 @@ void Gerenciadores::Gerenciador_Colisoes::executar() {
 		
 		for (int j = 0; j < N_Pers; j++) {
 			Entidades::Entidade* segunda = LPersonagens[j];
-			sf::Vector2f coli = primeira->Colide(segunda);
+			sf::Vector2f coli = primeira->Existe_Colisao(segunda);
 			if (coli.x < 0 && coli.y < 0 ) {
 				primeira->Colisao(segunda,coli);
 			}
 		}
 		for (k = 0; k < N_Obs; k++) {
 			Entidades::Entidade* segunda = static_cast<Entidades::Entidade*>(LOs[k]);
-			sf::Vector2f coli = primeira->Colide(segunda);
+			sf::Vector2f coli = primeira->Existe_Colisao(segunda);
 			if (coli.x < 0 && coli.y < 0) {
 				primeira->Colisao(segunda,coli);
 			}
 		}
 	}
-	VerificarMortos();
 }

@@ -1,9 +1,11 @@
 #include "../Cabecalhos/Jogador.h"
 
-Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi):Personagem(i,posi),pontos(0),
+Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi), pontos(0),
 andar_direita(false),andar_esquerda(false),arma(nullptr) {
 	num_vidas = 5; 
+	olhando_direita = true;
 	arma = new Projetil();
+	no_ar = false;
 	arma->setDono(this);
 	if (!Jogador2) {
 		Jogador2 = true;
@@ -34,6 +36,8 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 		break;
 	case 7:
 		Colisao_Obstaculo(colidida, limites);
+	case 8:
+		Colisao_Obstaculo(colidida, limites);
 		break;
 	default:
 		break;
@@ -45,11 +49,9 @@ void Entidades::Personagens::Jogador::atirar(){
 	arma->atirada();
 }
 
-
 void Entidades::Personagens::Jogador::Colisao_Deserto(Entidade* deserto, sf::Vector2f limites){
 	if (limites.y < 0) {
 		setPosi(getPosicao().x, getPosicao().y + (limites.y));
-		reseta_forca_res_y();
 		no_ar = false;
 	}
 	else if (limites.x < 0) {
@@ -66,7 +68,6 @@ void Entidades::Personagens::Jogador::Colisao_Floresta(Entidade* floresta, sf::V
 	if (limites.y < 0) {
 		setPosi(getPosicao().x, getPosicao().y + (limites.y));
 		no_ar = false;
-		reseta_forca_res_y();
 	}else if (limites.x < 0) {
 		if (floresta->getPosicao().x < getPosicao().x) {
 			setPosi(getPosicao().x + limites.x, getPosicao().y);
@@ -85,16 +86,18 @@ void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vec
 	if (limites.x < 0) {
 		if (inimigo->getPosicao().x < getPosicao().x) {
 			setPosi(getPosicao().x - limites.x, getPosicao().y);
-			reseta_forca_res_x();
 		}
 		if (inimigo->getPosicao().x > getPosicao().x) {
 			setPosi(getPosicao().x + limites.x, getPosicao().y);
-			reseta_forca_res_x();
 		}
 	}else if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y + (limites.y));
-		no_ar = false;
-		reseta_forca_res_y();
+		if (inimigo->getPosicao().y < getPosicao().y) {
+		setPosi(getPosicao().x, getPosicao().y - (limites.y));
+		}
+		if (inimigo->getPosicao().y > getPosicao().y) {
+			setPosi(getPosicao().x, getPosicao().y + (limites.y));
+			no_ar = false;
+		}
 	}
 	static_cast<Entidades::Personagens::Inimigo*>(inimigo)->danar(this);
 }
@@ -103,7 +106,6 @@ void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf:
 	if (limites.y < 0) {
 		setPosi(getPosicao().x, getPosicao().y + (limites.y));
 		no_ar = false;
-		reseta_forca_res_y();
 	}else if (limites.x < 0) {
 		if (obstaculo->getPosicao().x < getPosicao().x) {
 			setPosi(getPosicao().x + limites.x, getPosicao().y);
@@ -114,9 +116,11 @@ void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf:
 	}
 	static_cast<Entidades::Obstaculos::Obstaculo*>(obstaculo)->obstacular(this);
 }
+
 Entidades::Projetil* Entidades::Personagens::Jogador::getArma() const{
 	return arma;
 }
+
 void Entidades::Personagens::Jogador::setMovimento_direita(bool direita){
 	andar_direita = direita;
 }
@@ -127,16 +131,16 @@ void Entidades::Personagens::Jogador::setMovimento_esquerda(bool esquerda){
 
 void Entidades::Personagens::Jogador::executar() {
 	if (andar_direita) {
-		soma_forca(sf::Vector2f(10, 0));
+		mover_direita(rapidez);
 	}
 	else if (andar_esquerda) {
-		soma_forca(sf::Vector2f(-10, 0));
+		mover_esquerda(rapidez);
 	}
 	Calc_Fisica();
 	desenhar();
 }
 
-
 // define o primeiro jogador
 bool Entidades::Personagens::Jogador::Jogador2 = false;
+const float Entidades::Personagens::Jogador::rapidez = 40;
 

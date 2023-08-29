@@ -9,11 +9,9 @@ Entidades::Personagens::Gosma::~Gosma() {
 void Entidades::Personagens::Gosma::padrao_acao() {
 	if (direita) {
 		pular();
-		soma_forca(sf::Vector2f(distancia, 0));
 	}
 	else {
 		pular();
-		soma_forca(sf::Vector2f(-distancia, 0));
 	}
 }
 
@@ -25,11 +23,9 @@ void Entidades::Personagens::Gosma::executar(){
 
 void Entidades::Personagens::Gosma::Colisao(Entidade* colidida, sf::Vector2f limites){
 	int verificador = colidida->getId();
-	if ((verificador == 9) || (verificador == 10)) {
+	if ((verificador == 8) || (verificador == 9)) {
 		Colisao_Chao(colidida,limites);
 		iniciar = true;
-	}else if (verificador == 1 || verificador == 2) {
-
 	}
 }
 
@@ -37,7 +33,7 @@ void Entidades::Personagens::Gosma::Colisao_Chao(Entidade* Chao,sf::Vector2f lim
 	if (limites.y < 0) {
 		direita = inverte();
 		setPosi(getPosicao().x, getPosicao().y + limites.y);
-		reseta_forca_res_y();
+
 		no_ar = false;
 	}
 }
@@ -45,7 +41,6 @@ void Entidades::Personagens::Gosma::Colisao_Chao(Entidade* Chao,sf::Vector2f lim
 void Entidades::Personagens::Gosma::Colisao_Jogador(Entidade* Jogador,sf::Vector2f limites){
 	if (limites.y < 0) {
 		setPosi(getPosicao().x, getPosicao().y - (Jogador->getTamanho().y / 16 - getTamanho().y / 2));
-		reseta_forca_res_y();
 	}
 	if (limites.x < 0) {
 		if (getPosicao().x > Jogador->getPosicao().x) {

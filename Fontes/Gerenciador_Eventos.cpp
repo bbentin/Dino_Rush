@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Gerenciador_Eventos.h"
 
-Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos() {
+Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos():state(0) {
 	Jogador1 = nullptr; Jogador2 = nullptr; Unico = nullptr; PTela = nullptr;
 }
 Gerenciadores::Gerenciador_Eventos::~Gerenciador_Eventos() {
@@ -15,15 +15,8 @@ Gerenciadores::Gerenciador_Eventos* Gerenciadores::Gerenciador_Eventos::Singleto
 }
 
 
-void Gerenciadores::Gerenciador_Eventos::Leitura_teclado() {
-
-}
-
 void Gerenciadores::Gerenciador_Eventos::setTela(sf::RenderWindow* Tela){
 	PTela = Tela;
-}
-
-void Gerenciadores::Gerenciador_Eventos::executar_menu(){
 }
 
 void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Jogador* Player){
@@ -35,8 +28,13 @@ void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Joga
 	}
 }
 
+int Gerenciadores::Gerenciador_Eventos::getstate(){
+	return state;
+}
 
-void Gerenciadores::Gerenciador_Eventos::executar_fases() {
+
+
+void Gerenciadores::Gerenciador_Eventos::executar() {
 	sf::Event evento;
 	while (PTela->pollEvent(evento)){
 		if (evento.type == sf::Event::KeyPressed) {
@@ -67,6 +65,14 @@ void Gerenciadores::Gerenciador_Eventos::executar_fases() {
 				if (Entidades::Personagens::Jogador::Jogador2) {
 					Jogador2->setMovimento_direita(true);
 				}
+			case sf::Keyboard::Num1:
+				state = 1;
+				break;
+			case sf::Keyboard::Num2:
+				state = 2;
+				break;
+			case sf::Keyboard::Num3:
+				state = 3;
 				break;
 			default:
 				break;

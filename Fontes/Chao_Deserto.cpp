@@ -1,7 +1,6 @@
 #include "../Cabecalhos/Chao_Deserto.h"
 
 Entidades::Obstaculos::Chao_Deserto::Chao_Deserto(const int limite_alt):Obstaculo(8),limite_altura(limite_alt) {
-	massa = 40;
 }
 Entidades::Obstaculos::Chao_Deserto::~Chao_Deserto() {
 
@@ -13,7 +12,9 @@ void Entidades::Obstaculos::Chao_Deserto::executar(){
 		setPosi(getPosicao().x, limite_altura);
 		no_ar = false;
 	}
-	Calc_Fisica();
+	else {
+		Calc_Fisica();
+	}
 }
 
 void Entidades::Obstaculos::Chao_Deserto::Colisao(Entidade* colidida, sf::Vector2f limites){

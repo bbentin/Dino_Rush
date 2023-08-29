@@ -23,10 +23,8 @@ void Entidades::Personagens::Mosca::executar(){
 
 void Entidades::Personagens::Mosca::padrao_acao() {
 	if (!direita) {
-		soma_forca(sf::Vector2f(3.5, 0));
 	}
 	else {
-		soma_forca(sf::Vector2f(-3.5, 0));
 	}
 	inverter();
 }
@@ -34,11 +32,8 @@ void Entidades::Personagens::Mosca::padrao_acao() {
 void Entidades::Personagens::Mosca::Colisao(Entidade* colidida, sf::Vector2f limites){
 	int verificador = colidida->getId();
 
-	if (verificador == 9 || verificador == 10) {
+	if (verificador == 9 || verificador == 8) {
 		ColisaoChao(colidida,limites);
-	}
-	if (verificador == 1 || verificador == 2) {
-
 	}
 }
 
@@ -56,7 +51,6 @@ void Entidades::Personagens::Mosca::Inicializa(){
 void Entidades::Personagens::Mosca::ColisaoChao(Entidade* Chao, sf::Vector2f limites){
 	if (limites.y < 0) {
 		setPosi(getPosicao().x, getPosicao().y + limites.y);
-		reseta_forca_res_y();
 		no_ar = false;
 		iniciar = true;
 	}

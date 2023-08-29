@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Floresta.h"
 
 Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{3,25,10,15,20}, pos_Lamas{10,20,30,40,50},
-pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,49,51,60} {
+pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
 	num_Gosmas = rand() % 3 + 3;	num_Lamas = rand() % 3 + 3;
 	num_Moscas = rand() % 3 + 3;	num_Espinhos = rand() % 3 + 3;
 }
@@ -12,17 +12,10 @@ Fases::Floresta::~Floresta(){
 
 void Fases::Floresta::executar(){
 	desenhar();
-	LEs.executar();
-	if (Entidades::Personagens::Jogador::Jogador2) {
-		//Player1->executar();
-		//Player2->executar();
-	}
-	else {
-		Player1->executar();
-	}
+	VerificaMortos();
 	G_Colisoes.executar();
+	LEs.executar();
 	Player1->setIntervalo(relogio_global.restart().asMilliseconds() / 2);
-	LEs.VerificarMortos();
 }
 
 void Fases::Floresta::CriarInimigos(){
@@ -48,8 +41,8 @@ void Fases::Floresta::CriarGosmas(){
 
 void Fases::Floresta::CriarObstaculos() {
 	gerar_fase(k_fase);
-	CriarEspinhos();
-	CriarLamas();
+	//CriarEspinhos();
+	//CriarLamas();
 }
 
 void Fases::Floresta::CriarEspinhos(){
@@ -58,7 +51,7 @@ void Fases::Floresta::CriarEspinhos(){
 
 void Fases::Floresta::CriarLamas(){
 	for (int i = 0; i < num_Lamas; i++) {
-		Lama* pLama = new Lama(); pLama->setPosi(pos_Gosmas[i] * 16, altura_spawn_inimigos);
+		Lama* pLama = new Lama(); pLama->setPosi(pos_Gosmas[i] * 16, altura_spawn_obstaculos);
 		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
 		LEs.InserirEntidade(static_cast<Entidade*> (pLama));
 	}
@@ -74,5 +67,6 @@ void Fases::Floresta::Inicializa() {
 	gerar_fase(k_fase);
 	LEs.Inicializar();
 	Player1->Inicializa();
+	Player1->setPosi(16, 828);
 }
 

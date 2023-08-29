@@ -4,8 +4,7 @@ class Menu :
 	public Ente{
 
 private:
-	int selecao;
-	sf::Image Caixa_exibicao;
+	sf::Text textos[3];
 	sf::Font fonte;
 public:
 	Menu();
@@ -15,5 +14,6 @@ public:
 	int Menu_Jogo();
 	int Menu_Select_Fase();
 	void Menu_Salvar();
+	void executar();
 };
 

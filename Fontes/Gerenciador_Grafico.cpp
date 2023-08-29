@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Gerenciador_Grafico.h"
 Gerenciadores::Gerenciador_Grafico::Gerenciador_Grafico():Tela(sf::VideoMode(1280,960),"Jogo"),
-Jogador1() {Tela.setFramerateLimit(60);
+Jogador1() {Tela.setFramerateLimit(200);
 	Gerar_Inimigos();	Gerar_Menu();	Gerar_Jogador();	Gerar_Obstaculos(); Gerar_Projetil();	Gerar_Fases();
 }
 Gerenciadores::Gerenciador_Grafico::~Gerenciador_Grafico() {

@@ -1,8 +1,7 @@
 #include "../Cabecalhos/Chao_Floresta.h"
 
 
-Entidades::Obstaculos::Chao_Floresta::Chao_Floresta(const int limit):Obstaculo(9),limite_altura(limit) {
-	massa = 2;
+Entidades::Obstaculos::Chao_Floresta::Chao_Floresta(const int limit) :Obstaculo(9), limite_altura(limit) {
 }
 Entidades::Obstaculos::Chao_Floresta::~Chao_Floresta() {
 }

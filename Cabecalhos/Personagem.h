@@ -12,10 +12,11 @@ namespace Entidades {
 			int num_vidas;
 			static const int forca_movimento;
 			bool iniciar;
+			bool olhando_direita;
 		public:
 			void pular();
-			void mover_direita();
-			void mover_esquerda();
+			void mover_direita(float velo);
+			void mover_esquerda(float velo);
 			void causa_dano(Personagem* afetado);
 			void recebe_dano(int dano);
 			virtual void executar() = 0;

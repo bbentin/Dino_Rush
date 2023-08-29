@@ -33,6 +33,7 @@ namespace Fases{
         void gerar_fase(int fase);
         void CriarEntidades(char leitura, sf::Vector2f pos);
         void CriarChao(int i, sf::Vector2f pos);
+        void VerificaMortos();
         virtual void Inicializa();
         
     };
