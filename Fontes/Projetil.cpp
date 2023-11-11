@@ -80,6 +80,7 @@ void Entidades::Projetil::avanca(){
 	}
 	else if (dono->getId() == 4) {
 		if (visivel) {
+			Soma_Velocidade(sf::Vector2f(-40.0, -5));
 			Calc_Fisica();
 			desenhar();
 		}
@@ -88,6 +89,9 @@ void Entidades::Projetil::avanca(){
 	if (getPosicao().x > 1300 || getPosicao().x < 0) {
 		reseta_posicao(); visivel = false;
 	} 
+}
+
+void Entidades::Projetil::salvar(){
 }
 
 void Entidades::Projetil::setDono(Entidade* Dono){

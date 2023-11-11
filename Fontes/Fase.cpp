@@ -1,7 +1,7 @@
 #include"../Cabecalhos/Fase.h"
 
 Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),Player1(nullptr),Player2(nullptr),k_fase(k)
-,altura_spawn_inimigos(400),altura_spawn_obstaculos(740) {
+,altura_spawn_inimigos(600),altura_spawn_obstaculos(740) {
 
 }
 
@@ -13,15 +13,22 @@ void Fases::Fase::gerenciar_colisoes(){
 }
 
 void Fases::Fase::setJogador(Entidades::Personagens::Jogador* inserido){
-	if (!Player1) {
+	if (!Entidades::Personagens::Jogador::getJogador2()) {
 		Player1 = inserido;
 		LEs.InserirEntidade(static_cast<Entidade*>(Player1));
 		LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
 	}
-	else if (!Player2) {
-		Player2 = inserido;
-		LEs.InserirEntidade(static_cast<Entidade*>(Player1));
-		LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
+	else if (Entidades::Personagens::Jogador::getJogador2()) {
+		if (Player1 == nullptr) {
+			Player1 = inserido;
+			LEs.InserirEntidade(static_cast<Entidade*>(Player1));
+			LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
+		}
+		else if(Player2 == nullptr) {
+			Player2 = inserido;
+			LEs.InserirEntidade(static_cast<Entidade*>(Player2));
+			LEs.InserirEntidade(static_cast<Entidade*>(Player2->getArma()));
+		}
 	}
 }
 
@@ -57,7 +64,7 @@ void Fases::Fase::gerar_fase(int num) {
 		while (getline(arquivo, linha)) {
 			for (int i = 0; i < linha.size(); i++) {
 				if (linha[i] != ' ') {
-					CriarEntidades(linha[i], sf::Vector2f(i, j));
+					CriarEntidades(linha[i], sf::Vector2f(i, j)); // Factory method
 				}
 			}
 			j++;

@@ -17,6 +17,7 @@ namespace Entidades {
 		void executar();
 		void atirada();
 		void avanca();
+		void salvar();
 		void setDono(Entidade* Dono);
 
 		bool GetVisibilidade() const;

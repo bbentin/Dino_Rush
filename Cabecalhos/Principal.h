@@ -20,7 +20,7 @@ private:
 public:
 	Principal();
 	~Principal();
-
+	 
 	Gerenciadores::Gerenciador_Grafico* getGrafico();
 	void Executar();
 	void verifica_estado();

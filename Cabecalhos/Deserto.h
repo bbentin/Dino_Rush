@@ -25,5 +25,6 @@ namespace Fases {
         void CriarLamas();
         void CriarEspinhos();
         void Inicializa();
+        void salvar();
     };
 }

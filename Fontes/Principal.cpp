@@ -5,9 +5,11 @@ Principal::Principal():GGrafico(), Primeiro(), Segundo(),Primeira_fase(nullptr),
 	GEventos.Singleton();
 	GEventos.setTela(GGrafico.getTela());
 	GEventos.setJogador(&Primeiro);
+	GEventos.setJogador(&Segundo);
 	Primeira_fase = new Fases::Floresta();
 //	Segunda_fase = new Fases::Deserto();
 	Primeira_fase->setJogador(&Primeiro);
+	Primeira_fase->setJogador(&Segundo);
 //	Segunda_fase->setJogador(&Primeiro);
 	Primeira_fase->Inicializa();
 //	Segunda_fase->Inicializa();

@@ -11,11 +11,10 @@ namespace Entidades {
 		static float intervalo;
 		static const sf::Vector2f Gravidade;
 		sf::Vector2f posicao,velocidade;
-		bool no_ar;
+		bool no_ar,vivo;
 		void Aplicar_Gravidade();
 		void Calc_Posicao();
 		sf::Vector2f Limitar_Velocidade();
-	    void Soma_Velocidade(sf::Vector2f Soma);
 
 	public:
 		
@@ -26,6 +25,7 @@ namespace Entidades {
 		const sf::Vector2f getPosicao();
 		const sf::Vector2f getTamanho();
 		void setNoAr(bool ar);
+	    void Soma_Velocidade(sf::Vector2f Soma);
 		void setPosi(sf::Vector2f arrumada);
 		void setPosi(float a, float b);
 		void Calc_Fisica();
@@ -34,7 +34,8 @@ namespace Entidades {
 
 		static void setIntervalo(float tempo);
 		virtual void Colisao(Entidade* colidida,sf::Vector2f limites) = 0;
-		virtual void executar();
+		virtual void executar() = 0;
+		virtual void salvar() = 0;
 
 	};
 

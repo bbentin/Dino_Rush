@@ -16,3 +16,6 @@ void Entidades::Obstaculos::Cacto::Colisao(Entidade* colidida, sf::Vector2f limi
 
 void Entidades::Obstaculos::Cacto::obstacular(Entidade* obstaculada){
 }
+
+void Entidades::Obstaculos::Cacto::salvar(){
+}

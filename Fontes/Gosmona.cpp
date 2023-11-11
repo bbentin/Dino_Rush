@@ -34,3 +34,6 @@ void Entidades::Personagens::Gosmona::Colisao_Chao(Entidade* Chao, sf::Vector2f 
 
 void Entidades::Personagens::Gosmona::danar(Entidade* Afetada){
 }
+
+void Entidades::Personagens::Gosmona::salvar(){
+}

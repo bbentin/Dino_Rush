@@ -41,4 +41,7 @@ void Entidades::Personagens::Chefao::setArma(Entidades::Projetil* gun){
 	arma = gun;
 }
 
+void Entidades::Personagens::Chefao::salvar(){
+}
+
 

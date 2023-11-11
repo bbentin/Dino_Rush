@@ -22,3 +22,6 @@ void Entidades::Obstaculos::Chao_Floresta::Colisao(Entidade* colidida, sf::Vecto
 
 void Entidades::Obstaculos::Chao_Floresta::obstacular(Entidade* obstaculada){
 }
+
+void Entidades::Obstaculos::Chao_Floresta::salvar(){
+}

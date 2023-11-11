@@ -1,3 +1,5 @@
+target: jogo_simao
+
 all: compile link clean
 
 compile:
