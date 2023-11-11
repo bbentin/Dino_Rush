@@ -52,19 +52,23 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				Jogador1->atirar();
 				break;
 			case sf::Keyboard::Up:
-				if (Entidades::Personagens::Jogador::Jogador2) {
+				if (Entidades::Personagens::Jogador::getJogador2()) {
 					Jogador2->pular();
 				}
 				break;
 			case sf::Keyboard::Left:
-				if (Entidades::Personagens::Jogador::Jogador2) {
+				if (Entidades::Personagens::Jogador::getJogador2()) {
 					Jogador2->setMovimento_esquerda(true);
 				}
 				break;
 			case sf::Keyboard::Right:
-				if (Entidades::Personagens::Jogador::Jogador2) {
+				if (Entidades::Personagens::Jogador::getJogador2()) {
 					Jogador2->setMovimento_direita(true);
-				}
+				}break;
+			case sf::Keyboard::RAlt:
+				if (Entidades::Personagens::Jogador::getJogador2()) {
+					Jogador2->atirar();
+				}break;
 			case sf::Keyboard::Num1:
 				state = 1;
 				break;
@@ -87,12 +91,12 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				Jogador1->setMovimento_direita(false);
 				break;
 			case sf::Keyboard::Left:
-				if (Entidades::Personagens::Jogador::Jogador2) {
+				if (Entidades::Personagens::Jogador::getJogador2()) {
 					Jogador2->setMovimento_esquerda(false);
 				}
 				break;
 			case sf::Keyboard::Right:
-				if (Entidades::Personagens::Jogador::Jogador2) {
+				if (Entidades::Personagens::Jogador::getJogador2()) {
 					Jogador2->setMovimento_direita(false);
 				}
 				break;

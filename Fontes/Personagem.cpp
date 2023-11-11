@@ -15,7 +15,7 @@ void Entidades::Personagens::Personagem::operator--(){
 }
 
 void Entidades::Personagens::Personagem::operator++(){
-	num_vidas -= 1;
+	num_vidas += 1;
 }
 
 void Entidades::Personagens::Personagem::mover_esquerda(float velo){
@@ -42,5 +42,3 @@ void Entidades::Personagens::Personagem::recebe_dano(int dano){
 	num_vidas -= dano;
 }
 
-void Entidades::Personagens::Personagem::executar(){
-}

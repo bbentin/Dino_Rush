@@ -18,3 +18,6 @@ void Entidades::Personagens::Decapitado::Colisao(Entidade* colidida, sf::Vector2
 
 void Entidades::Personagens::Decapitado::danar(Entidade* Afetada){
 }
+
+void Entidades::Personagens::Decapitado::salvar(){
+}

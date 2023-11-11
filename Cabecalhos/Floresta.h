@@ -3,6 +3,7 @@
 #include "Mosca.h"
 #include "Espinhos.h"
 #include "Gosma.h"
+#include <time.h>
 namespace Fases {
     class Floresta :
         public Fase {
@@ -24,5 +25,6 @@ namespace Fases {
         void CriarEspinhos();
         void CriarLamas();
         void Inicializa();
+        void salvar();
     };
 }

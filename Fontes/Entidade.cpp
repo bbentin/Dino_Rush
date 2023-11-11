@@ -1,13 +1,10 @@
 #include "../Cabecalhos/Entidade.h"
 
-Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true) {
+Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true),vivo(true) {
 	posicao = posi; Imagem.setPosition(posicao);
 }
 
 Entidades::Entidade::~Entidade() {
-}
-
-void Entidades::Entidade::executar(){
 }
 
 sf::Vector2f Entidades::Entidade::Limitar_Velocidade() {

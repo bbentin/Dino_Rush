@@ -23,3 +23,6 @@ void Entidades::Obstaculos::Chao_Deserto::Colisao(Entidade* colidida, sf::Vector
 
 void Entidades::Obstaculos::Chao_Deserto::obstacular(Entidade* obstaculada){
 }
+
+void Entidades::Obstaculos::Chao_Deserto::salvar(){
+}

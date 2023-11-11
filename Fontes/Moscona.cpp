@@ -20,3 +20,6 @@ void Entidades::Personagens::Moscona::Colisao(Entidade* colidida, sf::Vector2f l
 
 void Entidades::Personagens::Moscona::danar(Entidade* Afetada){
 }
+
+void Entidades::Personagens::Moscona::salvar(){
+}

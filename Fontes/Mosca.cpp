@@ -56,3 +56,6 @@ void Entidades::Personagens::Mosca::ColisaoChao(Entidade* Chao, sf::Vector2f lim
 	}
 }
 
+void Entidades::Personagens::Mosca::salvar(){
+}
+

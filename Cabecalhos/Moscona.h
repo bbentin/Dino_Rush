@@ -14,6 +14,7 @@ namespace Entidades {
             void padrao_acao();
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void danar(Entidade* Afetada);
+            void salvar();
         };
     }
 }

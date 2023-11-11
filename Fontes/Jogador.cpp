@@ -5,13 +5,13 @@ andar_direita(false),andar_esquerda(false),arma(nullptr) {
 	num_vidas = 5; 
 	olhando_direita = true;
 	arma = new Projetil();
-	no_ar = false;
+	no_ar = true;
 	arma->setDono(this);
 	if (!Jogador2) {
 		Jogador2 = true;
 	}
 	else {
-		
+		Imagem.setColor(sf::Color::Red);
 	}
 }
 Entidades::Personagens::Jogador::~Jogador() {
@@ -49,37 +49,11 @@ void Entidades::Personagens::Jogador::atirar(){
 	arma->atirada();
 }
 
-void Entidades::Personagens::Jogador::Colisao_Deserto(Entidade* deserto, sf::Vector2f limites){
-	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y + (limites.y));
-		no_ar = false;
-	}
-	else if (limites.x < 0) {
-		if (deserto->getPosicao().x < getPosicao().y) {
-			setPosi(getPosicao().x + limites.x, getPosicao().y);
-		}
-		else if (deserto->getPosicao().x > 0) {
-			setPosi(getPosicao().x - limites.x, getPosicao().y);
-		}
-	}
+void Entidades::Personagens::Jogador::salvar(){
 }
 
-void Entidades::Personagens::Jogador::Colisao_Floresta(Entidade* floresta, sf::Vector2f limites){
-	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y + (limites.y));
-		no_ar = false;
-	}else if (limites.x < 0) {
-		if (floresta->getPosicao().x < getPosicao().x) {
-			setPosi(getPosicao().x + limites.x, getPosicao().y);
-		}
-		else if (floresta->getPosicao().x > getPosicao().x) {
-			setPosi(getPosicao().x - limites.x, getPosicao().y);
-		}
-	}
-}
-
-void Entidades::Personagens::Jogador::Colisao_Projetil(Entidade* projetil, sf::Vector2f limites){
-
+const bool Entidades::Personagens::Jogador::getJogador2(){
+	return Jogador2;
 }
 
 void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vector2f limites){

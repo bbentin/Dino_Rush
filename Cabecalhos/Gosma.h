@@ -5,9 +5,7 @@ namespace Entidades {
         class Gosma :
             public Inimigo {
 
-        private:
-            bool direita;
-            int distancia;
+        private:                 
         public:
             Gosma();
             ~Gosma();
@@ -17,7 +15,7 @@ namespace Entidades {
             void Colisao_Chao(Entidade* Chao,sf::Vector2f limites);
             void Colisao_Jogador(Entidade* Jogador,sf::Vector2f limites);
             void danar(Entidade* afetada);
-            bool inverte();
+            void salvar();
         };
     }
 }

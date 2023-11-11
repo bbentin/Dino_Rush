@@ -1,18 +1,13 @@
 #include "../Cabecalhos/Gosma.h"
 
-Entidades::Personagens::Gosma::Gosma():Inimigo(3),direita(true),distancia(2) {
+Entidades::Personagens::Gosma::Gosma():Inimigo(3) {
 	num_vidas = 3;
 }
 Entidades::Personagens::Gosma::~Gosma() {
 }
 
 void Entidades::Personagens::Gosma::padrao_acao() {
-	if (direita) {
-		pular();
-	}
-	else {
-		pular();
-	}
+		pular();	
 }
 
 void Entidades::Personagens::Gosma::executar(){
@@ -31,9 +26,7 @@ void Entidades::Personagens::Gosma::Colisao(Entidade* colidida, sf::Vector2f lim
 
 void Entidades::Personagens::Gosma::Colisao_Chao(Entidade* Chao,sf::Vector2f limites){
 	if (limites.y < 0) {
-		direita = inverte();
 		setPosi(getPosicao().x, getPosicao().y + limites.y);
-
 		no_ar = false;
 	}
 }
@@ -57,7 +50,6 @@ void Entidades::Personagens::Gosma::danar(Entidade* afetada){
 	afetada--;
 }
 
-bool Entidades::Personagens::Gosma::inverte(){
-	if (direita) { return false; }
-	else { return true; }
+
+void Entidades::Personagens::Gosma::salvar(){
 }

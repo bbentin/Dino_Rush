@@ -17,6 +17,7 @@ namespace Entidades {
             void danar(Entidade* Afetada);
             void Colisao_Chao(Entidade* colidida, sf::Vector2f limites);
             void setArma(Entidades::Projetil* gun);
+            void salvar();
         };
     }
 }

@@ -15,5 +15,11 @@ void Entidades::Obstaculos::Espinhos::Colisao(Entidade* colidida, sf::Vector2f l
 }
 
 void Entidades::Obstaculos::Espinhos::obstacular(Entidade* obstaculada){
+	if (obstaculada->getPosicao().x > posicao.x) {
+		obstaculada->Soma_Velocidade(sf::Vector2f(0.0, 0.0));
+	}
 	obstaculada--;
+}
+
+void Entidades::Obstaculos::Espinhos::salvar(){
 }

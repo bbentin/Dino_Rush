@@ -78,3 +78,6 @@ void Fases::Deserto::Inicializa(){
 	Player1->Inicializa();
 	
 }
+
+void Fases::Deserto::salvar(){
+}
