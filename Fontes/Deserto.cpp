@@ -12,7 +12,7 @@ Fases::Deserto::~Deserto(){
 void Fases::Deserto::executar() {
 	desenhar();
 	LEs.executar();
-
+	VerificaMortos();
 	G_Colisoes.executar();
 	Player1->setIntervalo(relogio_global.restart().asMilliseconds() / 2);
 }
@@ -73,9 +73,15 @@ void Fases::Deserto::Inicializa(){
 	CriarInimigos();
 	CriarObstaculos();
 	G_Colisoes.addJogador(Player1);
+	G_Colisoes.addJogador(Player2);
 	gerar_fase(k_fase);
 	LEs.Inicializar();
 	Player1->Inicializa();
+	Player1->setPosi(16, 828);
+	if (Entidades::Personagens::Jogador::getJogador2()) {
+		Player2->Inicializa();
+		Player2->setPosi(64, 828);
+	}
 	
 }
 

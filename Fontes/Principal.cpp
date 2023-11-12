@@ -7,12 +7,11 @@ Principal::Principal():GGrafico(), Primeiro(), Segundo(),Primeira_fase(nullptr),
 	GEventos.setJogador(&Primeiro);
 	GEventos.setJogador(&Segundo);
 	Primeira_fase = new Fases::Floresta();
-//	Segunda_fase = new Fases::Deserto();
-	Primeira_fase->setJogador(&Primeiro);
-	Primeira_fase->setJogador(&Segundo);
-//	Segunda_fase->setJogador(&Primeiro);
+	Segunda_fase = new Fases::Deserto();
+	Segunda_fase->setJogador(&Segundo);
+	Segunda_fase->setJogador(&Primeiro);
 	Primeira_fase->Inicializa();
-//	Segunda_fase->Inicializa();
+	Segunda_fase->Inicializa();
 }
 Principal::~Principal() {
 	delete Primeira_fase;
@@ -26,7 +25,7 @@ void Principal::Executar() {
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
 		GEventos.executar();
-		Primeira_fase->executar();
+		Segunda_fase->executar();
 		GGrafico.Exibir();
 	}
 }

@@ -1,6 +1,6 @@
 #include"../Cabecalhos/Fase.h"
 
-Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),Player1(nullptr),Player2(nullptr),k_fase(k)
+Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),k_fase(k)
 ,altura_spawn_inimigos(600),altura_spawn_obstaculos(740) {
 
 }
@@ -118,6 +118,9 @@ void Fases::Fase::VerificaMortos(){
 	if (pMorto != nullptr) {
 		LEs.RemoverEntidade(pMorto);
 	}
+	if (Player1->getVidas() <= 0 && Player2->getVidas() <= 0) {
+		exit(1);
+	}
 }
 
 
@@ -129,3 +132,6 @@ void Fases::Fase::Inicializa() {
 	LEs.Inicializar();
 	Player1->Inicializa();
 }
+
+Entidades::Personagens::Jogador* Fases::Fase::Player1 = nullptr;
+Entidades::Personagens::Jogador* Fases::Fase::Player2 = nullptr;
