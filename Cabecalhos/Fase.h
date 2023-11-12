@@ -18,9 +18,9 @@ namespace Fases{
         sf::Clock relogio_global;
         Gerenciadores::Gerenciador_Colisoes G_Colisoes;
         Listas::ListaEntidades LEs;
-        Entidades::Personagens::Jogador* Player1;
-        Entidades::Personagens::Jogador* Player2;
-        const int k_fase,altura_spawn_inimigos,altura_spawn_obstaculos;
+        static Entidades::Personagens::Jogador* Player1;
+        static Entidades::Personagens::Jogador* Player2;
+        const int k_fase, altura_spawn_inimigos, altura_spawn_obstaculos;
     public:
 
         Fase(const int i = 0, const int k = 0);
@@ -35,6 +35,5 @@ namespace Fases{
         void CriarChao(int i, sf::Vector2f pos);
         void VerificaMortos();
         virtual void Inicializa();
-        
     };
 }
