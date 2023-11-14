@@ -45,7 +45,7 @@ void Principal::Executar() {
 					menu->MoveDown();
 					break;
 
-				case sf::Keyboard::Return:
+				case sf::Keyboard::Enter:
 					switch (menu->GetPressedItem()) {
 					case 0:
 						estadoJogo = EstadoJogo::FASE1;
@@ -73,7 +73,7 @@ void Principal::Executar() {
 			Primeira_fase->executar();
 			break;
 
-			// Adicione casos para outros estados conforme necessário
+			// Adicione casos para outros estados conforme necessï¿½rio
 
 		default:
 			// Trate outros estados aqui

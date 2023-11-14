@@ -15,6 +15,7 @@ Menu::Menu(EstadoJogo* estado) :Ente(13), fonte(), estadoJogo(estado)
 		textos[i].setPosition(sf::Vector2f(100, (i + 1) * 100));
 	}
 	selected = 0;
+	textos[selected].setOutlineThickness(5);
 }
 
 Menu::~Menu() {
@@ -130,7 +131,7 @@ void Menu::MoveUp() {
 	if (selected - 1 >= 0)
 	{
 		//textos[selected].setColor(sf::Color::Red);
-		textos[selected].setOutlineThickness(5);
+		textos[selected].setOutlineThickness(0);
 		selected--;
 		//textos[selected].setColor(sf::Color::Blue);
 	}
@@ -140,6 +141,7 @@ void Menu::MoveDown() {
 	if (selected + 1 < MAX_NUMBER_OF_ITEMS)
 	{
 		//textos[selected].setColor(sf::Color::Red);
+		textos[selected].setOutlineThickness(0);
 		selected++;
 		//textos[selected].setColor(sf::Color::Blue);
 	}
