@@ -5,16 +5,25 @@
 #include "ListaEntidades.h"
 #include "Deserto.h"
 #include "Floresta.h"
-#include "Menu.h"
+//#include "Menu.h"
 #include <iostream>
+
+enum EstadoJogo {
+	MENU = 0,
+	FASE1 = 1,
+	FASE2 = 2,
+};
+
+class Menu;
+
 class Principal{
 private:
 	Gerenciadores::Gerenciador_Grafico GGrafico;
 	Gerenciadores::Gerenciador_Eventos GEventos;
 	Fases::Deserto* Segunda_fase;
 	Fases::Floresta* Primeira_fase;
-	Menu menu;
-	int estado;
+	Menu* menu;
+	EstadoJogo estadoJogo;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
 
 public:
