@@ -28,6 +28,7 @@ namespace Entidades {
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void atirar();
             void salvar();
+            void pontua();
             static const bool getJogador2();
         };
     }

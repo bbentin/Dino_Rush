@@ -1,7 +1,8 @@
 #include "../Cabecalhos/Jogador.h"
 
-Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi), pontos(0),
+Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 andar_direita(false),andar_esquerda(false),arma(nullptr) {
+	pontos = 0;
 	num_vidas = 5; 
 	olhando_direita = true;
 	arma = new Projetil();
