@@ -6,7 +6,7 @@ olhando_direita(false){
 Entidades::Personagens::Personagem::~Personagem(){
 }
 
-int Entidades::Personagens::Personagem::getVidas() const{
+int Entidades::Personagens::Personagem::getVidas() {
 	return num_vidas;
 }
 
@@ -42,3 +42,6 @@ void Entidades::Personagens::Personagem::recebe_dano(int dano){
 	num_vidas -= dano;
 }
 
+void Entidades::Personagens::Personagem::pontua() {
+	pontos += 1;
+}

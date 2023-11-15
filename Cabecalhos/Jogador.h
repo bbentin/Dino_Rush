@@ -8,7 +8,6 @@ namespace Entidades {
         class Jogador :
             public Personagem {
         private:
-            int pontos;
             bool andar_direita,andar_esquerda;
             Entidades::Projetil* arma;
             const static float rapidez;
