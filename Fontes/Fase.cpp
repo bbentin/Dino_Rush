@@ -39,7 +39,7 @@ sf::Clock* Fases::Fase::getRelogio() {
 void Fases::Fase::gerar_fase(int num) {	
 	std::fstream arquivo;
 	if (num == 2) {
-		arquivo.open("C:/Users/crisn/Desktop/Jogo_Simao(1)/Imagens/Fase/Deserto");
+		arquivo.open("Imagens/Fase/Deserto/Deserto.txt");
 		string linha;
 		if (!arquivo.is_open()) {
 				std::cout << "Nao abriu o Arquivo de Deserto" << std::endl;

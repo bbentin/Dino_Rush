@@ -8,12 +8,6 @@
 //#include "Menu.h"
 #include <iostream>
 
-enum EstadoJogo {
-	MENU = 0,
-	FASE1 = 1,
-	FASE2 = 2,
-};
-
 class Menu;
 
 class Principal{
@@ -23,7 +17,8 @@ private:
 	Fases::Deserto* Segunda_fase;
 	Fases::Floresta* Primeira_fase;
 	Menu* menu;
-	EstadoJogo estadoJogo;
+	int selected;
+	bool pressed;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
 
 public:

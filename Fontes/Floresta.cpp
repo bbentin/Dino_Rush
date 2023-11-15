@@ -5,6 +5,7 @@ pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
 	srand(time(NULL));
 	num_Moscas = rand() % 4 + 2;	num_Espinhos = rand() % 3 + 3;
 	num_Gosmas = rand() % 4 + 2;	num_Lamas = rand() % 3 + 3;
+	gerar_fase(k_fase);
 }
 
 Fases::Floresta::~Floresta(){
@@ -41,7 +42,6 @@ void Fases::Floresta::CriarGosmas(){
 }
 
 void Fases::Floresta::CriarObstaculos() {
-	gerar_fase(k_fase);
 	//CriarEspinhos();
 	//CriarLamas();
 }

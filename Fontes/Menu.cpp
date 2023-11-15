@@ -1,117 +1,47 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu(EstadoJogo* estado) :Ente(13), fonte(), estadoJogo(estado)
+Menu::Menu() :Ente(13), fonte(), pressed(false), selected(0)
 {
 	fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
 	textos[0].setString("Fase 1");
 	textos[1].setString("Fase 2");
 	textos[2].setString("Ranking");
-	textos[3].setString("Opcoes");
-	textos[4].setString("Sair");
-	for (int i = 0; i < 5; i++)
+	textos[3].setString("Sair");
+	for (int i = 0; i < 4; i++)
 	{
 		textos[i].setFont(fonte);
-		//textos[i].setColor(sf::Color::Red);
+		textos[i].setFillColor(sf::Color::Blue);
+		textos[i].setOutlineColor(sf::Color::Black);
+		textos[i].setOutlineThickness(0);
 		textos[i].setPosition(sf::Vector2f(100, (i + 1) * 100));
 	}
-	selected = 0;
-	textos[selected].setOutlineThickness(5);
+	textos[0].setOutlineThickness(5);
+	textos[0].setFillColor(sf::Color::Red);
 }
 
 Menu::~Menu() {
 
 }
 
-int Menu::Menu_Principal() {
-	/*fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
-	options = { "Fase 1", "Fase 2", "Ranking", "Opcoes", "Sair" };
-	textos.resize(5);
-	coords = { {100, 100}, {100, 200}, {100, 300}, {100, 400}, {100, 500} };
-	sizes = { 50, 50, 50, 50, 50 };
-	for (std::size_t i{}; i < textos.size(); i++)
+void Menu::executar() {
+	if (!pressed)
 	{
-		textos[i].setFont(fonte);
-		textos[i].setString(options[i]);
-		textos[i].setCharacterSize(sizes[i]);
-		textos[i].setOutlineColor(sf::Color::Black);
-		textos[i].setPosition(coords[i]);
-	}
-	sf::Event event;
-	while (Grafico->getTela()->pollEvent(event))
-	{
-		textos[pos].setOutlineThickness(5);
-		if (event.type == sf::Event::Closed)
-		{
-			Grafico->getTela()->close();
-			return false;
-		}
+		Desenhar();
+		sf::Event event;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !pressed && pos < 4)
+		while (Grafico->getTela()->pollEvent(event))
 		{
-			pos++;
-			pressed = true;
-			textos[pos].setOutlineThickness(5);
-			textos[pos - 1].setOutlineThickness(0);
-			pressed = false;
-			select = false;
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !pressed && pos > 0)
-		{
-			pos--;
-			pressed = true;
-			textos[pos].setOutlineThickness(5);
-			textos[pos + 1].setOutlineThickness(0);
-			pressed = false;
-			select = false;
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && !select)
-		{
-			select = true;
-			switch (pos)
+			switch (event.type)
 			{
-			case 4:
+			case sf::Event::KeyReleased:
+				handleInput(event);
+				break;
+			case sf::Event::Closed:
 				Grafico->getTela()->close();
 				break;
-			case 0:
-				Menu_Select_Fase();
-				break;
-			case 1:
-				Menu_Select_Fase();
-				break;
-			case 2:
-				//Ranking ranking;
-				//ranking.run();
-				break;
-			case 3:
-				//Opcoes opcoes;
-				//opcoes.run();
-				break;
 			}
-			return pos;
 		}
-	}*/
-	return 0;
-}
-
-int Menu::Menu_Jogo() {
-	return 0;
-}
-
-int Menu::Menu_Select_Fase() {
-	return 0;
-}
-
-void Menu::Menu_Salvar() {
-}
-
-void Menu::executar() {
-	/*desenhar();
-	for (auto t : textos) {
-		Grafico->getTela()->draw(t);
 	}
-	*estadoJogo = static_cast<EstadoJogo>(Menu_Principal());*/
 }
 
 void Menu::inicializar()
@@ -128,21 +58,45 @@ void Menu::Desenhar() {
 }
 
 void Menu::MoveUp() {
-	if (selected - 1 >= 0)
+	if ((selected - 1) >= 0)
 	{
-		//textos[selected].setColor(sf::Color::Red);
+		textos[selected].setFillColor(sf::Color::Blue);
 		textos[selected].setOutlineThickness(0);
 		selected--;
-		//textos[selected].setColor(sf::Color::Blue);
+		textos[selected].setFillColor(sf::Color::Red);
+		textos[selected].setOutlineThickness(5);
 	}
+	Desenhar();
 }
 
 void Menu::MoveDown() {
-	if (selected + 1 < MAX_NUMBER_OF_ITEMS)
+	if ((selected + 1) < MAX_NUMBER_OF_ITEMS)
 	{
-		//textos[selected].setColor(sf::Color::Red);
+		textos[selected].setFillColor(sf::Color::Blue);
 		textos[selected].setOutlineThickness(0);
 		selected++;
-		//textos[selected].setColor(sf::Color::Blue);
+		textos[selected].setFillColor(sf::Color::Red);
+		textos[selected].setOutlineThickness(5);
+	}
+	Desenhar();
+
+}
+
+void Menu::handleInput(sf::Event event)
+{
+	switch (event.key.code)
+	{
+	case sf::Keyboard::Up:
+		MoveUp();
+		break;
+
+	case sf::Keyboard::Down:
+		MoveDown();
+		break;
+
+	case sf::Keyboard::Enter:
+		pressed = true;
+		return;
+		break;
 	}
 }
