@@ -10,12 +10,12 @@ Menu::Menu() :Ente(13), fonte(), pressed(false), selected(0)
 	for (int i = 0; i < 4; i++)
 	{
 		textos[i].setFont(fonte);
-		textos[i].setFillColor(sf::Color::Blue);
+		textos[i].setFillColor(sf::Color::Green);
 		textos[i].setOutlineColor(sf::Color::Black);
-		textos[i].setOutlineThickness(0);
+		textos[i].setOutlineThickness(2);
 		textos[i].setPosition(sf::Vector2f(100, (i + 1) * 100));
 	}
-	textos[0].setOutlineThickness(5);
+	textos[0].setOutlineThickness(4);
 	textos[0].setFillColor(sf::Color::Red);
 }
 
@@ -60,11 +60,11 @@ void Menu::Desenhar() {
 void Menu::MoveUp() {
 	if ((selected - 1) >= 0)
 	{
-		textos[selected].setFillColor(sf::Color::Blue);
-		textos[selected].setOutlineThickness(0);
+		textos[selected].setFillColor(sf::Color::Green);
+		textos[selected].setOutlineThickness(2);
 		selected--;
 		textos[selected].setFillColor(sf::Color::Red);
-		textos[selected].setOutlineThickness(5);
+		textos[selected].setOutlineThickness(4);
 	}
 	Desenhar();
 }
@@ -72,11 +72,11 @@ void Menu::MoveUp() {
 void Menu::MoveDown() {
 	if ((selected + 1) < MAX_NUMBER_OF_ITEMS)
 	{
-		textos[selected].setFillColor(sf::Color::Blue);
-		textos[selected].setOutlineThickness(0);
+		textos[selected].setFillColor(sf::Color::Green);
+		textos[selected].setOutlineThickness(2);
 		selected++;
 		textos[selected].setFillColor(sf::Color::Red);
-		textos[selected].setOutlineThickness(5);
+		textos[selected].setOutlineThickness(4);
 	}
 	Desenhar();
 

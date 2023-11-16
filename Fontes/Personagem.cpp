@@ -43,7 +43,7 @@ void Entidades::Personagens::Personagem::recebe_dano(int dano){
 }
 
 void Entidades::Personagens::Personagem::pontua() {
-	pontos += 1;
+	this->pontos += 1;
 	cout << this->getId() << " Pontos: " << pontos << endl;
 	// Hud de pontos furutamente
 }
