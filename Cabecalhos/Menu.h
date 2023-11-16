@@ -26,5 +26,6 @@ public:
 	void handleInput(sf::Event evento);
 	int GetItem() { return selected; }
 	bool isPressed() { return pressed; }
+	sf::Font getFonte() { return fonte; }
 };
 

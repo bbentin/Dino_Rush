@@ -96,7 +96,6 @@ void Menu::handleInput(sf::Event event)
 
 	case sf::Keyboard::Enter:
 		pressed = true;
-		return;
 		break;
 	}
 }

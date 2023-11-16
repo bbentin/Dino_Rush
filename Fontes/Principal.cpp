@@ -1,7 +1,9 @@
 #include "../Cabecalhos/Principal.h"
 #include "../Cabecalhos/Menu.h"
+#include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), selected(10), pressed(false) {
+Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), selected(10), pressed(false), ranking()
+{
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
 	GEventos.setTela(GGrafico.getTela());
@@ -9,6 +11,8 @@ Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr
 	GEventos.setJogador(&Segundo);
 	menu = new Menu();
 	menu->inicializar();
+	ranking = new Ranking();
+	ranking->carregar();
 	Primeira_fase = new Fases::Floresta();
 	Segunda_fase = new Fases::Deserto();
 	Primeira_fase->setJogador(&Primeiro);
@@ -40,7 +44,7 @@ void Principal::Executar() {
 			Segunda_fase->executar();
 		}
 		else if (selected == 2 && pressed) {
-			//	Menu_Ranking.executar();
+			//ranking->executar();
 		}
 		else if (selected == 3 && pressed) {
 			GGrafico.getTela()->close();

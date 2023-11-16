@@ -30,10 +30,7 @@ char* Ranking::getPlayerName()
 
 void Ranking::salvar()
 {
-	std::ofstream arquivo;
-	arquivo.open("Imagens/Menus/Ranking/ranking.txt", std::ios::app);
-	arquivo << playerName << " " << score << std::endl;
-	arquivo.close();
+
 }
 
 void Ranking::carregar()
@@ -50,6 +47,7 @@ void Ranking::carregar()
 		std::cout << nome << " " << pontuacao << std::endl;
 	}
 	arquivo.close();
+	ordenar();
 }
 
 void Ranking::ordenar()
@@ -71,8 +69,36 @@ void Ranking::ordenar()
 		arquivo2 << linhas[i] << std::endl;
 	}
 	arquivo2.close();
+	salvar();
 }
 
 void Ranking::executar()
 {
+	carregar();
+	desenha();
+}
+
+void Ranking::desenha()
+{
+	// Abre o arquivo de ranking e faz a leitura e impressão na tela do ranking utilizando de textos do sfml na mesma tela de menu:
+	std::ifstream arquivo;
+	arquivo.open("Imagens/Menus/Ranking/ranking.txt");
+	std::string linha;
+	int i = 0;
+	while (std::getline(arquivo, linha))
+	{
+		std::istringstream iss(linha);
+		std::string nome;
+		int pontuacao;
+		iss >> nome >> pontuacao;
+		sf::Text text;
+		text.setFont(getFonte());
+		text.setString(nome + " " + std::to_string(pontuacao));
+		text.setCharacterSize(30);
+		text.setFillColor(sf::Color::White);
+		text.setPosition(100, 100 + i * 50);
+		//Grafico->getTela()->draw(text);
+		i++;
+	}
+
 }

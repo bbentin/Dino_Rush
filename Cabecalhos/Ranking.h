@@ -27,4 +27,5 @@ public:
 	void carregar();
 	void ordenar();
 	void executar();
+	void desenha();
 };
