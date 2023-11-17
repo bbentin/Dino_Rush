@@ -43,7 +43,6 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 	default:
 		break;
 	}
-	 //retora se houve colisão 
 }
 
 void Entidades::Personagens::Jogador::atirar(){
@@ -79,7 +78,7 @@ void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vec
 
 void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf::Vector2f limites) {
 	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y + (limites.y));
+			setPosi(getPosicao().x, getPosicao().y + (limites.y));
 		no_ar = false;
 	}else if (limites.x < 0) {
 		if (obstaculo->getPosicao().x < getPosicao().x) {

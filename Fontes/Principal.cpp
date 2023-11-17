@@ -18,6 +18,7 @@ Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr
 	Primeira_fase->setJogador(&Primeiro);
 	Primeira_fase->setJogador(&Segundo);
 	Segunda_fase->setJogador(&Primeiro);
+  Segunda_fase->setJogador(&Segundo);
 	Primeira_fase->Inicializa();
 	Segunda_fase->Inicializa();
 }
