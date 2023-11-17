@@ -18,15 +18,31 @@ void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites){
 		switch (IdColidida){
 		case 3:
 			ColisaoPersonagem(colidida);
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
+			{
+				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			}
 			break;
 		case 4:
 			ColisaoPersonagem(colidida);
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
+			{
+				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			}
 			break;
 		case 5:
 			ColisaoPersonagem(colidida);
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
+			{
+				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			}
 			break;
 		case 6:
 			ColisaoPersonagem(colidida);
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
+			{
+				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			}
 			break;
 		case 8:
 			ColisaoObstaculo(colidida);

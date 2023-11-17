@@ -1,12 +1,12 @@
 #include "../Cabecalhos/Personagem.h"
 
-Entidades::Personagens::Personagem::Personagem(const int i, sf::Vector2f posi) :Entidade(i, posi), num_vidas(3), Dano(1), iniciar(false),
+Entidades::Personagens::Personagem::Personagem(const int i, sf::Vector2f posi) :Entidade(i, posi), num_vidas(3), Dano(1), iniciar(false), pontos(),
 olhando_direita(false){
 }
 Entidades::Personagens::Personagem::~Personagem(){
 }
 
-int Entidades::Personagens::Personagem::getVidas() const{
+int Entidades::Personagens::Personagem::getVidas() {
 	return num_vidas;
 }
 
@@ -42,3 +42,8 @@ void Entidades::Personagens::Personagem::recebe_dano(int dano){
 	num_vidas -= dano;
 }
 
+void Entidades::Personagens::Personagem::pontua() {
+	this->pontos += 1;
+	cout << this->getId() << " Pontos: " << pontos << endl;
+	// Hud de pontos furutamente
+}
