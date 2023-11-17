@@ -2,6 +2,7 @@
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 andar_direita(false),andar_esquerda(false),arma(nullptr) {
+	pontos = 0;
 	num_vidas = 5; 
 	olhando_direita = true;
 	arma = new Projetil();

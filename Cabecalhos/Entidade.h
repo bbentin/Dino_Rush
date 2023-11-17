@@ -37,7 +37,6 @@ namespace Entidades {
 		virtual void Colisao(Entidade* colidida,sf::Vector2f limites) = 0;
 		virtual void executar() = 0;
 		virtual void salvar() = 0;
-
 	};
 
 }

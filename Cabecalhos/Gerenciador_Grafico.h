@@ -23,8 +23,6 @@ namespace Gerenciadores {
 		sf::RenderWindow* getTela();
 		void DesenharEnte(sf::Sprite sprite);
 		sf::Image getImagem(int identificador);
-		
-
 	};
 }
 

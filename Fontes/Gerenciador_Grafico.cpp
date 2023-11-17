@@ -32,6 +32,7 @@ void Gerenciadores::Gerenciador_Grafico::Gerar_Fases() {
 }
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Menu() {
+	Menu.loadFromFile("Imagens/Menu/Menu.png");
 }
 
 void Gerenciadores::Gerenciador_Grafico::Gerar_Projetil() {
