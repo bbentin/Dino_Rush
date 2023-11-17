@@ -6,6 +6,8 @@ namespace Entidades {
             public Obstaculo {
         private:
             const int dano;
+            bool visivel;
+            sf::Clock relogio;
         public:
             Espinhos();
             ~Espinhos();
@@ -14,6 +16,7 @@ namespace Entidades {
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void obstacular(Entidade* obstaculada);
             void salvar();
+            void brotar();
         };
     }
 }

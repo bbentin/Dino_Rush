@@ -46,14 +46,14 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				Jogador1->setMovimento_direita(true);
 				break;
 			case sf::Keyboard::W:
-				Jogador1->pular();
+				Jogador1->pular(80);
 				break;
 			case sf::Keyboard::LAlt:
 				Jogador1->atirar();
 				break;
 			case sf::Keyboard::Up:
 				if (Entidades::Personagens::Jogador::getJogador2()) {
-					Jogador2->pular();
+					Jogador2->pular(80);
 				}
 				break;
 			case sf::Keyboard::Left:

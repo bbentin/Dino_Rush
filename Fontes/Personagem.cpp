@@ -26,9 +26,12 @@ void Entidades::Personagens::Personagem::mover_direita(float velo) {
 	Soma_Velocidade(sf::Vector2f(velo, 0.0));
 }
 
-void Entidades::Personagens::Personagem::pular(){
+void Entidades::Personagens::Personagem::pular(int altura){
 	if (!no_ar) {
-		Soma_Velocidade(sf::Vector2f(0.0, -800));
+		for (int i = 0; i < 10; i++) {
+			Soma_Velocidade(sf::Vector2f(0.0, -80 -altura));
+			Calc_Fisica();
+		}
 		 no_ar = true;
 	}
 	else { return; }

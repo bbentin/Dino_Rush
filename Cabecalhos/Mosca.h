@@ -7,6 +7,7 @@ namespace Entidades {
         private:
             bool direita;
             float pos_x_inicial;
+            const int sujeira; // desacelera o jogador
         public:
             Mosca();
             ~Mosca();

@@ -15,7 +15,7 @@ namespace Entidades {
 			bool iniciar;
 			bool olhando_direita;
 		public:
-			void pular();
+			void pular(int altura);
 			void mover_direita(float velo);
 			void mover_esquerda(float velo);
 			void causa_dano(Personagem* afetado);

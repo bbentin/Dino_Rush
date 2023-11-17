@@ -12,7 +12,6 @@ namespace Entidades {
             Entidades::Projetil* arma;
             const static float rapidez;
             static bool Jogador2;
-
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));
             ~Jogador();

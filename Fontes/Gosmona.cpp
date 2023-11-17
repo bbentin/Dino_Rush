@@ -14,7 +14,7 @@ void Entidades::Personagens::Gosmona::executar() {
 }
 
 void Entidades::Personagens::Gosmona::padrao_acao() {
-	pular();
+	pular(0);
 }
 
 void Entidades::Personagens::Gosmona::Colisao(Entidade* colidida, sf::Vector2f limites){
@@ -33,6 +33,8 @@ void Entidades::Personagens::Gosmona::Colisao_Chao(Entidade* Chao, sf::Vector2f 
 }
 
 void Entidades::Personagens::Gosmona::danar(Entidade* Afetada){
+	empurrar(Afetada);
+
 }
 
 void Entidades::Personagens::Gosmona::salvar(){
