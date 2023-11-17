@@ -2,7 +2,7 @@
 1 - Jogador
 2 - Jogador2
 3 - Gosma - OK
-4 - Chefao
+4 - Chefao -OK
 5 - Mosca - OK
 6 - Gosmona - OK
 7 - Lama - OK

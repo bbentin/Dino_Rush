@@ -31,6 +31,7 @@ namespace Entidades {
 		void Calc_Fisica();
 		void parar_movimento_x();
 		void parar_movimento_y();
+		void empurrar(Entidade* empurrada);
 
 		static void setIntervalo(float tempo);
 		virtual void Colisao(Entidade* colidida,sf::Vector2f limites) = 0;

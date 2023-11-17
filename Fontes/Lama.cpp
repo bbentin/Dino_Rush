@@ -21,7 +21,8 @@ void Entidades::Obstaculos::Lama::Colisao(Entidade* colidida, sf::Vector2f limit
 }
 
 void Entidades::Obstaculos::Lama::obstacular(Entidade* obstaculada){
-
+	//empurrar(obstaculada);
+	obstaculada->Soma_Velocidade(sf::Vector2f(-100, 0)); 
 }
 
 void Entidades::Obstaculos::Lama::salvar(){

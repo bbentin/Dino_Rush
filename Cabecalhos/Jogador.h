@@ -7,13 +7,11 @@ namespace Entidades {
     namespace Personagens {
         class Jogador :
             public Personagem {
-        private:
-            int pontos;
+        private:           
             bool andar_direita,andar_esquerda;
             Entidades::Projetil* arma;
             const static float rapidez;
             static bool Jogador2;
-
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));
             ~Jogador();

@@ -57,8 +57,10 @@ void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
 
 void Entidades::Projetil::ColisaoPersonagem(Entidade* colidida){
-	reseta_posicao();	visivel = false;
-	static_cast<Entidades::Personagens::Personagem*>(colidida)->operator--();
+	if (visivel) {
+		reseta_posicao();	visivel = false;
+		static_cast<Entidades::Personagens::Personagem*>(colidida)->operator--();
+		}
 }
 
 void Entidades::Projetil::ColisaoObstaculo(Entidade* colidida){

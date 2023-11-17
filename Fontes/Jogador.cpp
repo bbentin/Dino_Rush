@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Jogador.h"
 
-Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi), pontos(0),
+Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 andar_direita(false),andar_esquerda(false),arma(nullptr) {
 	num_vidas = 5; 
 	olhando_direita = true;
@@ -25,7 +25,13 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 	case 3:
 		Colisao_Inimigo(colidida, limites);
 		break;
+	case 4:
+		Colisao_Inimigo(colidida, limites);
+		break;
 	case 5:
+		Colisao_Inimigo(colidida, limites);
+		break;
+	case 6:
 		Colisao_Inimigo(colidida, limites);
 		break;
 	case 9:
@@ -77,8 +83,14 @@ void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vec
 
 void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf::Vector2f limites) {
 	if (limites.y < 0) {
+		if (obstaculo->getPosicao().y < getPosicao().y){
+			setPosi(getPosicao().x, getPosicao().y - limites.y);
+			no_ar = true;
+		}
+		if (obstaculo->getPosicao().y > getPosicao().y){
 			setPosi(getPosicao().x, getPosicao().y + (limites.y));
-		no_ar = false;
+			no_ar = false;
+		}
 	}else if (limites.x < 0) {
 		if (obstaculo->getPosicao().x < getPosicao().x) {
 			setPosi(getPosicao().x + limites.x, getPosicao().y);

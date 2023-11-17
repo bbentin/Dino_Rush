@@ -99,5 +99,16 @@ void Entidades::Entidade::setNoAr(bool ar){
 	no_ar = ar;
 }
 
+void Entidades::Entidade::empurrar(Entidade* empurrada) {
+	if (empurrada->getPosicao().x > getPosicao().x) {
+		empurrada->setPosi(getPosicao().x + 10 + getTamanho().x, empurrada->getPosicao().y - 30);
+		empurrada->setNoAr(true);
+	}
+	else if (empurrada->getPosicao().x < getPosicao().x) {
+		empurrada->setPosi(getPosicao().x - 10 - getTamanho().x, empurrada->getPosicao().y - 30);
+		empurrada->setNoAr(true);
+	}
+}
+
 const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,6.0f);
 float Entidades::Entidade::intervalo = 0.0;

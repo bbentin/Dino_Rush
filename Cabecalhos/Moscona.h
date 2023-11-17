@@ -5,7 +5,7 @@ namespace Entidades {
         class Moscona :
             public Inimigo {
         private:
-
+       
         public:
             Moscona();
             ~Moscona();

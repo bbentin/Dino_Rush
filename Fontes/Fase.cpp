@@ -39,7 +39,7 @@ sf::Clock* Fases::Fase::getRelogio() {
 void Fases::Fase::gerar_fase(int num) {	
 	std::fstream arquivo;
 	if (num == 2) {
-		arquivo.open("C:/Users/rbben/Documents/Faculdade/2023-2/Tec_Prog/APS/Jogo_Simao/Imagens/Fase/Deserto/Deserto.txt");
+		arquivo.open("Imagens/Fase/Deserto/Deserto.txt");
 		string linha;
 		if (!arquivo.is_open()) {
 				std::cout << "Nao abriu o Arquivo de Deserto" << std::endl;
@@ -56,7 +56,7 @@ void Fases::Fase::gerar_fase(int num) {
 	}
 	else if (num == 1) {
 		string linha;
-		arquivo.open("C:/Users/rbben/Documents/Faculdade/2023-2/Tec_Prog/APS/Jogo_Simao/Imagens/Fase/Floresta/Floresta.txt");
+		arquivo.open("Imagens/Fase/Floresta/Floresta.txt");
 		if (!arquivo.is_open()) {
 			std::cout << "Nao abriu o arquivo de Floresta" << std::endl;
 		}

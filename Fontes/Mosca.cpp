@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Mosca.h"
 
-Entidades::Personagens::Mosca::Mosca():Inimigo(5),pos_x_inicial(getPosicao().x),direita(true) {
+Entidades::Personagens::Mosca::Mosca():Inimigo(5),pos_x_inicial(getPosicao().x),direita(true),sujeira(20) {
 }
 Entidades::Personagens::Mosca::~Mosca() {
 
@@ -23,8 +23,10 @@ void Entidades::Personagens::Mosca::executar(){
 
 void Entidades::Personagens::Mosca::padrao_acao() {
 	if (!direita) {
+		mover_direita(8);
 	}
 	else {
+		mover_esquerda(8);
 	}
 	inverter();
 }

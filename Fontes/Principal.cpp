@@ -8,8 +8,8 @@ Principal::Principal():GGrafico(), Primeiro(), Segundo(),Primeira_fase(nullptr),
 	GEventos.setJogador(&Segundo);
 	Primeira_fase = new Fases::Floresta();
 	Segunda_fase = new Fases::Deserto();
-	Segunda_fase->setJogador(&Segundo);
-	Segunda_fase->setJogador(&Primeiro);
+	Primeira_fase->setJogador(&Segundo);
+	Primeira_fase->setJogador(&Primeiro);
 	Primeira_fase->Inicializa();
 	Segunda_fase->Inicializa();
 }
@@ -25,7 +25,7 @@ void Principal::Executar() {
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
 		GEventos.executar();
-		Segunda_fase->executar();
+		Primeira_fase->executar();
 		GGrafico.Exibir();
 	}
 }

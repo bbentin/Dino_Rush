@@ -1,13 +1,17 @@
 #include "../Cabecalhos/Gosma.h"
 
-Entidades::Personagens::Gosma::Gosma():Inimigo(3) {
+Entidades::Personagens::Gosma::Gosma():Inimigo(3),num_pulos(10) {
 	num_vidas = 3;
 }
 Entidades::Personagens::Gosma::~Gosma() {
 }
 
 void Entidades::Personagens::Gosma::padrao_acao() {
-		pular();	
+		pular(0);	
+		num_pulos--;
+		if (num_pulos <= 0){
+			//delete this;
+		}
 }
 
 void Entidades::Personagens::Gosma::executar(){
@@ -46,6 +50,7 @@ void Entidades::Personagens::Gosma::Colisao_Jogador(Entidade* Jogador,sf::Vector
 }
 
 void Entidades::Personagens::Gosma::danar(Entidade* afetada){
+	empurrar(afetada);
 	static_cast<Entidades::Personagens::Personagem*>(afetada);
 	afetada--;
 }
