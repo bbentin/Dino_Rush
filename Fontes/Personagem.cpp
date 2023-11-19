@@ -28,10 +28,7 @@ void Entidades::Personagens::Personagem::mover_direita(float velo) {
 
 void Entidades::Personagens::Personagem::pular(int altura){
 	if (!no_ar) {
-		for (int i = 0; i < 10; i++) {
-			Soma_Velocidade(sf::Vector2f(0.0, -80 -altura));
-			Calc_Fisica();
-		}
+		Soma_Velocidade(sf::Vector2f(0.0, -altura));
 		 no_ar = true;
 	}
 	else { return; }

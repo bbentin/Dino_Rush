@@ -71,18 +71,17 @@ void Fases::Deserto::Inicializa(){
 
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
-	CriarInimigos();
 	CriarObstaculos();
+	CriarInimigos();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
 	LEs.Inicializar();
-	Player1->Inicializa();
-	Player1->setPosi(16, 828);
+	Player1->setPosi(500, 500);
+	Player1->setNoAr(true);
 	if (Entidades::Personagens::Jogador::getJogador2()) {
-		Player2->Inicializa();
-		Player2->setPosi(64, 828);
+		Player2->setPosi(500, 500);
+		Player2->setNoAr(true);
 	}
-	
 }
 
 void Fases::Deserto::salvar(){

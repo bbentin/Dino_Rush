@@ -18,8 +18,8 @@ namespace Fases{
         sf::Clock relogio_global;
         Gerenciadores::Gerenciador_Colisoes G_Colisoes;
         Listas::ListaEntidades LEs;
-        static Entidades::Personagens::Jogador* Player1;
-        static Entidades::Personagens::Jogador* Player2;
+        Entidades::Personagens::Jogador* Player1;
+        Entidades::Personagens::Jogador* Player2;
         const int k_fase, altura_spawn_inimigos, altura_spawn_obstaculos;
     public:
 

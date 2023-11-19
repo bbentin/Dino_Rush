@@ -5,7 +5,7 @@ namespace Entidades {
 		class Lama :
 			public Obstaculo {
 		private:
-			int viscosidade;
+			const int viscosidade;
 			const float limite_altura;
 		public:
 			Lama();

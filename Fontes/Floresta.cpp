@@ -4,7 +4,7 @@ Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{3,25,10,15,20}, pos_Lamas
 pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
 	srand(time(NULL));
 
-=======	num_Moscas = 3 + rand() % 3;	num_Espinhos = rand() % 3 + 3;
+	num_Moscas = 3 + rand() % 3;	num_Espinhos = rand() % 3 + 3;
 	num_Gosmas = 3 + rand() % 3;	num_Lamas = rand() % 3 + 3;
 	cout << "Moscas: " << num_Moscas << " Gosmas: " << num_Gosmas <<  endl;
 
@@ -17,9 +17,9 @@ Fases::Floresta::~Floresta(){
 
 void Fases::Floresta::executar(){
 	desenhar();
+	LEs.executar();
 	VerificaMortos();
 	G_Colisoes.executar();
-	LEs.executar();
 	Player1->setIntervalo(relogio_global.restart().asMilliseconds() / 2);
 }
 
@@ -70,11 +70,11 @@ void Fases::Floresta::Inicializa() {
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
 	LEs.Inicializar();
-	Player1->Inicializa();
-	Player1->setPosi(16, 828);
+	Player1->setPosi(500, 500);
+	Player1->setNoAr(true);
 	if (Entidades::Personagens::Jogador::getJogador2()) {
-		Player2->Inicializa();
-		Player2->setPosi(64, 828);
+		Player2->setPosi(500, 500);
+		Player2->setNoAr(true);
 	}
 }
 

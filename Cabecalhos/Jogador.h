@@ -12,6 +12,7 @@ namespace Entidades {
             Entidades::Projetil* arma;
             const static float rapidez;
             static bool Jogador2;
+            const int altura_jogador;
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));
             ~Jogador();
@@ -27,6 +28,7 @@ namespace Entidades {
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void atirar();
             void salvar();
+            void Inicializa();
             static const bool getJogador2();
         };
     }

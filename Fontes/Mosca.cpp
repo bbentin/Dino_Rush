@@ -23,10 +23,10 @@ void Entidades::Personagens::Mosca::executar(){
 
 void Entidades::Personagens::Mosca::padrao_acao() {
 	if (!direita) {
-		mover_direita(8);
+		mover_direita(1);
 	}
 	else {
-		mover_esquerda(8);
+		mover_esquerda(1);
 	}
 	inverter();
 }
@@ -52,7 +52,8 @@ void Entidades::Personagens::Mosca::Inicializa(){
 
 void Entidades::Personagens::Mosca::ColisaoChao(Entidade* Chao, sf::Vector2f limites){
 	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y + limites.y);
+		parar_movimento_y();
+		parar_movimento_x();
 		no_ar = false;
 		iniciar = true;
 	}

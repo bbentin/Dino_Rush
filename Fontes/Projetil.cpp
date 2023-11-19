@@ -90,7 +90,7 @@ void Entidades::Projetil::atirada(){
 void Entidades::Projetil::avanca(){
 	if (dono->getId() == 1) {
 		if (visivel) {
-			Soma_Velocidade(sf::Vector2f(40.0, -5));
+			Soma_Velocidade(sf::Vector2f(2.0,-0.5));
 			Calc_Fisica();
 			desenhar();
 		}
@@ -98,7 +98,7 @@ void Entidades::Projetil::avanca(){
 	}
 	else if (dono->getId() == 4) {
 		if (visivel) {
-			Soma_Velocidade(sf::Vector2f(-40.0, -5));
+			Soma_Velocidade(sf::Vector2f(-2.0,-0.5));
 			Calc_Fisica();
 			desenhar();
 		}

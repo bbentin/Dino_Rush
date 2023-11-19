@@ -1,6 +1,6 @@
 #include"../Cabecalhos/Fase.h"
 
-Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),k_fase(k)
+Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),k_fase(k),Player1(nullptr),Player2(nullptr)
 ,altura_spawn_inimigos(600),altura_spawn_obstaculos(740) {
 
 }
@@ -125,13 +125,13 @@ void Fases::Fase::VerificaMortos(){
 
 
 void Fases::Fase::Inicializa() {
-	Textura.loadFromImage(Grafico->getImagem(getId()));
+	/*Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
 	G_Colisoes.addJogador(Player1);
 	gerar_fase(k_fase);
 	LEs.Inicializar();
-	Player1->Inicializa();
+	Player1->Inicializa();*/
 }
 
-Entidades::Personagens::Jogador* Fases::Fase::Player1 = nullptr;
-Entidades::Personagens::Jogador* Fases::Fase::Player2 = nullptr;
+//Entidades::Personagens::Jogador* Fases::Fase::Player1 = nullptr;
+//Entidades::Personagens::Jogador* Fases::Fase::Player2 = nullptr;

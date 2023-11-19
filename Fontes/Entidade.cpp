@@ -1,7 +1,8 @@
 #include "../Cabecalhos/Entidade.h"
 
 Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true),vivo(true) {
-	posicao = posi; Imagem.setPosition(posicao);
+	velocidade = sf::Vector2f(0.0, 0.0);
+	Imagem.setPosition(posi);
 }
 
 Entidades::Entidade::~Entidade() {
@@ -27,7 +28,7 @@ sf::Vector2f Entidades::Entidade::Limitar_Velocidade() {
 }
 
 const sf::Vector2f Entidades::Entidade::getPosicao(){
-	return posicao;
+	return Imagem.getPosition();
 }
 
 const sf::Vector2f Entidades::Entidade::getTamanho(){
@@ -38,12 +39,11 @@ const sf::Vector2f Entidades::Entidade::getTamanho(){
 }
 
 void Entidades::Entidade::setPosi(sf::Vector2f ajeitada){
-	posicao = ajeitada;
-	Imagem.setPosition(posicao);
+	Imagem.setPosition(ajeitada);
 }
 
-void Entidades::Entidade::setPosi(float a, float b){
-	posicao = sf::Vector2f(a, b);
+void Entidades::Entidade::setPosi(float X, float Y){
+	sf::Vector2f posicao = sf::Vector2f(X, Y);
 	Imagem.setPosition(posicao);
 }
 
@@ -75,24 +75,18 @@ void Entidades::Entidade::Soma_Velocidade(sf::Vector2f veloc) {
 	velocidade += veloc;
 }
 
-void Entidades::Entidade::Calc_Posicao(){
-	sf::Vector2f mudanca;
-	
-	mudanca.y += velocidade.y * intervalo /30;
-	mudanca.x += velocidade.x * intervalo /30; 
-		
-	posicao += mudanca;
-}
-
 void Entidades::Entidade::Aplicar_Gravidade() {
 	Soma_Velocidade(Gravidade);
 }
 
 void Entidades::Entidade::Calc_Fisica(){
 	if (no_ar) { Aplicar_Gravidade(); }
-	Calc_Posicao();
-	setPosi(posicao);
-	parar_movimento_x(); parar_movimento_y();
+	//Calc_Posicao();
+	Imagem.move(velocidade);
+	parar_movimento_x();	parar_movimento_y();
+}
+
+void Entidades::Entidade::Aplica_Fisica() {
 }
 
 void Entidades::Entidade::setNoAr(bool ar){
@@ -110,5 +104,5 @@ void Entidades::Entidade::empurrar(Entidade* empurrada) {
 	}
 }
 
-const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,6.0f);
+const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,0.5f);
 float Entidades::Entidade::intervalo = 0.0;

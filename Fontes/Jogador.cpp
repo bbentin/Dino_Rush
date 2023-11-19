@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Jogador.h"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
-andar_direita(false),andar_esquerda(false),arma(nullptr) {
+andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828) {
 	pontos = 0;
 	num_vidas = 5; 
 	olhando_direita = true;
@@ -47,6 +47,7 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 		Colisao_Obstaculo(colidida, limites);
 		break;
 	default:
+		no_ar = true;
 		break;
 	}
 }
@@ -65,28 +66,32 @@ const bool Entidades::Personagens::Jogador::getJogador2(){
 void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vector2f limites){
 	if (limites.x < 0) {
 		if (inimigo->getPosicao().x < getPosicao().x) {
-			setPosi(getPosicao().x - limites.x, getPosicao().y);
+			//setPosi(getPosicao().x - limites.x, getPosicao().y);
+			parar_movimento_x();
 		}
 		if (inimigo->getPosicao().x > getPosicao().x) {
-			setPosi(getPosicao().x + limites.x, getPosicao().y);
+			//setPosi(getPosicao().x + limites.x, getPosicao().y);
+			parar_movimento_x();
 		}
+		no_ar = true;
 	}else if (limites.y < 0) {
 		if (inimigo->getPosicao().y < getPosicao().y) {
-		setPosi(getPosicao().x, getPosicao().y - (limites.y));
+		//setPosi(getPosicao().x, getPosicao().y - (limites.y));
+			parar_movimento_y();
 		}
 		if (inimigo->getPosicao().y > getPosicao().y) {
-			setPosi(getPosicao().x, getPosicao().y + (limites.y));
-			no_ar = false;
+			//setPosi(getPosicao().x, getPosicao().y + (limites.y));
+			parar_movimento_y();
 		}
 	}
 	static_cast<Entidades::Personagens::Inimigo*>(inimigo)->danar(this);
+	no_ar = true;
 }
 
 void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf::Vector2f limites) {
 	if (limites.y < 0) {
 		if (obstaculo->getPosicao().y < getPosicao().y){
 			setPosi(getPosicao().x, getPosicao().y - limites.y);
-			no_ar = true;
 		}
 		if (obstaculo->getPosicao().y > getPosicao().y){
 			setPosi(getPosicao().x, getPosicao().y + (limites.y));
@@ -126,7 +131,14 @@ void Entidades::Personagens::Jogador::executar() {
 	desenhar();
 }
 
+void Entidades::Personagens::Jogador::Inicializa() {
+	Textura.loadFromImage(Grafico->getImagem(getId()));
+	Imagem.setTexture(Textura);
+	Imagem.setScale(2.0, 2.0);
+	setPosi(16,828);
+}
+
 // define o primeiro jogador
 bool Entidades::Personagens::Jogador::Jogador2 = false;
-const float Entidades::Personagens::Jogador::rapidez = 40;
+const float Entidades::Personagens::Jogador::rapidez = 5;
 

@@ -10,10 +10,9 @@ namespace Entidades {
 		
 		static float intervalo;
 		static const sf::Vector2f Gravidade;
-		sf::Vector2f posicao,velocidade;
+		sf::Vector2f velocidade;
 		bool no_ar,vivo;
 		void Aplicar_Gravidade();
-		void Calc_Posicao();
 		sf::Vector2f Limitar_Velocidade();
 
 	public:
@@ -29,6 +28,7 @@ namespace Entidades {
 		void setPosi(sf::Vector2f arrumada);
 		void setPosi(float a, float b);
 		void Calc_Fisica();
+		void Aplica_Fisica();
 		void parar_movimento_x();
 		void parar_movimento_y();
 		void empurrar(Entidade* empurrada);
