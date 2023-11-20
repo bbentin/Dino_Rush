@@ -26926,6 +26926,53 @@
 											"type": "int"
 										}
 									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAGL2uOPE4+5DX4=",
+									"_parent": {
+										"$ref": "Bpx+ok2YEUa/BXA19tWAowAA"
+									},
+									"name": "Gerar_Fases",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGL2uPur5aqaq4=",
+											"_parent": {
+												"$ref": "AAAAAAGL2uOPE4+5DX4="
+											},
+											"type": "void",
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAGL2uOXIpKzLcM=",
+									"_parent": {
+										"$ref": "Bpx+ok2YEUa/BXA19tWAowAA"
+									},
+									"name": "getImagem",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGL2ug3j+LUYa0=",
+											"_parent": {
+												"$ref": "AAAAAAGL2uOXIpKzLcM="
+											},
+											"type": "sf::Imagem",
+											"direction": "return"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGL2uksr+zxOoA=",
+											"_parent": {
+												"$ref": "AAAAAAGL2uOXIpKzLcM="
+											},
+											"name": "identificador",
+											"type": "int"
+										}
+									]
 								}
 							]
 						},
