@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Obstaculo.h"
 
-Entidades::Obstaculos::Obstaculo::Obstaculo(const int i):Entidade(i),danoso(false) {
+Entidades::Obstaculos::Obstaculo::Obstaculo(const int i,const float limite):Entidade(i),limite_altura(limite) {
 }
 
 Entidades::Obstaculos:: Obstaculo::~Obstaculo() {

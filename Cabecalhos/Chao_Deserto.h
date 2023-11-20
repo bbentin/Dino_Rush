@@ -5,9 +5,8 @@ namespace Entidades {
         class Chao_Deserto :
             public Obstaculo {
         private:
-            const int limite_altura;
         public:
-            Chao_Deserto(const int limite_alt);
+            Chao_Deserto(const float limite_alt = 0);
             ~Chao_Deserto();
 
             void executar();

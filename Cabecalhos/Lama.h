@@ -6,9 +6,8 @@ namespace Entidades {
 			public Obstaculo {
 		private:
 			const int viscosidade;
-			const float limite_altura;
 		public:
-			Lama();
+			Lama(const float limite = 870);
 			~Lama();
 			void executar();
 			void Colisao(Entidade* colidida, sf::Vector2f limites);

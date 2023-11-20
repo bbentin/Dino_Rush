@@ -13,6 +13,7 @@ namespace Entidades {
 			int pontos;
 			static const int forca_movimento;
 			bool iniciar;
+			bool no_chao;
 			bool olhando_direita;
 		public:
 			void pular(int altura);

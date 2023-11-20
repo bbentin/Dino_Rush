@@ -21,6 +21,8 @@ namespace Fases{
         Entidades::Personagens::Jogador* Player1;
         Entidades::Personagens::Jogador* Player2;
         const int k_fase, altura_spawn_inimigos, altura_spawn_obstaculos;
+        int num_inimigos;
+        bool ativa;
     public:
 
         Fase(const int i = 0, const int k = 0);
@@ -34,6 +36,8 @@ namespace Fases{
         void CriarEntidades(char leitura, sf::Vector2f pos);
         void CriarChao(int i, sf::Vector2f pos);
         void VerificaMortos();
+        void verificaAtiva();
+        bool getAtiva();
         virtual void Inicializa();
     };
 }

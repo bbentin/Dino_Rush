@@ -11,6 +11,7 @@ namespace Entidades {
 		static float intervalo;
 		static const sf::Vector2f Gravidade;
 		sf::Vector2f velocidade;
+		float rapidez;
 		bool no_ar,vivo;
 		void Aplicar_Gravidade();
 		sf::Vector2f Limitar_Velocidade();
@@ -32,11 +33,14 @@ namespace Entidades {
 		void parar_movimento_x();
 		void parar_movimento_y();
 		void empurrar(Entidade* empurrada);
+		void multiplica_Rapidez(bool sinal);
 
+		virtual void Colisao(Entidade* colidida, sf::Vector2f limites) = 0;
 		static void setIntervalo(float tempo);
-		virtual void Colisao(Entidade* colidida,sf::Vector2f limites) = 0;
 		virtual void executar() = 0;
 		virtual void salvar() = 0;
+		const float getRapidez() const;
+		virtual void Inicializa();
 	};
 
 }

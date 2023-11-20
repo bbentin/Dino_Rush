@@ -13,7 +13,6 @@ Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr
 	ranking = new Ranking();
 	ranking->carregar();
 	Primeira_fase = new Fases::Floresta();
-	Segunda_fase = new Fases::Deserto();
 	Inicializar();
 }
 Principal::~Principal() {
@@ -32,13 +31,21 @@ void Principal::Executar() {
 		selected = menu->GetItem();
 		pressed = menu->isPressed();
 		if (selected == 0 && pressed) {
-
+			if (!Primeira_fase->getAtiva()) { Primeira_fase->Inicializa(); }
 			GEventos.executar();
-			Segunda_fase->executar();
+			Primeira_fase->executar();
 		}
 		else if (selected == 1 && pressed) {
-			GEventos.executar();
-			Segunda_fase->executar();
+			if (Segunda_fase == nullptr) { 
+				Segunda_fase = new Fases::Deserto(); 
+				Segunda_fase->setJogador(&Primeiro);
+				Segunda_fase->setJogador(&Segundo);
+				Segunda_fase->Inicializa();
+			}
+			else {
+				GEventos.executar();
+				Segunda_fase->executar();
+			}
 		}
 		else if (selected == 2 && pressed) {
 			//ranking->executar();
@@ -57,8 +64,4 @@ void Principal::Inicializar() {
 	menu->inicializar();
 	Primeira_fase->setJogador(&Primeiro);
 	Primeira_fase->setJogador(&Segundo);
-	Segunda_fase->setJogador(&Primeiro);
-	Segunda_fase->setJogador(&Segundo);
-	Primeira_fase->Inicializa();
-	Segunda_fase->Inicializa();
 }

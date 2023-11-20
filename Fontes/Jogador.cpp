@@ -3,6 +3,7 @@
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828) {
 	pontos = 0;
+	rapidez = 4;
 	num_vidas = 5; 
 	olhando_direita = true;
 	arma = new Projetil();
@@ -39,7 +40,9 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 		Colisao_Obstaculo(colidida, limites);
 		break;
 	case 10:
-		Colisao_Obstaculo(colidida, limites);
+		if (static_cast<Entidades::Obstaculos::Espinhos*>(colidida)->getVisivel()) {
+			Colisao_Obstaculo(colidida, limites);
+		}
 		break;
 	case 7:
 		Colisao_Obstaculo(colidida, limites);
@@ -91,18 +94,24 @@ void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vec
 void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf::Vector2f limites) {
 	if (limites.y < 0) {
 		if (obstaculo->getPosicao().y < getPosicao().y){
-			setPosi(getPosicao().x, getPosicao().y - limites.y);
+			//setPosi(getPosicao().x, getPosicao().y - limites.y);
+			parar_movimento_y();
 		}
 		if (obstaculo->getPosicao().y > getPosicao().y){
-			setPosi(getPosicao().x, getPosicao().y + (limites.y));
+			//setPosi(getPosicao().x, getPosicao().y + (limites.y));
+			parar_movimento_y();
+			no_chao = true;
 			no_ar = false;
 		}
-	}else if (limites.x < 0) {
+	}
+	if (limites.x < 0) {
 		if (obstaculo->getPosicao().x < getPosicao().x) {
-			setPosi(getPosicao().x + limites.x, getPosicao().y);
+			//setPosi(getPosicao().x + limites.x, getPosicao().y);
+			parar_movimento_x();
 		}
 		else if (obstaculo->getPosicao().x > getPosicao().x) {
-			setPosi(getPosicao().x - limites.x, getPosicao().y);
+			//setPosi(getPosicao().x - limites.x, getPosicao().y);
+			parar_movimento_x();
 		}
 	}
 	static_cast<Entidades::Obstaculos::Obstaculo*>(obstaculo)->obstacular(this);
@@ -138,7 +147,10 @@ void Entidades::Personagens::Jogador::Inicializa() {
 	setPosi(16,828);
 }
 
+int Entidades::Personagens::Jogador::getPontos(){
+	return pontos;
+}
+
 // define o primeiro jogador
 bool Entidades::Personagens::Jogador::Jogador2 = false;
-const float Entidades::Personagens::Jogador::rapidez = 5;
 

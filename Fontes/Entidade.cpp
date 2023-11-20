@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Entidade.h"
 
-Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true),vivo(true) {
+Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true),vivo(true),rapidez(2) {
 	velocidade = sf::Vector2f(0.0, 0.0);
 	Imagem.setPosition(posi);
 }
@@ -59,6 +59,13 @@ void Entidades::Entidade::setIntervalo(float tempo){
 	intervalo = tempo;
 }
 
+const float Entidades::Entidade::getRapidez() const{
+	return rapidez;
+}
+
+void Entidades::Entidade::Inicializa(){
+}
+
 sf::Vector2f Entidades::Entidade::Existe_Colisao(Entidade* proximidade){
 	float distancia_x, distancia_y, limites_x, limites_y;
 
@@ -81,7 +88,6 @@ void Entidades::Entidade::Aplicar_Gravidade() {
 
 void Entidades::Entidade::Calc_Fisica(){
 	if (no_ar) { Aplicar_Gravidade(); }
-	//Calc_Posicao();
 	Imagem.move(velocidade);
 	parar_movimento_x();	parar_movimento_y();
 }
@@ -95,12 +101,21 @@ void Entidades::Entidade::setNoAr(bool ar){
 
 void Entidades::Entidade::empurrar(Entidade* empurrada) {
 	if (empurrada->getPosicao().x > getPosicao().x) {
-		empurrada->setPosi(getPosicao().x + 10 + getTamanho().x, empurrada->getPosicao().y - 30);
+		empurrada->Soma_Velocidade(sf::Vector2f(getTamanho().x/1.2, -20));
 		empurrada->setNoAr(true);
 	}
 	else if (empurrada->getPosicao().x < getPosicao().x) {
-		empurrada->setPosi(getPosicao().x - 10 - getTamanho().x, empurrada->getPosicao().y - 30);
+		empurrada->Soma_Velocidade(sf::Vector2f(-getTamanho().x/1.2, -20));
 		empurrada->setNoAr(true);
+	}
+}
+
+void Entidades::Entidade::multiplica_Rapidez(bool sinal){
+	if (sinal) {
+		rapidez = 4;
+	}
+	else {
+		rapidez = 0.5;
 	}
 }
 
