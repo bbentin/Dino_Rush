@@ -27,6 +27,9 @@ void Entidades::Personagens::Chefao::Colisao(Entidade* colidida, sf::Vector2f li
 }
 
 void Entidades::Personagens::Chefao::danar(Entidade* Afetada){
+	empurrar(Afetada);
+	empurrar(Afetada);
+	static_cast<Entidades::Personagens::Personagem*>(Afetada)->operator--();
 }
 
 void Entidades::Personagens::Chefao::Colisao_Chao(Entidade* colidida, sf::Vector2f limites){

@@ -161,6 +161,7 @@
     <ClCompile Include="Fontes\Personagem.cpp" />
     <ClCompile Include="Fontes\Principal.cpp" />
     <ClCompile Include="Fontes\Projetil.cpp" />
+    <ClCompile Include="Fontes\Ranking.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cabecalhos\Cacto.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Cabecalhos\Personagem.h" />
     <ClInclude Include="Cabecalhos\Principal.h" />
     <ClInclude Include="Cabecalhos\Projetil.h" />
+    <ClInclude Include="Cabecalhos\Ranking.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

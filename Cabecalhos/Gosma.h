@@ -5,7 +5,8 @@ namespace Entidades {
         class Gosma :
             public Inimigo {
 
-        private:                 
+        private:             
+            int num_pulos; //morre apos ultrapassar o numero de pulos
         public:
             Gosma();
             ~Gosma();

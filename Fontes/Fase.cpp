@@ -1,7 +1,7 @@
 #include"../Cabecalhos/Fase.h"
 
-Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),k_fase(k)
-,altura_spawn_inimigos(600),altura_spawn_obstaculos(740) {
+Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),k_fase(k),Player1(nullptr),Player2(nullptr)
+,altura_spawn_inimigos(600),altura_spawn_obstaculos(740),ativa(false),num_inimigos(0) {
 
 }
 
@@ -119,19 +119,36 @@ void Fases::Fase::VerificaMortos(){
 		LEs.RemoverEntidade(pMorto);
 	}
 	if (Player1->getVidas() <= 0 && Player2->getVidas() <= 0) {
-		exit(1);
+		ativa = false;
 	}
+}
+
+void Fases::Fase::verificaAtiva(){
+	if (Player1 == nullptr && Player2 == nullptr) {
+	//	ativa = false;
+	}
+	if ((Player1->getPontos() + Player2->getPontos()) >= num_inimigos) {
+	//	ativa = false;
+	}
+	
+	if (!ativa) {
+	 }
+
+}
+
+bool Fases::Fase::getAtiva(){
+	return ativa;
 }
 
 
 void Fases::Fase::Inicializa() {
-	Textura.loadFromImage(Grafico->getImagem(getId()));
+	/*Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
 	G_Colisoes.addJogador(Player1);
 	gerar_fase(k_fase);
 	LEs.Inicializar();
-	Player1->Inicializa();
+	Player1->Inicializa();*/
 }
 
-Entidades::Personagens::Jogador* Fases::Fase::Player1 = nullptr;
-Entidades::Personagens::Jogador* Fases::Fase::Player2 = nullptr;
+//Entidades::Personagens::Jogador* Fases::Fase::Player1 = nullptr;
+//Entidades::Personagens::Jogador* Fases::Fase::Player2 = nullptr;

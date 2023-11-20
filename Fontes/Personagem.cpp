@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Personagem.h"
 
 Entidades::Personagens::Personagem::Personagem(const int i, sf::Vector2f posi) :Entidade(i, posi), num_vidas(3), Dano(1), iniciar(false), pontos(),
-olhando_direita(false){
+olhando_direita(false),no_chao(false) {
 }
 Entidades::Personagens::Personagem::~Personagem(){
 }
@@ -26,10 +26,12 @@ void Entidades::Personagens::Personagem::mover_direita(float velo) {
 	Soma_Velocidade(sf::Vector2f(velo, 0.0));
 }
 
-void Entidades::Personagens::Personagem::pular(){
-	if (!no_ar) {
-		Soma_Velocidade(sf::Vector2f(0.0, -800));
+void Entidades::Personagens::Personagem::pular(int altura){
+	multiplica_Rapidez(true);
+	if (no_chao) {
+		Imagem.move(sf::Vector2f(0, -altura));
 		 no_ar = true;
+		 no_chao = false;
 	}
 	else { return; }
 }

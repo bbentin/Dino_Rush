@@ -1,7 +1,8 @@
 #include "../Cabecalhos/Entidade.h"
 
-Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true),vivo(true) {
-	posicao = posi; Imagem.setPosition(posicao);
+Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true),vivo(true),rapidez(2) {
+	velocidade = sf::Vector2f(0.0, 0.0);
+	Imagem.setPosition(posi);
 }
 
 Entidades::Entidade::~Entidade() {
@@ -27,7 +28,7 @@ sf::Vector2f Entidades::Entidade::Limitar_Velocidade() {
 }
 
 const sf::Vector2f Entidades::Entidade::getPosicao(){
-	return posicao;
+	return Imagem.getPosition();
 }
 
 const sf::Vector2f Entidades::Entidade::getTamanho(){
@@ -38,12 +39,11 @@ const sf::Vector2f Entidades::Entidade::getTamanho(){
 }
 
 void Entidades::Entidade::setPosi(sf::Vector2f ajeitada){
-	posicao = ajeitada;
-	Imagem.setPosition(posicao);
+	Imagem.setPosition(ajeitada);
 }
 
-void Entidades::Entidade::setPosi(float a, float b){
-	posicao = sf::Vector2f(a, b);
+void Entidades::Entidade::setPosi(float X, float Y){
+	sf::Vector2f posicao = sf::Vector2f(X, Y);
 	Imagem.setPosition(posicao);
 }
 
@@ -57,6 +57,13 @@ void Entidades::Entidade::parar_movimento_y() {
 
 void Entidades::Entidade::setIntervalo(float tempo){
 	intervalo = tempo;
+}
+
+const float Entidades::Entidade::getRapidez() const{
+	return rapidez;
+}
+
+void Entidades::Entidade::Inicializa(){
 }
 
 sf::Vector2f Entidades::Entidade::Existe_Colisao(Entidade* proximidade){
@@ -75,29 +82,42 @@ void Entidades::Entidade::Soma_Velocidade(sf::Vector2f veloc) {
 	velocidade += veloc;
 }
 
-void Entidades::Entidade::Calc_Posicao(){
-	sf::Vector2f mudanca;
-	
-	mudanca.y += velocidade.y * intervalo /30;
-	mudanca.x += velocidade.x * intervalo /30; 
-		
-	posicao += mudanca;
-}
-
 void Entidades::Entidade::Aplicar_Gravidade() {
 	Soma_Velocidade(Gravidade);
 }
 
 void Entidades::Entidade::Calc_Fisica(){
 	if (no_ar) { Aplicar_Gravidade(); }
-	Calc_Posicao();
-	setPosi(posicao);
-	parar_movimento_x(); parar_movimento_y();
+	Imagem.move(velocidade);
+	parar_movimento_x();	parar_movimento_y();
+}
+
+void Entidades::Entidade::Aplica_Fisica() {
 }
 
 void Entidades::Entidade::setNoAr(bool ar){
 	no_ar = ar;
 }
 
-const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,6.0f);
+void Entidades::Entidade::empurrar(Entidade* empurrada) {
+	if (empurrada->getPosicao().x > getPosicao().x) {
+		empurrada->Soma_Velocidade(sf::Vector2f(getTamanho().x/1.2, -20));
+		empurrada->setNoAr(true);
+	}
+	else if (empurrada->getPosicao().x < getPosicao().x) {
+		empurrada->Soma_Velocidade(sf::Vector2f(-getTamanho().x/1.2, -20));
+		empurrada->setNoAr(true);
+	}
+}
+
+void Entidades::Entidade::multiplica_Rapidez(bool sinal){
+	if (sinal) {
+		rapidez = 4;
+	}
+	else {
+		rapidez = 0.5;
+	}
+}
+
+const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,0.5f);
 float Entidades::Entidade::intervalo = 0.0;

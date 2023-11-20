@@ -1,6 +1,6 @@
 #pragma once
 #include "Personagem.h"
-#include "Obstaculo.h"
+#include "Espinhos.h"
 #include "Inimigo.h"
 #include "Projetil.h"
 namespace Entidades {
@@ -9,10 +9,9 @@ namespace Entidades {
             public Personagem {
         private:
             bool andar_direita,andar_esquerda;
-            Entidades::Projetil* arma;
-            const static float rapidez;
+            Entidades::Projetil* arma;        
             static bool Jogador2;
-
+            const int altura_jogador;
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));
             ~Jogador();
@@ -28,6 +27,8 @@ namespace Entidades {
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void atirar();
             void salvar();
+            void Inicializa();
+            int getPontos();
             static const bool getJogador2();
         };
     }

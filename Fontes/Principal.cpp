@@ -10,17 +10,10 @@ Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr
 	GEventos.setJogador(&Primeiro);
 	GEventos.setJogador(&Segundo);
 	menu = new Menu();
-	menu->inicializar();
 	ranking = new Ranking();
 	ranking->carregar();
 	Primeira_fase = new Fases::Floresta();
-	Segunda_fase = new Fases::Deserto();
-	Primeira_fase->setJogador(&Primeiro);
-	Primeira_fase->setJogador(&Segundo);
-	Segunda_fase->setJogador(&Primeiro);
-  Segunda_fase->setJogador(&Segundo);
-	Primeira_fase->Inicializa();
-	Segunda_fase->Inicializa();
+	Inicializar();
 }
 Principal::~Principal() {
 	delete Primeira_fase;
@@ -33,16 +26,26 @@ Gerenciadores::Gerenciador_Grafico* Principal::getGrafico() {
 void Principal::Executar() {
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
+
 		menu->executar();
 		selected = menu->GetItem();
 		pressed = menu->isPressed();
 		if (selected == 0 && pressed) {
+			if (!Primeira_fase->getAtiva()) { Primeira_fase->Inicializa(); }
 			GEventos.executar();
 			Primeira_fase->executar();
 		}
 		else if (selected == 1 && pressed) {
-			GEventos.executar();
-			Segunda_fase->executar();
+			if (Segunda_fase == nullptr) { 
+				Segunda_fase = new Fases::Deserto(); 
+				Segunda_fase->setJogador(&Primeiro);
+				Segunda_fase->setJogador(&Segundo);
+				Segunda_fase->Inicializa();
+			}
+			else {
+				GEventos.executar();
+				Segunda_fase->executar();
+			}
 		}
 		else if (selected == 2 && pressed) {
 			//ranking->executar();
@@ -58,4 +61,7 @@ void Principal::verifica_estado() {
 }
 
 void Principal::Inicializar() {
+	menu->inicializar();
+	Primeira_fase->setJogador(&Primeiro);
+	Primeira_fase->setJogador(&Segundo);
 }

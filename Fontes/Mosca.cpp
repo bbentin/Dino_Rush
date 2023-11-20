@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Mosca.h"
 
-Entidades::Personagens::Mosca::Mosca():Inimigo(5),pos_x_inicial(getPosicao().x),direita(true) {
+Entidades::Personagens::Mosca::Mosca():Inimigo(5),pos_x_inicial(getPosicao().x),direita(true),sujeira(20) {
 }
 Entidades::Personagens::Mosca::~Mosca() {
 
@@ -23,8 +23,10 @@ void Entidades::Personagens::Mosca::executar(){
 
 void Entidades::Personagens::Mosca::padrao_acao() {
 	if (!direita) {
+		mover_direita(1);
 	}
 	else {
+		mover_esquerda(1);
 	}
 	inverter();
 }
@@ -39,6 +41,7 @@ void Entidades::Personagens::Mosca::Colisao(Entidade* colidida, sf::Vector2f lim
 
 void Entidades::Personagens::Mosca::danar(Entidade* Afetada){
 	Afetada--;
+	Afetada->multiplica_Rapidez(false);
 }
 
 void Entidades::Personagens::Mosca::Inicializa(){
@@ -50,7 +53,8 @@ void Entidades::Personagens::Mosca::Inicializa(){
 
 void Entidades::Personagens::Mosca::ColisaoChao(Entidade* Chao, sf::Vector2f limites){
 	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y + limites.y);
+		parar_movimento_y();
+		parar_movimento_x();
 		no_ar = false;
 		iniciar = true;
 	}

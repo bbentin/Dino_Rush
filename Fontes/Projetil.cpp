@@ -73,8 +73,10 @@ void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites){
 }
 
 void Entidades::Projetil::ColisaoPersonagem(Entidade* colidida){
-	reseta_posicao();	visivel = false;
-	static_cast<Entidades::Personagens::Personagem*>(colidida)->operator--();
+	if (visivel) {
+		reseta_posicao();	visivel = false;
+		static_cast<Entidades::Personagens::Personagem*>(colidida)->operator--();
+		}
 }
 
 void Entidades::Projetil::ColisaoObstaculo(Entidade* colidida){
@@ -88,7 +90,7 @@ void Entidades::Projetil::atirada(){
 void Entidades::Projetil::avanca(){
 	if (dono->getId() == 1) {
 		if (visivel) {
-			Soma_Velocidade(sf::Vector2f(40.0, -5));
+			Soma_Velocidade(sf::Vector2f(2.0,-0.5));
 			Calc_Fisica();
 			desenhar();
 		}
@@ -96,7 +98,7 @@ void Entidades::Projetil::avanca(){
 	}
 	else if (dono->getId() == 4) {
 		if (visivel) {
-			Soma_Velocidade(sf::Vector2f(-40.0, -5));
+			Soma_Velocidade(sf::Vector2f(-2.0,-0.5));
 			Calc_Fisica();
 			desenhar();
 		}

@@ -4,6 +4,7 @@ Fases::Deserto::Deserto() :Fase(11, 2), pos_Moscas{ 5,15,30,40,50 }, pos_Gosmona
 pos_Lamas{ 10, 20, 25, 30, 40 }, pos_Espinhos{ 15,30,35,40,55 } {
 	num_Moscas = rand() % 3 + 3;	num_Gosmonas = rand() % 3 + 3;
 	num_Lamas = rand() % 3 + 3;		num_Espinhos = rand() % 3 + 3;
+	gerar_fase(k_fase);
 }
 
 Fases::Deserto::~Deserto(){
@@ -70,19 +71,17 @@ void Fases::Deserto::Inicializa(){
 
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
-	CriarInimigos();
 	CriarObstaculos();
+	CriarInimigos();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
-	gerar_fase(k_fase);
 	LEs.Inicializar();
-	Player1->Inicializa();
-	Player1->setPosi(16, 828);
+	Player1->setPosi(500, 500);
+	Player1->setNoAr(true);
 	if (Entidades::Personagens::Jogador::getJogador2()) {
-		Player2->Inicializa();
-		Player2->setPosi(64, 828);
+		Player2->setPosi(500, 500);
+		Player2->setNoAr(true);
 	}
-	
 }
 
 void Fases::Deserto::salvar(){
