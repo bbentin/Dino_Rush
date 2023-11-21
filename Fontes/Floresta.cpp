@@ -20,6 +20,7 @@ void Fases::Floresta::executar(){
 	VerificaMortos();
 	G_Colisoes.executar();
 	Player1->setIntervalo(relogio_global.restart().asMilliseconds() / 2);
+	
 }
 
 void Fases::Floresta::CriarInimigos(){
@@ -67,21 +68,21 @@ void Fases::Floresta::CriarLamas(){
 }
 
 void Fases::Floresta::Inicializa() {
+	ativa = true;
 
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
 	CriarObstaculos();
 	CriarInimigos();
+	LEs.Inicializar();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
-	LEs.Inicializar();
 	Player1->setPosi(500, 500);
 	Player1->setNoAr(true);
 	if (Entidades::Personagens::Jogador::getJogador2()) {
 		Player2->setPosi(500, 500);
 		Player2->setNoAr(true);
 	}
-	ativa = true;
 }
 
 void Fases::Floresta::salvar(){

@@ -29,6 +29,8 @@ namespace Entidades {
             void salvar();
             void Inicializa();
             int getPontos();
+            void zeraPontos();
+
             static const bool getJogador2();
         };
     }

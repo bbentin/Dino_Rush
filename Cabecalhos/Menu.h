@@ -24,8 +24,10 @@ public:
 	void MoveUp();
 	void MoveDown();
 	void handleInput(sf::Event evento);
+	void reset();
 	int GetItem() { return selected; }
 	bool isPressed() { return pressed; }
 	sf::Font getFonte() { return fonte; }
+
 };
 

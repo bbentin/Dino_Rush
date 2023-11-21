@@ -19,7 +19,7 @@ namespace Entidades {
 	public:
 		
 		Entidade(const int i = 0, sf::Vector2f posi = sf::Vector2f(0, 0));
-		~Entidade();
+		virtual ~Entidade();
 
 		sf::Vector2f Existe_Colisao(Entidade* proxima);
 		const sf::Vector2f getPosicao();

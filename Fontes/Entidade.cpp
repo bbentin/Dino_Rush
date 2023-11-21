@@ -64,6 +64,9 @@ const float Entidades::Entidade::getRapidez() const{
 }
 
 void Entidades::Entidade::Inicializa(){
+	Textura.loadFromImage(Grafico->getImagem(getId()));
+	Imagem.setTexture(Textura);
+	Imagem.setScale(2.0, 2.0);
 }
 
 sf::Vector2f Entidades::Entidade::Existe_Colisao(Entidade* proximidade){

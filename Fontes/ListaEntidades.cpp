@@ -21,7 +21,7 @@ void Listas::ListaEntidades::executar_entidades(){
 	Listas::Lista<Entidades::Entidade>::Elemento<Entidades::Entidade>* pAux = LEs.getPrimeiro();
 
 	if (pAux != nullptr) {
-		while (pAux != LEs.getAtual()) {
+		while (pAux != LEs.getAtual()->getProx()) {
 			pAux->getInfo()->executar();
 			pAux = pAux->getProx();
 		}
@@ -36,7 +36,7 @@ void Listas::ListaEntidades::Inicializar(){
 	Listas::Lista<Entidades::Entidade>::Elemento<Entidades::Entidade>* pAux = LEs.getPrimeiro();
 
 	if (pAux != nullptr) {
-		while (pAux != LEs.getAtual()) {
+		while (pAux != LEs.getAtual()->getProx()) {
 			pAux->getInfo()->Inicializa();
 			pAux = pAux->getProx();
 		}

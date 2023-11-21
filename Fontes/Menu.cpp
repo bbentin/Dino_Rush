@@ -52,7 +52,7 @@ void Menu::inicializar()
 
 void Menu::Desenhar() {
 	desenhar();
-	for (auto t : textos) {
+	for (auto t : textos){
 		Grafico->getTela()->draw(t);
 	}
 }
@@ -98,4 +98,9 @@ void Menu::handleInput(sf::Event event)
 		pressed = true;
 		break;
 	}
+}
+
+void Menu::reset(){
+	pressed = false;
+	selected = 0;
 }

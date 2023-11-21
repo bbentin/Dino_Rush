@@ -49,7 +49,7 @@ void Gerenciadores::Gerenciador_Colisoes::removeObstaculo(Entidades::Entidade* p
 
 Entidades::Entidade* Gerenciadores::Gerenciador_Colisoes::VerificaMortos(){
 	int i = 0;
-	Entidades::Entidade* pMorto;
+	Entidades::Entidade* pMorto = nullptr;
 	while (i < LPersonagens.size()) {
 
 		if (LPersonagens[i]->getId() < 7) {
@@ -61,7 +61,7 @@ Entidades::Entidade* Gerenciadores::Gerenciador_Colisoes::VerificaMortos(){
 		}
 		i++;
 	}
-
+	return pMorto;
 }
 
 void Gerenciadores::Gerenciador_Colisoes::executar() {

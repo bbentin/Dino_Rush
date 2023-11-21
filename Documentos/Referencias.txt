@@ -3,3 +3,4 @@ Sprite --  https://coem.itch.io/issac-style-prototype-tileset
 Tileset -- https://www.gameart2d.com/free-platformer-game-tileset.html
 Tileset -- https://www.gameart2d.com/free-desert-platformer-tileset.html
 Eventos -- https://subscription.packtpub.com/book/game-development/9781849696845/1/ch01lvl1sec11/game-loops-and-frames
+Espinhos -- https://gamedeveloperstudio.itch.io/floor-spikes

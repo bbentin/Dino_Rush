@@ -53,7 +53,7 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				break;
 			case sf::Keyboard::Up:
 				if (Entidades::Personagens::Jogador::getJogador2()) {
-					Jogador2->pular(30);
+					Jogador2->pular(120);
 				}
 				break;
 			case sf::Keyboard::Left:
