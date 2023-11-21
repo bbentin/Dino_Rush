@@ -5,7 +5,6 @@ pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 3;	num_Espinhos = 3 + rand() % 3;
 	num_Gosmas = 3 + rand() % 3;	num_Lamas = 3 + rand() % 3;
-	cout << "Moscas: " << num_Moscas << " Gosmas: " << num_Gosmas <<  endl;
 
 	gerar_fase(k_fase);
 }
