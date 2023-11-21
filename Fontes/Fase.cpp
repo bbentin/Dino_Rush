@@ -1,7 +1,7 @@
 #include"../Cabecalhos/Fase.h"
 
 Fases::Fase::Fase(const int i, const int k):Ente(i),relogio_global(),G_Colisoes(),LEs(),k_fase(k),Player1(nullptr),Player2(nullptr)
-,altura_spawn_inimigos(600),altura_spawn_obstaculos(740),ativa(false),num_inimigos(0) {
+,altura_spawn_inimigos(600),altura_spawn_obstaculos(740),ativa(false),final(false), num_inimigos(0) {
 
 }
 
@@ -114,31 +114,31 @@ void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos) {
 }
 
 void Fases::Fase::VerificaMortos(){
+
 	Entidades::Entidade* pMorto = G_Colisoes.VerificaMortos();
 	if (pMorto != nullptr) {
+		int i = pMorto->getId();
+		if (i > 2 && i < 7) {
+			num_inimigos--;
+		}
 		LEs.RemoverEntidade(pMorto);
-	}
-	if (Player1->getVidas() <= 0 && Player2->getVidas() <= 0) {
-		ativa = false;
 	}
 }
 
-void Fases::Fase::verificaAtiva(){
-	if (Player1 == nullptr && Player2 == nullptr) {
-	//	ativa = false;
+bool Fases::Fase::verificaFinal(){
+	if (num_inimigos == 0 && ativa == true) {
+		final = true;
 	}
-	if ((Player1->getPontos() + Player2->getPontos()) >= num_inimigos) {
-	//	ativa = false;
+	if (Player1->getVidas() == 0 && Player2->getVidas() == 0) {
+		final = true;
 	}
-	
-	if (!ativa) {
-	 }
-
+	return final;
 }
 
 bool Fases::Fase::getAtiva(){
 	return ativa;
 }
+
 
 
 void Fases::Fase::Inicializa() {

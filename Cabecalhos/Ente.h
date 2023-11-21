@@ -16,7 +16,7 @@ protected:
 public:
 
 	Ente(const int i = 0);
-	~Ente();
+	virtual ~Ente();
 
 	virtual void executar() = 0;
 	const int getId() const;

@@ -151,6 +151,10 @@ int Entidades::Personagens::Jogador::getPontos(){
 	return pontos;
 }
 
+void Entidades::Personagens::Jogador::zeraPontos(){
+	pontos = 0;
+}
+
 // define o primeiro jogador
 bool Entidades::Personagens::Jogador::Jogador2 = false;
 

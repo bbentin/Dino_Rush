@@ -5,6 +5,7 @@ pos_Lamas{ 10, 20, 25, 30, 40 }, pos_Espinhos{ 15,30,35,40,55 } {
 	num_Moscas = 3 + rand() % 3;	num_Gosmonas = 3 + rand() % 3;
 	num_Lamas = 3 + rand() % 3;		num_Espinhos = 3 + rand() % 3;
 	gerar_fase(k_fase);
+	ativa = true;
 }
 
 Fases::Deserto::~Deserto(){
@@ -33,6 +34,7 @@ void Fases::Deserto::CriarMoscas(){
 		Mosca* pMosca = new Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
 		G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
 		LEs.InserirEntidade(static_cast<Entidade*> (pMosca));
+		num_inimigos++;
 	}
 }
 
@@ -41,6 +43,7 @@ void Fases::Deserto::CriarGosmonas(){
 		Gosmona* pGosmona = new Gosmona; pGosmona->setPosi(pos_Gosmonas[i] * 16, altura_spawn_inimigos);
 		G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosmona));
 		LEs.InserirEntidade(static_cast<Entidade*> (pGosmona));
+		num_inimigos++;
 	}
 }
 
@@ -49,6 +52,7 @@ void Fases::Deserto::CriarChefao(){
 	Projetil* pArma = new Projetil();	pArma->setDono(static_cast<Entidade*>(pChefao));	pChefao->setArma(pArma);
 	G_Colisoes.addInimigo(static_cast<Inimigo*>(pChefao)); G_Colisoes.addProjetil(pArma);
 	LEs.InserirEntidade(static_cast<Entidade*> (pChefao));	LEs.InserirEntidade(static_cast<Entidade*>(pArma));
+	num_inimigos++;
 }
 
 void Fases::Deserto::CriarLamas(){
