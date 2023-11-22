@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Gerenciadores/Gerenciador_Estados.h"
+#include "Gerenciador_Estados.h"
 
 namespace Estados
 {

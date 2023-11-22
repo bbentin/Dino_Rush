@@ -163,6 +163,7 @@
     <ClCompile Include="Fontes\Principal.cpp" />
     <ClCompile Include="Fontes\Projetil.cpp" />
     <ClCompile Include="Fontes\Ranking.cpp" />
+    <ClCompile Include="Gerenciador_Estados.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cabecalhos\Cacto.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Cabecalhos\Projetil.h" />
     <ClInclude Include="Cabecalhos\Ranking.h" />
     <ClInclude Include="Estado.h" />
+    <ClInclude Include="Gerenciador_Estados.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
