@@ -26,7 +26,7 @@ void Principal::Executar() {
 		GEventos.setState(0);
 		GEventos.setMenu(menu);
 		menu->executar();
-		if (menu->GetItem() == 0 && menu->isPressed()) {
+		if (menu->GetItem() == 1 && menu->isPressed()) {
 			GEventos.setState(1);
 			if (Primeira_fase == nullptr) {
 				Primeira_fase = new Fases::Floresta();
@@ -43,7 +43,7 @@ void Principal::Executar() {
 				}
 			}
 		}
-		else if (menu->GetItem() == 1 && menu->isPressed()) {
+		else if (menu->GetItem() == 2 && menu->isPressed()) {
 			GEventos.setState(2);
 			if (Segunda_fase == nullptr) { 
 				Segunda_fase = new Fases::Deserto(); 
@@ -61,11 +61,11 @@ void Principal::Executar() {
 				}
 			}
 		}
-		else if (menu->GetItem() == 2 && menu->isPressed()) {
+		else if (menu->GetItem() == 3 && menu->isPressed()) {
 			GEventos.setState(3);
 			//ranking->executar();
 		}
-		else if (menu->GetItem() == 3 && menu->isPressed()) {
+		else if (menu->GetItem() == 4 && menu->isPressed()) {
 			GGrafico.getTela()->close();
 		}
 		GGrafico.Exibir();
