@@ -13,9 +13,10 @@ private:
 	int selected;
 	bool pressed;
 	sf::Text textos[MAX_NUMBER_OF_ITEMS];
+	Gerenciadores::Gerenciador_Eventos* ge;
 
 public:
-	Menu();
+	Menu(Gerenciadores::Gerenciador_Eventos* pGE);
 	~Menu();
 
 	void executar();
@@ -23,11 +24,10 @@ public:
 	void Desenhar();
 	void MoveUp();
 	void MoveDown();
-	void handleInput(sf::Event evento);
 	void reset();
 	int GetItem() { return selected; }
+	void setPressed(bool press) { pressed = press; }
 	bool isPressed() { return pressed; }
 	sf::Font getFonte() { return fonte; }
-
 };
 
