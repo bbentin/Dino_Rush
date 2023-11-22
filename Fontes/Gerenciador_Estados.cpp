@@ -1,5 +1,5 @@
-#include "../Cabecalhos/Gerenciador_Eventos.h"
-#include "../Cabecalhos/Estado.h"
+#include "Cabecalhos/Gerenciador_Eventos.h"
+#include "Cabecalhos/Estado.h"
 
 namespace Gerenciadores
 {
@@ -17,7 +17,7 @@ namespace Gerenciadores
         estadoAtual(1)
     {
         // Colocar aqui o número de estados que você possui:
-        estados.resize(4);
+        estados.resize(2);
     }
 
     Gerenciador_Estados::~Gerenciador_Estados()
