@@ -16,7 +16,7 @@ private:
 	sf::Text textos[MAX_NUMBER_OF_ITEMS];
 
 public:
-	Menu(int estado = -1);
+	Menu();
 	~Menu();
 
 	void executar();

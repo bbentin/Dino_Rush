@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Deserto.h"
 
-Fases::Deserto::Deserto() :Fase(11, 2, 2), pos_Moscas{ 5,15,30,40,50 }, pos_Gosmonas{15,25,36,48,50},pos_Chefao(65),
+Fases::Deserto::Deserto() :Fase(11, 2), pos_Moscas{ 5,15,30,40,50 }, pos_Gosmonas{15,25,36,48,50},pos_Chefao(65),
 pos_Lamas{ 10, 20, 25, 30, 40 }, pos_Espinhos{ 15,30,35,40,55 } {
 	num_Moscas = 3 + rand() % 3;	num_Gosmonas = 3 + rand() % 3;
 	num_Lamas = 3 + rand() % 3;		num_Espinhos = 3 + rand() % 3;

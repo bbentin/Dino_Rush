@@ -2,7 +2,6 @@
 #pragma once
 #include "Gerenciador_Grafico.h"
 #include "Gerenciador_Eventos.h"
-#include "Gerenciador_Estados.h"
 #include "ListaEntidades.h"
 #include "Deserto.h"
 #include "Floresta.h"
@@ -17,7 +16,6 @@ class Principal {
 private:
 	Gerenciadores::Gerenciador_Grafico GGrafico;
 	Gerenciadores::Gerenciador_Eventos GEventos;
-	Gerenciadores::Gerenciador_Estados GEstados;
 	Fases::Deserto* Segunda_fase;
 	Fases::Floresta* Primeira_fase;
 	Menu* menu;
