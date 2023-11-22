@@ -5,8 +5,6 @@
 #include "ListaEntidades.h"
 #include "Deserto.h"
 #include "Floresta.h"
-//#include "Menu.h"
-//#include "Ranking.h"
 #include <iostream>
 
 class Menu;
@@ -20,8 +18,6 @@ private:
 	Fases::Floresta* Primeira_fase;
 	Menu* menu;
 	Ranking* ranking;
-	int selected;
-	bool pressed;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
 
 public:

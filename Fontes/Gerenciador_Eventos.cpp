@@ -1,10 +1,11 @@
 #include "../Cabecalhos/Gerenciador_Eventos.h"
+#include "../Cabecalhos/Menu.h"
 
 Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos():state(0) {
-	Jogador1 = nullptr; Jogador2 = nullptr; Unico = nullptr; PTela = nullptr;
+	Jogador1 = nullptr; Jogador2 = nullptr; Unico = nullptr; PTela = nullptr; menu = nullptr;
 }
 Gerenciadores::Gerenciador_Eventos::~Gerenciador_Eventos() {
-	Jogador1 = nullptr; Jogador2 = nullptr; delete Unico;
+	Jogador1 = nullptr; Jogador2 = nullptr; menu = nullptr; delete Unico;
 }
 
 Gerenciadores::Gerenciador_Eventos* Gerenciadores::Gerenciador_Eventos::Singleton(){
@@ -32,8 +33,6 @@ int Gerenciadores::Gerenciador_Eventos::getstate(){
 	return state;
 }
 
-
-
 void Gerenciadores::Gerenciador_Eventos::executar() {
 	sf::Event evento;
 	while (PTela->pollEvent(evento)){
@@ -52,8 +51,21 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				Jogador1->atirar();
 				break;
 			case sf::Keyboard::Up:
+				if (state == 0) {
+					menu->MoveUp();
+				}
 				if (Entidades::Personagens::Jogador::getJogador2()) {
 					Jogador2->pular(120);
+				}
+				break;
+			case sf::Keyboard::Down:
+				if (state == 0) {
+					menu->MoveDown();
+				}
+				break;
+			case sf::Keyboard::Enter:
+				if (state == 0) {
+					menu->setPressed(true);
 				}
 				break;
 			case sf::Keyboard::Left:

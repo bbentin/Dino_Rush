@@ -1,7 +1,8 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu() :Ente(13), fonte(), pressed(false), selected(0)
+Menu::Menu(Gerenciadores::Gerenciador_Eventos* pGE) :Ente(13), fonte(), pressed(false), selected(0)
 {
+	ge = pGE;
 	fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
 	textos[0].setString("Fase 1");
 	textos[1].setString("Fase 2");
@@ -27,20 +28,7 @@ void Menu::executar() {
 	if (!pressed)
 	{
 		Desenhar();
-		sf::Event event;
-
-		while (Grafico->getTela()->pollEvent(event))
-		{
-			switch (event.type)
-			{
-			case sf::Event::KeyReleased:
-				handleInput(event);
-				break;
-			case sf::Event::Closed:
-				Grafico->getTela()->close();
-				break;
-			}
-		}
+		ge->executar();
 	}
 }
 
@@ -79,25 +67,6 @@ void Menu::MoveDown() {
 		textos[selected].setOutlineThickness(4);
 	}
 	Desenhar();
-
-}
-
-void Menu::handleInput(sf::Event event)
-{
-	switch (event.key.code)
-	{
-	case sf::Keyboard::Up:
-		MoveUp();
-		break;
-
-	case sf::Keyboard::Down:
-		MoveDown();
-		break;
-
-	case sf::Keyboard::Enter:
-		pressed = true;
-		break;
-	}
 }
 
 void Menu::reset(){
