@@ -3,7 +3,7 @@
 #include "Principal.h"
 #include <vector>
 
-#define MAX_NUMBER_OF_ITEMS 4
+#define MAX_NUMBER_OF_ITEMS 5
 
 class Menu :
 	public Ente {
@@ -25,6 +25,7 @@ public:
 	void MoveUp();
 	void MoveDown();
 	void reset();
+	void setGerenciador(Gerenciadores::Gerenciador_Eventos* pGE) { ge = pGE; }
 	int GetItem() { return selected; }
 	void setPressed(bool press) { pressed = press; }
 	bool isPressed() { return pressed; }

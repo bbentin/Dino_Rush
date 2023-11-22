@@ -1,14 +1,15 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu(Gerenciadores::Gerenciador_Eventos* pGE) :Ente(13), fonte(), pressed(false), selected(0)
+Menu::Menu(Gerenciadores::Gerenciador_Eventos* pGE) :Ente(13), fonte(), pressed(false), selected(1)
 {
-	ge = pGE;
+	setGerenciador(pGE);
 	fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
-	textos[0].setString("Fase 1");
-	textos[1].setString("Fase 2");
-	textos[2].setString("Ranking");
-	textos[3].setString("Sair");
-	for (int i = 0; i < 4; i++)
+	textos[0].setString("Dino Rush");
+	textos[1].setString("Fase 1");
+	textos[2].setString("Fase 2");
+	textos[3].setString("Ranking");
+	textos[4].setString("Sair");
+	for (int i = 0; i < 5; i++)
 	{
 		textos[i].setFont(fonte);
 		textos[i].setFillColor(sf::Color::Green);
@@ -16,8 +17,10 @@ Menu::Menu(Gerenciadores::Gerenciador_Eventos* pGE) :Ente(13), fonte(), pressed(
 		textos[i].setOutlineThickness(2);
 		textos[i].setPosition(sf::Vector2f(100, (i + 1) * 100));
 	}
+	textos[0].setCharacterSize(50);
 	textos[0].setOutlineThickness(4);
-	textos[0].setFillColor(sf::Color::Red);
+	textos[1].setOutlineThickness(4);
+	textos[1].setFillColor(sf::Color::Red);
 }
 
 Menu::~Menu() {
@@ -46,9 +49,9 @@ void Menu::Desenhar() {
 }
 
 void Menu::MoveUp() {
-	if ((selected - 1) >= 0)
+	if ((selected - 1) >= 1)
 	{
-		textos[selected].setFillColor(sf::Color::Green);
+		textos[selected].setFillColor(sf::Color::Green);	
 		textos[selected].setOutlineThickness(2);
 		selected--;
 		textos[selected].setFillColor(sf::Color::Red);
@@ -71,5 +74,5 @@ void Menu::MoveDown() {
 
 void Menu::reset(){
 	pressed = false;
-	selected = 0;
+	selected = 1;
 }
