@@ -2,12 +2,11 @@
 #include "Ente.h"
 #include "Principal.h"
 #include <vector>
-#include "Estado.h"
 
 #define MAX_NUMBER_OF_ITEMS 4
 
 class Menu :
-	public Ente, public Estado {
+	public Ente {
 
 private:
 	sf::Font fonte;
