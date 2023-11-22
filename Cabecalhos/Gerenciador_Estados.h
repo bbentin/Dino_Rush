@@ -21,9 +21,8 @@ namespace Gerenciadores
         std::vector<Estados::Estado*> estados;
         static Gerenciador_Estados* instancia;
 
-        
-    public:
         Gerenciador_Estados();
+    public:
         ~Gerenciador_Estados();
 
         static Gerenciador_Estados* get_instancia();

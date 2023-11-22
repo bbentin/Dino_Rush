@@ -6,7 +6,7 @@ namespace Gerenciadores {
 	class Gerenciador_Eventos {
 
 	private:
-		static Gerenciador_Eventos* Unico;
+		Gerenciador_Eventos* Unico;
 		Entidades::Personagens::Jogador* Jogador1;
 		Entidades::Personagens::Jogador* Jogador2;
 		sf::RenderWindow* PTela;
@@ -15,7 +15,7 @@ namespace Gerenciadores {
 
 		~Gerenciador_Eventos();
 		Gerenciador_Eventos();
-		static Gerenciador_Eventos* Singleton();
+		Gerenciador_Eventos* Singleton();
 		void setTela(sf::RenderWindow* Tela);
 		void executar();
 		void setJogador(Entidades::Personagens::Jogador* Player);

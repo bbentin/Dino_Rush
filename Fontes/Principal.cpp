@@ -9,7 +9,6 @@ Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr
 	GEventos.setTela(GGrafico.getTela());
 	GEventos.setJogador(&Primeiro);
 	GEventos.setJogador(&Segundo);
-	GEstados.get_instancia();
 	menu = new Menu();
 	ranking = new Ranking();
 	ranking->carregar();
