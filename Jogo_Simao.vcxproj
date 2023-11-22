@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Estado.cpp" />
     <ClCompile Include="Fontes\Cacto.cpp" />
     <ClCompile Include="Fontes\Chao_Deserto.cpp" />
     <ClCompile Include="Fontes\Chao_Floresta.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Cabecalhos\Principal.h" />
     <ClInclude Include="Cabecalhos\Projetil.h" />
     <ClInclude Include="Cabecalhos\Ranking.h" />
+    <ClInclude Include="Estado.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
