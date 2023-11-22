@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu() :Ente(13), fonte(), pressed(false), selected(0)
+Menu::Menu(int est) :Ente(13), fonte(), pressed(false), selected(0), Estado(est)
 {
 	fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
 	textos[0].setString("Fase 1");

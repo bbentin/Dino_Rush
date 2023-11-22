@@ -11,6 +11,7 @@
 using namespace Entidades;
 using namespace Personagens;
 using namespace Obstaculos;
+using namespace Estados;
 
 namespace Fases {
 	class Fase :
@@ -26,7 +27,7 @@ namespace Fases {
 		bool ativa, final;
 	public:
 
-		Fase(const int i = 0, const int k = 0);
+		Fase(const int i = 0, const int k = 0, int estado = -1);
 		virtual ~Fase();
 
 		sf::Clock* getRelogio();

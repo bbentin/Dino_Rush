@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Floresta.h"
 
-Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{3,25,10,15,20}, pos_Lamas{10,20,30,40,50},
+Fases::Floresta::Floresta() :Fase(14, 1, 1), pos_Espinhos{3,25,10,15,20}, pos_Lamas{10,20,30,40,50},
 pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 3;	num_Espinhos = 3 + rand() % 3;
