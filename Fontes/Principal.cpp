@@ -26,6 +26,7 @@ Gerenciadores::Gerenciador_Grafico* Principal::getGrafico() {
 void Principal::Executar() {
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
+		GEstados.executar();
 
 		menu->executar();
 		selected = menu->GetItem();
