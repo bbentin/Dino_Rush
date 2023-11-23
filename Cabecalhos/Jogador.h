@@ -16,6 +16,7 @@ namespace Entidades {
             Entidades::Projetil* arma;        
             static bool Jogador2;
             const int altura_jogador;
+            int pontos;
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));
             ~Jogador();
@@ -33,7 +34,7 @@ namespace Entidades {
             void salvar(std::ostringstream* entrada);
             void Inicializa();
             int getPontos();
-            void zeraPontos();
+            void Reseta_Vidas();
             void criarProjetil();
 
             static const bool getJogador2();

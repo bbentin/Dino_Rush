@@ -5,10 +5,9 @@
 #include <sstream>
 #include <string>
 
+Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{8,17,25,35,70}, pos_Lamas{10,20,30,40,50},
+pos_Gosmas{5,20,32,41,60}, pos_Moscas{15,30,45,51,59} {
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
-
-Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{ 3,25,10,15,20 }, pos_Lamas{ 10,20,30,40,50 },
-pos_Gosmas{ 10,20,45,58,32 }, pos_Moscas{ 15,30,45,51,59 } {
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 3;	num_Espinhos = 3 + rand() % 3;
 	num_Gosmas = 3 + rand() % 3;	num_Lamas = 3 + rand() % 3;
@@ -87,7 +86,7 @@ void Fases::Floresta::CriarGosmas() {
 
 	// verifica se o arquivo esta vazio:
 	if (arquivo.peek() == -1) {
-		// caso esteja faz a criaÁ„o padr„o apÛs fechar o arquivo
+		// caso esteja faz a cria√ß√£o padr√£o ap√≥s fechar o arquivo
 		arquivo.close();
 		for (int i = 0; i < num_Gosmas; i++) {
 			Gosma* pGosma = new Gosma(); pGosma->setPosi(pos_Gosmas[i] * 16, altura_spawn_inimigos);
@@ -98,7 +97,7 @@ void Fases::Floresta::CriarGosmas() {
 	}
 	else
 	{
-		// caso n„o esteja vazio, decodifica o arquivo com o parse
+		// caso n√£o esteja vazio, decodifica o arquivo com o parse
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
 		// cria aux
@@ -110,7 +109,7 @@ void Fases::Floresta::CriarGosmas() {
 			string id = to_string((*it).front());
 			// compara o id lido do arquivo com o da gosma
 			if (id == "[3]") {
-				// cria auxiliar para armazenar a posiÁ„o e velocidade da Gosma
+				// cria auxiliar para armazenar a posi√ß√£o e velocidade da Gosma
 				sf::Vector2f pos = sf::Vector2f(
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
@@ -125,7 +124,7 @@ void Fases::Floresta::CriarGosmas() {
 				// incrementa o numero de inimigos
 				num_inimigos++;
 			}
-			// limpa o id para n„o dar problema na proxima iteraÁ„o
+			// limpa o id para n√£o dar problema na proxima itera√ß√£o
 			id = "";
 		}
 	}
@@ -224,10 +223,10 @@ void Fases::Floresta::Inicializa() {
 	LEs.Inicializar();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
-	Player1->setPosi(500, 500);
+	Player1->setPosi(32, 832);
 	Player1->setNoAr(true);
 	if (Entidades::Personagens::Jogador::getJogador2()) {
-		Player2->setPosi(500, 500);
+		Player2->setPosi(64, 832);
 		Player2->setNoAr(true);
 	}
 }

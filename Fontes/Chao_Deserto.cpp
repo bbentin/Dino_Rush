@@ -9,8 +9,8 @@ Entidades::Obstaculos::Chao_Deserto::~Chao_Deserto() {
 void Entidades::Obstaculos::Chao_Deserto::executar(){
 	desenhar();
 	if (getPosicao().y >= limite_altura) {
-		setPosi(getPosicao().x, limite_altura);
-		no_ar = false;
+		Soma_Velocidade(sf::Vector2f(0.0, -0.5));
+		Calc_Fisica();
 	}
 	else {
 		Calc_Fisica();

@@ -90,7 +90,7 @@ void Entidades::Entidade::Aplicar_Gravidade() {
 }
 
 void Entidades::Entidade::Calc_Fisica(){
-	if (no_ar) { Aplicar_Gravidade(); }
+	Aplicar_Gravidade();
 	Imagem.move(velocidade);
 	parar_movimento_x();	parar_movimento_y();
 }
@@ -104,11 +104,11 @@ void Entidades::Entidade::setNoAr(bool ar){
 
 void Entidades::Entidade::empurrar(Entidade* empurrada) {
 	if (empurrada->getPosicao().x > getPosicao().x) {
-		empurrada->Soma_Velocidade(sf::Vector2f(getTamanho().x/1.2, -20));
+		empurrada->Soma_Velocidade(sf::Vector2f(empurrada->getTamanho().x, -20));
 		empurrada->setNoAr(true);
 	}
 	else if (empurrada->getPosicao().x < getPosicao().x) {
-		empurrada->Soma_Velocidade(sf::Vector2f(-getTamanho().x/1.2, -20));
+		empurrada->Soma_Velocidade(sf::Vector2f(-empurrada->getTamanho().x, -20));
 		empurrada->setNoAr(true);
 	}
 }
