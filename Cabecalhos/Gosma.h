@@ -17,7 +17,6 @@ namespace Entidades {
             void Colisao_Jogador(Entidade* Jogador,sf::Vector2f limites);
             void danar(Entidade* afetada);
             void salvar(std::ostringstream* entrada);
-            void atualizar();
         };
     }
 }

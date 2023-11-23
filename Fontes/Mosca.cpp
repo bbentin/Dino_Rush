@@ -1,16 +1,18 @@
 #include "../Cabecalhos/Mosca.h"
+#include <sstream>
 
-Entidades::Personagens::Mosca::Mosca():Inimigo(5),pos_x_inicial(getPosicao().x),direita(true),sujeira(20) {
+Entidades::Personagens::Mosca::Mosca(sf::Vector2f pos, float vel):Inimigo(5),pos_x_inicial(getPosicao().x),direita(true),sujeira(20) {
 }
+
 Entidades::Personagens::Mosca::~Mosca() {
 
 }
 
 void Entidades::Personagens::Mosca::inverter(){
-	if (getPosicao().x > (pos_x_inicial + 20)) {
+	if (getPosicao().x > (pos_x_inicial + 50)) {
 		direita = true;
 	}
-	else if (getPosicao().x < (pos_x_inicial - 20)) {
+	else if (getPosicao().x < (pos_x_inicial - 50)) {
 		direita = false;
 	}
 }
@@ -61,5 +63,7 @@ void Entidades::Personagens::Mosca::ColisaoChao(Entidade* Chao, sf::Vector2f lim
 }
 
 void Entidades::Personagens::Mosca::salvar(std::ostringstream* entrada){
+	sf::Vector2f pos = getPosicao();
+	float vel = getRapidez();
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
 }
-

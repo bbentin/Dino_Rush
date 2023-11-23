@@ -9,7 +9,7 @@ namespace Entidades {
             float pos_x_inicial;
             const int sujeira; // desacelera o jogador
         public:
-            Mosca();
+            Mosca(sf::Vector2f pos = sf::Vector2f(0.f, 0.f), float vel = 0.0);
             ~Mosca();
 
             void inverter();

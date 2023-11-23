@@ -58,12 +58,7 @@ void Entidades::Personagens::Gosma::danar(Entidade* afetada){
 }
 
 void Entidades::Personagens::Gosma::salvar(std::ostringstream* entrada){
-	sf::Vector2f pos = this->getPosicao();
-	float vel = this->getRapidez();
-	(*entrada) << "{ \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
-}
-
-void Entidades::Personagens::Gosma::atualizar()
-{
-	setPosi(getPosicao().x, getPosicao().y);
+	sf::Vector2f pos = getPosicao();
+	float vel = getRapidez();
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
 }

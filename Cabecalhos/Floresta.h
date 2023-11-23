@@ -16,7 +16,6 @@ namespace Fases {
         const int pos_Espinhos[5], pos_Lamas[5];
         int num_Moscas,num_Gosmas,num_Espinhos,num_Lamas;
         std::ostringstream buffer;
-        bool salvou = false;
 
     public:
 

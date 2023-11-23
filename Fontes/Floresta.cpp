@@ -34,11 +34,45 @@ void Fases::Floresta::CriarInimigos() {
 }
 
 void Fases::Floresta::CriarMoscas() {
-	for (int i = 0; i < num_Moscas; i++) {
-		Mosca* pMosca = new Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
-		G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
-		LEs.InserirEntidade(static_cast<Entidade*> (pMosca));
-		num_inimigos++;
+	std::ifstream arquivo(ARQUIVO);
+	if (!arquivo)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
+
+	// verifica se o arquivo esta vazio:
+	if (arquivo.peek() == -1) {
+		arquivo.close();
+		for (int i = 0; i < num_Moscas; i++) {
+			Mosca* pMosca = new Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
+			G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
+			LEs.InserirEntidade(static_cast<Entidade*> (pMosca));
+			num_inimigos++;
+		}
+	}
+	else
+	{
+		nlohmann::json json = nlohmann::json::parse(arquivo);
+
+		Mosca* pMosca;
+
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			// pega o id da entidade e converte para string para comparar com o id da Gosma
+			string id = to_string((*it).front());
+			if (id == "[5]") {
+				sf::Vector2f pos = sf::Vector2f(
+					(float)((*it)["posicao"][0]),
+					(float)((*it)["posicao"][1])
+				);
+				float vel = (float)((*it)["velocidade"][0]);
+				LEs.InserirEntidade(static_cast<Entidade*> (pMosca = new Mosca(pos, vel)));
+				pMosca->setPosi(pos);
+				G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
+				num_inimigos++;
+			}
+			id = "";
+		}
 	}
 }
 
@@ -49,8 +83,6 @@ void Fases::Floresta::CriarGosmas() {
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
 		exit(1);
 	}
-
-	cout << arquivo.peek() << endl;
 
 	// verifica se o arquivo esta vazio:
 	if (arquivo.peek() == -1) {
@@ -64,22 +96,25 @@ void Fases::Floresta::CriarGosmas() {
 	}
 	else
 	{
-		salvou = true;
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
 		Gosma* pGosma;
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
-			LEs.InserirEntidade(static_cast<Entidade*> (pGosma = new Gosma(sf::Vector2f(
-				(float)((*it)["posicao"][0]),
-				(float)((*it)["posicao"][1])
-			),
-				(float)((*it)["velocidade"][0])
-			)
-				));
-			pGosma->atualizar();
-			G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosma));
-			num_inimigos++;
+			// pega o id da entidade e converte para string para comparar com o id da Gosma
+			string id = to_string((*it).front());
+			if (id == "[3]") {
+				sf::Vector2f pos = sf::Vector2f(
+					(float)((*it)["posicao"][0]),
+					(float)((*it)["posicao"][1])
+				);
+				float vel = (float)((*it)["velocidade"][0]);
+				LEs.InserirEntidade(static_cast<Entidade*> (pGosma = new Gosma(pos, vel)));
+				pGosma->setPosi(pos);
+				G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosma));
+				num_inimigos++;
+			}
+			id = "";
 		}
 	}
 }
