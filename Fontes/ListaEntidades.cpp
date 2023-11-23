@@ -1,4 +1,5 @@
 #include "../Cabecalhos/ListaEntidades.h"
+#include <sstream>
 
 Listas::ListaEntidades::ListaEntidades():LEs(){
 	LEs.LimpaLista();
@@ -43,4 +44,16 @@ void Listas::ListaEntidades::Inicializar(){
 	}
 }
 
+// função que salva as entidades no arquivo
+void Listas::ListaEntidades::salvar(std::ostringstream* entrada) {
+	Listas::Lista<Entidades::Entidade>::Elemento<Entidades::Entidade>* pAux = LEs.getPrimeiro();
 
+	if (pAux != nullptr) {
+		while (pAux != LEs.getAtual()->getProx()) {
+			pAux->getInfo()->salvar(entrada);
+			if(pAux != LEs.getAtual())
+				(*entrada) << ",";
+			pAux = pAux->getProx();
+		}
+	}
+}

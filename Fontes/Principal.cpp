@@ -2,14 +2,14 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), selected(10), pressed(false), ranking()
+Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), ranking()
 {
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
 	GEventos.setTela(GGrafico.getTela());
 	GEventos.setJogador(&Primeiro);
 	GEventos.setJogador(&Segundo);
-	menu = new Menu();
+	menu = new Menu(&GEventos);
 	ranking = new Ranking();
 	ranking->carregar();
 	Inicializar();
@@ -23,11 +23,11 @@ Gerenciadores::Gerenciador_Grafico* Principal::getGrafico() {
 void Principal::Executar() {
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
-
+		GEventos.setState(0);
+		GEventos.setMenu(menu);
 		menu->executar();
-		selected = menu->GetItem();
-		pressed = menu->isPressed();
-		if (selected == 0 && pressed) {
+		if (menu->GetItem() == 1 && menu->isPressed()) {
+			GEventos.setState(1);
 			if (Primeira_fase == nullptr) {
 				Primeira_fase = new Fases::Floresta();
 				Primeira_fase->setJogador(&Primeiro);
@@ -36,6 +36,7 @@ void Principal::Executar() {
 			}else {
 				GEventos.executar();
 				Primeira_fase->executar();
+				Primeira_fase->salvar();
 				if (Primeira_fase->verificaFinal()) {
 					Primeira_fase = nullptr;
 					delete Primeira_fase;
@@ -45,7 +46,8 @@ void Principal::Executar() {
 				}
 			}
 		}
-		else if (selected == 1 && pressed) {
+		else if (menu->GetItem() == 2 && menu->isPressed()) {
+			GEventos.setState(2);
 			if (Segunda_fase == nullptr) { 
 				Segunda_fase = new Fases::Deserto(); 
 				Segunda_fase->setJogador(&Primeiro);
@@ -64,10 +66,11 @@ void Principal::Executar() {
 				}
 			}
 		}
-		else if (selected == 2 && pressed) {
+		else if (menu->GetItem() == 3 && menu->isPressed()) {
+			GEventos.setState(3);
 			//ranking->executar();
 		}
-		else if (selected == 3 && pressed) {
+		else if (menu->GetItem() == 4 && menu->isPressed()) {
 			GGrafico.getTela()->close();
 		}
 		GGrafico.Exibir();

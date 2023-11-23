@@ -3,6 +3,10 @@
 #include "Espinhos.h"
 #include "Inimigo.h"
 #include "Projetil.h"
+#include <sstream>
+#include <fstream>
+#include "../json.hpp"
+
 namespace Entidades {
     namespace Personagens {
         class Jogador :
@@ -27,10 +31,11 @@ namespace Entidades {
             void executar();
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void atirar();
-            void salvar();
+            void salvar(std::ostringstream* entrada);
             void Inicializa();
             int getPontos();
             void Reseta_Vidas();
+            void criarProjetil();
 
             static const bool getJogador2();
         };

@@ -1,42 +1,45 @@
 #include "../Cabecalhos/Espinhos.h"
+#include <sstream>
 
-Entidades::Obstaculos::Espinhos::Espinhos(const float limite_alt):Obstaculo(10,limite_alt),dano(2),relogio(),visivel(false) {
+Entidades::Obstaculos::Espinhos::Espinhos(sf::Vector2f pos, int tmp, bool visi, const float limite_alt) :Obstaculo(10, limite_alt), dano(2), relogio(), visivel(visi), tempo(tmp) {
 	no_ar = true;
 }
 
-Entidades::Obstaculos::Espinhos::~Espinhos(){
+Entidades::Obstaculos::Espinhos::~Espinhos() {
 }
 
-void Entidades::Obstaculos::Espinhos::executar(){
+void Entidades::Obstaculos::Espinhos::executar() {
 	brotar();
 	if (visivel) {
-	desenhar();
+		desenhar();
 	}
 	if (getPosicao().y > limite_altura) {
 		no_ar = false;
 		parar_movimento_y();
 	}
-	else{
+	else {
 		desenhar();
 		Calc_Fisica();
 	}
 }
 
-void Entidades::Obstaculos::Espinhos::Colisao(Entidade* colidida, sf::Vector2f limites){
+void Entidades::Obstaculos::Espinhos::Colisao(Entidade* colidida, sf::Vector2f limites) {
 }
 
-void Entidades::Obstaculos::Espinhos::obstacular(Entidade* obstaculada){
+void Entidades::Obstaculos::Espinhos::obstacular(Entidade* obstaculada) {
 	if (visivel) {
 		empurrar(obstaculada);
 		static_cast<Entidades::Personagens::Personagem*>(obstaculada)->operator--();
 	}
 }
 
-void Entidades::Obstaculos::Espinhos::salvar(){
+void Entidades::Obstaculos::Espinhos::salvar(std::ostringstream* entrada) {
+	sf::Vector2f pos = getPosicao();
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"visivel\": [" << getVisivel() << "], \"tempo\": [" << tempo << "] }" << endl;
 }
 
 void Entidades::Obstaculos::Espinhos::brotar() {
-	int tempo = relogio.getElapsedTime().asSeconds();
+
 	if (tempo == 2) {
 		visivel = true;
 	}
@@ -44,9 +47,10 @@ void Entidades::Obstaculos::Espinhos::brotar() {
 		visivel = false;
 		relogio.restart();
 	}
+	tempo = relogio.getElapsedTime().asSeconds();
 }
 
-const bool Entidades::Obstaculos::Espinhos::getVisivel() const{
+const bool Entidades::Obstaculos::Espinhos::getVisivel() const {
 	return visivel;
 }
 

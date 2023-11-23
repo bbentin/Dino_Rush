@@ -37,5 +37,5 @@ void Entidades::Personagens::Gosmona::danar(Entidade* Afetada){
 
 }
 
-void Entidades::Personagens::Gosmona::salvar(){
+void Entidades::Personagens::Gosmona::salvar(std::ostringstream* entrada){
 }

@@ -8,7 +8,7 @@ namespace Entidades {
 		bool pontua;
 		Entidade* dono;
 	public:
-		Projetil();
+		Projetil(sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), Entidade* Dono = nullptr, float vel = 0.0f, bool visi = false);
 		~Projetil();
 
 		void reseta_posicao();
@@ -18,7 +18,7 @@ namespace Entidades {
 		void executar();
 		void atirada();
 		void avanca();
-		void salvar();
+		void salvar(std::ostringstream* entrada);
 		void setDono(Entidade* Dono);
 		const bool getPontos();
 

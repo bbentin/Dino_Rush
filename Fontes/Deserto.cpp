@@ -2,8 +2,8 @@
 
 Fases::Deserto::Deserto() :Fase(11, 2), pos_Moscas{ 5,15,30,40,50 }, pos_Gosmonas{15,25,36,48,50},pos_Chefao(65),
 pos_Lamas{ 10, 20, 25, 30, 40 }, pos_Espinhos{ 15,30,35,40,55 } {
-	num_Moscas = rand() % 3 + 3;	num_Gosmonas = rand() % 3 + 3;
-	num_Lamas = rand() % 3 + 3;		num_Espinhos = rand() % 3 + 3;
+	num_Moscas = 3 + rand() % 3;	num_Gosmonas = 3 + rand() % 3;
+	num_Lamas = 3 + rand() % 3;		num_Espinhos = 3 + rand() % 3;
 	gerar_fase(k_fase);
 	ativa = true;
 }
