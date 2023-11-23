@@ -100,7 +100,7 @@ void Fases::Floresta::CriarGosmas() {
 	{
 		// caso não esteja vazio, decodifica o arquivo com o parse
 		nlohmann::json json = nlohmann::json::parse(arquivo);
-		
+
 		// cria aux
 		Gosma* pGosma;
 
@@ -145,10 +145,40 @@ void Fases::Floresta::CriarEspinhos() {
 }
 
 void Fases::Floresta::CriarLamas() {
-	for (int i = 0; i < num_Lamas; i++) {
-		Lama* pLama = new Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
-		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
-		LEs.InserirEntidade(static_cast<Entidade*> (pLama));
+	std::ifstream arquivo(ARQUIVO);
+	if (!arquivo)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
+
+	if (arquivo.peek() == -1) {
+		arquivo.close();
+		for (int i = 0; i < num_Lamas; i++) {
+			Lama* pLama = new Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
+			LEs.InserirEntidade(static_cast<Entidade*> (pLama));
+		}
+	}
+	else
+	{
+		nlohmann::json json = nlohmann::json::parse(arquivo);
+
+		Lama* pLama;
+
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			string id = to_string((*it).front());
+			if (id == "[7]") {
+				sf::Vector2f pos = sf::Vector2f(
+					(float)((*it)["posicao"][0]),
+					(float)((*it)["posicao"][1])
+				);
+				LEs.InserirEntidade(static_cast<Entidade*> (pLama = new Lama(pos)));
+				pLama->setPosi(pos);
+				G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
+			}
+			id = "";
+		}
 	}
 }
 

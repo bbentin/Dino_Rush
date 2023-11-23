@@ -1,7 +1,9 @@
 #include "../Cabecalhos/Lama.h"
+#include <sstream>
 
-Entidades::Obstaculos::Lama::Lama(const float limite):Obstaculo(7,limite),viscosidade(0) {
+Entidades::Obstaculos::Lama::Lama(sf::Vector2f pos, const float limite):Obstaculo(7,limite),viscosidade(0) {
 }
+
 Entidades::Obstaculos::Lama::~Lama() {
 
 }
@@ -28,4 +30,6 @@ void Entidades::Obstaculos::Lama::obstacular(Entidade* obstaculada){
 }
 
 void Entidades::Obstaculos::Lama::salvar(std::ostringstream* entrada){
+	sf::Vector2f pos = getPosicao();
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "] }" << std::endl;
 }
