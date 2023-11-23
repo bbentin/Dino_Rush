@@ -13,6 +13,7 @@ namespace Entidades {
 
 			virtual void danar(Entidade* Afetada) = 0;
 			virtual void executar() = 0;
+			virtual void salvar (std::ostringstream* entrada) = 0;
 		};
 	}
 }

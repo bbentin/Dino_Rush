@@ -6,6 +6,7 @@
 #include "Lama.h"
 #include "Chao_Deserto.h"
 #include "Chao_Floresta.h"
+#include "../json.hpp"
 
 using namespace Entidades;
 using namespace Personagens;

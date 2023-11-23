@@ -32,7 +32,7 @@ void Entidades::Obstaculos::Espinhos::obstacular(Entidade* obstaculada){
 	}
 }
 
-void Entidades::Obstaculos::Espinhos::salvar(){
+void Entidades::Obstaculos::Espinhos::salvar(std::ostringstream* entrada){
 }
 
 void Entidades::Obstaculos::Espinhos::brotar() {

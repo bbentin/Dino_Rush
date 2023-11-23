@@ -38,7 +38,7 @@ namespace Entidades {
 		virtual void Colisao(Entidade* colidida, sf::Vector2f limites) = 0;
 		static void setIntervalo(float tempo);
 		virtual void executar() = 0;
-		virtual void salvar() = 0;
+		virtual void salvar(std::ostringstream* entrada) = 0;
 		const float getRapidez() const;
 		virtual void Inicializa();
 	};

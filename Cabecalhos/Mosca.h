@@ -19,7 +19,7 @@ namespace Entidades {
             void danar(Entidade* Afetada);
             void Inicializa();
             void ColisaoChao(Entidade* Chao,sf::Vector2f limites);
-            void salvar();
+            void salvar(std::ostringstream* entrada);
         };
     }
 }

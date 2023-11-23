@@ -24,5 +24,5 @@ void Entidades::Obstaculos::Chao_Floresta::obstacular(Entidade* obstaculada){
 	obstaculada->multiplica_Rapidez(true);
 }
 
-void Entidades::Obstaculos::Chao_Floresta::salvar(){
+void Entidades::Obstaculos::Chao_Floresta::salvar(std::ostringstream* entrada){
 }

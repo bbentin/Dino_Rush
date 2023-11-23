@@ -1,7 +1,14 @@
 #include "../Cabecalhos/Floresta.h"
+#include "../Cabecalhos/Lista.h"
+#include "../json.hpp"
+#include <fstream>
+#include <sstream>
+#include <string>
 
-Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{3,25,10,15,20}, pos_Lamas{10,20,30,40,50},
-pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
+#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
+
+Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{ 3,25,10,15,20 }, pos_Lamas{ 10,20,30,40,50 },
+pos_Gosmas{ 10,20,45,58,32 }, pos_Moscas{ 15,30,45,51,59 } {
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 3;	num_Espinhos = 3 + rand() % 3;
 	num_Gosmas = 3 + rand() % 3;	num_Lamas = 3 + rand() % 3;
@@ -9,39 +16,71 @@ pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
 	gerar_fase(k_fase);
 }
 
-Fases::Floresta::~Floresta(){
-	
+Fases::Floresta::~Floresta() {
+
 }
 
-void Fases::Floresta::executar(){
+void Fases::Floresta::executar() {
 	desenhar();
 	LEs.executar();
 	VerificaMortos();
 	G_Colisoes.executar();
 	Player1->setIntervalo(relogio_global.restart().asMilliseconds() / 2);
-	
 }
 
-void Fases::Floresta::CriarInimigos(){
+void Fases::Floresta::CriarInimigos() {
 	CriarMoscas();
 	CriarGosmas();
 }
 
-void Fases::Floresta::CriarMoscas(){
+void Fases::Floresta::CriarMoscas() {
 	for (int i = 0; i < num_Moscas; i++) {
-		Mosca* pMosca = new Mosca(); pMosca->setPosi(pos_Moscas[i] * 16,altura_spawn_inimigos);
+		Mosca* pMosca = new Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
 		G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
 		LEs.InserirEntidade(static_cast<Entidade*> (pMosca));
 		num_inimigos++;
 	}
 }
 
-void Fases::Floresta::CriarGosmas(){
-	for (int i = 0; i < num_Gosmas; i++) {
-		Gosma* pGosma = new Gosma(); pGosma->setPosi(pos_Gosmas[i] * 16,altura_spawn_inimigos);
-		G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosma));
-		LEs.InserirEntidade(static_cast<Entidade*> (pGosma));
-		num_inimigos++;
+void Fases::Floresta::CriarGosmas() {
+	std::ifstream arquivo(ARQUIVO);
+	if (!arquivo)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
+
+	cout << arquivo.peek() << endl;
+
+	// verifica se o arquivo esta vazio:
+	if (arquivo.peek() == -1) {
+		arquivo.close();
+		for (int i = 0; i < num_Gosmas; i++) {
+			Gosma* pGosma = new Gosma(); pGosma->setPosi(pos_Gosmas[i] * 16, altura_spawn_inimigos);
+			G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosma));
+			LEs.InserirEntidade(static_cast<Entidade*> (pGosma));
+			num_inimigos++;
+		}
+	}
+	else
+	{
+		salvou = true;
+		nlohmann::json json = nlohmann::json::parse(arquivo);
+
+		Gosma* pGosma;
+
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			LEs.InserirEntidade(static_cast<Entidade*> (pGosma = new Gosma(sf::Vector2f(
+				(float)((*it)["posicao"][0]),
+				(float)((*it)["posicao"][1])
+			),
+				(float)((*it)["velocidade"][0])
+			)
+				));
+			pGosma->atualizar();
+			G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosma));
+			num_inimigos++;
+		}
 	}
 }
 
@@ -50,15 +89,15 @@ void Fases::Floresta::CriarObstaculos() {
 	CriarLamas();
 }
 
-void Fases::Floresta::CriarEspinhos(){
-	for (int i = 0; i < num_Espinhos ; i++) {
+void Fases::Floresta::CriarEspinhos() {
+	for (int i = 0; i < num_Espinhos; i++) {
 		Espinhos* pEspinhos = new Espinhos(); pEspinhos->setPosi(pos_Gosmas[i] * 16, altura_spawn_obstaculos);
 		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pEspinhos));
 		LEs.InserirEntidade(static_cast<Entidade*> (pEspinhos));
 	}
 }
 
-void Fases::Floresta::CriarLamas(){
+void Fases::Floresta::CriarLamas() {
 	for (int i = 0; i < num_Lamas; i++) {
 		Lama* pLama = new Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
 		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
@@ -84,6 +123,20 @@ void Fases::Floresta::Inicializa() {
 	}
 }
 
-void Fases::Floresta::salvar(){
-}
+void Fases::Floresta::salvar() {
+	std::ofstream arquivo(ARQUIVO);
+	if (!arquivo)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
 
+	buffer.str("");
+	buffer << "[";
+
+	LEs.salvar(&buffer);
+
+	buffer << "]";
+	arquivo << buffer.str();
+	arquivo.close();
+}

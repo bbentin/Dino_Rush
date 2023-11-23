@@ -1,8 +1,10 @@
 #include "../Cabecalhos/Gosma.h"
+#include <sstream>
 
-Entidades::Personagens::Gosma::Gosma():Inimigo(3),num_pulos(10) {
+Entidades::Personagens::Gosma::Gosma(sf::Vector2f pos, float vel):Inimigo(3, pos),num_pulos(10) {
 	num_vidas = 3;
 }
+
 Entidades::Personagens::Gosma::~Gosma() {
 }
 
@@ -55,6 +57,13 @@ void Entidades::Personagens::Gosma::danar(Entidade* afetada){
 	afetada--;
 }
 
+void Entidades::Personagens::Gosma::salvar(std::ostringstream* entrada){
+	sf::Vector2f pos = this->getPosicao();
+	float vel = this->getRapidez();
+	(*entrada) << "{ \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
+}
 
-void Entidades::Personagens::Gosma::salvar(){
+void Entidades::Personagens::Gosma::atualizar()
+{
+	setPosi(getPosicao().x, getPosicao().y);
 }

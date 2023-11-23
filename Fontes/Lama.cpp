@@ -27,5 +27,5 @@ void Entidades::Obstaculos::Lama::obstacular(Entidade* obstaculada){
 	}
 }
 
-void Entidades::Obstaculos::Lama::salvar(){
+void Entidades::Obstaculos::Lama::salvar(std::ostringstream* entrada){
 }

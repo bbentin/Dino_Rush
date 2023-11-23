@@ -36,6 +36,7 @@ void Principal::Executar() {
 			}else {
 				GEventos.executar();
 				Primeira_fase->executar();
+				Primeira_fase->salvar();
 				if (Primeira_fase->verificaFinal()) {
 					Primeira_fase = nullptr;
 					delete Primeira_fase;

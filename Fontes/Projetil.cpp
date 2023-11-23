@@ -109,7 +109,7 @@ void Entidades::Projetil::avanca(){
 	} 
 }
 
-void Entidades::Projetil::salvar(){
+void Entidades::Projetil::salvar(std::ostringstream* entrada){
 }
 
 void Entidades::Projetil::setDono(Entidade* Dono){

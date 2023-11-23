@@ -26,10 +26,11 @@ namespace Entidades {
             void executar();
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void atirar();
-            void salvar();
+            void salvar(std::ostringstream* entrada);
             void Inicializa();
             int getPontos();
             void zeraPontos();
+            void atualizar();
 
             static const bool getJogador2();
         };

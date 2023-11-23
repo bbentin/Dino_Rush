@@ -17,7 +17,7 @@ namespace Entidades {
 		void executar();
 		void atirada();
 		void avanca();
-		void salvar();
+		void salvar(std::ostringstream* entrada);
 		void setDono(Entidade* Dono);
 
 		bool GetVisibilidade() const;

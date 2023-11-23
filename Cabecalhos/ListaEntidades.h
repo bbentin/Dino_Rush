@@ -16,6 +16,7 @@ namespace Listas {
 		void executar_entidades();
 		void executar();
 		void Inicializar();
+		void salvar(std::ostringstream* entrada);
 	};
 }
 

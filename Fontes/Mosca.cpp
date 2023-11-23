@@ -60,6 +60,6 @@ void Entidades::Personagens::Mosca::ColisaoChao(Entidade* Chao, sf::Vector2f lim
 	}
 }
 
-void Entidades::Personagens::Mosca::salvar(){
+void Entidades::Personagens::Mosca::salvar(std::ostringstream* entrada){
 }
 

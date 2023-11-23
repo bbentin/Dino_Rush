@@ -1,4 +1,5 @@
 #include "../Cabecalhos/Jogador.h"
+#include <sstream>
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828) {
@@ -59,7 +60,10 @@ void Entidades::Personagens::Jogador::atirar(){
 	arma->atirada();
 }
 
-void Entidades::Personagens::Jogador::salvar(){
+void Entidades::Personagens::Jogador::salvar(std::ostringstream* entrada){
+	sf::Vector2f pos = this->getPosicao();
+	float vel = this->getRapidez();
+	(*entrada) << "{ \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
 }
 
 const bool Entidades::Personagens::Jogador::getJogador2(){
@@ -153,6 +157,11 @@ int Entidades::Personagens::Jogador::getPontos(){
 
 void Entidades::Personagens::Jogador::zeraPontos(){
 	pontos = 0;
+}
+
+void Entidades::Personagens::Jogador::atualizar()
+{
+	setPosi(getPosicao().x, getPosicao().y);
 }
 
 // define o primeiro jogador
