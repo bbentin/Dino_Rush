@@ -5,6 +5,7 @@ namespace Entidades {
 	class Projetil :public Entidade {
 	private:
 		bool visivel;
+		bool pontua;
 		Entidade* dono;
 	public:
 		Projetil();
@@ -19,6 +20,7 @@ namespace Entidades {
 		void avanca();
 		void salvar();
 		void setDono(Entidade* Dono);
+		const bool getPontos();
 
 		bool GetVisibilidade() const;
 	};

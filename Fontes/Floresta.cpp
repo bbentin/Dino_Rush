@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Floresta.h"
 
-Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{3,25,10,15,20}, pos_Lamas{10,20,30,40,50},
-pos_Gosmas{10,20,45,58,32}, pos_Moscas{15,30,45,51,59} {
+Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{8,17,25,35,70}, pos_Lamas{10,20,30,40,50},
+pos_Gosmas{5,20,32,41,60}, pos_Moscas{15,30,45,51,59} {
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 3;	num_Espinhos = rand() % 3 + 3;
 	num_Gosmas = 3 + rand() % 3;	num_Lamas = rand() % 3 + 3;
@@ -53,7 +53,7 @@ void Fases::Floresta::CriarObstaculos() {
 
 void Fases::Floresta::CriarEspinhos(){
 	for (int i = 0; i < num_Espinhos ; i++) {
-		Espinhos* pEspinhos = new Espinhos(); pEspinhos->setPosi(pos_Gosmas[i] * 16, altura_spawn_obstaculos);
+		Espinhos* pEspinhos = new Espinhos(); pEspinhos->setPosi(pos_Espinhos[i] * 16, altura_spawn_obstaculos);
 		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pEspinhos));
 		LEs.InserirEntidade(static_cast<Entidade*> (pEspinhos));
 	}
@@ -77,10 +77,10 @@ void Fases::Floresta::Inicializa() {
 	LEs.Inicializar();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
-	Player1->setPosi(500, 500);
+	Player1->setPosi(32, 832);
 	Player1->setNoAr(true);
 	if (Entidades::Personagens::Jogador::getJogador2()) {
-		Player2->setPosi(500, 500);
+		Player2->setPosi(64, 832);
 		Player2->setNoAr(true);
 	}
 }

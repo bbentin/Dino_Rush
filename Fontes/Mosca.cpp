@@ -53,8 +53,8 @@ void Entidades::Personagens::Mosca::Inicializa(){
 
 void Entidades::Personagens::Mosca::ColisaoChao(Entidade* Chao, sf::Vector2f limites){
 	if (limites.y < 0) {
-		parar_movimento_y();
-		parar_movimento_x();
+		Imagem.move(0, limites.y);
+		no_chao = true;
 		no_ar = false;
 		iniciar = true;
 	}

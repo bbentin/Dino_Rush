@@ -80,10 +80,10 @@ void Fases::Deserto::Inicializa(){
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
 	LEs.Inicializar();
-	Player1->setPosi(500, 500);
+	Player1->setPosi(32, 832);
 	Player1->setNoAr(true);
 	if (Entidades::Personagens::Jogador::getJogador2()) {
-		Player2->setPosi(500, 500);
+		Player2->setPosi(64, 832);
 		Player2->setNoAr(true);
 	}
 }

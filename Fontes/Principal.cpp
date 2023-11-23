@@ -39,6 +39,8 @@ void Principal::Executar() {
 				if (Primeira_fase->verificaFinal()) {
 					Primeira_fase = nullptr;
 					delete Primeira_fase;
+					Primeiro.Reseta_Vidas();
+					Segundo.Reseta_Vidas();
 					menu->reset();
 				}
 			}
@@ -56,6 +58,8 @@ void Principal::Executar() {
 				if (Segunda_fase->verificaFinal()) {
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
+					Primeiro.Reseta_Vidas();
+					Segundo.Reseta_Vidas();
 					menu->reset();
 				}
 			}

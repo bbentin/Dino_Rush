@@ -1,13 +1,13 @@
 #include "../Cabecalhos/Projetil.h"
 
-Entidades::Projetil::Projetil():Entidade(12),visivel(false),dono(nullptr) {
+Entidades::Projetil::Projetil():Entidade(12),visivel(false),dono(nullptr),pontua(false) {
 }
 
 Entidades::Projetil::~Projetil(){
 }
 
 void Entidades::Projetil::reseta_posicao(){
-	setPosi(dono->getPosicao().x + 10, dono->getPosicao().y+8);
+	setPosi(dono->getPosicao().x + 10, dono->getPosicao().y+4);
 }
 
 void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites){
@@ -18,30 +18,26 @@ void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites){
 		switch (IdColidida){
 		case 3:
 			ColisaoPersonagem(colidida);
-			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
-			{
-				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0){
+				pontua = true;
 			}
 			break;
 		case 4:
 			ColisaoPersonagem(colidida);
-			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
-			{
-				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0) {
+				pontua = true;
 			}
 			break;
 		case 5:
 			ColisaoPersonagem(colidida);
-			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
-			{
-				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0) {
+				pontua = true;
 			}
 			break;
 		case 6:
 			ColisaoPersonagem(colidida);
-			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0)
-			{
-				static_cast<Entidades::Personagens::Personagem*>(dono)->pontua();
+			if (static_cast<Entidades::Personagens::Personagem*>(colidida)->getVidas() == 0) {
+				pontua = true;
 			}
 			break;
 		case 8:
@@ -90,7 +86,7 @@ void Entidades::Projetil::atirada(){
 void Entidades::Projetil::avanca(){
 	if (dono->getId() == 1) {
 		if (visivel) {
-			Soma_Velocidade(sf::Vector2f(2.0,-0.5));
+			Soma_Velocidade(sf::Vector2f(2.0,-0.3));
 			Calc_Fisica();
 			desenhar();
 		}
@@ -98,7 +94,7 @@ void Entidades::Projetil::avanca(){
 	}
 	else if (dono->getId() == 4) {
 		if (visivel) {
-			Soma_Velocidade(sf::Vector2f(-2.0,-0.5));
+			Soma_Velocidade(sf::Vector2f(-2.0,-0.3));
 			Calc_Fisica();
 			desenhar();
 		}
@@ -117,6 +113,14 @@ void Entidades::Projetil::setDono(Entidade* Dono){
 		dono = Dono;
 	}
 	else { std::cout << "Dono invalido" << std::endl; }
+}
+
+const bool Entidades::Projetil::getPontos(){
+	if (pontua) {
+		pontua = false;
+		return true;
+	}
+	else { return false; }
 }
 
 bool Entidades::Projetil::GetVisibilidade() const{

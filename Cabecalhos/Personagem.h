@@ -10,7 +10,6 @@ namespace Entidades {
 			int Dano;
 		protected:
 			int num_vidas;
-			int pontos;
 			static const int forca_movimento;
 			bool iniciar;
 			bool no_chao;
@@ -25,7 +24,6 @@ namespace Entidades {
 			virtual void salvar() = 0;
 
 			int getVidas();
-			void pontua();
 			void operator--();
 			void operator++();
 			Personagem(const int i = 0,sf::Vector2f posi = sf::Vector2f(0,0));

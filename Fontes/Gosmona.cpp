@@ -27,8 +27,8 @@ void Entidades::Personagens::Gosmona::Colisao(Entidade* colidida, sf::Vector2f l
 
 void Entidades::Personagens::Gosmona::Colisao_Chao(Entidade* Chao, sf::Vector2f limites){
 	if (limites.y < 0) {
-		setPosi(getPosicao().x, getPosicao().y + limites.y);
-		no_ar = false;
+		Imagem.move(0, limites.y);
+		no_chao = true;
 	}
 }
 

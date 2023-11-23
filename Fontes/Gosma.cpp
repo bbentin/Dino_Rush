@@ -7,10 +7,9 @@ Entidades::Personagens::Gosma::~Gosma() {
 }
 
 void Entidades::Personagens::Gosma::padrao_acao() {
-		pular(0);	
-		num_pulos--;
+		pular(30);	
 		if (num_pulos <= 0){
-			//delete this;
+			//num_vidas = 0;
 		}
 }
 
@@ -32,6 +31,8 @@ void Entidades::Personagens::Gosma::Colisao_Chao(Entidade* Chao,sf::Vector2f lim
 	if (limites.y < 0) {
 		setPosi(getPosicao().x, getPosicao().y + limites.y);
 		no_ar = false;
+		no_chao = true;
+		num_pulos--;
 	}
 }
 
