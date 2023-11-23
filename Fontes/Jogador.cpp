@@ -4,7 +4,7 @@
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
-andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828) {
+andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828),posicao_recuperada() {
 	pontos = 0;
 	rapidez = 4;
 	num_vidas = 5; 
@@ -62,9 +62,9 @@ void Entidades::Personagens::Jogador::atirar(){
 }
 
 void Entidades::Personagens::Jogador::salvar(std::ostringstream* entrada){
-	sf::Vector2f pos = this->getPosicao();
-	float vel = this->getRapidez();
-	(*entrada) << "{ \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
+	sf::Vector2f pos = getPosicao();
+	float vel = getRapidez();
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
 }
 
 const bool Entidades::Personagens::Jogador::getJogador2(){
@@ -149,7 +149,35 @@ void Entidades::Personagens::Jogador::Inicializa() {
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);
 	Imagem.setScale(2.0, 2.0);
-	setPosi(16,828);
+
+	std::ifstream arquivo(ARQUIVO);
+	if (!arquivo)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
+
+	if (arquivo.peek() == -1) {
+		arquivo.close();
+		setPosi(16, 828);
+	}
+	else
+	{
+		nlohmann::json json = nlohmann::json::parse(arquivo);
+
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			string id = to_string((*it).front());
+			if (id == "[1]") {
+				sf::Vector2f pos = sf::Vector2f(
+					(float)((*it)["posicao"][0]),
+					(float)((*it)["posicao"][1])
+				);
+				setPosi(pos);
+			}
+			id = "";
+		}
+		arquivo.close();
+	}
 }
 
 int Entidades::Personagens::Jogador::getPontos(){
@@ -200,4 +228,3 @@ void Entidades::Personagens::Jogador::criarProjetil() {
 
 // define o primeiro jogador
 bool Entidades::Personagens::Jogador::Jogador2 = false;
-

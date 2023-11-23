@@ -3,6 +3,7 @@
 #include "Gerenciador_Colisoes.h"
 #include "ListaEntidades.h"
 #include <fstream>
+#include <sstream>
 #include "Lama.h"
 #include "Chao_Deserto.h"
 #include "Chao_Floresta.h"
