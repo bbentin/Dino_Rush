@@ -13,7 +13,7 @@ namespace Entidades {
             void executar();
             void Colisao(Entidade* colidida, sf::Vector2f limites);
             void obstacular(Entidade* obstaculada);
-            void salvar();
+            void salvar(std::ostringstream* entrada);
         };
     }
 }

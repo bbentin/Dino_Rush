@@ -22,7 +22,7 @@ namespace Entidades {
 			void causa_dano(Personagem* afetado);
 			void recebe_dano(int dano);
 			virtual void executar() = 0;
-			virtual void salvar() = 0;
+			virtual void salvar(std::ostringstream* entrada) = 0;
 
 			int getVidas();
 			void pontua();

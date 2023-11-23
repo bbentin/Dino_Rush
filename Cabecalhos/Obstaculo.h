@@ -14,7 +14,7 @@ namespace Entidades {
 			virtual void Inicializa();
 			virtual void executar() = 0;
 			virtual void obstacular(Entidade* obstaculada) = 0;
-			virtual void salvar() = 0;
+			virtual void salvar(std::ostringstream* entrada) = 0;
 		};
 	}
 }
