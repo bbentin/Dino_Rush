@@ -9,10 +9,10 @@ Entidades::Personagens::Mosca::~Mosca() {
 }
 
 void Entidades::Personagens::Mosca::inverter(){
-	if (getPosicao().x > (pos_x_inicial + 50)) {
+	if (getPosicao().x > (pos_x_inicial + 20)) {
 		direita = true;
 	}
-	else if (getPosicao().x < (pos_x_inicial - 50)) {
+	else if (getPosicao().x < (pos_x_inicial - 20)) {
 		direita = false;
 	}
 }

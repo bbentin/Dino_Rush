@@ -3,6 +3,10 @@
 #include "Espinhos.h"
 #include "Inimigo.h"
 #include "Projetil.h"
+#include <sstream>
+#include <fstream>
+#include "../json.hpp"
+
 namespace Entidades {
     namespace Personagens {
         class Jogador :
@@ -30,7 +34,7 @@ namespace Entidades {
             void Inicializa();
             int getPontos();
             void zeraPontos();
-            void atualizar();
+            void criarProjetil();
 
             static const bool getJogador2();
         };

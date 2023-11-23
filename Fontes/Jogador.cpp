@@ -1,15 +1,16 @@
 #include "../Cabecalhos/Jogador.h"
 #include <sstream>
 
+#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
+
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828) {
 	pontos = 0;
 	rapidez = 4;
 	num_vidas = 5; 
 	olhando_direita = true;
-	arma = new Projetil();
+	criarProjetil();
 	no_ar = true;
-	arma->setDono(this);
 	if (!Jogador2) {
 		Jogador2 = true;
 	}
@@ -159,9 +160,42 @@ void Entidades::Personagens::Jogador::zeraPontos(){
 	pontos = 0;
 }
 
-void Entidades::Personagens::Jogador::atualizar()
-{
-	setPosi(getPosicao().x, getPosicao().y);
+void Entidades::Personagens::Jogador::criarProjetil() {
+	/*std::ifstream arquivo(ARQUIVO);
+	if (!arquivo)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
+
+	if (arquivo.peek() == -1) {
+		arquivo.close();*/
+		arma = new Projetil();
+		arma->setDono(this);/*
+	}
+	else
+	{
+		nlohmann::json json = nlohmann::json::parse(arquivo);
+
+		Projetil* pProjetil;
+
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			string id = to_string((*it).front());
+			if (id == "[12]") {
+				sf::Vector2f pos = sf::Vector2f(
+					(float)((*it)["posicao"][0]),
+					(float)((*it)["posicao"][1])
+				);
+			    float vel = (float)((*it)["velocidade"][0]);
+				int visivel = (int)((*it)["visibilidade"][0]);
+				pProjetil = new Projetil(pos, static_cast<Entidade*>(this), vel, static_cast<bool>(visivel));
+				pProjetil->setPosi(pos);
+				pProjetil->setDono(this);
+				arma = pProjetil;
+			}
+			id = "";
+		}
+	}*/
 }
 
 // define o primeiro jogador

@@ -76,14 +76,12 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos){
 	switch (leitura) {
 	case '1':
 		if (Player1) {
-			Player1->atualizar();
-			//Player1->setPosi(pos.x * 16, 2);
+			Player1->setPosi(pos.x * 16, 2);
 		}
 		break;
 	case '2':
 		if (Player2) {
-			Player2->atualizar();
-			//Player2->setPosi(pos.x * 16, pos.y * 16);
+			Player2->setPosi(pos.x * 16, pos.y * 16);
 		}
 		break;
 	case '3':
