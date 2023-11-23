@@ -9,8 +9,9 @@ namespace Entidades {
             const int dano;
             bool visivel;
             sf::Clock relogio;
+            int tempo;
         public:
-            Espinhos(const float limite_alt = 860);
+            Espinhos(sf::Vector2f pos = sf::Vector2f(0.f, 0.f), int tmp = 0, bool visi = false, const float limite_alt = 860);
             ~Espinhos();
 
             void Inicializa();
