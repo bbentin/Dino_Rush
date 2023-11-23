@@ -4,7 +4,7 @@
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
-andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828),posicao_recuperada() {
+andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828){
 	pontos = 0;
 	rapidez = 4;
 	num_vidas = 5; 
