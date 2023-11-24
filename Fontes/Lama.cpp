@@ -24,7 +24,7 @@ void Entidades::Obstaculos::Lama::Colisao(Entidade* colidida, sf::Vector2f limit
 
 void Entidades::Obstaculos::Lama::obstacular(Entidade* obstaculada){
 	//empurrar(obstaculada);
-	if (obstaculada->getRapidez() > 2) {
+	if (obstaculada->getRapidez() > 2 ) {
 		obstaculada->multiplica_Rapidez(false);
 	}
 }

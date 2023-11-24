@@ -4,7 +4,8 @@
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
-andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828){
+
+andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828),pontos(0) {
 	pontos = 0;
 	rapidez = 4;
 	num_vidas = 5; 
@@ -77,22 +78,17 @@ const bool Entidades::Personagens::Jogador::getJogador2(){
 void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vector2f limites){
 	if (limites.x < 0) {
 		if (inimigo->getPosicao().x < getPosicao().x) {
-			//setPosi(getPosicao().x - limites.x, getPosicao().y);
-			parar_movimento_x();
+			Imagem.move(-limites.x, 0);
 		}
 		if (inimigo->getPosicao().x > getPosicao().x) {
-			//setPosi(getPosicao().x + limites.x, getPosicao().y);
-			parar_movimento_x();
+			Imagem.move(limites.x, 0);
 		}
-		no_ar = true;
 	}else if (limites.y < 0) {
 		if (inimigo->getPosicao().y < getPosicao().y) {
-		//setPosi(getPosicao().x, getPosicao().y - (limites.y));
-			parar_movimento_y();
+			Imagem.move(0,-limites.y);
 		}
 		if (inimigo->getPosicao().y > getPosicao().y) {
-			//setPosi(getPosicao().x, getPosicao().y + (limites.y));
-			parar_movimento_y();
+			Imagem.move(0,-limites.y);
 		}
 	}
 	static_cast<Entidades::Personagens::Inimigo*>(inimigo)->danar(this);
@@ -102,23 +98,21 @@ void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vec
 void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf::Vector2f limites) {
 	if (limites.y < 0) {
 		if (obstaculo->getPosicao().y < getPosicao().y){
-			//setPosi(getPosicao().x, getPosicao().y - limites.y);
+			Imagem.move(0, -limites.y);
 			parar_movimento_y();
 		}
 		if (obstaculo->getPosicao().y > getPosicao().y){
-			//setPosi(getPosicao().x, getPosicao().y + (limites.y));
-			parar_movimento_y();
+			Imagem.move(0, +limites.y);
+		//	parar_movimento_y();
 			no_chao = true;
 			no_ar = false;
 		}
 	}
 	if (limites.x < 0) {
 		if (obstaculo->getPosicao().x < getPosicao().x) {
-			//setPosi(getPosicao().x + limites.x, getPosicao().y);
 			parar_movimento_x();
 		}
 		else if (obstaculo->getPosicao().x > getPosicao().x) {
-			//setPosi(getPosicao().x - limites.x, getPosicao().y);
 			parar_movimento_x();
 		}
 	}
@@ -138,6 +132,8 @@ void Entidades::Personagens::Jogador::setMovimento_esquerda(bool esquerda){
 }
 
 void Entidades::Personagens::Jogador::executar() {
+	
+	if (arma->getPontos()) { pontos++; std::cout << "pontuou" << endl; }
 	if (andar_direita) {
 		mover_direita(rapidez);
 	}
@@ -206,8 +202,8 @@ int Entidades::Personagens::Jogador::getPontos(){
 	return pontos;
 }
 
-void Entidades::Personagens::Jogador::zeraPontos(){
-	pontos = 0;
+void Entidades::Personagens::Jogador::Reseta_Vidas(){
+	num_vidas = 3;
 }
 
 void Entidades::Personagens::Jogador::criarProjetil() {
