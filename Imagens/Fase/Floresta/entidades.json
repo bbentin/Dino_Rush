@@ -1,0 +1,16 @@
+[{ "posicao": [32,852], "velocidade": [4] }
+,{ "posicao": [64,852], "velocidade": [4] }
+,{ "id": [10], "posicao": [128,860.5], "visivel": [0], "tempo": [1] }
+,{ "id": [10], "posicao": [272,860.5], "visivel": [0], "tempo": [1] }
+,{ "id": [10], "posicao": [400,860.5], "visivel": [0], "tempo": [1] }
+,{ "id": [10], "posicao": [560,860.5], "visivel": [0], "tempo": [1] }
+,{ "id": [7], "posicao": [160,870.5] }
+,{ "id": [7], "posicao": [320,870.5] }
+,{ "id": [7], "posicao": [480,870.5] }
+,{ "id": [5], "posicao": [283,720], "velocidade": [2] }
+,{ "id": [5], "posicao": [515,848], "velocidade": [2] }
+,{ "id": [5], "posicao": [735,848], "velocidade": [2] }
+,{ "id": [5], "posicao": [851,848], "velocidade": [2] }
+,{ "id": [3], "posicao": [320,710], "velocidade": [4] }
+,{ "id": [3], "posicao": [512,832], "velocidade": [4] }
+]

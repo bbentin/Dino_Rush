@@ -1,8 +1,8 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include <iostream>
-using namespace std;
 #include "Gerenciador_Grafico.h"
+#include <iostream>
+
 class Ente{
 private:
 

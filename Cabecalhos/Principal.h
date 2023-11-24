@@ -1,4 +1,3 @@
-
 #pragma once
 #include "Gerenciador_Grafico.h"
 #include "Gerenciador_Eventos.h"
@@ -7,9 +6,6 @@
 #include "Floresta.h"
 #include <iostream>
 
-class Menu;
-class Ranking;
-
 class Principal {
 private:
 	Gerenciadores::Gerenciador_Grafico GGrafico;
@@ -17,7 +13,6 @@ private:
 	Fases::Deserto* Segunda_fase;
 	Fases::Floresta* Primeira_fase;
 	Menu* menu;
-	Ranking* ranking;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
 
 public:

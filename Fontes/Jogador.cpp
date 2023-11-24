@@ -1,7 +1,4 @@
 #include "../Cabecalhos/Jogador.h"
-#include <sstream>
-
-#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 

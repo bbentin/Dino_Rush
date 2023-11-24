@@ -2,16 +2,15 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), ranking()
+Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr)
 {
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
+	menu = new Menu();
 	GEventos.setTela(GGrafico.getTela());
 	GEventos.setJogador(&Primeiro);
 	GEventos.setJogador(&Segundo);
-	menu = new Menu(&GEventos);
-	ranking = new Ranking();
-	ranking->carregar();
+	GEventos.setMenu(menu);
 	Inicializar();
 }
 Principal::~Principal() {
@@ -21,11 +20,11 @@ Gerenciadores::Gerenciador_Grafico* Principal::getGrafico() {
 }
 
 void Principal::Executar() {
+	GEventos.setState(0);
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
-		GEventos.setState(0);
-		GEventos.setMenu(menu);
 		menu->executar();
+		GEventos.executar();
 		if (menu->GetItem() == 1 && menu->isPressed()) {
 			GEventos.setState(1);
 			if (Primeira_fase == nullptr) {
@@ -34,15 +33,15 @@ void Principal::Executar() {
 				Primeira_fase->setJogador(&Segundo);
 				Primeira_fase->Inicializa();
 			}else {
-				GEventos.executar();
 				Primeira_fase->executar();
-				Primeira_fase->salvar();
+			//	Primeira_fase->salvar();
 				if (Primeira_fase->verificaFinal()) {
 					Primeira_fase = nullptr;
 					delete Primeira_fase;
 					Primeiro.Reseta_Vidas();
 					Segundo.Reseta_Vidas();
 					menu->reset();
+					GEventos.setState(0);
 				}
 			}
 		}
@@ -55,7 +54,6 @@ void Principal::Executar() {
 				Segunda_fase->Inicializa();
 			}
 			else {
-				GEventos.executar();
 				Segunda_fase->executar();
 				if (Segunda_fase->verificaFinal()) {
 					Segunda_fase = nullptr;
@@ -63,6 +61,7 @@ void Principal::Executar() {
 					Primeiro.Reseta_Vidas();
 					Segundo.Reseta_Vidas();
 					menu->reset();
+					GEventos.setState(0);
 				}
 			}
 		}

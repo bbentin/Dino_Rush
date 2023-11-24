@@ -42,7 +42,8 @@ void Entidades::Personagens::Mosca::Colisao(Entidade* colidida, sf::Vector2f lim
 }
 
 void Entidades::Personagens::Mosca::danar(Entidade* Afetada){
-	Afetada--;
+	static_cast<Entidades::Personagens::Personagem*>(Afetada)->operator--();
+	empurrar(Afetada);
 	Afetada->multiplica_Rapidez(false);
 }
 

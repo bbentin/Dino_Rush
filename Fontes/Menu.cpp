@@ -1,8 +1,7 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu(Gerenciadores::Gerenciador_Eventos* pGE) :Ente(13), fonte(), pressed(false), selected(1)
+Menu::Menu():Ente(13), fonte(), pressed(false), selected(1)
 {
-	setGerenciador(pGE);
 	fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
 	textos[0].setString("Dino Rush");
 	textos[1].setString("Fase 1");
@@ -28,10 +27,8 @@ Menu::~Menu() {
 }
 
 void Menu::executar() {
-	if (!pressed)
-	{
+	if (!pressed){
 		Desenhar();
-		ge->executar();
 	}
 }
 
