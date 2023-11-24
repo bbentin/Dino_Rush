@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Ranking.h"
 
-Ranking::Ranking() : score(0), playerName(nullptr), Menu(nullptr)
+Ranking::Ranking() : score(0), playerName(nullptr), Menu()
 {
 }
 

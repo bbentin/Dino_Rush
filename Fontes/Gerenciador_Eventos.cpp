@@ -1,5 +1,4 @@
 #include "../Cabecalhos/Gerenciador_Eventos.h"
-#include "../Cabecalhos/Menu.h"
 
 Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos():state(0) {
 	Jogador1 = nullptr; Jogador2 = nullptr; Unico = nullptr; PTela = nullptr; menu = nullptr;
@@ -31,6 +30,10 @@ void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Joga
 
 int Gerenciadores::Gerenciador_Eventos::getstate(){
 	return state;
+}
+
+void Gerenciadores::Gerenciador_Eventos::setMenu(Menu* men){
+	menu = men;
 }
 
 void Gerenciadores::Gerenciador_Eventos::executar() {

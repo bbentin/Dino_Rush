@@ -1,11 +1,10 @@
 #include "../Cabecalhos/Floresta.h"
-#include "../Cabecalhos/Lista.h"
 #include "../json.hpp"
 #include <fstream>
 #include <sstream>
 #include <string>
 
-Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{8,17,25,35,70}, pos_Lamas{10,20,30,40,50},
+Fases::Floresta::Floresta():Fase(14, 1), pos_Espinhos{8,17,25,35,70}, pos_Lamas{10,20,30,40,50},
 pos_Gosmas{5,20,32,41,60}, pos_Moscas{15,30,45,51,59} {
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 	srand(time(NULL));

@@ -7,6 +7,8 @@
 #include <fstream>
 #include "../json.hpp"
 
+#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
+
 namespace Entidades {
     namespace Personagens {
         class Jogador :

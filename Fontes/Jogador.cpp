@@ -1,7 +1,4 @@
 #include "../Cabecalhos/Jogador.h"
-#include <sstream>
-
-#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
 andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828),pontos(0) {
@@ -62,8 +59,8 @@ void Entidades::Personagens::Jogador::atirar(){
 }
 
 void Entidades::Personagens::Jogador::salvar(std::ostringstream* entrada){
-	sf::Vector2f pos = this->getPosicao();
-	float vel = this->getRapidez();
+	sf::Vector2f pos = getPosicao();
+	float vel = getRapidez();
 	(*entrada) << "{ \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
 }
 
