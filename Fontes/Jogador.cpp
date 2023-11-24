@@ -154,7 +154,6 @@ void Entidades::Personagens::Jogador::Inicializa() {
 
 	if (arquivo.peek() == -1) {
 		arquivo.close();
-		cout << "Arquivo de salvamento vazio" << endl;
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
 		Imagem.setScale(2.0, 2.0);
@@ -162,13 +161,12 @@ void Entidades::Personagens::Jogador::Inicializa() {
 	}
 	else
 	{
-		cout << "Arquivo de salvamento encontrado" << endl;
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it).front());
+			string id = to_string((*it)["id"][0]);
 			string jogador = to_string((*it)["jogador2"][0]);
-			if (id == "[1]" && jogador == "[false]") {
+			if (id == "1" && jogador == "0") {
 				sf::Vector2f pos = sf::Vector2f(
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
@@ -179,22 +177,20 @@ void Entidades::Personagens::Jogador::Inicializa() {
 				setPosi(pos);
 				pontos = (int)((*it)["pontos"][0]);
 			}
-			else if (id == "[1]" && jogador == "[true]") {
+			if (id == "1" && jogador == "1") {
 				sf::Vector2f pos = sf::Vector2f(
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
 				);
-				Textura.loadFromImage(Grafico->getImagem(2));
+				Textura.loadFromImage(Grafico->getImagem(getId()));
 				Imagem.setTexture(Textura);
 				Imagem.setScale(2.0, 2.0);
-				Imagem.setColor(sf::Color::Red);
 				setPosi(pos);
 				pontos = (int)((*it)["pontos"][0]);
 			}
 			id = "";
 		}
 		arquivo.close();
-		cout << "Jogadores inicializados" << endl;
 	}
 }
 
