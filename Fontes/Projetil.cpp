@@ -108,9 +108,9 @@ void Entidades::Projetil::avanca() {
 }
 
 void Entidades::Projetil::salvar(std::ostringstream* entrada) {
-	/*sf::Vector2f pos = getPosicao();
+	sf::Vector2f pos = getPosicao();
 	float vel = getRapidez();
-	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "], \"visibilidade\": [" << visivel << "], \"dono\": [" << dono->getId() << "] }" << std::endl;*/
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "], \"visibilidade\": [" << visivel << "], \"dono\": [" << dono->getId() << "] }" << std::endl;
 }
 
 void Entidades::Projetil::setDono(Entidade* Dono) {
