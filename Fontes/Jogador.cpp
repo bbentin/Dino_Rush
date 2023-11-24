@@ -13,8 +13,10 @@ andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828){
 	no_ar = true;
 	if (!Jogador2) {
 		Jogador2 = true;
+		sou_jogador2 = false;
 	}
 	else {
+		sou_jogador2 = true;
 		Imagem.setColor(sf::Color::Red);
 	}
 }
@@ -62,9 +64,10 @@ void Entidades::Personagens::Jogador::atirar(){
 }
 
 void Entidades::Personagens::Jogador::salvar(std::ostringstream* entrada){
-	sf::Vector2f pos = getPosicao();
-	float vel = getRapidez();
-	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "] }" << std::endl;
+		sf::Vector2f pos = getPosicao();
+		float vel = getRapidez();
+		(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"velocidade\": [" << vel << "], \"pontos\": [" << pontos << "], \"vidas\": [" 
+			<< num_vidas << "], \"jogador2\": [" << sou_jogador2 << "] }" << std::endl;
 }
 
 const bool Entidades::Personagens::Jogador::getJogador2(){
@@ -146,10 +149,6 @@ void Entidades::Personagens::Jogador::executar() {
 }
 
 void Entidades::Personagens::Jogador::Inicializa() {
-	Textura.loadFromImage(Grafico->getImagem(getId()));
-	Imagem.setTexture(Textura);
-	Imagem.setScale(2.0, 2.0);
-
 	std::ifstream arquivo(ARQUIVO);
 	if (!arquivo)
 	{
@@ -159,24 +158,47 @@ void Entidades::Personagens::Jogador::Inicializa() {
 
 	if (arquivo.peek() == -1) {
 		arquivo.close();
+		cout << "Arquivo de salvamento vazio" << endl;
+		Textura.loadFromImage(Grafico->getImagem(getId()));
+		Imagem.setTexture(Textura);
+		Imagem.setScale(2.0, 2.0);
 		setPosi(16, 828);
 	}
 	else
 	{
+		cout << "Arquivo de salvamento encontrado" << endl;
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
 			string id = to_string((*it).front());
-			if (id == "[1]") {
+			string jogador = to_string((*it)["jogador2"][0]);
+			if (id == "[1]" && jogador == "[false]") {
 				sf::Vector2f pos = sf::Vector2f(
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
 				);
+				Textura.loadFromImage(Grafico->getImagem(getId()));
+				Imagem.setTexture(Textura);
+				Imagem.setScale(2.0, 2.0);
 				setPosi(pos);
+				pontos = (int)((*it)["pontos"][0]);
+			}
+			else if (id == "[1]" && jogador == "[true]") {
+				sf::Vector2f pos = sf::Vector2f(
+					(float)((*it)["posicao"][0]),
+					(float)((*it)["posicao"][1])
+				);
+				Textura.loadFromImage(Grafico->getImagem(2));
+				Imagem.setTexture(Textura);
+				Imagem.setScale(2.0, 2.0);
+				Imagem.setColor(sf::Color::Red);
+				setPosi(pos);
+				pontos = (int)((*it)["pontos"][0]);
 			}
 			id = "";
 		}
 		arquivo.close();
+		cout << "Jogadores inicializados" << endl;
 	}
 }
 

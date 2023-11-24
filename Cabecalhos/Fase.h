@@ -24,7 +24,7 @@ namespace Fases{
         Entidades::Personagens::Jogador* Player2;
         const int k_fase, altura_spawn_inimigos, altura_spawn_obstaculos;
         int num_inimigos;
-        bool ativa,final;
+        bool ativa,final,recuperada;
     public:
 
         Fase(const int i = 0, const int k = 0);

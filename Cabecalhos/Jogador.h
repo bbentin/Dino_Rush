@@ -16,6 +16,7 @@ namespace Entidades {
             Entidades::Projetil* arma;        
             static bool Jogador2;
             const int altura_jogador;
+            bool sou_jogador2;
 
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));

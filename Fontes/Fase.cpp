@@ -3,7 +3,7 @@
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 
 Fases::Fase::Fase(const int i, const int k) :Ente(i), relogio_global(), G_Colisoes(), LEs(), k_fase(k), Player1(nullptr), Player2(nullptr)
-, altura_spawn_inimigos(600), altura_spawn_obstaculos(740), ativa(false), final(false), num_inimigos(0) {
+, altura_spawn_inimigos(600), altura_spawn_obstaculos(740), ativa(false), final(false), num_inimigos(0), recuperada(false) {
 
 }
 
@@ -38,39 +38,65 @@ sf::Clock* Fases::Fase::getRelogio() {
 	return &relogio_global;
 }
 
-void Fases::Fase::gerar_fase(int num) {
-	std::fstream arquivo;
-	if (num == 2) {
-		arquivo.open("Imagens/Fase/Deserto/Deserto.txt");
-		string linha;
-		if (!arquivo.is_open()) {
-			std::cout << "Nao abriu o Arquivo de Deserto" << std::endl;
-		}
-		int j = 0;
-		while (getline(arquivo, linha)) {
-			for (int i = 0; i < linha.size(); i++) {
-				if (linha[i] != ' ') {
-					CriarEntidades(linha[i], sf::Vector2f(i, j));
-				}
-			}
-			j++;
-		}
+void Fases::Fase::gerar_fase(int num)
+{
+	std::ifstream arquivoj(ARQUIVO);
+	if (!arquivoj)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
 	}
-	else if (num == 1) {
-		string linha;
-		arquivo.open("Imagens/Fase/Floresta/Floresta.txt");
-		if (!arquivo.is_open()) {
-			std::cout << "Nao abriu o arquivo de Floresta" << std::endl;
-		}
-		int j = 0;
-		while (getline(arquivo, linha)) {
-			for (int i = 0; i < linha.size(); i++) {
-				if (linha[i] != ' ') {
-					CriarEntidades(linha[i], sf::Vector2f(i, j)); // Factory method
-				}
+
+	if (arquivoj.peek() == -1) {
+		arquivoj.close();
+		std::fstream arquivo;
+		if (num == 2) {
+			arquivo.open("Imagens/Fase/Deserto/Deserto.txt");
+			string linha;
+			if (!arquivo.is_open()) {
+				std::cout << "Nao abriu o Arquivo de Deserto" << std::endl;
 			}
-			j++;
+			int j = 0;
+			while (getline(arquivo, linha)) {
+				for (int i = 0; i < linha.size(); i++) {
+					if (linha[i] != ' ') {
+						CriarEntidades(linha[i], sf::Vector2f(i, j));
+					}
+				}
+				j++;
+			}
 		}
+		else if (num == 1) {
+			string linha;
+			arquivo.open("Imagens/Fase/Floresta/Floresta.txt");
+			if (!arquivo.is_open()) {
+				std::cout << "Nao abriu o arquivo de Floresta" << std::endl;
+			}
+			int j = 0;
+			while (getline(arquivo, linha)) {
+				for (int i = 0; i < linha.size(); i++) {
+					if (linha[i] != ' ') {
+						CriarEntidades(linha[i], sf::Vector2f(i, j)); // Factory method
+					}
+				}
+				j++;
+			}
+		}
+		arquivo.close();
+	}
+	else {
+		recuperada = true;
+		nlohmann::json json = nlohmann::json::parse(arquivoj);
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			string id = to_string((*it).front());
+			if (id == "[1]" || id == "[2]" || id == "[9]" || id == "[8]") {
+				CriarEntidades((char)id[1], sf::Vector2f(
+					(float)((*it)["posicao"][0]),
+					(float)((*it)["posicao"][1])
+				));
+			}
+		}
+		arquivoj.close();
 	}
 }
 
@@ -78,18 +104,18 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
 	switch (leitura) {
 	case '1':
 		if (Player1) {
-			Player1->setPosi(pos.x * 16, 2);
+			//Player1->setPosi(pos.x * 16, 2);
 		}
 		break;
 	case '2':
 		if (Player2) {
-			Player2->setPosi(pos.x * 16, pos.y * 16);
+			//Player2->setPosi(pos.x * 16, pos.y * 16);
 		}
 		break;
-	case '3':
+	case '9':
 		CriarChao(1, pos);
 		break;
-	case '4':
+	case '8':
 		CriarChao(2, pos);
 		break;
 	default:
@@ -103,73 +129,38 @@ void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos) {
 	{
 	case 1:
 	{
-		Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y * 16);
-		std::ifstream arquivo(ARQUIVO);
-		if (!arquivo)
+		if (!recuperada)
 		{
-			cout << "Erro ao abrir arquivo de salvamento" << endl;
-			exit(1);
-		}
-
-		if (arquivo.peek() == -1) {
-			arquivo.close();
+			Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y * 16);
 			pCh_Floresta->setPosi(pos.x * 16, pos.y * 16);
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Floresta));
+			LEs.InserirEntidade(static_cast<Entidade*> (pCh_Floresta));
 		}
 		else
 		{
-			nlohmann::json json = nlohmann::json::parse(arquivo);
-
-			for (auto it = json.begin(); it != json.end(); ++it) {
-				string id = to_string((*it).front());
-				if (id == "[9]") {
-					sf::Vector2f pos = sf::Vector2f(
-						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					);
-					pCh_Floresta->setPosi(pos);
-				}
-				id = "";
-			}
-			arquivo.close();
+			Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y);
+			pCh_Floresta->setPosi(pos);
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Floresta));
+			LEs.InserirEntidade(static_cast<Entidade*> (pCh_Floresta));
 		}
-		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Floresta));
-		LEs.InserirEntidade(static_cast<Entidade*> (pCh_Floresta));
 	}
 	break;
 	case 2:
 	{
-		Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y * 16);
-		std::ifstream arquivo(ARQUIVO);
-		if (!arquivo)
+		if (!recuperada)
 		{
-			cout << "Erro ao abrir arquivo de salvamento" << endl;
-			exit(1);
-		}
-
-		if (arquivo.peek() == -1) {
-			arquivo.close();
+			Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y * 16);
 			pCh_Deserto->setPosi(pos.x * 16, pos.y * 16);
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
+			LEs.InserirEntidade(static_cast<Entidade*> (pCh_Deserto));
 		}
 		else
 		{
-			nlohmann::json json = nlohmann::json::parse(arquivo);
-
-			for (auto it = json.begin(); it != json.end(); ++it) {
-				string id = to_string((*it).front());
-				if (id == "[9]") {
-					sf::Vector2f pos = sf::Vector2f(
-						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					);
-					pCh_Deserto->setPosi(pos);
-				}
-				id = "";
-			}
-			arquivo.close();
+			Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y);
+			pCh_Deserto->setPosi(pos);
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
+			LEs.InserirEntidade(static_cast<Entidade*> (pCh_Deserto));
 		}
-
-		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
-		LEs.InserirEntidade(static_cast<Entidade*> (pCh_Deserto));
 	}
 	break;
 	default:
@@ -202,8 +193,6 @@ bool Fases::Fase::verificaFinal() {
 bool Fases::Fase::getAtiva() {
 	return ativa;
 }
-
-
 
 void Fases::Fase::Inicializa() {
 	/*Textura.loadFromImage(Grafico->getImagem(getId()));
