@@ -126,7 +126,7 @@ void Entidades::Personagens::Jogador::setMovimento_esquerda(bool esquerda){
 
 void Entidades::Personagens::Jogador::executar() {
 	
-	if (arma->getPontos()) { pontos++; std::cout << "pontuou" << endl; }
+	if (arma->getPontos()) { pontos++; std::cout << "pontuou" << std::endl; }
 	if (andar_direita) {
 		mover_direita(rapidez);
 	}

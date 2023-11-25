@@ -35,7 +35,7 @@ void Entidades::Obstaculos::Espinhos::obstacular(Entidade* obstaculada) {
 
 void Entidades::Obstaculos::Espinhos::salvar(std::ostringstream* entrada) {
 	sf::Vector2f pos = getPosicao();
-	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"visivel\": [" << getVisivel() << "], \"tempo\": [" << tempo << "] }" << endl;
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "], \"visivel\": [" << getVisivel() << "], \"tempo\": [" << tempo << "] }" << std::endl;
 }
 
 void Entidades::Obstaculos::Espinhos::brotar() {

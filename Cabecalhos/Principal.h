@@ -12,7 +12,8 @@ private:
 	Gerenciadores::Gerenciador_Eventos GEventos;
 	Fases::Deserto* Segunda_fase;
 	Fases::Floresta* Primeira_fase;
-	Menu* menu;
+	Menu* menu_principal;
+	Menu* menu_pause;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
 
 public:
@@ -21,7 +22,5 @@ public:
 
 	Gerenciadores::Gerenciador_Grafico* getGrafico();
 	void Executar();
-	void verifica_estado();
-	void Inicializar();
 };
 

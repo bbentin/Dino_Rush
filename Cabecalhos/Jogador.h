@@ -1,5 +1,4 @@
 #pragma once
-#include "Personagem.h"
 #include "Espinhos.h"
 #include "Inimigo.h"
 #include "Projetil.h"
