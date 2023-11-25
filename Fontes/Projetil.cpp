@@ -2,7 +2,7 @@
 #include <sstream>
 
 
-Entidades::Projetil::Projetil(sf::Vector2f pos, Entidade* Dono, float vel, bool visi) :Entidade(12), visivel(visi), dono(Dono) {
+Entidades::Projetil::Projetil(sf::Vector2f pos, Entidade* Dono, float vel, bool visi) :Entidade(12), visivel(visi), dono(Dono), pontua(true) {
 }
 
 Entidades::Projetil::~Projetil() {
