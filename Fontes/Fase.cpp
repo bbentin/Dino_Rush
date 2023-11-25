@@ -47,7 +47,7 @@ void Fases::Fase::gerar_fase(int num)
 		exit(1);
 	}
 
-	if (arquivoj.peek() == -1) {
+	if (arquivoj.peek() == -1 || num == 2) {
 		arquivoj.close();
 		std::fstream arquivo;
 		if (num == 2) {

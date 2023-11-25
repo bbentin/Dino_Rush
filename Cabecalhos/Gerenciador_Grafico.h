@@ -5,15 +5,16 @@ namespace Gerenciadores {
 	private:
 		sf::RenderWindow Tela;
 		sf::Image Jogador1, Jogador2, Mosca, Gosma, Deserto, Floresta, Chao_Floresta, Chao_Deserto, Lama,
-			Decapitado, Chefao, Espinhos, Obstaculo2, Projetil, Menu, Gosmona, Moscona;
+			Decapitado, Chefao, Espinhos, Obstaculo2, Projetil, Menu, Gosmona, Moscona, Ranking;
 	public:
 
 		Gerenciador_Grafico();
 		~Gerenciador_Grafico();
-		
+
 		void Exibir();
 		void Fecha_Tela();
 		void Gerar_Menu();
+		void Gerar_Ranking();
 		void Gerar_Fases();
 		void Limpar_Tela();
 		void Gerar_Jogador();

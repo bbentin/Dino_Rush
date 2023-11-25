@@ -1,25 +1,25 @@
 #include "../Cabecalhos/Gerenciador_Eventos.h"
 
-Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos():state(0) {
+Gerenciadores::Gerenciador_Eventos::Gerenciador_Eventos() :state(0) {
 	Jogador1 = nullptr; Jogador2 = nullptr; Unico = nullptr; PTela = nullptr; menu = nullptr;
 }
 Gerenciadores::Gerenciador_Eventos::~Gerenciador_Eventos() {
 	Jogador1 = nullptr; Jogador2 = nullptr; menu = nullptr; delete Unico;
 }
 
-Gerenciadores::Gerenciador_Eventos* Gerenciadores::Gerenciador_Eventos::Singleton(){
+Gerenciadores::Gerenciador_Eventos* Gerenciadores::Gerenciador_Eventos::Singleton() {
 	if (Unico == nullptr) {
-		Unico  = new Gerenciador_Eventos();
+		Unico = new Gerenciador_Eventos();
 	}
 	return Unico;
 }
 
 
-void Gerenciadores::Gerenciador_Eventos::setTela(sf::RenderWindow* Tela){
+void Gerenciadores::Gerenciador_Eventos::setTela(sf::RenderWindow* Tela) {
 	PTela = Tela;
 }
 
-void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Jogador* Player){
+void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Jogador* Player) {
 	if (Jogador1 == nullptr) {
 		Jogador1 = Player;
 	}
@@ -28,19 +28,25 @@ void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Joga
 	}
 }
 
-int Gerenciadores::Gerenciador_Eventos::getstate(){
+int Gerenciadores::Gerenciador_Eventos::getstate() {
 	return state;
 }
 
-void Gerenciadores::Gerenciador_Eventos::setMenu(Menu* men){
+void Gerenciadores::Gerenciador_Eventos::setMenu(Menu* men) {
 	menu = men;
 }
 
 void Gerenciadores::Gerenciador_Eventos::executar() {
 	sf::Event evento;
-	while (PTela->pollEvent(evento)){
+	while (PTela->pollEvent(evento)) {
 		if (evento.type == sf::Event::KeyPressed) {
 			switch (evento.key.code) {
+			case sf::Keyboard::V:
+				if (state != 0)
+				{
+					state = 0;
+				}
+				break;
 			case sf::Keyboard::A:
 				Jogador1->setMovimento_esquerda(true);
 				break;
