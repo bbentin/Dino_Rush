@@ -1,6 +1,8 @@
 #pragma once
 #include "Obstaculo.h"
 #include "Personagem.h"
+#include <iostream>
+using namespace std;
 namespace Entidades {
     namespace Obstaculos {
         class Espinhos :

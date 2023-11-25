@@ -2,7 +2,7 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr)
+Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), ranking(nullptr) 
 {
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
@@ -26,16 +26,17 @@ void Principal::Executar() {
 		menu->executar();
 		GEventos.executar();
 		if (menu->GetItem() == 1 && menu->isPressed()) {
-			GEventos.setState(1);
 			if (Primeira_fase == nullptr) {
+				GEventos.setState(1);
 				Primeira_fase = new Fases::Floresta();
 				Primeira_fase->setJogador(&Primeiro);
 				Primeira_fase->setJogador(&Segundo);
 				Primeira_fase->Inicializa();
-			}else {
+			}
+			else {
 				Primeira_fase->executar();
-			//	Primeira_fase->salvar();
-				if (Primeira_fase->verificaFinal()) {
+				if (Primeira_fase->verificaFinal() || GEventos.getstate() == 0) {
+					Primeira_fase->salvar();
 					Primeira_fase = nullptr;
 					delete Primeira_fase;
 					Primeiro.Reseta_Vidas();
@@ -46,16 +47,17 @@ void Principal::Executar() {
 			}
 		}
 		else if (menu->GetItem() == 2 && menu->isPressed()) {
-			GEventos.setState(2);
-			if (Segunda_fase == nullptr) { 
-				Segunda_fase = new Fases::Deserto(); 
+			if (Segunda_fase == nullptr) {
+				GEventos.setState(2);
+				Segunda_fase = new Fases::Deserto();
 				Segunda_fase->setJogador(&Primeiro);
 				Segunda_fase->setJogador(&Segundo);
 				Segunda_fase->Inicializa();
 			}
 			else {
 				Segunda_fase->executar();
-				if (Segunda_fase->verificaFinal()) {
+				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0) {
+					//Segunda_fase->salvar();
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
 					Primeiro.Reseta_Vidas();
@@ -66,8 +68,21 @@ void Principal::Executar() {
 			}
 		}
 		else if (menu->GetItem() == 3 && menu->isPressed()) {
-			GEventos.setState(3);
-			//ranking->executar();
+			if (ranking == nullptr) {
+				GEventos.setState(3);
+				ranking = new Ranking();
+				ranking->Inicializa();
+			}
+			else
+			{
+				ranking->executar();
+				if (GEventos.getstate() == 0) {
+					ranking = nullptr;
+					delete ranking;
+					menu->reset();
+					GEventos.setState(0);
+				}
+			}
 		}
 		else if (menu->GetItem() == 4 && menu->isPressed()) {
 			GGrafico.getTela()->close();
