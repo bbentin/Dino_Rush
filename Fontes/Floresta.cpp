@@ -207,48 +207,6 @@ void Fases::Floresta::Inicializa() {
 	LEs.Inicializar();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
-  
-	std::ifstream arquivo(ARQUIVO);
-
-	if (arquivo.peek() == -1 || !arquivo) {
-		arquivo.close();
-
-		Player1->setPosi(500, 500);
-		Player1->setNoAr(true);
-		if (Entidades::Personagens::Jogador::getJogador2()) {
-			Player2->setPosi(500, 500);
-			Player2->setNoAr(true);
-		}
-	}
-	else
-	{
-		nlohmann::json json = nlohmann::json::parse(arquivo);
-
-		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it).front());
-			string id2 = to_string((*it).back());
-			if (id == "[1]") {
-				if(id2 == "[0]"){
-					sf::Vector2f pos = sf::Vector2f(
-						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					);
-					Player1->setPosi(pos);
-					Player1->setNoAr(true);
-				}
-				else if (id2 == "[1]") {
-					sf::Vector2f pos = sf::Vector2f(
-						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					);
-					Player2->setPosi(pos);
-					Player2->setNoAr(true);
-				}
-			}
-			id = "";
-		}
-		arquivo.close();
-	}
 }
 
 void Fases::Floresta::salvar() {
