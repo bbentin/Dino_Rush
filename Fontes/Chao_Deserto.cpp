@@ -26,4 +26,6 @@ void Entidades::Obstaculos::Chao_Deserto::obstacular(Entidade* obstaculada){
 }
 
 void Entidades::Obstaculos::Chao_Deserto::salvar(std::ostringstream* entrada){
+	sf::Vector2f pos = getPosicao();
+	(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos.x << "," << pos.y << "] }" << std::endl;
 }

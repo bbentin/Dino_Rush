@@ -1,6 +1,7 @@
 #include"../Cabecalhos/Fase.h"
 
-#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
+#define ARQUIVOF "Imagens/Fase/Floresta/entidades.json"
+#define ARQUIVOD "Imagens/Fase/Deserto/entidades.json"
 
 Fases::Fase::Fase(const int i, const int k) :Ente(i), relogio_global(), G_Colisoes(), LEs(), k_fase(k), Player1(nullptr), Player2(nullptr)
 , altura_spawn_inimigos(600), altura_spawn_obstaculos(740), ativa(false), final(false), num_inimigos(0), recuperada(false) {
@@ -19,17 +20,20 @@ void Fases::Fase::setJogador(Entidades::Personagens::Jogador* inserido) {
 		Player1 = inserido;
 		LEs.InserirEntidade(static_cast<Entidade*>(Player1));
 		LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
+		G_Colisoes.addProjetil(Player1->getArma());
 	}
 	else if (Entidades::Personagens::Jogador::getJogador2()) {
 		if (Player1 == nullptr) {
 			Player1 = inserido;
 			LEs.InserirEntidade(static_cast<Entidade*>(Player1));
 			LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
+			G_Colisoes.addProjetil(Player1->getArma());
 		}
 		else if (Player2 == nullptr) {
 			Player2 = inserido;
 			LEs.InserirEntidade(static_cast<Entidade*>(Player2));
 			LEs.InserirEntidade(static_cast<Entidade*>(Player2->getArma()));
+			G_Colisoes.addProjetil(Player2->getArma());
 		}
 	}
 }
@@ -40,40 +44,35 @@ sf::Clock* Fases::Fase::getRelogio() {
 
 void Fases::Fase::gerar_fase(int num)
 {
-	std::ifstream arquivoj(ARQUIVO);
-	if (!arquivoj)
+
+	std::ifstream arquivof(ARQUIVOF);
+	if (!arquivof)
 	{
+		arquivof.close();
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
+	std::ifstream arquivod(ARQUIVOD);
+	if (!arquivod)
+	{
+		arquivod.close();
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
 		exit(1);
 	}
 
-	if (arquivoj.peek() == -1 || num == 2) {
-		arquivoj.close();
-		std::fstream arquivo;
-		if (num == 2) {
-			arquivo.open("Imagens/Fase/Deserto/Deserto.txt");
+	if (num == 1)
+	{
+		if (arquivof.peek() == -1)
+		{
+			arquivof.close();
+			std::fstream arquivoF;
 			string linha;
-			if (!arquivo.is_open()) {
-				std::cout << "Nao abriu o Arquivo de Deserto" << std::endl;
-			}
-			int j = 0;
-			while (getline(arquivo, linha)) {
-				for (int i = 0; i < linha.size(); i++) {
-					if (linha[i] != ' ') {
-						CriarEntidades(linha[i], sf::Vector2f(i, j));
-					}
-				}
-				j++;
-			}
-		}
-		else if (num == 1) {
-			string linha;
-			arquivo.open("Imagens/Fase/Floresta/Floresta.txt");
-			if (!arquivo.is_open()) {
+			arquivoF.open("Imagens/Fase/Floresta/Floresta.txt");
+			if (!arquivoF.is_open()) {
 				std::cout << "Nao abriu o arquivo de Floresta" << std::endl;
 			}
 			int j = 0;
-			while (getline(arquivo, linha)) {
+			while (getline(arquivoF, linha)) {
 				for (int i = 0; i < linha.size(); i++) {
 					if (linha[i] != ' ') {
 						CriarEntidades(linha[i], sf::Vector2f(i, j)); // Factory method
@@ -81,37 +80,67 @@ void Fases::Fase::gerar_fase(int num)
 				}
 				j++;
 			}
+			arquivoF.close();
 		}
-		arquivo.close();
-	}
-	else {
-		recuperada = true;
-		nlohmann::json json = nlohmann::json::parse(arquivoj);
-		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it).front());
-			if (id == "[1]" || id == "[2]" || id == "[9]" || id == "[8]") {
-				CriarEntidades((char)id[1], sf::Vector2f(
-					(float)((*it)["posicao"][0]),
-					(float)((*it)["posicao"][1])
-				));
+		else
+		{
+			recuperada = true;
+			nlohmann::json json = nlohmann::json::parse(arquivof);
+			for (auto it = json.begin(); it != json.end(); ++it) {
+				string id = to_string((*it).front());
+				if (id == "[9]") {
+					CriarEntidades((char)id[1], sf::Vector2f(
+						(float)((*it)["posicao"][0]),
+						(float)((*it)["posicao"][1])
+					));
+				}
 			}
+			arquivof.close();
 		}
-		arquivoj.close();
+	}
+
+	if (num == 2)
+	{
+		if (arquivod.peek() == -1)
+		{
+			arquivod.close();
+			std::fstream arquivoD;
+			string linha;
+			arquivoD.open("Imagens/Fase/Deserto/Deserto.txt");
+			if (!arquivoD.is_open()) {
+				std::cout << "Nao abriu o arquivo de Deserto" << std::endl;
+			}
+			int j = 0;
+			while (getline(arquivoD, linha)) {
+				for (int i = 0; i < linha.size(); i++) {
+					if (linha[i] != ' ') {
+						CriarEntidades(linha[i], sf::Vector2f(i, j)); // Factory method
+					}
+				}
+				j++;
+			}
+			arquivoD.close();
+		}
+		else
+		{
+			recuperada = true;
+			nlohmann::json json = nlohmann::json::parse(arquivod);
+			for (auto it = json.begin(); it != json.end(); ++it) {
+				string id = to_string((*it).front());
+				if (id == "[8]") {
+					CriarEntidades((char)id[1], sf::Vector2f(
+						(float)((*it)["posicao"][0]),
+						(float)((*it)["posicao"][1])
+					));
+				}
+			}
+			arquivod.close();
+		}
 	}
 }
 
 void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
 	switch (leitura) {
-	case '1':
-		if (Player1) {
-			//Player1->setPosi(pos.x * 16, 2);
-		}
-		break;
-	case '2':
-		if (Player2) {
-			//Player2->setPosi(pos.x * 16, pos.y * 16);
-		}
-		break;
 	case '9':
 		CriarChao(1, pos);
 		break;

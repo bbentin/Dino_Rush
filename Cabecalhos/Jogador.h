@@ -10,7 +10,8 @@
 #include "../json.hpp"
 using namespace std;
 
-#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
+#define ARQUIVOF "Imagens/Fase/Floresta/entidades.json"
+#define ARQUIVOD "Imagens/Fase/Deserto/entidades.json"
 
 namespace Entidades {
     namespace Personagens {
@@ -23,6 +24,7 @@ namespace Entidades {
             const int altura_jogador;
             bool sou_jogador2;
             int pontos;
+            int fase;
               
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));
@@ -43,6 +45,7 @@ namespace Entidades {
             int getPontos();
             void Reseta_Vidas();
             void criarProjetil();
+            void setFase(int fase);
 
             static const bool getJogador2();
         };

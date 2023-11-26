@@ -2,7 +2,7 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), ranking(nullptr) 
+Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), ranking(nullptr)
 {
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
@@ -57,7 +57,7 @@ void Principal::Executar() {
 			else {
 				Segunda_fase->executar();
 				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0) {
-					//Segunda_fase->salvar();
+					Segunda_fase->salvar();
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
 					Primeiro.Reseta_Vidas();

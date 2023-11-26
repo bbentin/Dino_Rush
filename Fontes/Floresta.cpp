@@ -1,12 +1,7 @@
 #include "../Cabecalhos/Floresta.h"
-#include "../json.hpp"
-#include <fstream>
-#include <sstream>
-#include <string>
 
 Fases::Floresta::Floresta():Fase(14, 1), pos_Espinhos{8,17,25,35,70}, pos_Lamas{10,20,30,40,50},
 pos_Gosmas{5,20,32,41,60}, pos_Moscas{15,30,45,51,59} {
-#define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 3;	num_Espinhos = 3 + rand() % 3;
 	num_Gosmas = 3 + rand() % 3;	num_Lamas = 3 + rand() % 3;
@@ -32,7 +27,7 @@ void Fases::Floresta::CriarInimigos() {
 }
 
 void Fases::Floresta::CriarMoscas() {
-	std::ifstream arquivo(ARQUIVO);
+	std::ifstream arquivo(ARQUIVOF);
 	if (!arquivo)
 	{
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
@@ -77,7 +72,7 @@ void Fases::Floresta::CriarMoscas() {
 
 void Fases::Floresta::CriarGosmas() {
 	// abre arquivo para leitura
-	std::ifstream arquivo(ARQUIVO);
+	std::ifstream arquivo(ARQUIVOF);
 	if (!arquivo)
 	{
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
@@ -138,7 +133,7 @@ void Fases::Floresta::CriarObstaculos() {
 }
 
 void Fases::Floresta::CriarEspinhos() {
-	std::ifstream arquivo(ARQUIVO);
+	std::ifstream arquivo(ARQUIVOF);
 	if (!arquivo)
 	{
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
@@ -179,7 +174,7 @@ void Fases::Floresta::CriarEspinhos() {
 }
 
 void Fases::Floresta::CriarLamas() {
-	std::ifstream arquivo(ARQUIVO);
+	std::ifstream arquivo(ARQUIVOF);
 	if (!arquivo)
 	{
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
@@ -224,13 +219,15 @@ void Fases::Floresta::Inicializa() {
 	Imagem.setTexture(Textura);
 	CriarObstaculos();
 	CriarInimigos();
+	Player1->setFase(1);
+	Player2->setFase(1);
 	LEs.Inicializar();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
 }
 
 void Fases::Floresta::salvar() {
-	std::ofstream arquivo(ARQUIVO);
+	std::ofstream arquivo(ARQUIVOF);
 	if (!arquivo)
 	{
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
