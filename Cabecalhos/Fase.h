@@ -2,7 +2,6 @@
 #include "Gerenciador_Colisoes.h"
 #include "ListaEntidades.h"
 #include "Lama.h"
-#include "Chao_Deserto.h"
 #include "Chao_Floresta.h"
 #include "../json.hpp"
 #include <fstream>
@@ -37,8 +36,7 @@ namespace Fases{
         void gerenciar_colisoes();
         void setJogador(Entidades::Personagens::Jogador* inserido);
         void gerar_fase(int fase);
-        void CriarEntidades(char leitura, sf::Vector2f pos);
-        void CriarChao(int i, sf::Vector2f pos);
+        void CriarChao(sf::Vector2f pos);
         void VerificaMortos();
         bool verificaFinal();
         bool getAtiva();

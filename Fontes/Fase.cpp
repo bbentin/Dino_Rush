@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Fase.h"
 
-Fases::Fase::Fase(const int i, const int k) : Ente(i), relogio_global(), G_Colisoes(), LEs(), k_fase(k), Player1(nullptr), Player2(nullptr), altura_spawn_inimigos(600), altura_spawn_obstaculos(920), ativa(false), final(false), num_inimigos(0), recuperada(false)
-{
+Fases::Fase::Fase(const int i, const int k) : Ente(i), relogio_global(), G_Colisoes(), LEs(), k_fase(k), Player1(nullptr), Player2(nullptr), altura_spawn_inimigos(600), altura_spawn_obstaculos(920)
+, ativa(false), final(false), num_inimigos(0), recuperada(false){
 }
 
 Fases::Fase::~Fase()
@@ -65,7 +65,7 @@ void Fases::Fase::gerar_fase(int num)
 				{
 					if (linha[i] != ' ')
 					{
-						CriarEntidades(linha[i], sf::Vector2f(i, j)); // Factory method
+						CriarChao(sf::Vector2f(i, j));
 					}
 				}
 				j++;
@@ -81,9 +81,9 @@ void Fases::Fase::gerar_fase(int num)
 				string id = to_string((*it).front());
 				if (id == "[9]")
 				{
-					CriarEntidades((char)id[1], sf::Vector2f(
-													(float)((*it)["posicao"][0]),
-													(float)((*it)["posicao"][1])));
+					CriarChao(sf::Vector2f(
+													(float)((*it)["posicao"][0])/16,
+													(float)((*it)["posicao"][1])/16));
 				}
 			}
 			arquivoj.close();
@@ -107,7 +107,7 @@ void Fases::Fase::gerar_fase(int num)
 				{
 					if (linha[i] != ' ')
 					{
-						CriarEntidades(linha[i], sf::Vector2f(i, j)); // Factory method
+						CriarChao(sf::Vector2f(i, j));
 					}
 				}
 				j++;
@@ -121,11 +121,11 @@ void Fases::Fase::gerar_fase(int num)
 			for (auto it = json.begin(); it != json.end(); ++it)
 			{
 				string id = to_string((*it).front());
-				if (id == "[8]")
+				if (id == "[9]")
 				{
-					CriarEntidades((char)id[1], sf::Vector2f(
-													(float)((*it)["posicao"][0]),
-													(float)((*it)["posicao"][1])));
+					CriarChao( sf::Vector2f(
+													(float)((*it)["posicao"][0])/16,
+													(float)((*it)["posicao"][1])/16));
 				}
 			}
 			arquivod.close();
@@ -133,63 +133,12 @@ void Fases::Fase::gerar_fase(int num)
 	}
 }
 
-void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
-	switch (leitura) {
-	case '8':
-		CriarChao(1, pos);
-		break;
-	case '9':
-		CriarChao(2, pos);
-		break;
-	default:
-		std::cout << "Caractere invalido" << std::endl;
-		break;
-	}
-}
 
-void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos)
-{
-	switch (tipo_obs)
-	{
-	case 2:
-	{
-		if (!recuperada)
-		{
-			Entidades::Obstaculos::Chao_Floresta *pCh_Floresta = new Entidades::Obstaculos::Chao_Floresta(pos.y * 16);
-			pCh_Floresta->setPosi(pos.x * 16, pos.y * 16);
-			G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo *>(pCh_Floresta));
-			LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pCh_Floresta));
-		}
-		else
-		{
-			Entidades::Obstaculos::Chao_Floresta *pCh_Floresta = new Entidades::Obstaculos::Chao_Floresta(pos.y);
-			pCh_Floresta->setPosi(pos);
-			G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo *>(pCh_Floresta));
-			LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pCh_Floresta));
-		}
-	}
-	break;
-	case 1:
-	{
-		if (!recuperada)
-		{
-			Entidades::Obstaculos::Chao_Deserto *pCh_Deserto = new Entidades::Obstaculos::Chao_Deserto(pos.y * 16);
-			pCh_Deserto->setPosi(pos.x * 16, pos.y * 16);
-			G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo *>(pCh_Deserto));
-			LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pCh_Deserto));
-		}
-		else
-		{
-			Entidades::Obstaculos::Chao_Deserto *pCh_Deserto = new Entidades::Obstaculos::Chao_Deserto(pos.y);
-			pCh_Deserto->setPosi(pos);
-			G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo *>(pCh_Deserto));
-			LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pCh_Deserto));
-		}
-	}
-	break;
-	default:
-		std::cout << "Chao Invalido" << std::endl;
-	}
+void Fases::Fase::CriarChao(sf::Vector2f pos){
+	Entidades::Obstaculos::Chao_Floresta *pCh_Floresta = new Entidades::Obstaculos::Chao_Floresta(pos.y * 16);
+	pCh_Floresta->setPosi(pos.x * 16, pos.y * 16);
+	G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo *>(pCh_Floresta));
+	LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pCh_Floresta));
 }
 
 void Fases::Fase::VerificaMortos()
