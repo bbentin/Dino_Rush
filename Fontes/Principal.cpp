@@ -2,7 +2,7 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() : GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), ranking(nullptr)
+Principal::Principal() : GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu_principal(nullptr), ranking(nullptr), menu_pause(nullptr)
 {
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();

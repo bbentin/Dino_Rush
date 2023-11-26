@@ -42,9 +42,9 @@ void Fases::Deserto::CriarMoscas(){
 	if (arquivo.peek() == -1) {
 		arquivo.close();
 		for (int i = 0; i < num_Moscas; i++) {
-			Mosca* pMosca = new Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
-			G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
-			LEs.InserirEntidade(static_cast<Entidade*> (pMosca));
+			Entidades::Personagens::Mosca* pMosca = new Entidades::Personagens::Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
+			G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo*>(pMosca));
+			LEs.InserirEntidade(static_cast<Entidades::Entidade*> (pMosca));
 			num_inimigos++;
 		}
 	}
@@ -52,7 +52,7 @@ void Fases::Deserto::CriarMoscas(){
 	{
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
-		Mosca* pMosca;
+		Entidades::Personagens::Mosca* pMosca;
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
 			// pega o id da entidade e converte para string para comparar com o id da Gosma
@@ -63,9 +63,9 @@ void Fases::Deserto::CriarMoscas(){
 					(float)((*it)["posicao"][1])
 				);
 				float vel = (float)((*it)["velocidade"][0]);
-				LEs.InserirEntidade(static_cast<Entidade*> (pMosca = new Mosca(pos, vel)));
+				LEs.InserirEntidade(static_cast<Entidades::Entidade*> (pMosca = new Entidades::Personagens::Mosca(pos, vel)));
 				pMosca->setPosi(pos);
-				G_Colisoes.addInimigo(static_cast<Inimigo*>(pMosca));
+				G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo*>(pMosca));
 				num_inimigos++;
 			}
 			id = "";
@@ -85,10 +85,10 @@ void Fases::Deserto::CriarChefao(){
 	if (arquivo.peek() == -1) {
 		arquivo.close();
 		for (int i = 0; i < num_Chefoes; i++) {
-			Chefao* pChefao = new Chefao(); 	pChefao->setPosi(pos_Chefao[i] * 16, altura_spawn_inimigos);
-			Projetil* pArma = new Projetil();	pArma->setDono(static_cast<Entidade*>(pChefao));	pChefao->setArma(pArma);
-			G_Colisoes.addInimigo(static_cast<Inimigo*>(pChefao)); G_Colisoes.addProjetil(pArma);
-			LEs.InserirEntidade(static_cast<Entidade*> (pChefao));	LEs.InserirEntidade(static_cast<Entidade*>(pArma));
+			Entidades::Personagens::Chefao* pChefao = new Entidades::Personagens::Chefao(); 	pChefao->setPosi(pos_Chefao[i] * 16, altura_spawn_inimigos);
+			Entidades::Projetil* pArma = new Entidades::Projetil();	pArma->setDono(static_cast<Entidades::Entidade*>(pChefao));	pChefao->setArma(pArma);
+			G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo*>(pChefao)); G_Colisoes.addProjetil(pArma);
+			LEs.InserirEntidade(static_cast<Entidades::Entidade*> (pChefao));	LEs.InserirEntidade(static_cast<Entidades::Entidade*>(pArma));
 			num_inimigos++;
 		}
 	}
@@ -96,7 +96,7 @@ void Fases::Deserto::CriarChefao(){
 	{
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
-		Chefao* pChefao;
+		Entidades::Personagens::Chefao* pChefao;
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
 			string id = to_string((*it)["id"][0]);
@@ -105,13 +105,13 @@ void Fases::Deserto::CriarChefao(){
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
 				);
-				LEs.InserirEntidade(static_cast<Entidade*> (pChefao = new Chefao(pos)));
+				LEs.InserirEntidade(static_cast<Entidades::Entidade*> (pChefao = new Entidades::Personagens::Chefao(pos)));
 				pChefao->setPosi(pos);
-				G_Colisoes.addInimigo(static_cast<Inimigo*>(pChefao));
+				G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo*>(pChefao));
 				num_inimigos++;
-				Projetil* pArma = pChefao->getArma();
-				pArma->setDono(static_cast<Entidade*>(pChefao));
-				LEs.InserirEntidade(static_cast<Entidade*>(pArma));
+				Entidades::Projetil* pArma = pChefao->getArma();
+				pArma->setDono(static_cast<Entidades::Entidade*>(pChefao));
+				LEs.InserirEntidade(static_cast<Entidades::Entidade*>(pArma));
 				G_Colisoes.addProjetil(pArma);
 			}
 			id = "";
@@ -132,16 +132,16 @@ void Fases::Deserto::CriarLamas(){
 	if (arquivo.peek() == -1) {
 		arquivo.close();
 		for (int i = 0; i < num_Lamas; i++) {
-			Lama* pLama = new Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
-			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
-			LEs.InserirEntidade(static_cast<Entidade*> (pLama));
+			Entidades::Obstaculos::Lama* pLama = new Entidades::Obstaculos::Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
+			G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo*>(pLama));
+			LEs.InserirEntidade(static_cast<Entidades::Entidade*> (pLama));
 		}
 	}
 	else
 	{
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
-		Lama* pLama;
+		Entidades::Obstaculos::Lama* pLama;
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
 			string id = to_string((*it).front());
@@ -150,9 +150,9 @@ void Fases::Deserto::CriarLamas(){
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
 				);
-				LEs.InserirEntidade(static_cast<Entidade*> (pLama = new Lama(pos)));
+				LEs.InserirEntidade(static_cast<Entidades::Entidade*> (pLama = new Entidades::Obstaculos::Lama(pos)));
 				pLama->setPosi(pos);
-				G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
+				G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo*>(pLama));
 			}
 			id = "";
 		}
@@ -165,11 +165,13 @@ void Fases::Deserto::Inicializa(){
 	Imagem.setTexture(Textura);
 	CriarObstaculos();
 	CriarInimigos();
-	G_Colisoes.addJogador(Player1);
-	G_Colisoes.addJogador(Player2);
-	Player1->setFase(2);
-	Player2->setFase(2);
 	LEs.Inicializar();
+	G_Colisoes.addJogador(Player1);
+	LEs.InserirEntidade(static_cast<Entidades::Entidade*>(Player1->getArma()));
+	G_Colisoes.addProjetil(Player1->getArma());
+	G_Colisoes.addJogador(Player2);
+	LEs.InserirEntidade(static_cast<Entidades::Entidade*>(Player2->getArma()));
+	G_Colisoes.addProjetil(Player2->getArma());
 }
 
 void Fases::Deserto::salvar(){

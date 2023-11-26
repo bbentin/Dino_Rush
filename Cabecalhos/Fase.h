@@ -1,5 +1,4 @@
 #pragma once
-#include "Ente.h"
 #include "Gerenciador_Colisoes.h"
 #include "ListaEntidades.h"
 #include "Lama.h"
@@ -11,9 +10,8 @@
 #include <string>
 #include <time.h>
 
-using namespace Entidades;
-using namespace Personagens;
-using namespace Obstaculos;
+#define ARQUIVOF "Imagens/Fase/Floresta/entidades.json"
+#define ARQUIVOD "Imagens/Fase/Deserto/entidades.json"
 
 namespace Fases{
     class Fase :

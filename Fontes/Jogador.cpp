@@ -195,7 +195,7 @@ void Entidades::Personagens::Jogador::executar()
 void Entidades::Personagens::Jogador::Inicializa()
 {
 
-	if (fase == 1)
+	if (fase == 14)
 	{
 		std::ifstream arquivo(ARQUIVOF);
 		if (arquivo.peek() == -1 || !arquivo)
@@ -216,7 +216,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 			{
 				string id = to_string((*it)["id"][0]);
 				string jogador = to_string((*it)["jogador2"][0]);
-				if (id == "1" && jogador == "0" && !sou_jogador)
+				if (id == "1" && jogador == "0" && !sou_jogador2)
 				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
@@ -227,7 +227,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					pontos = (int)((*it)["pontos"][0]);
 					criarProjetil();
 				}
-				else if (id == "1" && jogador == "1" && sou_jogador)
+				else if (id == "1" && jogador == "1" && sou_jogador2)
 				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
@@ -243,7 +243,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 			arquivo.close();
 		}
 	}
-	if (fase == 2)
+	if (fase == 11)
 	{
 		std::ifstream arquivod(ARQUIVOD);
 		if (arquivod.peek() == (-1) || !arquivod)
@@ -303,21 +303,19 @@ void Entidades::Personagens::Jogador::Reseta_Vidas()
 	num_vidas = 3;
 }
 
-void Entidades::Personagens::Jogador::criarProjetil()
-{
-	if (fase == 1)
-	{
-		std::ifstream arquivo(ARQUIVO);
+void Entidades::Personagens::Jogador::criarProjetil(){
+	if (fase == 14){
+		std::ifstream arquivo(ARQUIVOF);
 
 		if (arquivo.peek() == -1 || !arquivo)
 		{
-			arquivof.close();
+			arquivo.close();
 			arma = new Projetil();
 			arma->setDono(this);
 		}
 		else
 		{
-			nlohmann::json json = nlohmann::json::parse(arquivof);
+			nlohmann::json json = nlohmann::json::parse(arquivo);
 
 			for (auto it = json.begin(); it != json.end(); ++it)
 			{
@@ -330,15 +328,14 @@ void Entidades::Personagens::Jogador::criarProjetil()
 					float vel = (float)((*it)["velocidade"][0]);
 					int visivel = (int)((*it)["visibilidade"][0]);
 					arma = new Projetil(pos, static_cast<Entidade *>(this), vel, static_cast<bool>(visivel));
-					arma->setDono(this);
 				}
 				id = "";
 			}
-			arquivof.close();
+			arquivo.close();
 		}
 	}
 
-	if (fase == 2)
+	if (fase == 11)
 	{
 		std::ifstream arquivod(ARQUIVOD);
 
@@ -372,8 +369,7 @@ void Entidades::Personagens::Jogador::criarProjetil()
 	}
 }
 
-void Entidades::Personagens::Jogador::setFase(int f)
-{
+void Entidades::Personagens::Jogador::setFase(int f){
 	fase = f;
 }
 
