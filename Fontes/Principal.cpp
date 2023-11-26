@@ -40,7 +40,6 @@ void Principal::Executar() {
 					delete Primeira_fase;
 					Primeiro.Reseta_Vidas();
 					Segundo.Reseta_Vidas();
-					//menu->reset();
 					GEventos.finaliza_atual();
 				}
 			}
@@ -54,13 +53,11 @@ void Principal::Executar() {
 			}
 			else {
 				Segunda_fase->executar();
-				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0) {
-					//Segunda_fase->salvar();
+				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0) {				
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
 					Primeiro.Reseta_Vidas();
 					Segundo.Reseta_Vidas();
-					//menu->reset();
 					GEventos.finaliza_atual();
 				}
 			}
@@ -82,6 +79,7 @@ void Principal::Executar() {
 		else if (GEventos.getstate() == 5) {
 			menu_pause->executar();
 			if (menu_pause->isPressed()) {
+				GEventos.finaliza_atual();
 				switch (menu_pause->GetItem()) {
 				case 1:
 					if (GEventos.getstate() == 1) {
@@ -91,15 +89,12 @@ void Principal::Executar() {
 						Segunda_fase->salvar();
 					}
 					menu_pause->setPressed(false);
-					GEventos.finaliza_atual();
 					break;
 				case 2:
-					menu_pause->setPressed(false);
-					GEventos.finaliza_atual();
+					menu_pause->setPressed(false);					
 					break;
 				case 3:
 					menu_pause->setPressed(false);
-					GEventos.finaliza_atual();
 					GEventos.finaliza_atual();
 					break;
 				case 4:

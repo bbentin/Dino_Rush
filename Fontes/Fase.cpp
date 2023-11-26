@@ -106,10 +106,10 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
 			//Player2->setPosi(pos.x * 16, pos.y * 16);
 		}
 		break;
-	case '3':
+	case '8':
 		CriarChao(1, pos);
 		break;
-	case '4':
+	case '9':
 		CriarChao(2, pos);
 		break;
 	default:
@@ -121,7 +121,7 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
 void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos) {
 	switch (tipo_obs)
 	{
-	case 1:
+	case 2:
 	{
 		if (!recuperada)
 		{
@@ -139,7 +139,7 @@ void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos) {
 		}
 	}
 	break;
-	case 2:
+	case 1:
 	{
 		if (!recuperada)
 		{
