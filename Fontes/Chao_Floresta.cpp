@@ -1,6 +1,4 @@
 #include "../Cabecalhos/Chao_Floresta.h"
-#include <sstream>
-
 
 Entidades::Obstaculos::Chao_Floresta::Chao_Floresta(const float limit) :Obstaculo(9, limit) {
 }

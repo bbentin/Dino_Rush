@@ -2,12 +2,14 @@
 #include "Ente.h"
 #include "Gerenciador_Colisoes.h"
 #include "ListaEntidades.h"
-#include <fstream>
-#include <sstream>
 #include "Lama.h"
 #include "Chao_Deserto.h"
 #include "Chao_Floresta.h"
 #include "../json.hpp"
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <time.h>
 
 using namespace Entidades;
 using namespace Personagens;
@@ -25,6 +27,8 @@ namespace Fases{
         const int k_fase, altura_spawn_inimigos, altura_spawn_obstaculos;
         int num_inimigos;
         bool ativa,final,recuperada;
+        std::ostringstream buffer;
+
     public:
 
         Fase(const int i = 0, const int k = 0);

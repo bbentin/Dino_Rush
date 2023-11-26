@@ -88,7 +88,11 @@ void Menu::MoveDown() {
 
 void Menu::reset(){
 	pressed = false;
+	textos[selected].setOutlineThickness(2);
+	textos[selected].setFillColor(sf::Color::Green);
 	selected = 1;
+	textos[1].setOutlineThickness(4);
+	textos[1].setFillColor(sf::Color::Red);
 }
 
 int Menu::GetItem(){
