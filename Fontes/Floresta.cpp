@@ -33,14 +33,9 @@ void Fases::Floresta::CriarInimigos() {
 
 void Fases::Floresta::CriarMoscas() {
 	std::ifstream arquivo(ARQUIVO);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
 	// verifica se o arquivo esta vazio:
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		for (int i = 0; i < num_Moscas; i++) {
 			Mosca* pMosca = new Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
@@ -78,14 +73,9 @@ void Fases::Floresta::CriarMoscas() {
 void Fases::Floresta::CriarGosmas() {
 	// abre arquivo para leitura
 	std::ifstream arquivo(ARQUIVO);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
 	// verifica se o arquivo esta vazio:
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		// caso esteja faz a criação padrão após fechar o arquivo
 		arquivo.close();
 		for (int i = 0; i < num_Gosmas; i++) {
@@ -139,13 +129,8 @@ void Fases::Floresta::CriarObstaculos() {
 
 void Fases::Floresta::CriarEspinhos() {
 	std::ifstream arquivo(ARQUIVO);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		for (int i = 0; i < num_Espinhos; i++) {
 			Espinhos* pEspinhos = new Espinhos(); pEspinhos->setPosi(pos_Espinhos[i] * 16, altura_spawn_obstaculos);
@@ -180,13 +165,8 @@ void Fases::Floresta::CriarEspinhos() {
 
 void Fases::Floresta::CriarLamas() {
 	std::ifstream arquivo(ARQUIVO);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		for (int i = 0; i < num_Lamas; i++) {
 			Lama* pLama = new Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
