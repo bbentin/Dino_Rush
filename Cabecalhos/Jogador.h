@@ -16,9 +16,9 @@ namespace Entidades {
             bool andar_direita,andar_esquerda;
             Entidades::Projetil* arma;        
             static bool Jogador2;
-            const int altura_jogador;
-            bool sou_jogador2;
+            const int altura_jogador;      
             int pontos;
+            bool sou_jogador2;
               
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0,0));

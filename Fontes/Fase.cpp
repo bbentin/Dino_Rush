@@ -41,13 +41,7 @@ sf::Clock* Fases::Fase::getRelogio() {
 void Fases::Fase::gerar_fase(int num)
 {
 	std::ifstream arquivoj(ARQUIVO);
-	if (!arquivoj)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
-
-	if (arquivoj.peek() == -1) {
+	if (!arquivoj || arquivoj.peek() == -1){
 		arquivoj.close();
 		std::fstream arquivo;
 		if (num == 2) {
@@ -112,10 +106,10 @@ void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
 			//Player2->setPosi(pos.x * 16, pos.y * 16);
 		}
 		break;
-	case '9':
+	case '3':
 		CriarChao(1, pos);
 		break;
-	case '8':
+	case '4':
 		CriarChao(2, pos);
 		break;
 	default:

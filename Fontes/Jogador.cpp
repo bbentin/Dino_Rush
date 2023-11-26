@@ -1,7 +1,6 @@
 #include "../Cabecalhos/Jogador.h"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi),
-
 andar_direita(false),andar_esquerda(false),arma(nullptr),altura_jogador(828),pontos(0) {
 	pontos = 0;
 	rapidez = 4;
@@ -146,13 +145,8 @@ void Entidades::Personagens::Jogador::executar() {
 
 void Entidades::Personagens::Jogador::Inicializa() {
 	std::ifstream arquivo(ARQUIVO);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
@@ -164,8 +158,8 @@ void Entidades::Personagens::Jogador::Inicializa() {
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it)["id"][0]);
-			string jogador = to_string((*it)["jogador2"][0]);
+			std::string id = to_string((*it)["id"][0]);
+			std::string jogador = to_string((*it)["jogador2"][0]);
 			if (id == "1" && jogador == "0") {
 				sf::Vector2f pos = sf::Vector2f(
 					(float)((*it)["posicao"][0]),
