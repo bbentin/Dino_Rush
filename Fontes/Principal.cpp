@@ -41,6 +41,7 @@ void Principal::Executar() {
 					delete Primeira_fase;
 					Primeiro.Reseta_Vidas();
 					Segundo.Reseta_Vidas();
+					// ao invés de resetar menu chamar a fase 2 ficando assim sequencial tbm
 					menu->reset();
 					GEventos.setState(0);
 				}
