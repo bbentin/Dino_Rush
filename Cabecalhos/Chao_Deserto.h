@@ -1,5 +1,7 @@
 #pragma once
 #include "Obstaculo.h"
+#include <sstream>
+
 namespace Entidades {
     namespace Obstaculos {
         class Chao_Deserto :

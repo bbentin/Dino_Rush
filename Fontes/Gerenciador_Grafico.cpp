@@ -1,10 +1,12 @@
 #include "../Cabecalhos/Gerenciador_Grafico.h"
 #include <iostream>
 using namespace std;
-Gerenciadores::Gerenciador_Grafico::Gerenciador_Grafico() :Tela(sf::VideoMode(1280, 960), "Jogo"),
+Gerenciadores::Gerenciador_Grafico::Gerenciador_Grafico() :Tela(sf::VideoMode(1280, 960), "Jogo", sf::Style::Default),
 Jogador1() {
 	Tela.setFramerateLimit(200);
 	Gerar_Inimigos();	Gerar_Menu();	Gerar_Jogador();	Gerar_Obstaculos(); Gerar_Projetil();	Gerar_Fases(); Gerar_Ranking();
+	// posiciona a tela em modo janela tela cheia
+	Tela.setPosition(sf::Vector2i(320, 0));
 }
 Gerenciadores::Gerenciador_Grafico::~Gerenciador_Grafico() {
 }
