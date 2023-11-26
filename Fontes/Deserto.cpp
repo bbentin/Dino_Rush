@@ -32,14 +32,8 @@ void Fases::Deserto::CriarObstaculos(){
 
 void Fases::Deserto::CriarMoscas(){
 	std::ifstream arquivo(ARQUIVOD);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
-
 	// verifica se o arquivo esta vazio:
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		for (int i = 0; i < num_Moscas; i++) {
 			Entidades::Personagens::Mosca* pMosca = new Entidades::Personagens::Mosca(); pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
@@ -76,13 +70,8 @@ void Fases::Deserto::CriarMoscas(){
 
 void Fases::Deserto::CriarChefao(){
 	std::ifstream arquivo(ARQUIVOD);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 	
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		for (int i = 0; i < num_Chefoes; i++) {
 			Entidades::Personagens::Chefao* pChefao = new Entidades::Personagens::Chefao(); 	pChefao->setPosi(pos_Chefao[i] * 16, altura_spawn_inimigos);
@@ -123,13 +112,7 @@ void Fases::Deserto::CriarChefao(){
 
 void Fases::Deserto::CriarLamas(){
 	std::ifstream arquivo(ARQUIVOD);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
-
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		for (int i = 0; i < num_Lamas; i++) {
 			Entidades::Obstaculos::Lama* pLama = new Entidades::Obstaculos::Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
@@ -179,7 +162,6 @@ void Fases::Deserto::salvar(){
 	if (!arquivo)
 	{
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
 	}
 
 	buffer.str("");
