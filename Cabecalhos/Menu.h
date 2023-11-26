@@ -24,9 +24,9 @@ public:
 	void MoveUp();
 	void MoveDown();
 	void reset();
-	int GetItem() { return selected; }
-	void setPressed(bool press) { pressed = press; }
-	bool isPressed() { return pressed; }
+	int GetItem();
+	void setPressed(bool press);
+	bool isPressed();
 	const bool getPause();
 	sf::Font getFonte();
 };

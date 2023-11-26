@@ -198,7 +198,6 @@ void Fases::Floresta::salvar()
 	if (!arquivo)
 	{
 		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
 	}
 
 	buffer.str("");

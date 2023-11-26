@@ -130,7 +130,6 @@ void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade *obstaculo, sf:
 		if (obstaculo->getPosicao().y > getPosicao().y)
 		{
 			Imagem.move(0, +limites.y);
-			//	parar_movimento_y();
 			no_chao = true;
 			no_ar = false;
 		}
@@ -308,13 +307,9 @@ void Entidades::Personagens::Jogador::criarProjetil()
 {
 	if (fase == 1)
 	{
-		std::ifstream arquivof(ARQUIVOF);
-		if (!arquivof)
-		{
-			cout << "Erro ao abrir arquivo de salvamento" << endl;
-			exit(1);
-		}
-		if (arquivof.peek() == -1)
+		std::ifstream arquivo(ARQUIVO);
+
+		if (arquivo.peek() == -1 || !arquivo)
 		{
 			arquivof.close();
 			arma = new Projetil();
@@ -346,13 +341,8 @@ void Entidades::Personagens::Jogador::criarProjetil()
 	if (fase == 2)
 	{
 		std::ifstream arquivod(ARQUIVOD);
-		if (!arquivod)
-		{
-			cout << "Erro ao abrir arquivo de salvamento" << endl;
-			arquivod.close();
-			exit(1);
-		}
-		if (fase == 2 && arquivod.peek() == -1)
+
+		if (arquivod.peek() == -1 || !arquivod)
 		{
 			arquivod.close();
 			arma = new Projetil();

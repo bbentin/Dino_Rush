@@ -95,6 +95,18 @@ void Menu::reset(){
 	textos[1].setFillColor(sf::Color::Red);
 }
 
+int Menu::GetItem(){
+	return selected;
+}
+
+void Menu::setPressed(bool press){
+	pressed = press;
+}
+
+bool Menu::isPressed(){
+	return pressed;
+}
+
 const bool Menu::getPause(){
 	return pause;
 }

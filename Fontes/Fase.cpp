@@ -142,15 +142,13 @@ void Fases::Fase::gerar_fase(int num)
 	}
 }
 
-void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos)
-{
-	switch (leitura)
-	{
+void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
+	switch (leitura) {
 	case '8':
-		CriarChao(1, pos);
+		CriarChao(2, pos);
 		break;
 	case '9':
-		CriarChao(2, pos);
+		CriarChao(1, pos);
 		break;
 	default:
 		std::cout << "Caractere invalido" << std::endl;
@@ -236,15 +234,5 @@ bool Fases::Fase::getAtiva()
 	return ativa;
 }
 
-void Fases::Fase::Inicializa()
-{
-	/*Textura.loadFromImage(Grafico->getImagem(getId()));
-	Imagem.setTexture(Textura);
-	G_Colisoes.addJogador(Player1);
-	gerar_fase(k_fase);
-	LEs.Inicializar();
-	Player1->Inicializa();*/
+void Fases::Fase::Inicializa() {
 }
-
-// Entidades::Personagens::Jogador* Fases::Fase::Player1 = nullptr;
-// Entidades::Personagens::Jogador* Fases::Fase::Player2 = nullptr;
