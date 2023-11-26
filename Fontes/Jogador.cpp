@@ -1,29 +1,35 @@
 #include "../Cabecalhos/Jogador.h"
 
-Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) :Personagem(i, posi), andar_direita(false), 
-andar_esquerda(false), arma(nullptr), altura_jogador(828), pontos(0), fase(0) {
+Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) : Personagem(i, posi), andar_direita(false),
+																		   andar_esquerda(false), arma(nullptr), altura_jogador(828), pontos(0), fase(0)
+{
 	pontos = 0;
 	rapidez = 4;
 	num_vidas = 5;
 	olhando_direita = true;
 	no_ar = true;
-	if (!Jogador2) {
+	if (!Jogador2)
+	{
 		Jogador2 = true;
 		sou_jogador2 = false;
 	}
-	else {
+	else
+	{
 		sou_jogador2 = true;
 		Imagem.setColor(sf::Color::Red);
 	}
 }
-Entidades::Personagens::Jogador::~Jogador() {
+Entidades::Personagens::Jogador::~Jogador()
+{
 	delete arma;
 }
 
-void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f limites) {
+void Entidades::Personagens::Jogador::Colisao(Entidade *colidida, sf::Vector2f limites)
+{
 	int verificador = colidida->getId();
 
-	switch (verificador) {
+	switch (verificador)
+	{
 	case 3:
 		Colisao_Inimigo(colidida, limites);
 		break;
@@ -40,7 +46,8 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 		Colisao_Obstaculo(colidida, limites);
 		break;
 	case 10:
-		if (static_cast<Entidades::Obstaculos::Espinhos*>(colidida)->getVisivel()) {
+		if (static_cast<Entidades::Obstaculos::Espinhos *>(colidida)->getVisivel())
+		{
 			Colisao_Obstaculo(colidida, limites);
 		}
 		break;
@@ -55,113 +62,145 @@ void Entidades::Personagens::Jogador::Colisao(Entidade* colidida, sf::Vector2f l
 	}
 }
 
-void Entidades::Personagens::Jogador::atirar() {
+void Entidades::Personagens::Jogador::atirar()
+{
 	arma->atirada();
 }
 
-void Entidades::Personagens::Jogador::salvar(std::ostringstream* entrada) {
+void Entidades::Personagens::Jogador::salvar(std::ostringstream *entrada)
+{
 	if (!sou_jogador2)
 	{
 		sf::Vector2f pos3 = getPosicao();
 		float vel = getRapidez();
 		(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos3.x << "," << pos3.y << "], \"velocidade\": [" << vel << "], \"pontos\": [" << pontos << "], \"vidas\": ["
-			<< num_vidas << "], \"jogador2\": [" << sou_jogador2 << "] }" << std::endl;
+				   << num_vidas << "], \"jogador2\": [" << sou_jogador2 << "] }" << std::endl;
 	}
 	else if (sou_jogador2)
 	{
 		sf::Vector2f pos4 = getPosicao();
 		float vel = getRapidez();
 		(*entrada) << "{ \"id\": [" << getId() << "], \"posicao\": [" << pos4.x << "," << pos4.y << "], \"velocidade\": [" << vel << "], \"pontos\": [" << pontos << "], \"vidas\": ["
-			<< num_vidas << "], \"jogador2\": [" << sou_jogador2 << "] }" << std::endl;
+				   << num_vidas << "], \"jogador2\": [" << sou_jogador2 << "] }" << std::endl;
 	}
 }
 
-const bool Entidades::Personagens::Jogador::getJogador2() {
+const bool Entidades::Personagens::Jogador::getJogador2()
+{
 	return Jogador2;
 }
 
-void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade* inimigo, sf::Vector2f limites) {
-	if (limites.x < 0) {
-		if (inimigo->getPosicao().x < getPosicao().x) {
+void Entidades::Personagens::Jogador::Colisao_Inimigo(Entidade *inimigo, sf::Vector2f limites)
+{
+	if (limites.x < 0)
+	{
+		if (inimigo->getPosicao().x < getPosicao().x)
+		{
 			Imagem.move(-limites.x, 0);
 		}
-		if (inimigo->getPosicao().x > getPosicao().x) {
+		if (inimigo->getPosicao().x > getPosicao().x)
+		{
 			Imagem.move(limites.x, 0);
 		}
 	}
-	else if (limites.y < 0) {
-		if (inimigo->getPosicao().y < getPosicao().y) {
+	else if (limites.y < 0)
+	{
+		if (inimigo->getPosicao().y < getPosicao().y)
+		{
 			Imagem.move(0, -limites.y);
 		}
-		if (inimigo->getPosicao().y > getPosicao().y) {
+		if (inimigo->getPosicao().y > getPosicao().y)
+		{
 			Imagem.move(0, -limites.y);
 		}
 	}
-	static_cast<Entidades::Personagens::Inimigo*>(inimigo)->danar(this);
+	static_cast<Entidades::Personagens::Inimigo *>(inimigo)->danar(this);
 	no_ar = true;
 }
 
-void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf::Vector2f limites) {
-	if (limites.y < 0) {
-		if (obstaculo->getPosicao().y < getPosicao().y) {
+void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade *obstaculo, sf::Vector2f limites)
+{
+	if (limites.y < 0)
+	{
+		if (obstaculo->getPosicao().y < getPosicao().y)
+		{
 			Imagem.move(0, -limites.y);
 			parar_movimento_y();
 		}
-		if (obstaculo->getPosicao().y > getPosicao().y) {
+		if (obstaculo->getPosicao().y > getPosicao().y)
+		{
 			Imagem.move(0, +limites.y);
 			//	parar_movimento_y();
 			no_chao = true;
 			no_ar = false;
 		}
 	}
-	if (limites.x < 0) {
-		if (obstaculo->getPosicao().x < getPosicao().x) {
+	if (limites.x < 0)
+	{
+		if (obstaculo->getPosicao().x < getPosicao().x)
+		{
 			parar_movimento_x();
 		}
-		else if (obstaculo->getPosicao().x > getPosicao().x) {
+		else if (obstaculo->getPosicao().x > getPosicao().x)
+		{
 			parar_movimento_x();
 		}
 	}
-	static_cast<Entidades::Obstaculos::Obstaculo*>(obstaculo)->obstacular(this);
+	static_cast<Entidades::Obstaculos::Obstaculo *>(obstaculo)->obstacular(this);
 }
 
-Entidades::Projetil* Entidades::Personagens::Jogador::getArma() const {
+Entidades::Projetil *Entidades::Personagens::Jogador::getArma() const
+{
 	return arma;
 }
 
-void Entidades::Personagens::Jogador::setMovimento_direita(bool direita) {
+void Entidades::Personagens::Jogador::setMovimento_direita(bool direita)
+{
 	andar_direita = direita;
 }
 
-void Entidades::Personagens::Jogador::setMovimento_esquerda(bool esquerda) {
+void Entidades::Personagens::Jogador::setMovimento_esquerda(bool esquerda)
+{
 	andar_esquerda = esquerda;
 }
 
-void Entidades::Personagens::Jogador::executar() {
+void Entidades::Personagens::Jogador::executar()
+{
 
-	if (arma->getPontos()) { pontos++; std::cout << "pontuou" << endl; }
-	if (andar_direita) {
+	if (Imagem.getPosition().x <= 0)
+	{
+		setPosi(0, Imagem.getPosition().y);
+	}
+	else if (Imagem.getPosition().x >= 1248)
+	{
+		setPosi(1248, Imagem.getPosition().y);
+	}
+
+	if (arma->getPontos())
+	{
+		pontos++;
+		std::cout << "pontuou" << std::endl;
+	}
+	if (andar_direita)
+	{
 		mover_direita(rapidez);
 	}
-	else if (andar_esquerda) {
+	else if (andar_esquerda)
+	{
 		mover_esquerda(rapidez);
 	}
 	Calc_Fisica();
 	desenhar();
 }
 
-void Entidades::Personagens::Jogador::Inicializa() {
+void Entidades::Personagens::Jogador::Inicializa()
+{
 
 	if (fase == 1)
 	{
 		std::ifstream arquivo(ARQUIVOF);
-		if (!arquivo)
+		if (arquivo.peek() == -1 || !arquivo)
 		{
-			cout << "Erro ao abrir arquivo de salvamento" << endl;
-			arquivo.close();
-			exit(1);
-		}
-		if (arquivo.peek() == (-1)) {
 			arquivo.close();
 			Textura.loadFromImage(Grafico->getImagem(getId()));
 			Imagem.setTexture(Textura);
@@ -174,25 +213,26 @@ void Entidades::Personagens::Jogador::Inicializa() {
 		{
 			nlohmann::json json = nlohmann::json::parse(arquivo);
 
-			for (auto it = json.begin(); it != json.end(); ++it) {
+			for (auto it = json.begin(); it != json.end(); ++it)
+			{
 				string id = to_string((*it)["id"][0]);
 				string jogador = to_string((*it)["jogador2"][0]);
-				if (id == "1" && jogador == "0") {
+				if (id == "1" && jogador == "0" && !sou_jogador)
+				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					));
+						(float)((*it)["posicao"][1])));
 					Textura.loadFromImage(Grafico->getImagem(getId()));
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
 					criarProjetil();
 				}
-				else if (id == "1" && jogador == "1") {
+				else if (id == "1" && jogador == "1" && sou_jogador)
+				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					));
+						(float)((*it)["posicao"][1])));
 					Textura.loadFromImage(Grafico->getImagem(getId()));
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
@@ -207,13 +247,8 @@ void Entidades::Personagens::Jogador::Inicializa() {
 	if (fase == 2)
 	{
 		std::ifstream arquivod(ARQUIVOD);
-		if (!arquivod)
+		if (arquivod.peek() == (-1) || !arquivod)
 		{
-			cout << "Erro ao abrir arquivo de salvamento" << endl;
-			arquivod.close();
-			exit(1);
-		}
-		if (arquivod.peek() == (-1)) {
 			arquivod.close();
 			Textura.loadFromImage(Grafico->getImagem(getId()));
 			Imagem.setTexture(Textura);
@@ -226,25 +261,26 @@ void Entidades::Personagens::Jogador::Inicializa() {
 		{
 			nlohmann::json json = nlohmann::json::parse(arquivod);
 
-			for (auto it = json.begin(); it != json.end(); ++it) {
+			for (auto it = json.begin(); it != json.end(); ++it)
+			{
 				string id = to_string((*it)["id"][0]);
 				string jogador = to_string((*it)["jogador2"][0]);
-				if (id == "1" && jogador == "0" && !sou_jogador2) {
+				if (id == "1" && jogador == "0" && !sou_jogador2)
+				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					));
+						(float)((*it)["posicao"][1])));
 					Textura.loadFromImage(Grafico->getImagem(getId()));
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
 					criarProjetil();
 				}
-				else if (id == "1" && jogador == "1" && sou_jogador2) {
+				else if (id == "1" && jogador == "1" && sou_jogador2)
+				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					));
+						(float)((*it)["posicao"][1])));
 					Textura.loadFromImage(Grafico->getImagem(getId()));
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
@@ -258,15 +294,18 @@ void Entidades::Personagens::Jogador::Inicializa() {
 	}
 }
 
-int Entidades::Personagens::Jogador::getPontos() {
+int Entidades::Personagens::Jogador::getPontos()
+{
 	return pontos;
 }
 
-void Entidades::Personagens::Jogador::Reseta_Vidas() {
+void Entidades::Personagens::Jogador::Reseta_Vidas()
+{
 	num_vidas = 3;
 }
 
-void Entidades::Personagens::Jogador::criarProjetil() {
+void Entidades::Personagens::Jogador::criarProjetil()
+{
 	if (fase == 1)
 	{
 		std::ifstream arquivof(ARQUIVOF);
@@ -275,7 +314,8 @@ void Entidades::Personagens::Jogador::criarProjetil() {
 			cout << "Erro ao abrir arquivo de salvamento" << endl;
 			exit(1);
 		}
-		if (arquivof.peek() == -1) {
+		if (arquivof.peek() == -1)
+		{
 			arquivof.close();
 			arma = new Projetil();
 			arma->setDono(this);
@@ -284,18 +324,18 @@ void Entidades::Personagens::Jogador::criarProjetil() {
 		{
 			nlohmann::json json = nlohmann::json::parse(arquivof);
 
-			for (auto it = json.begin(); it != json.end(); ++it) {
+			for (auto it = json.begin(); it != json.end(); ++it)
+			{
 				string id = to_string((*it)["id"][0]);
-				if (id == "12") {
+				if (id == "12")
+				{
 					sf::Vector2f pos = sf::Vector2f(
 						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					);
+						(float)((*it)["posicao"][1]));
 					float vel = (float)((*it)["velocidade"][0]);
 					int visivel = (int)((*it)["visibilidade"][0]);
-					arma = new Projetil(pos, static_cast<Entidade*>(this), vel, static_cast<bool>(visivel));
+					arma = new Projetil(pos, static_cast<Entidade *>(this), vel, static_cast<bool>(visivel));
 					arma->setDono(this);
-
 				}
 				id = "";
 			}
@@ -312,28 +352,28 @@ void Entidades::Personagens::Jogador::criarProjetil() {
 			arquivod.close();
 			exit(1);
 		}
-		if (fase == 2 && arquivod.peek() == -1) {
+		if (fase == 2 && arquivod.peek() == -1)
+		{
 			arquivod.close();
 			arma = new Projetil();
 			arma->setDono(this);
-
 		}
 		else
 		{
 			nlohmann::json json = nlohmann::json::parse(arquivod);
 
-			for (auto it = json.begin(); it != json.end(); ++it) {
+			for (auto it = json.begin(); it != json.end(); ++it)
+			{
 				string id = to_string((*it)["id"][0]);
-				if (id == "12") {
+				if (id == "12")
+				{
 					sf::Vector2f pos = sf::Vector2f(
 						(float)((*it)["posicao"][0]),
-						(float)((*it)["posicao"][1])
-					);
+						(float)((*it)["posicao"][1]));
 					float vel = (float)((*it)["velocidade"][0]);
 					int visivel = (int)((*it)["visibilidade"][0]);
-					arma = new Projetil(pos, static_cast<Entidade*>(this), vel, static_cast<bool>(visivel));
+					arma = new Projetil(pos, static_cast<Entidade *>(this), vel, static_cast<bool>(visivel));
 					arma->setDono(this);
-
 				}
 				id = "";
 			}
@@ -342,7 +382,8 @@ void Entidades::Personagens::Jogador::criarProjetil() {
 	}
 }
 
-void Entidades::Personagens::Jogador::setFase(int f) {
+void Entidades::Personagens::Jogador::setFase(int f)
+{
 	fase = f;
 }
 
