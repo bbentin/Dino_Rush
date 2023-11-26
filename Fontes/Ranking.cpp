@@ -17,13 +17,8 @@ Ranking::~Ranking()
 void Ranking::carregar()
 {
 	std::ifstream arquivo(ARQUIVO);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		cout << "Arquivo vazio" << endl;
 	}

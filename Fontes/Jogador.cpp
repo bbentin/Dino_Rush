@@ -110,7 +110,6 @@ void Entidades::Personagens::Jogador::Colisao_Obstaculo(Entidade* obstaculo, sf:
 		}
 		if (obstaculo->getPosicao().y > getPosicao().y) {
 			Imagem.move(0, +limites.y);
-			//	parar_movimento_y();
 			no_chao = true;
 			no_ar = false;
 		}
@@ -162,7 +161,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
 		Imagem.setScale(2.0, 2.0);
-		setPosi(500, 500);
+		setPosi(16, 500);
 		setNoAr(true);
 	}
 	else
@@ -172,7 +171,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 		for (auto it = json.begin(); it != json.end(); ++it) {
 			std::string id = to_string((*it)["id"][0]);
 			std::string jogador = to_string((*it)["jogador2"][0]);
-			if (id == "1" && jogador == "0") {
+			if ((id == "1" && jogador == "0") && !sou_jogador2) {
 				sf::Vector2f pos1 = sf::Vector2f(
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
@@ -183,7 +182,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 				setPosi(pos1);
 				pontos = (int)((*it)["pontos"][0]);
 			}
-			else if (id == "1" && jogador == "1") {
+			else if (id == "1" && jogador == "1" && sou_jogador2) {
 				sf::Vector2f pos2 = sf::Vector2f(
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1])
@@ -210,13 +209,8 @@ void Entidades::Personagens::Jogador::Reseta_Vidas() {
 
 void Entidades::Personagens::Jogador::criarProjetil() {
 	std::ifstream arquivo(ARQUIVO);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		arma = new Projetil();
 		arma->setDono(this);
