@@ -96,21 +96,11 @@ void Fases::Fase::gerar_fase(int num)
 
 void Fases::Fase::CriarEntidades(char leitura, sf::Vector2f pos) {
 	switch (leitura) {
-	case '1':
-		if (Player1) {
-			//Player1->setPosi(pos.x * 16, 2);
-		}
-		break;
-	case '2':
-		if (Player2) {
-			//Player2->setPosi(pos.x * 16, pos.y * 16);
-		}
-		break;
 	case '8':
-		CriarChao(1, pos);
+		CriarChao(2, pos);
 		break;
 	case '9':
-		CriarChao(2, pos);
+		CriarChao(1, pos);
 		break;
 	default:
 		std::cout << "Caractere invalido" << std::endl;
@@ -189,13 +179,4 @@ bool Fases::Fase::getAtiva() {
 }
 
 void Fases::Fase::Inicializa() {
-	/*Textura.loadFromImage(Grafico->getImagem(getId()));
-	Imagem.setTexture(Textura);
-	G_Colisoes.addJogador(Player1);
-	gerar_fase(k_fase);
-	LEs.Inicializar();
-	Player1->Inicializa();*/
 }
-
-//Entidades::Personagens::Jogador* Fases::Fase::Player1 = nullptr;
-//Entidades::Personagens::Jogador* Fases::Fase::Player2 = nullptr;
