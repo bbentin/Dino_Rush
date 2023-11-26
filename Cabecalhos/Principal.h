@@ -4,6 +4,7 @@
 #include "ListaEntidades.h"
 #include "Deserto.h"
 #include "Floresta.h"
+#include "Ranking.h"
 #include <iostream>
 
 class Principal {
@@ -14,6 +15,7 @@ private:
 	Fases::Floresta* Primeira_fase;
 	Menu* menu_principal;
 	Menu* menu_pause;
+	Ranking *ranking;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
 
 public:

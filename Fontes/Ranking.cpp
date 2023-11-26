@@ -1,104 +1,77 @@
 #include "../Cabecalhos/Ranking.h"
 
-Ranking::Ranking() : score(0), playerName(nullptr), Menu()
+Ranking::Ranking() : Ente(15), pontos(), nomes(), text(), fonte()
 {
+	fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
+	text.setFont(fonte);
+	text.setCharacterSize(30);
+	text.setFillColor(sf::Color::Green);
+	text.setOutlineThickness(2);
+	text.setOutlineColor(sf::Color::Black);
 }
 
 Ranking::~Ranking()
 {
 }
 
-void Ranking::setScore(int s)
-{
-	score = s;
-}
-
-int Ranking::getScore()
-{
-	return score;
-}
-
-void Ranking::setPlayerName(char* name)
-{
-	playerName = name;
-}
-
-char* Ranking::getPlayerName()
-{
-	return playerName;
-}
-
-void Ranking::salvar()
-{
-
-}
-
 void Ranking::carregar()
 {
-	std::ifstream arquivo;
-	arquivo.open("Imagens/Menus/Ranking/ranking.txt");
-	std::string linha;
-	while (std::getline(arquivo, linha))
+	std::ifstream arquivo(ARQUIVO);
+	if (!arquivo)
 	{
-		std::istringstream iss(linha);
-		std::string nome;
-		int pontuacao;
-		iss >> nome >> pontuacao;
-		std::cout << nome << " " << pontuacao << std::endl;
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
 	}
-	arquivo.close();
-	ordenar();
-}
 
-void Ranking::ordenar()
-{
-	std::ifstream arquivo;
-	arquivo.open("Imagens/Menus/Ranking/ranking.txt");
-	std::string linha;
-	std::vector<std::string> linhas;
-	while (std::getline(arquivo, linha))
-	{
-		linhas.push_back(linha);
+	if (arquivo.peek() == -1) {
+		arquivo.close();
+		cout << "Arquivo vazio" << endl;
 	}
-	arquivo.close();
-	std::sort(linhas.begin(), linhas.end());
-	std::ofstream arquivo2;
-	arquivo2.open("Imagens/Menus/Ranking/ranking.txt");
-	for (int i = 0; i < linhas.size(); i++)
-	{
-		arquivo2 << linhas[i] << std::endl;
+	else {
+		nlohmann::json json = nlohmann::json::parse(arquivo);
+
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			string id = to_string((*it)["id"][0]);
+			string jogador = to_string((*it)["jogador2"][0]);
+			if (id == "1")
+			{
+				string aux = to_string((*it)["pontos"][0]);
+				pontos.push_back(aux);
+				if (jogador == "0")
+				{
+					nomes.push_back("Jogador 1");
+				}
+				else if (jogador == "1")
+				{
+					nomes.push_back("Jogador 2");
+				}
+			}
+		}
+		arquivo.close();
 	}
-	arquivo2.close();
-	salvar();
 }
 
 void Ranking::executar()
 {
-	carregar();
 	desenha();
 }
 
 void Ranking::desenha()
 {
-	// Abre o arquivo de ranking e faz a leitura e impressão na tela do ranking utilizando de textos do sfml na mesma tela de menu:
-	std::ifstream arquivo;
-	arquivo.open("Imagens/Menus/Ranking/ranking.txt");
-	std::string linha;
-	int i = 0;
-	while (std::getline(arquivo, linha))
+	desenhar();
+	for (int i = 0; i < pontos.size(); i++)
 	{
-		std::istringstream iss(linha);
-		std::string nome;
-		int pontuacao;
-		iss >> nome >> pontuacao;
-		sf::Text text;
-		text.setFont(getFonte());
-		text.setString(nome + " " + std::to_string(pontuacao));
-		text.setCharacterSize(30);
-		text.setFillColor(sf::Color::White);
-		text.setPosition(100, 100 + i * 50);
-		//Grafico->getTela()->draw(text);
-		i++;
+		std::stringstream ss;
+		ss << nomes[i] << " " << pontos[i];
+		text.setString(ss.str());
+		text.setPosition(sf::Vector2f(50, (i + 1) * 50));
+		Grafico->getTela()->draw(text);
 	}
+}
 
+void Ranking::Inicializa()
+{
+	carregar();
+	Textura.loadFromImage(Grafico->getImagem(getId()));
+	Imagem.setTexture(Textura);
 }
