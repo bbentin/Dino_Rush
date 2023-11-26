@@ -4,7 +4,10 @@
 #include "Projetil.h"
 #include <sstream>
 #include <fstream>
+#include <iostream>
+#include <string>
 #include "../json.hpp"
+using namespace std;
 
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
 

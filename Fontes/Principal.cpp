@@ -2,7 +2,8 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr){
+
+Principal::Principal() :GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr),ranking(nullptr){
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
 	menu_principal = new Menu(false);
@@ -25,17 +26,18 @@ void Principal::Executar() {
 		GGrafico.Limpar_Tela();
 		GEventos.executar();
 		if(GEventos.getstate() == 0){ menu_principal->executar();}
-
 		if (GEventos.getstate() == 1) {
 			if (Primeira_fase == nullptr) {
+				GEventos.setState(1);
 				Primeira_fase = new Fases::Floresta();
 				Primeira_fase->setJogador(&Primeiro);
 				Primeira_fase->setJogador(&Segundo);
 				Primeira_fase->Inicializa();
-			}else {
+			}
+			else {
 				Primeira_fase->executar();
 				if (Primeira_fase->verificaFinal()) {
-					Primeira_fase = nullptr;
+    			Primeira_fase = nullptr;
 					delete Primeira_fase;
 					Primeiro.Reseta_Vidas();
 					Segundo.Reseta_Vidas();
@@ -53,7 +55,8 @@ void Principal::Executar() {
 			}
 			else {
 				Segunda_fase->executar();
-				if (Segunda_fase->verificaFinal()) {
+				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0) {
+					//Segunda_fase->salvar();
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
 					Primeiro.Reseta_Vidas();
@@ -64,8 +67,19 @@ void Principal::Executar() {
 			}
 		}
 		else if (GEventos.getstate() == 3) {
-			//GEventos.setState(3);
-			//ranking->executar();
+			if (ranking == nullptr) {
+				ranking = new Ranking();
+				ranking->Inicializa();
+			}
+			else
+			{
+				ranking->executar();
+				if (GEventos.getstate() == 0) {
+					ranking = nullptr;
+					delete ranking;
+					menu->reset();
+				}
+			}
 		}
 		else if (GEventos.getstate() == 5) {
 			menu_pause->executar();

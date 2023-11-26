@@ -8,19 +8,19 @@ Gerenciadores::Gerenciador_Eventos::~Gerenciador_Eventos() {
 	Jogador1 = nullptr; Jogador2 = nullptr; menu_principal = nullptr; menu_pause = nullptr; delete Unico;
 }
 
-Gerenciadores::Gerenciador_Eventos* Gerenciadores::Gerenciador_Eventos::Singleton(){
+Gerenciadores::Gerenciador_Eventos* Gerenciadores::Gerenciador_Eventos::Singleton() {
 	if (Unico == nullptr) {
-		Unico  = new Gerenciador_Eventos();
+		Unico = new Gerenciador_Eventos();
 	}
 	return Unico;
 }
 
 
-void Gerenciadores::Gerenciador_Eventos::setTela(sf::RenderWindow* Tela){
+void Gerenciadores::Gerenciador_Eventos::setTela(sf::RenderWindow* Tela) {
 	PTela = Tela;
 }
 
-void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Jogador* Player){
+void Gerenciadores::Gerenciador_Eventos::setJogador(Entidades::Personagens::Jogador* Player) {
 	if (Jogador1 == nullptr) {
 		Jogador1 = Player;
 	}
@@ -50,7 +50,7 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 	while (PTela->pollEvent(evento)){
 
 
-		if (state.top() == 0) {	// controle das ações do menu
+		if (state.top() == 0) {	// controle das aï¿½ï¿½es do menu
 			if (evento.type == sf::Event::KeyPressed) {
 				switch (evento.key.code) {
 				case sf::Keyboard::Up:
@@ -68,7 +68,7 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				}
 			}
 		}
-		if (state.top() == 1 || state.top() == 2) { // controle das ações dos Jogadores
+		if (state.top() == 1 || state.top() == 2) { // controle das aï¿½ï¿½es dos Jogadores
 			if (evento.type == sf::Event::KeyPressed) {
 				switch (evento.key.code) {
 				case sf::Keyboard::A:
