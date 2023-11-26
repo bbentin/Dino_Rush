@@ -21,7 +21,6 @@ Gerenciadores::Gerenciador_Grafico* Principal::getGrafico() {
 }
 
 void Principal::Executar() {
-	//GEventos.setState(0);
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
 		GEventos.executar();

@@ -91,6 +91,18 @@ void Menu::reset(){
 	selected = 1;
 }
 
+int Menu::GetItem(){
+	return selected;
+}
+
+void Menu::setPressed(bool press){
+	pressed = press;
+}
+
+bool Menu::isPressed(){
+	return pressed;
+}
+
 const bool Menu::getPause(){
 	return pause;
 }
