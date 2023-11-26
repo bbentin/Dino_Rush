@@ -5,3 +5,6 @@
 /.vs
 /Debug
 /SFML
+Fontes/.vscode/c_cpp_properties.json
+Fontes/.vscode/launch.json
+Fontes/.vscode/settings.json

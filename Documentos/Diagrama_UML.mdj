@@ -5092,8 +5092,8 @@
 									"visible": null,
 									"fillColor": "#FFFFFF",
 									"font": "Arial;11;0",
-									"left": 617,
-									"top": 56,
+									"left": 353,
+									"top": 25,
 									"height": 11,
 									"alpha": 15707963267949,
 									"distance": 30,
@@ -5111,8 +5111,8 @@
 									"visible": false,
 									"fillColor": "#FFFFFF",
 									"font": "Arial;11;0",
-									"left": 616,
-									"top": 41,
+									"left": 338,
+									"top": 26,
 									"height": 11,
 									"alpha": 15707963267949,
 									"distance": 15,
@@ -5130,8 +5130,8 @@
 									"visible": false,
 									"fillColor": "#FFFFFF",
 									"font": "Arial;11;0",
-									"left": 615,
-									"top": 41,
+									"left": 338,
+									"top": 27,
 									"height": 11,
 									"alpha": -15707963267949,
 									"distance": 15,
@@ -8785,7 +8785,7 @@
 									"edgePosition": 1
 								}
 							],
-							"lineColor": "#800040",
+							"lineColor": "#cc076a",
 							"fillColor": "#800040",
 							"font": "Arial;11;0",
 							"head": {
@@ -10131,6 +10131,25 @@
 											"height": 11,
 											"text": "-dono: Entidade*",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGMAYTIrk0/Rkc=",
+											"_parent": {
+												"$ref": "RqqbaZhIbU6muqXxP3V9QwAA"
+											},
+											"model": {
+												"$ref": "AAAAAAGMAYTIWk0qy8M="
+											},
+											"lineColor": "#800000",
+											"fillColor": "#7fff00",
+											"font": "Arial;11;0",
+											"left": 2541,
+											"top": 673,
+											"width": 230.2158203125,
+											"height": 11,
+											"text": "-pontua: bool",
+											"horizontalAlignment": 0
 										}
 									],
 									"lineColor": "#800000",
@@ -10139,7 +10158,7 @@
 									"left": 2368,
 									"top": 666,
 									"width": 240.2158203125,
-									"height": 34
+									"height": 47
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -10280,7 +10299,7 @@
 							"left": 2368,
 							"top": 632,
 							"width": 240.2158203125,
-							"height": 141,
+							"height": 154,
 							"showProperty": false,
 							"nameCompartment": {
 								"$ref": "nV3en3xTdUasqVnGoBLUFwAA"
@@ -14010,7 +14029,7 @@
 									"fillColor": "#FFFFFF",
 									"font": "Arial;11;0",
 									"left": 619,
-									"top": 251,
+									"top": 307,
 									"height": 11,
 									"alpha": 0,
 									"distance": 30,
@@ -14047,7 +14066,7 @@
 									"fillColor": "#FFFFFF",
 									"font": "Arial;11;0",
 									"left": 591,
-									"top": 260,
+									"top": 316,
 									"width": 6.11767578125,
 									"height": 11,
 									"alpha": -1,
@@ -14086,7 +14105,7 @@
 									"fillColor": "#FFFFFF",
 									"font": "Arial;11;0",
 									"left": 629,
-									"top": 251,
+									"top": 307,
 									"height": 11,
 									"alpha": 0,
 									"distance": 40,
@@ -29249,6 +29268,16 @@
 							"name": "dono",
 							"visibility": "private",
 							"type": "Entidade*"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGMAYTIWk0qy8M=",
+							"_parent": {
+								"$ref": "82LAi2UIo02RgIoh3hOn0gAA"
+							},
+							"name": "pontua",
+							"visibility": "private",
+							"type": "bool"
 						}
 					],
 					"operations": [
