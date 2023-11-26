@@ -129,8 +129,11 @@ void Entidades::Personagens::Jogador::setMovimento_esquerda(bool esquerda){
 }
 
 void Entidades::Personagens::Jogador::executar() {
-	
-	if (arma->getPontos()) { pontos++; std::cout << "pontuou" << endl; }
+
+	if (Imagem.getPosition().x <= 0) { setPosi(0, Imagem.getPosition().y); }
+	else if (Imagem.getPosition().x >= 1248) { setPosi(1248, Imagem.getPosition().y);}
+
+	if (arma->getPontos()) { pontos++; std::cout << "pontuou" << std::endl; }
 	if (andar_direita) {
 		mover_direita(rapidez);
 	}
