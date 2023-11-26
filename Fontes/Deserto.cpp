@@ -140,6 +140,7 @@ void Fases::Deserto::CriarLamas(){
 			id = "";
 		}
 		arquivo.close();
+		exit(1);
 	}
 }
 

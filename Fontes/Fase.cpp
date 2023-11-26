@@ -82,8 +82,8 @@ void Fases::Fase::gerar_fase(int num)
 				if (id == "[9]")
 				{
 					CriarChao(sf::Vector2f(
-													(float)((*it)["posicao"][0]),
-													(float)((*it)["posicao"][1])));
+													(float)((*it)["posicao"][0])/16,
+													(float)((*it)["posicao"][1])/16));
 				}
 			}
 			arquivoj.close();
@@ -121,7 +121,7 @@ void Fases::Fase::gerar_fase(int num)
 			for (auto it = json.begin(); it != json.end(); ++it)
 			{
 				string id = to_string((*it).front());
-				if (id == "[8]")
+				if (id == "[9]")
 				{
 					CriarChao( sf::Vector2f(
 													(float)((*it)["posicao"][0])/16,

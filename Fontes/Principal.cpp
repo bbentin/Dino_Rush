@@ -64,9 +64,8 @@ void Principal::Executar() {
 			else
 			{
 				Segunda_fase->executar();
-				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0)
-				{
-					Segunda_fase->salvar();
+				if (Segunda_fase->verificaFinal())
+				{		
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
 					Primeiro.Reseta_Vidas();
