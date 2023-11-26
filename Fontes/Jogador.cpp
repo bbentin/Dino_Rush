@@ -6,7 +6,6 @@ andar_esquerda(false), arma(nullptr), altura_jogador(828), pontos(0), fase(0) {
 	rapidez = 4;
 	num_vidas = 5;
 	olhando_direita = true;
-	criarProjetil();
 	no_ar = true;
 	if (!Jogador2) {
 		Jogador2 = true;
@@ -169,6 +168,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 			Imagem.setScale(2.0, 2.0);
 			setPosi(0, 500);
 			setNoAr(true);
+			criarProjetil();
 		}
 		else
 		{
@@ -186,6 +186,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
+					criarProjetil();
 				}
 				else if (id == "1" && jogador == "1") {
 					setPosi(sf::Vector2f(
@@ -196,6 +197,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
+					criarProjetil();
 				}
 				id = "";
 			}
@@ -216,8 +218,9 @@ void Entidades::Personagens::Jogador::Inicializa() {
 			Textura.loadFromImage(Grafico->getImagem(getId()));
 			Imagem.setTexture(Textura);
 			Imagem.setScale(2.0, 2.0);
-			setPosi(500, 500);
+			setPosi(0, 500);
 			setNoAr(true);
+			criarProjetil();
 		}
 		else
 		{
@@ -226,7 +229,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 			for (auto it = json.begin(); it != json.end(); ++it) {
 				string id = to_string((*it)["id"][0]);
 				string jogador = to_string((*it)["jogador2"][0]);
-				if (id == "1" && jogador == "0") {
+				if (id == "1" && jogador == "0" && !sou_jogador2) {
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
 						(float)((*it)["posicao"][1])
@@ -235,8 +238,9 @@ void Entidades::Personagens::Jogador::Inicializa() {
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
+					criarProjetil();
 				}
-				else if (id == "1" && jogador == "1") {
+				else if (id == "1" && jogador == "1" && sou_jogador2) {
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
 						(float)((*it)["posicao"][1])
@@ -245,6 +249,7 @@ void Entidades::Personagens::Jogador::Inicializa() {
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
+					criarProjetil();
 				}
 				id = "";
 			}
@@ -262,77 +267,79 @@ void Entidades::Personagens::Jogador::Reseta_Vidas() {
 }
 
 void Entidades::Personagens::Jogador::criarProjetil() {
-	arma = new Projetil();
-	arma->setDono(this);
-	/*std::ifstream arquivo(ARQUIVOF);
-	if (!arquivo)
+	if (fase == 1)
 	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
-
-	if (fase == 1 && arquivo.peek() == -1) {
-		arquivo.close();
-		arma = new Projetil();
-		arma->setDono(this);
-
-	}
-	else
-	{
-		nlohmann::json json = nlohmann::json::parse(arquivo);
-
-		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it)["id"][0]);
-			if (id == "12") {
-				sf::Vector2f pos = sf::Vector2f(
-					(float)((*it)["posicao"][0]),
-					(float)((*it)["posicao"][1])
-				);
-				float vel = (float)((*it)["velocidade"][0]);
-				int visivel = (int)((*it)["visibilidade"][0]);
-				arma = new Projetil(pos, static_cast<Entidade*>(this), vel, static_cast<bool>(visivel));
-				arma->setDono(this);
-
-			}
-			id = "";
+		std::ifstream arquivof(ARQUIVOF);
+		if (!arquivof)
+		{
+			cout << "Erro ao abrir arquivo de salvamento" << endl;
+			exit(1);
 		}
-		arquivo.close();
-	}
-
-	std::ifstream arquivod(ARQUIVOD);
-	if (!arquivod)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		arquivod.close();
-		exit(1);
-	}
-	if (fase == 2 && arquivod.peek() == -1) {
-		arquivod.close();
-		arma = new Projetil();
-		arma->setDono(this);
-
-	}
-	else
-	{
-		nlohmann::json json = nlohmann::json::parse(arquivod);
-
-		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it)["id"][0]);
-			if (id == "12") {
-				sf::Vector2f pos = sf::Vector2f(
-					(float)((*it)["posicao"][0]),
-					(float)((*it)["posicao"][1])
-				);
-				float vel = (float)((*it)["velocidade"][0]);
-				int visivel = (int)((*it)["visibilidade"][0]);
-				arma = new Projetil(pos, static_cast<Entidade*>(this), vel, static_cast<bool>(visivel));
-				arma->setDono(this);
-
-			}
-			id = "";
+		if (arquivof.peek() == -1) {
+			arquivof.close();
+			arma = new Projetil();
+			arma->setDono(this);
 		}
-		arquivod.close();
-	}*/
+		else
+		{
+			nlohmann::json json = nlohmann::json::parse(arquivof);
+
+			for (auto it = json.begin(); it != json.end(); ++it) {
+				string id = to_string((*it)["id"][0]);
+				if (id == "12") {
+					sf::Vector2f pos = sf::Vector2f(
+						(float)((*it)["posicao"][0]),
+						(float)((*it)["posicao"][1])
+					);
+					float vel = (float)((*it)["velocidade"][0]);
+					int visivel = (int)((*it)["visibilidade"][0]);
+					arma = new Projetil(pos, static_cast<Entidade*>(this), vel, static_cast<bool>(visivel));
+					arma->setDono(this);
+
+				}
+				id = "";
+			}
+			arquivof.close();
+		}
+	}
+
+	if (fase == 2)
+	{
+		std::ifstream arquivod(ARQUIVOD);
+		if (!arquivod)
+		{
+			cout << "Erro ao abrir arquivo de salvamento" << endl;
+			arquivod.close();
+			exit(1);
+		}
+		if (fase == 2 && arquivod.peek() == -1) {
+			arquivod.close();
+			arma = new Projetil();
+			arma->setDono(this);
+
+		}
+		else
+		{
+			nlohmann::json json = nlohmann::json::parse(arquivod);
+
+			for (auto it = json.begin(); it != json.end(); ++it) {
+				string id = to_string((*it)["id"][0]);
+				if (id == "12") {
+					sf::Vector2f pos = sf::Vector2f(
+						(float)((*it)["posicao"][0]),
+						(float)((*it)["posicao"][1])
+					);
+					float vel = (float)((*it)["velocidade"][0]);
+					int visivel = (int)((*it)["visibilidade"][0]);
+					arma = new Projetil(pos, static_cast<Entidade*>(this), vel, static_cast<bool>(visivel));
+					arma->setDono(this);
+
+				}
+				id = "";
+			}
+			arquivod.close();
+		}
+	}
 }
 
 void Entidades::Personagens::Jogador::setFase(int f) {

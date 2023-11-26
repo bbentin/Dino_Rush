@@ -12,9 +12,9 @@ namespace Fases {
         public Fase {
 
     private:
-        const int pos_Moscas[5],pos_Gosmonas[5],pos_Chefao[3];
-        const int pos_Lamas[5],pos_Espinhos[5]; 
-        int num_Moscas, num_Gosmonas, num_Lamas, num_Espinhos, num_Chefoes;
+        const int pos_Moscas[6],pos_Chefao[4];
+        const int pos_Lamas[6]; 
+        int num_Moscas, num_Lamas, num_Chefoes;
     public:
 
         Deserto();
@@ -23,10 +23,8 @@ namespace Fases {
         void CriarInimigos();
         void CriarObstaculos();
         void CriarMoscas();
-        void CriarGosmonas();
         void CriarChefao();
         void CriarLamas();
-        void CriarEspinhos();
         void Inicializa();
         void salvar();
     };

@@ -4,7 +4,7 @@
 #define ARQUIVOD "Imagens/Fase/Deserto/entidades.json"
 
 Fases::Fase::Fase(const int i, const int k) :Ente(i), relogio_global(), G_Colisoes(), LEs(), k_fase(k), Player1(nullptr), Player2(nullptr)
-, altura_spawn_inimigos(600), altura_spawn_obstaculos(740), ativa(false), final(false), num_inimigos(0), recuperada(false) {
+, altura_spawn_inimigos(600), altura_spawn_obstaculos(920), ativa(false), final(false), num_inimigos(0), recuperada(false) {
 
 }
 

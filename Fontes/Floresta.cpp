@@ -1,10 +1,10 @@
 #include "../Cabecalhos/Floresta.h"
 
-Fases::Floresta::Floresta():Fase(14, 1), pos_Espinhos{8,17,25,35,70}, pos_Lamas{10,20,30,40,50},
-pos_Gosmas{5,20,32,41,60}, pos_Moscas{15,30,45,51,59} {
+Fases::Floresta::Floresta() :Fase(14, 1), pos_Espinhos{ 8,25,39,43,60,72 },
+pos_Gosmas{ 5,20,33,41,48,65 }, pos_Moscas{ 15,30,45,53,59,73 } {
 	srand(time(NULL));
-	num_Moscas = 3 + rand() % 3;	num_Espinhos = 3 + rand() % 3;
-	num_Gosmas = 3 + rand() % 3;	num_Lamas = 3 + rand() % 3;
+	num_Moscas = 3 + rand() % 4;	num_Espinhos = 3 + rand() % 4;
+	num_Gosmas = 3 + rand() % 4;
 
 	gerar_fase(k_fase);
 }
@@ -129,7 +129,6 @@ void Fases::Floresta::CriarGosmas() {
 
 void Fases::Floresta::CriarObstaculos() {
 	CriarEspinhos();
-	CriarLamas();
 }
 
 void Fases::Floresta::CriarEspinhos() {
@@ -173,45 +172,6 @@ void Fases::Floresta::CriarEspinhos() {
 	}
 }
 
-void Fases::Floresta::CriarLamas() {
-	std::ifstream arquivo(ARQUIVOF);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
-
-	if (arquivo.peek() == -1) {
-		arquivo.close();
-		for (int i = 0; i < num_Lamas; i++) {
-			Lama* pLama = new Lama(); pLama->setPosi(pos_Lamas[i] * 16, altura_spawn_obstaculos);
-			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
-			LEs.InserirEntidade(static_cast<Entidade*> (pLama));
-		}
-	}
-	else
-	{
-		nlohmann::json json = nlohmann::json::parse(arquivo);
-
-		Lama* pLama;
-
-		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it).front());
-			if (id == "[7]") {
-				sf::Vector2f pos = sf::Vector2f(
-					(float)((*it)["posicao"][0]),
-					(float)((*it)["posicao"][1])
-				);
-				LEs.InserirEntidade(static_cast<Entidade*> (pLama = new Lama(pos)));
-				pLama->setPosi(pos);
-				G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pLama));
-			}
-			id = "";
-		}
-		arquivo.close();
-	}
-}
-
 void Fases::Floresta::Inicializa() {
 	ativa = true;
 
@@ -221,9 +181,10 @@ void Fases::Floresta::Inicializa() {
 	CriarInimigos();
 	Player1->setFase(1);
 	Player2->setFase(1);
-	LEs.Inicializar();
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
+	LEs.Inicializar();
+	
 }
 
 void Fases::Floresta::salvar() {

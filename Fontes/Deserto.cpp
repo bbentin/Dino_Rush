@@ -1,11 +1,11 @@
 #include "../Cabecalhos/Deserto.h"
 
-Fases::Deserto::Deserto() :Fase(11, 2), pos_Moscas{ 5,15,30,40,50 }, pos_Gosmonas{ 15,25,36,48,50 }, pos_Chefao{ 24, 52, 74 },
-pos_Lamas{ 10, 20, 25, 30, 40 }, pos_Espinhos{ 15,30,35,40,55 } {
+Fases::Deserto::Deserto() :Fase(11, 2), pos_Moscas{ 5,15,25,40,57,70}, pos_Chefao{33, 45, 64, 74 }, pos_Lamas{ 10, 20, 30, 40, 50, 60 }
+{
 	srand(time(NULL));
-	num_Moscas = 3 + rand() % 3;	num_Gosmonas = 3 + rand() % 3;
-	num_Lamas = 3 + rand() % 3;		num_Espinhos = 3 + rand() % 3;
-	num_Chefoes = 3;
+	num_Moscas = 3 + rand() % 4;
+	num_Lamas = 3 + rand() % 4;
+	num_Chefoes = 3 + rand() % 1;
 	gerar_fase(k_fase);
 	ativa = true;
 }
@@ -23,7 +23,6 @@ void Fases::Deserto::executar() {
 
 void Fases::Deserto::CriarInimigos(){
 	CriarMoscas();
-	//CriarGosmonas();
 	CriarChefao();
 }
 
@@ -72,15 +71,6 @@ void Fases::Deserto::CriarMoscas(){
 			id = "";
 		}
 		arquivo.close();
-	}
-}
-
-void Fases::Deserto::CriarGosmonas(){
-	for (int i = 0; i < num_Gosmonas; i++) {
-		Gosmona* pGosmona = new Gosmona; pGosmona->setPosi(pos_Gosmonas[i] * 16, altura_spawn_inimigos);
-		G_Colisoes.addInimigo(static_cast<Inimigo*>(pGosmona));
-		LEs.InserirEntidade(static_cast<Entidade*> (pGosmona));
-		num_inimigos++;
 	}
 }
 
@@ -167,14 +157,6 @@ void Fases::Deserto::CriarLamas(){
 			id = "";
 		}
 		arquivo.close();
-	}
-}
-
-void Fases::Deserto::CriarEspinhos(){
-	for (int i = 0; i < num_Espinhos; i++) {
-		Espinhos* pEspinhos = new Espinhos();	pEspinhos->setPosi(pos_Espinhos[i] * 16, altura_spawn_obstaculos);
-		G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pEspinhos));
-		LEs.InserirEntidade(static_cast<Entidade*> (pEspinhos));
 	}
 }
 

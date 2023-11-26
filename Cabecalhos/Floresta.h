@@ -11,9 +11,9 @@ namespace Fases {
         public Fase {
 
     private:
-        const int pos_Moscas[5], pos_Gosmas[5];
-        const int pos_Espinhos[5], pos_Lamas[5];
-        int num_Moscas,num_Gosmas,num_Espinhos,num_Lamas;
+        const int pos_Moscas[6], pos_Gosmas[6];
+        const int pos_Espinhos[6];
+        int num_Moscas, num_Gosmas, num_Espinhos;
 
     public:
 
@@ -26,7 +26,6 @@ namespace Fases {
         void CriarGosmas();
         void CriarObstaculos();
         void CriarEspinhos();
-        void CriarLamas();
         void Inicializa();
         void salvar();
     };
