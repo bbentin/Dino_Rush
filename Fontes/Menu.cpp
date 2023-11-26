@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu(bool pau):Ente(13),pause(pau), fonte(), pressed(false), selected(1){
+Menu::Menu(int pau):Ente(13),pause(pau), fonte(), pressed(false), selected(1){
 	Inicializa();
 }
 
@@ -15,7 +15,7 @@ void Menu::executar() {
 }
 
 void Menu::Inicializa(){
-	if (!pause) {
+	if (pause == 0) {
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
 		fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
@@ -35,7 +35,7 @@ void Menu::Inicializa(){
 		textos[1].setFillColor(sf::Color::Red);
 		textos[1].setOutlineThickness(4);
 	}
-	if (pause) {
+	if (pause == 1) {
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
 		fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
@@ -46,6 +46,27 @@ void Menu::Inicializa(){
 		textos[4].setString("Fechar o Jogo");
 
 		for (int i = 0; i < 5; i++) {
+			textos[i].setFont(fonte);
+			textos[i].setFillColor(sf::Color::Green);
+			textos[i].setOutlineColor(sf::Color::Black);
+			textos[i].setOutlineThickness(2);
+			textos[i].setPosition(sf::Vector2f(100, (i + 1) * 100));
+		}
+		textos[1].setFillColor(sf::Color::Red);
+		textos[1].setOutlineThickness(4);
+	}
+	if (pause == 2)
+	{
+		Textura.loadFromImage(Grafico->getImagem(getId()));
+		Imagem.setTexture(Textura);
+		fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
+		textos[0].setString("Digite seu nome:");
+		// seta string vazia que vai ler o valor digitado:
+		textos[1].setString("");
+		textos[2].setString("Confirmar");
+		textos[3].setString("Voltar");
+		textos[4].setString("Sair sem salvar");
+		for (int i = 0; i < 3; i++) {
 			textos[i].setFont(fonte);
 			textos[i].setFillColor(sf::Color::Green);
 			textos[i].setOutlineColor(sf::Color::Black);
@@ -113,4 +134,12 @@ const bool Menu::getPause(){
 
 sf::Font Menu::getFonte(){
 	return fonte;
+}
+
+void Menu::setNome(std::string nome) {
+	textos[1].setString(nome);
+}
+
+std::string Menu::getNome() {
+	return textos[1].getString();
 }

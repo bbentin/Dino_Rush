@@ -160,6 +160,17 @@ void Fases::Deserto::CriarLamas(){
 	}
 }
 
+void Fases::Deserto::Apagar_save() {
+	std::ofstream arquivo(ARQUIVOD);
+	if (!arquivo)
+	{
+		cout << "Erro ao abrir arquivo de salvamento" << endl;
+		exit(1);
+	}
+	arquivo << "";
+	arquivo.close();
+}
+
 void Fases::Deserto::Inicializa(){
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);

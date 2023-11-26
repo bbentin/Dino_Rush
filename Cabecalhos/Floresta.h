@@ -26,6 +26,7 @@ namespace Fases {
         void CriarGosmas();
         void CriarObstaculos();
         void CriarEspinhos();
+        void Apagar_save();
         void Inicializa();
         void salvar();
     };

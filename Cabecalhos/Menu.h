@@ -8,14 +8,14 @@ class Menu :
 	public Ente {
 
 private:
-	const bool pause;
+	const int pause;
 	sf::Font fonte;
 	int selected;
 	bool pressed;
 	sf::Text textos[MAX_NUMBER_OF_ITEMS];
 
 public:
-	Menu(bool stop = false);
+	Menu(int stop = 0);
 	~Menu();
 
 	void executar();
@@ -29,5 +29,7 @@ public:
 	bool isPressed();
 	const bool getPause();
 	sf::Font getFonte();
+	void setNome(std::string nome);
+	std::string getNome();
 };
 

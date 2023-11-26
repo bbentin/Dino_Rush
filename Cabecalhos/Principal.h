@@ -15,6 +15,7 @@ private:
 	Fases::Floresta* Primeira_fase;
 	Menu* menu_principal;
 	Menu* menu_pause;
+	Menu* menu_salvar;
 	Ranking *ranking;
 	Entidades::Personagens::Jogador Primeiro, Segundo;
 

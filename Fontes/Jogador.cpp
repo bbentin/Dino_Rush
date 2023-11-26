@@ -8,6 +8,7 @@ Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) : Perso
 	num_vidas = 5;
 	olhando_direita = true;
 	no_ar = true;
+	//criarProjetil();
 	if (!Jogador2)
 	{
 		Jogador2 = true;
@@ -206,7 +207,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 			Imagem.setScale(2.0, 2.0);
 			setPosi(0, 500);
 			setNoAr(true);
-			criarProjetil();
+			//criarProjetil();
 		}
 		else
 		{
@@ -216,7 +217,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 			{
 				string id = to_string((*it)["id"][0]);
 				string jogador = to_string((*it)["jogador2"][0]);
-				if (id == "1" && jogador == "0" && !sou_jogador)
+				if (id == "1" && jogador == "0" && !sou_jogador2)
 				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
@@ -225,9 +226,9 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					criarProjetil();
+					//criarProjetil();
 				}
-				else if (id == "1" && jogador == "1" && sou_jogador)
+				else if (id == "1" && jogador == "1" && sou_jogador2)
 				{
 					setPosi(sf::Vector2f(
 						(float)((*it)["posicao"][0]),
@@ -236,7 +237,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					criarProjetil();
+					//criarProjetil();
 				}
 				id = "";
 			}
@@ -254,7 +255,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 			Imagem.setScale(2.0, 2.0);
 			setPosi(0, 500);
 			setNoAr(true);
-			criarProjetil();
+			//criarProjetil();
 		}
 		else
 		{
@@ -273,7 +274,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					criarProjetil();
+					//criarProjetil();
 				}
 				else if (id == "1" && jogador == "1" && sou_jogador2)
 				{
@@ -284,7 +285,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					criarProjetil();
+					//criarProjetil();
 				}
 				id = "";
 			}
@@ -307,9 +308,9 @@ void Entidades::Personagens::Jogador::criarProjetil()
 {
 	if (fase == 1)
 	{
-		std::ifstream arquivo(ARQUIVO);
+		std::ifstream arquivof(ARQUIVOF);
 
-		if (arquivo.peek() == -1 || !arquivo)
+		if (arquivof.peek() == -1 || !arquivof)
 		{
 			arquivof.close();
 			arma = new Projetil();
@@ -324,6 +325,7 @@ void Entidades::Personagens::Jogador::criarProjetil()
 				string id = to_string((*it)["id"][0]);
 				if (id == "12")
 				{
+					cout << (float)((*it)["posicao"][0]) << endl;
 					sf::Vector2f pos = sf::Vector2f(
 						(float)((*it)["posicao"][0]),
 						(float)((*it)["posicao"][1]));

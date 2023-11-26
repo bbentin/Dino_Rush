@@ -2,12 +2,13 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() : GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu(nullptr), ranking(nullptr)
+Principal::Principal() : GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), ranking(nullptr)
 {
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
-	menu_principal = new Menu(false);
-	menu_pause = new Menu(true);
+	menu_principal = new Menu(0);
+	menu_pause = new Menu(1);
+	menu_salvar = new Menu(2);
 	GEventos.setTela(GGrafico.getTela());
 	GEventos.setJogador(&Primeiro);
 	GEventos.setJogador(&Segundo);
@@ -44,6 +45,7 @@ void Principal::Executar() {
 				Primeira_fase->executar();
 				if (Primeira_fase->verificaFinal())
 				{
+					Primeira_fase->Apagar_save();
 					Primeira_fase = nullptr;
 					delete Primeira_fase;
 					Primeiro.Reseta_Vidas();
@@ -66,7 +68,7 @@ void Principal::Executar() {
 				Segunda_fase->executar();
 				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0)
 				{
-					Segunda_fase->salvar();
+					Segunda_fase->Apagar_save();
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
 					Primeiro.Reseta_Vidas();
@@ -101,14 +103,6 @@ void Principal::Executar() {
 				switch (menu_pause->GetItem())
 				{
 				case 1:
-					if (GEventos.getstate() == 1)
-					{
-						Primeira_fase->salvar();
-					}
-					else if (GEventos.getstate() == 2)
-					{
-						Segunda_fase->salvar();
-					}
 					menu_pause->setPressed(false);
 					break;
 				case 2:
@@ -124,6 +118,36 @@ void Principal::Executar() {
 				default:
 					break;
 				}
+			}
+		}
+		else if (GEventos.getstate() == 6)
+		{
+			menu_salvar->executar();
+			switch (menu_salvar->GetItem())
+			{
+			case 2:
+				if (GEventos.getstate() == 1)
+				{
+					Primeira_fase->salvar();
+				}
+				if (GEventos.getstate() == 2)
+				{
+					Segunda_fase->salvar();
+				}
+				menu_salvar->setPressed(false);
+				break;
+			case 3:
+				menu_salvar->setPressed(false);
+				break;
+			case 4:
+				menu_salvar->setPressed(false);
+				while (GEventos.getstate() != 0)
+				{
+					GEventos.finaliza_atual();
+				}
+				break;
+			default:
+				break;
 			}
 		}
 		else if (GEventos.getstate() == 4)

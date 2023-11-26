@@ -10,6 +10,7 @@
 using namespace std;
 
 #define ARQUIVO "Imagens/Fase/Floresta/entidades.json"
+#define ARQUIVO2 "Imagens/Fase/Deserto/entidades.json"
 
 class Ranking : public Ente
 {

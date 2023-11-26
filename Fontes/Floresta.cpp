@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Floresta.h"
 
 Fases::Floresta::Floresta() : Fase(14, 1), pos_Espinhos{8, 25, 39, 43, 60, 72},
-							  pos_Gosmas{5, 20, 33, 41, 48, 65}, pos_Moscas{15, 30, 45, 53, 59, 73}
+							  pos_Gosmas{5, 20, 33, 41, 49, 65}, pos_Moscas{15, 30, 45, 53, 59, 73}
 {
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 4;
@@ -32,7 +32,7 @@ void Fases::Floresta::CriarInimigos()
 
 void Fases::Floresta::CriarMoscas()
 {
-	std::ifstream arquivo(ARQUIVO);
+	std::ifstream arquivo(ARQUIVOF);
 
 	// verifica se o arquivo esta vazio:
 	if (arquivo.peek() == -1 || !arquivo)
@@ -77,7 +77,7 @@ void Fases::Floresta::CriarMoscas()
 void Fases::Floresta::CriarGosmas()
 {
 	// abre arquivo para leitura
-	std::ifstream arquivo(ARQUIVO);
+	std::ifstream arquivo(ARQUIVOF);
 
 	// verifica se o arquivo esta vazio:
 	if (arquivo.peek() == -1 || !arquivo)
@@ -138,7 +138,7 @@ void Fases::Floresta::CriarObstaculos()
 
 void Fases::Floresta::CriarEspinhos()
 {
-	std::ifstream arquivo(ARQUIVO);
+	std::ifstream arquivo(ARQUIVOF);
 
 	if (arquivo.peek() == -1 || !arquivo)
 	{
@@ -187,9 +187,29 @@ void Fases::Floresta::Inicializa()
 	CriarInimigos();
 	Player1->setFase(1);
 	Player2->setFase(1);
+	Player1->criarProjetil();
+	Player2->criarProjetil();
+	// adiciona os projeteis no gerenciador de colisoes e na lista
+	G_Colisoes.addProjetil(static_cast<Projetil *>(Player1->getArma()));
+	G_Colisoes.addProjetil(static_cast<Projetil *>(Player2->getArma()));
+	LEs.InserirEntidade(static_cast<Entidade *>(Player1->getArma()));
+	LEs.InserirEntidade(static_cast<Entidade *>(Player2->getArma()));
 	G_Colisoes.addJogador(Player1);
 	G_Colisoes.addJogador(Player2);
 	LEs.Inicializar();
+}
+
+void Fases::Floresta::Apagar_save()
+{
+	std::ofstream arquivo(ARQUIVOF);
+	if (!arquivo)
+	{
+		arquivo.close();
+	}
+	else {
+		arquivo << "";
+		arquivo.close();
+	}
 }
 
 void Fases::Floresta::salvar()

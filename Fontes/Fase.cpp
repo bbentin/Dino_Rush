@@ -16,13 +16,13 @@ void Fases::Fase::gerenciar_colisoes()
 	G_Colisoes.executar();
 }
 
-void Fases::Fase::setJogador(Entidades::Personagens::Jogador *inserido)
+void Fases::Fase::setJogador(Entidades::Personagens::Jogador* inserido)
 {
 	if (!Entidades::Personagens::Jogador::getJogador2())
 	{
 		Player1 = inserido;
-		LEs.InserirEntidade(static_cast<Entidade *>(Player1));
-		LEs.InserirEntidade(static_cast<Entidade *>(Player1->getArma()));
+		LEs.InserirEntidade(static_cast<Entidade*>(Player1));
+		LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
 		G_Colisoes.addProjetil(Player1->getArma());
 	}
 	else if (Entidades::Personagens::Jogador::getJogador2())
@@ -30,43 +30,42 @@ void Fases::Fase::setJogador(Entidades::Personagens::Jogador *inserido)
 		if (Player1 == nullptr)
 		{
 			Player1 = inserido;
-			LEs.InserirEntidade(static_cast<Entidade *>(Player1));
-			LEs.InserirEntidade(static_cast<Entidade *>(Player1->getArma()));
+			LEs.InserirEntidade(static_cast<Entidade*>(Player1));
+			LEs.InserirEntidade(static_cast<Entidade*>(Player1->getArma()));
 			G_Colisoes.addProjetil(Player1->getArma());
 		}
 		else if (Player2 == nullptr)
 		{
 			Player2 = inserido;
-			LEs.InserirEntidade(static_cast<Entidade *>(Player2));
-			LEs.InserirEntidade(static_cast<Entidade *>(Player2->getArma()));
+			LEs.InserirEntidade(static_cast<Entidade*>(Player2));
+			LEs.InserirEntidade(static_cast<Entidade*>(Player2->getArma()));
 			G_Colisoes.addProjetil(Player2->getArma());
 		}
 	}
 }
 
-sf::Clock *Fases::Fase::getRelogio()
+sf::Clock* Fases::Fase::getRelogio()
 {
 	return &relogio_global;
 }
 
 void Fases::Fase::gerar_fase(int num)
 {
-	std::ifstream arquivoj(ARQUIVO);
-	if (!arquivoj || arquivoj.peek() == -1)
+	if (num == 2)
 	{
-		arquivoj.close();
-		std::fstream arquivo;
-		if (num == 2)
+		std::ifstream arquivoF(ARQUIVOF);
+		if (!arquivoF || arquivoF.peek() == -1)
 		{
-			arquivo.open("Imagens/Fase/Deserto/Deserto.txt");
+			arquivoF.close();
+			std::fstream arquivof;
 			string linha;
-			arquivoF.open("Imagens/Fase/Floresta/Floresta.txt");
-			if (!arquivoF.is_open())
+			arquivof.open("Imagens/Fase/Floresta/Floresta.txt");
+			if (!arquivof.is_open())
 			{
 				std::cout << "Nao abriu o arquivo de Floresta" << std::endl;
 			}
 			int j = 0;
-			while (getline(arquivoF, linha))
+			while (getline(arquivof, linha))
 			{
 				for (int i = 0; i < linha.size(); i++)
 				{
@@ -77,29 +76,30 @@ void Fases::Fase::gerar_fase(int num)
 				}
 				j++;
 			}
-			arquivoF.close();
+			arquivof.close();
 		}
 		else
 		{
 			recuperada = true;
-			nlohmann::json json = nlohmann::json::parse(arquivof);
+			nlohmann::json json = nlohmann::json::parse(arquivoF);
 			for (auto it = json.begin(); it != json.end(); ++it)
 			{
 				string id = to_string((*it).front());
 				if (id == "[9]")
 				{
 					CriarEntidades((char)id[1], sf::Vector2f(
-													(float)((*it)["posicao"][0]),
-													(float)((*it)["posicao"][1])));
+						(float)((*it)["posicao"][0]),
+						(float)((*it)["posicao"][1])));
 				}
 			}
-			arquivof.close();
+			arquivoF.close();
 		}
 	}
 
-	if (num == 2)
+	if (num == 1)
 	{
-		if (arquivod.peek() == -1)
+		std::ifstream arquivod(ARQUIVOD);
+		if (arquivod.peek() == -1 || !arquivod)
 		{
 			arquivod.close();
 			std::fstream arquivoD;
@@ -133,8 +133,8 @@ void Fases::Fase::gerar_fase(int num)
 				if (id == "[8]")
 				{
 					CriarEntidades((char)id[1], sf::Vector2f(
-													(float)((*it)["posicao"][0]),
-													(float)((*it)["posicao"][1])));
+						(float)((*it)["posicao"][0]),
+						(float)((*it)["posicao"][1])));
 				}
 			}
 			arquivod.close();
@@ -164,17 +164,17 @@ void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos)
 	{
 		if (!recuperada)
 		{
-			Chao_Floresta *pCh_Floresta = new Chao_Floresta(pos.y * 16);
+			Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y * 16);
 			pCh_Floresta->setPosi(pos.x * 16, pos.y * 16);
-			G_Colisoes.addObstaculo(static_cast<Obstaculo *>(pCh_Floresta));
-			LEs.InserirEntidade(static_cast<Entidade *>(pCh_Floresta));
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Floresta));
+			LEs.InserirEntidade(static_cast<Entidade*>(pCh_Floresta));
 		}
 		else
 		{
-			Chao_Floresta *pCh_Floresta = new Chao_Floresta(pos.y);
+			Chao_Floresta* pCh_Floresta = new Chao_Floresta(pos.y);
 			pCh_Floresta->setPosi(pos);
-			G_Colisoes.addObstaculo(static_cast<Obstaculo *>(pCh_Floresta));
-			LEs.InserirEntidade(static_cast<Entidade *>(pCh_Floresta));
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Floresta));
+			LEs.InserirEntidade(static_cast<Entidade*>(pCh_Floresta));
 		}
 	}
 	break;
@@ -182,17 +182,17 @@ void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos)
 	{
 		if (!recuperada)
 		{
-			Chao_Deserto *pCh_Deserto = new Chao_Deserto(pos.y * 16);
+			Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y * 16);
 			pCh_Deserto->setPosi(pos.x * 16, pos.y * 16);
-			G_Colisoes.addObstaculo(static_cast<Obstaculo *>(pCh_Deserto));
-			LEs.InserirEntidade(static_cast<Entidade *>(pCh_Deserto));
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
+			LEs.InserirEntidade(static_cast<Entidade*>(pCh_Deserto));
 		}
 		else
 		{
-			Chao_Deserto *pCh_Deserto = new Chao_Deserto(pos.y);
+			Chao_Deserto* pCh_Deserto = new Chao_Deserto(pos.y);
 			pCh_Deserto->setPosi(pos);
-			G_Colisoes.addObstaculo(static_cast<Obstaculo *>(pCh_Deserto));
-			LEs.InserirEntidade(static_cast<Entidade *>(pCh_Deserto));
+			G_Colisoes.addObstaculo(static_cast<Obstaculo*>(pCh_Deserto));
+			LEs.InserirEntidade(static_cast<Entidade*>(pCh_Deserto));
 		}
 	}
 	break;
@@ -204,7 +204,7 @@ void Fases::Fase::CriarChao(int tipo_obs, sf::Vector2f pos)
 void Fases::Fase::VerificaMortos()
 {
 
-	Entidades::Entidade *pMorto = G_Colisoes.VerificaMortos();
+	Entidades::Entidade* pMorto = G_Colisoes.VerificaMortos();
 	if (pMorto != nullptr)
 	{
 		int i = pMorto->getId();
