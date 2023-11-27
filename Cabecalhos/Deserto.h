@@ -25,6 +25,7 @@ namespace Fases {
         void CriarMoscas();
         void CriarChefao();
         void CriarLamas();
+        void Apagar_save();
         void Inicializa();
         void salvar();
     };
