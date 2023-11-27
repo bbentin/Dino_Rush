@@ -23,11 +23,14 @@ void Ranking::carregar(){
 		std::cout << "Arquivo vazio" <<	std::endl;
 	}
 	else {
+		buffer.str("");
+		buffer << "[";
 		nlohmann::json json = nlohmann::json::parse(arquivo);
-
 		for (auto it = json.begin(); it != json.end(); ++it) {
 			std::string name = to_string((*it)["nome"]);
-			std::string points = to_string((*it)["pontos"][0]);	
+			std::string points = to_string((*it)["pontos"][0]);
+			buffer << "{\"nome\":" << name << ",";
+			buffer << "\"pontos\": [" << points << "]}," << std::endl;
 			pontos.push_back(points);
 			nomes.push_back(name);
 			}
@@ -36,8 +39,7 @@ void Ranking::carregar(){
 	}
 
 
-void Ranking::executar()
-{
+void Ranking::executar(){
 	desenha();
 }
 
@@ -54,8 +56,17 @@ void Ranking::desenha(){
 	}
 }
 
-void Ranking::Inicializa()
-{
+void Ranking::escrever(std::string nick, int pontuacao){
+	std::ofstream arquivo(ARQUIVO);
+	nick.erase(nick.begin() + 0);
+	nick.erase(nick.end());
+	buffer << "{\"nome\":\""<<nick<<"\","<<"\"pontos\": ["<<pontuacao<<"]}"<<std::endl;
+	buffer << "]";
+	arquivo << buffer.str();
+	arquivo.close();
+}
+
+void Ranking::Inicializa(){
 	carregar();
 	Textura.loadFromImage(Grafico->getImagem(getId()));
 	Imagem.setTexture(Textura);

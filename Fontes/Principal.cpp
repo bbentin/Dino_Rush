@@ -10,6 +10,8 @@ menu_pause(nullptr),menu_salvar(nullptr){
 	menu_principal = new Menu(0);
 	menu_pause = new Menu(1);
 	menu_salvar = new Menu(2);
+	ranking = new Ranking();
+	ranking->Inicializa();
 	GEventos.setTela(GGrafico.getTela());
 	GEventos.setJogador(&Primeiro);
 	GEventos.setJogador(&Segundo);
@@ -75,20 +77,14 @@ void Principal::Executar() {
 			}
 		}
 		if (GEventos.getstate() == 3){
-			if (ranking == nullptr)
-			{
-				ranking = new Ranking();
-				ranking->Inicializa();
-			}
-			else
-			{
+			
+			
 				ranking->executar();
 				/*if (GEventos.getstate() == 0)
 				{
 					ranking = nullptr;
 					delete ranking;
 				}*/
-			}
 		}
 		if (GEventos.getstate() == 5){
 			menu_pause->executar();
@@ -99,19 +95,28 @@ void Principal::Executar() {
 			if (menu_salvar->isPressed()) {
 				switch (menu_salvar->GetItem()) {
 				case 2:
-					Primeira_fase->salvar();
+					GEventos.finaliza_atual();
+					GEventos.finaliza_atual();
+					Primeiro.setNome(menu_salvar->getNome());
 					if (GEventos.getstate() == 2)
 					{
 						Segunda_fase->salvar();
+						ranking->escrever(Primeiro.getNome(), Primeiro.getPontos() + Segundo.getPontos());
 					}
-					menu_salvar->setPressed(false);
+					if (GEventos.getstate() == 1) {
+						Primeira_fase->salvar();
+						ranking->escrever(Primeiro.getNome(), Primeiro.getPontos() + Segundo.getPontos());
+					}
 					GEventos.finaliza_atual();
+					menu_salvar->setPressed(false);
 					break;
 				case 3:
 					menu_salvar->setPressed(false);
+					GEventos.finaliza_atual();
 					break;
 				case 4:
 					menu_salvar->setPressed(false);
+					GGrafico.Fecha_Tela();
 					break;
 				default:
 					break;
@@ -120,7 +125,7 @@ void Principal::Executar() {
 		}
 		else if (GEventos.getstate() == 4)
 		{
-			GGrafico.getTela()->close();
+			GGrafico.Fecha_Tela();
 		}
 		GGrafico.Exibir();
 	}

@@ -19,6 +19,7 @@ private:
 	std::vector<std::string> nomes;
 	sf::Text text;
 	sf::Font fonte;
+	std::ostringstream buffer;
 
 public:
 	Ranking();
@@ -27,6 +28,7 @@ public:
 	void carregar();
 	void executar();
 	void desenha();
+	void escrever(std::string nick, int pontuacao);
 
 	void Inicializa();
 };
