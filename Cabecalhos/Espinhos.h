@@ -13,7 +13,7 @@ namespace Entidades {
             sf::Clock relogio;
             int tempo;
         public:
-            Espinhos(sf::Vector2f pos = sf::Vector2f(0.f, 0.f), int tmp = 0, bool visi = false, const float limite_alt = 860);
+            Espinhos(sf::Vector2f pos = sf::Vector2f(0.f, 0.f), int tmp = 0, bool visi = false, const float limite_alt = 904);
             ~Espinhos();
 
             void Inicializa();

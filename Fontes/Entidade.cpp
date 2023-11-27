@@ -106,7 +106,7 @@ void Entidades::Entidade::empurrar(Entidade* empurrada) {
 void Entidades::Entidade::multiplica_Rapidez(float sinal){
 	
 	rapidez *= sinal;
-	
+	Limitar_Velocidade();
 }
 
 const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,0.5f);

@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Lama.h"
 #include <sstream>
 
-Entidades::Obstaculos::Lama::Lama(sf::Vector2f pos, const float limite):Obstaculo(7,limite),viscosidade(1) {
+Entidades::Obstaculos::Lama::Lama(sf::Vector2f pos, const float limite):Obstaculo(7,limite),viscosidade(0.5) {
 }
 
 Entidades::Obstaculos::Lama::~Lama() {

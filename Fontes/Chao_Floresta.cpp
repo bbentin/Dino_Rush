@@ -20,8 +20,9 @@ void Entidades::Obstaculos::Chao_Floresta::Colisao(Entidade* colidida, sf::Vecto
 }
 
 void Entidades::Obstaculos::Chao_Floresta::obstacular(Entidade* obstaculada) {
+	obstaculada->multiplica_Rapidez(4);
 	int tempo = susto.getElapsedTime().asSeconds();
-	if (tempo % 5  == 0) {
+	if (tempo % 10  == 0) {
 		empurrar(obstaculada);
 		susto.restart();
 	}
