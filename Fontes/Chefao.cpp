@@ -50,13 +50,8 @@ Entidades::Projetil* Entidades::Personagens::Chefao::getArma() const {
 
 void Entidades::Personagens::Chefao::criarArma() {
 	std::ifstream arquivo(ARQUIVOD);
-	if (!arquivo)
-	{
-		cout << "Erro ao abrir arquivo de salvamento" << endl;
-		exit(1);
-	}
 
-	if (arquivo.peek() == -1) {
+	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
 		arma = new Projetil();
 		arma->setDono(this);

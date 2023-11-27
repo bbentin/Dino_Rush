@@ -15,8 +15,7 @@ Fases::Floresta::~Floresta()
 {
 }
 
-void Fases::Floresta::executar()
-{
+void Fases::Floresta::executar(){
 	desenhar();
 	LEs.executar();
 	VerificaMortos();
@@ -40,10 +39,10 @@ void Fases::Floresta::CriarMoscas()
 		arquivo.close();
 		for (int i = 0; i < num_Moscas; i++)
 		{
-			Mosca *pMosca = new Mosca();
+			Entidades::Personagens::Mosca *pMosca = new Entidades::Personagens::Mosca();
 			pMosca->setPosi(pos_Moscas[i] * 16, altura_spawn_inimigos);
-			G_Colisoes.addInimigo(static_cast<Inimigo *>(pMosca));
-			LEs.InserirEntidade(static_cast<Entidade *>(pMosca));
+			G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo *>(pMosca));
+			LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pMosca));
 			num_inimigos++;
 		}
 	}
@@ -51,7 +50,7 @@ void Fases::Floresta::CriarMoscas()
 	{
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
-		Mosca *pMosca;
+		Entidades::Personagens::Mosca *pMosca;
 
 		for (auto it = json.begin(); it != json.end(); ++it)
 		{
@@ -63,9 +62,9 @@ void Fases::Floresta::CriarMoscas()
 					(float)((*it)["posicao"][0]),
 					(float)((*it)["posicao"][1]));
 				float vel = (float)((*it)["velocidade"][0]);
-				LEs.InserirEntidade(static_cast<Entidade *>(pMosca = new Mosca(pos, vel)));
+				LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pMosca = new Entidades::Personagens::Mosca(pos, vel)));
 				pMosca->setPosi(pos);
-				G_Colisoes.addInimigo(static_cast<Inimigo *>(pMosca));
+				G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo *>(pMosca));
 				num_inimigos++;
 			}
 			id = "";
@@ -86,10 +85,10 @@ void Fases::Floresta::CriarGosmas()
 		arquivo.close();
 		for (int i = 0; i < num_Gosmas; i++)
 		{
-			Gosma *pGosma = new Gosma();
+			Entidades::Personagens::Gosma *pGosma = new Entidades::Personagens::Gosma();
 			pGosma->setPosi(pos_Gosmas[i] * 16, altura_spawn_inimigos);
-			G_Colisoes.addInimigo(static_cast<Inimigo *>(pGosma));
-			LEs.InserirEntidade(static_cast<Entidade *>(pGosma));
+			G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo *>(pGosma));
+			LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pGosma));
 			num_inimigos++;
 		}
 	}
@@ -99,7 +98,7 @@ void Fases::Floresta::CriarGosmas()
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
 		// cria aux
-		Gosma *pGosma;
+		Entidades::Personagens::Gosma *pGosma;
 
 		// percorre o arquivo
 		for (auto it = json.begin(); it != json.end(); ++it)
@@ -115,11 +114,11 @@ void Fases::Floresta::CriarGosmas()
 					(float)((*it)["posicao"][1]));
 				float vel = (float)((*it)["velocidade"][0]);
 				// cria a Gosma com os valores lidos do arquivo e insere na lista de entidades
-				LEs.InserirEntidade(static_cast<Entidade *>(pGosma = new Gosma(pos, vel)));
+				LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pGosma = new Entidades::Personagens::Gosma(pos, vel)));
 				// seta posicao que foi recuperada
 				pGosma->setPosi(pos);
 				// adiciona no gerenciado de colisoes
-				G_Colisoes.addInimigo(static_cast<Inimigo *>(pGosma));
+				G_Colisoes.addInimigo(static_cast<Entidades::Personagens::Inimigo *>(pGosma));
 				// incrementa o numero de inimigos
 				num_inimigos++;
 			}
@@ -145,17 +144,17 @@ void Fases::Floresta::CriarEspinhos()
 		arquivo.close();
 		for (int i = 0; i < num_Espinhos; i++)
 		{
-			Espinhos *pEspinhos = new Espinhos();
+			Entidades::Obstaculos::Espinhos *pEspinhos = new Entidades::Obstaculos::Espinhos();
 			pEspinhos->setPosi(pos_Espinhos[i] * 16, altura_spawn_obstaculos);
-			G_Colisoes.addObstaculo(static_cast<Obstaculo *>(pEspinhos));
-			LEs.InserirEntidade(static_cast<Entidade *>(pEspinhos));
+			G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo *>(pEspinhos));
+			LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pEspinhos));
 		}
 	}
 	else
 	{
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
-		Espinhos *pEspinhos;
+		Entidades::Obstaculos::Espinhos *pEspinhos;
 
 		for (auto it = json.begin(); it != json.end(); ++it)
 		{
@@ -167,9 +166,9 @@ void Fases::Floresta::CriarEspinhos()
 					(float)((*it)["posicao"][1]));
 				int visivel = (int)((*it)["visivel"][0]);
 				int tempo = (int)((*it)["tempo"][0]);
-				LEs.InserirEntidade(static_cast<Entidade *>(pEspinhos = new Espinhos(pos, tempo, static_cast<bool>(visivel))));
+				LEs.InserirEntidade(static_cast<Entidades::Entidade *>(pEspinhos = new Entidades::Obstaculos::Espinhos(pos, tempo, static_cast<bool>(visivel))));
 				pEspinhos->setPosi(pos);
-				G_Colisoes.addObstaculo(static_cast<Obstaculo *>(pEspinhos));
+				G_Colisoes.addObstaculo(static_cast<Entidades::Obstaculos::Obstaculo *>(pEspinhos));
 			}
 			id = "";
 		}
@@ -185,18 +184,13 @@ void Fases::Floresta::Inicializa()
 	Imagem.setTexture(Textura);
 	CriarObstaculos();
 	CriarInimigos();
-	Player1->setFase(1);
-	Player2->setFase(1);
-	Player1->criarProjetil();
-	Player2->criarProjetil();
-	// adiciona os projeteis no gerenciador de colisoes e na lista
-	G_Colisoes.addProjetil(static_cast<Projetil *>(Player1->getArma()));
-	G_Colisoes.addProjetil(static_cast<Projetil *>(Player2->getArma()));
-	LEs.InserirEntidade(static_cast<Entidade *>(Player1->getArma()));
-	LEs.InserirEntidade(static_cast<Entidade *>(Player2->getArma()));
-	G_Colisoes.addJogador(Player1);
-	G_Colisoes.addJogador(Player2);
 	LEs.Inicializar();
+	G_Colisoes.addJogador(Player1);
+	LEs.InserirEntidade(static_cast<Entidades::Entidade*>(Player1->getArma()));
+	G_Colisoes.addProjetil(Player1->getArma());
+	G_Colisoes.addJogador(Player2);
+	LEs.InserirEntidade(static_cast<Entidades::Entidade*>(Player2->getArma()));
+	G_Colisoes.addProjetil(Player2->getArma());
 }
 
 void Fases::Floresta::Apagar_save()
