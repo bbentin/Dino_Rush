@@ -42,19 +42,31 @@ void Gerenciadores::Gerenciador_Eventos::finaliza_atual() {
 }
 
 void Gerenciadores::Gerenciador_Eventos::setMenu(Menu* men) {
-	if (!men->getPause()) { menu_principal = men; }
-	else if (men->getPause()) { menu_pause = men; }
+	int i = men->getType();
+	switch (i){
+	case 0:
+		menu_principal = men;
+		break;
+	case 1:
+		menu_pause = men;
+		break;
+	case 2:
+		menu_salvar = men;
+		menu_salvar->setPressed(false);
+		break;
+	default:
+		break;
+	}
 }
 
 void Gerenciadores::Gerenciador_Eventos::executar() {
 	sf::Event evento;
 	while (PTela->pollEvent(evento)) {
-
-
-		if (state.top() == 0) {	// controle das a��es do menu
+	// controle das acoes do menu	
+		if (state.top() == 0) {
 			if (evento.type == sf::Event::KeyPressed) {
 				switch (evento.key.code) {
-				case sf::Keyboard::Up:
+ 				case sf::Keyboard::Up:
 					menu_principal->MoveUp();
 					break;
 				case sf::Keyboard::Down:
@@ -69,7 +81,8 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				}
 			}
 		}
-		if (state.top() == 1 || state.top() == 2) { // controle das a��es dos Jogadores
+	//controle das acoes dos jogadores nas fases
+		if (state.top() == 1 || state.top() == 2) { // controle das acoes dos Jogadores
 			if (evento.type == sf::Event::KeyPressed) {
 				switch (evento.key.code) {
 				case sf::Keyboard::A:
@@ -105,7 +118,7 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				case sf::Keyboard::P: {
 					state.push(5);
 				}
-									break;
+				break;
 				default:
 					break;
 				}
@@ -133,7 +146,7 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				}
 			}
 		}
-
+	//controle das acoes do menu pausar
 		if (state.top() == 5) {
 			if (evento.type == sf::Event::KeyPressed) {
 				switch (evento.key.code) {
@@ -143,18 +156,35 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				case sf::Keyboard::Down:
 					menu_pause->MoveDown();
 					break;
-				case sf::Keyboard::Enter:
+				case sf::Keyboard::Enter: {
 					menu_pause->setPressed(true);
-					if (menu_pause->GetItem() == 1) {
+					switch (menu_pause->GetItem()) {
+					case 1:
 						state.push(6);
+						menu_pause->reset();
+						break;
+					case 2:
+						finaliza_atual();
+						break;
+					case 3:
+						menu_pause->setPressed(false);
+						finaliza_atual();
+						finaliza_atual();
+						break;
+					case 4:
+						menu_pause->setPressed(false);
+						PTela->close();
+					default:
+						break;
 					}
+				}
 					break;
 				default:
 					break;
 				}
 			}
 		}
-
+	//controle das acoes do menu salvar
 		if (state.top() == 6) {
 			if (evento.type == sf::Event::KeyPressed) {
 				switch (evento.key.code) {
@@ -164,7 +194,7 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				case sf::Keyboard::Down:
 					menu_salvar->MoveDown();
 					break;
-				case sf::Keyboard::Enter:
+				case sf::Keyboard::RShift:
 					menu_salvar->setPressed(true);
 					break;
 				default:
@@ -178,18 +208,6 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 			}
 		}
 
-		if (state.top() == 3)
-		{
-			if (evento.type == sf::Event::KeyPressed) {
-				switch (evento.key.code) {
-				case sf::Keyboard::Escape:
-					state.push(0);
-					break;
-				default:
-					break;
-				}
-			}
-		}
 		else if (evento.type == sf::Event::Closed) {
 			PTela->close();
 		}

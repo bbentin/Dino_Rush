@@ -26,6 +26,7 @@ namespace Entidades
             int pontos;
             int fase;
             bool sou_jogador2;
+            string nome;
 
         public:
             Jogador(const int i = 1, sf::Vector2f posi = sf::Vector2f(0, 0));
@@ -47,6 +48,8 @@ namespace Entidades
             void Reseta_Vidas();
             void criarProjetil();
             void setFase(int fase);
+            void setNome(string name);
+            const string getNome();
 
             static const bool getJogador2();
         };

@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Menu.h"
 
-Menu::Menu(int pau):Ente(13),pause(pau), fonte(), pressed(false), selected(1){
+Menu::Menu(int type):Ente(13),tipo(type), fonte(), pressed(false), selected(1){
 	Inicializa();
 }
 
@@ -15,7 +15,7 @@ void Menu::executar() {
 }
 
 void Menu::Inicializa(){
-	if (pause == 0) {
+	if (tipo == 0) {
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
 		fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
@@ -35,7 +35,7 @@ void Menu::Inicializa(){
 		textos[1].setFillColor(sf::Color::Red);
 		textos[1].setOutlineThickness(4);
 	}
-	if (pause == 1) {
+	if (tipo == 1) {
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
 		fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
@@ -55,18 +55,18 @@ void Menu::Inicializa(){
 		textos[1].setFillColor(sf::Color::Red);
 		textos[1].setOutlineThickness(4);
 	}
-	if (pause == 2)
+	if (tipo == 2)
 	{
 		Textura.loadFromImage(Grafico->getImagem(getId()));
 		Imagem.setTexture(Textura);
 		fonte.loadFromFile("Imagens/Texto/PressStart2P-Regular.ttf");
-		textos[0].setString("Digite seu nome:");
+		textos[0].setString("Digite o nome da dupla:");
 		// seta string vazia que vai ler o valor digitado:
 		textos[1].setString("");
 		textos[2].setString("Confirmar");
 		textos[3].setString("Voltar");
 		textos[4].setString("Sair sem salvar");
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 5; i++) {
 			textos[i].setFont(fonte);
 			textos[i].setFillColor(sf::Color::Green);
 			textos[i].setOutlineColor(sf::Color::Black);
@@ -128,18 +128,23 @@ bool Menu::isPressed(){
 	return pressed;
 }
 
-const bool Menu::getPause(){
-	return pause;
+const int Menu::getType(){
+	return tipo;
 }
+
 
 sf::Font Menu::getFonte(){
 	return fonte;
 }
 
 void Menu::setNome(std::string nome) {
-	textos[1].setString(nome);
+	if (tipo == 2) {
+		textos[1].setString(nome);
+	}
 }
 
 std::string Menu::getNome() {
-	return textos[1].getString();
+	if (tipo == 2) {
+		return textos[1].getString();
+	}
 }
