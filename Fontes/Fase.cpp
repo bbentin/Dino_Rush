@@ -13,7 +13,7 @@ void Fases::Fase::gerenciar_colisoes()
 	G_Colisoes.executar();
 }
 
-void Fases::Fase::setJogador(Entidades::Personagens::Jogador *inserido)
+void Fases::Fase::setJogador(Entidades::Personagens::Jogador* inserido)
 {
 	if (!Entidades::Personagens::Jogador::getJogador2())
 	{
@@ -38,7 +38,7 @@ void Fases::Fase::setJogador(Entidades::Personagens::Jogador *inserido)
 	}
 }
 
-sf::Clock *Fases::Fase::getRelogio()
+sf::Clock* Fases::Fase::getRelogio()
 {
 	return &relogio_global;
 }
@@ -89,7 +89,7 @@ void Fases::Fase::gerar_fase(int num)
 			arquivoj.close();
 		}
 
-	if (num == 2)
+	if (num == 1)
 	{
 		if (arquivod.peek() == -1 || !arquivod){
 			arquivod.close();
@@ -133,7 +133,6 @@ void Fases::Fase::gerar_fase(int num)
 	}
 }
 
-
 void Fases::Fase::CriarChao(sf::Vector2f pos){
 	Entidades::Obstaculos::Chao_Floresta *pCh_Floresta = new Entidades::Obstaculos::Chao_Floresta(pos.y * 16);
 	pCh_Floresta->setPosi(pos.x * 16, pos.y * 16);
@@ -144,7 +143,7 @@ void Fases::Fase::CriarChao(sf::Vector2f pos){
 void Fases::Fase::VerificaMortos()
 {
 
-	Entidades::Entidade *pMorto = G_Colisoes.VerificaMortos();
+	Entidades::Entidade* pMorto = G_Colisoes.VerificaMortos();
 	if (pMorto != nullptr)
 	{
 		int i = pMorto->getId();

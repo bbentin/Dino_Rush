@@ -1,6 +1,7 @@
 #pragma once
 #include "Jogador.h"
 #include "Menu.h"
+#include "Ranking.h"
 #include <stack>
 
 namespace Gerenciadores {
@@ -12,7 +13,7 @@ namespace Gerenciadores {
 		Entidades::Personagens::Jogador* Jogador1;
 		Entidades::Personagens::Jogador* Jogador2;
 		sf::RenderWindow* PTela;
-		Menu* menu_principal, *menu_pause;
+		Menu* menu_principal, *menu_pause, *menu_salvar;
 		std::stack<int> state;
 
 	public:

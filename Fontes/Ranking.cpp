@@ -44,6 +44,36 @@ void Ranking::carregar()
 		}
 		arquivo.close();
 	}
+
+	// abre o arquivo da outra fase e soma as pontuações pros mesmos jogadores:
+	std::ifstream arquivo2(ARQUIVO2);
+
+	if (arquivo2.peek() == -1 || !arquivo2) {
+		arquivo2.close();
+		cout << "Arquivo vazio" << endl;
+	}
+	else {
+		nlohmann::json json = nlohmann::json::parse(arquivo2);
+
+		for (auto it = json.begin(); it != json.end(); ++it) {
+			string id = to_string((*it)["id"][0]);
+			string jogador = to_string((*it)["jogador2"][0]);
+			if (id == "1")
+			{
+				string aux = to_string((*it)["pontos"][0]);
+				pontos.push_back(aux);
+				if (jogador == "0")
+				{
+					nomes.push_back("Jogador 1");
+				}
+				else if (jogador == "1")
+				{
+					nomes.push_back("Jogador 2");
+				}
+			}
+		}
+		arquivo2.close();
+	}
 }
 
 void Ranking::executar()

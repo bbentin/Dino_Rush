@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Floresta.h"
 
 Fases::Floresta::Floresta() : Fase(14, 1), pos_Espinhos{8, 25, 39, 43, 60, 72},
-							  pos_Gosmas{5, 20, 33, 41, 48, 65}, pos_Moscas{15, 30, 45, 53, 59, 73}
+							  pos_Gosmas{5, 20, 33, 41, 49, 65}, pos_Moscas{15, 30, 45, 53, 59, 73}
 {
 	srand(time(NULL));
 	num_Moscas = 3 + rand() % 4;
@@ -191,6 +191,19 @@ void Fases::Floresta::Inicializa()
 	G_Colisoes.addJogador(Player2);
 	LEs.InserirEntidade(static_cast<Entidades::Entidade*>(Player2->getArma()));
 	G_Colisoes.addProjetil(Player2->getArma());
+}
+
+void Fases::Floresta::Apagar_save()
+{
+	std::ofstream arquivo(ARQUIVOF);
+	if (!arquivo)
+	{
+		arquivo.close();
+	}
+	else {
+		arquivo << "";
+		arquivo.close();
+	}
 }
 
 void Fases::Floresta::salvar()
