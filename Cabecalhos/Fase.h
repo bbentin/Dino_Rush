@@ -11,6 +11,7 @@
 
 #define ARQUIVOF "Imagens/Fase/Floresta/entidades.json"
 #define ARQUIVOD "Imagens/Fase/Deserto/entidades.json"
+#define ARQUIVOR "Imagens/Ranking/ranking.json"
 
 namespace Fases{
     class Fase :

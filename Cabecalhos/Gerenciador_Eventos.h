@@ -15,6 +15,7 @@ namespace Gerenciadores {
 		sf::RenderWindow* PTela;
 		Menu* menu_principal, *menu_pause, *menu_salvar;
 		std::stack<int> state;
+		Ranking* ranking;
 
 	public:
 

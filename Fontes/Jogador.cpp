@@ -1,14 +1,13 @@
 #include "../Cabecalhos/Jogador.h"
 
 Entidades::Personagens::Jogador::Jogador(const int i, sf::Vector2f posi) : Personagem(i, posi), andar_direita(false),
-																		   andar_esquerda(false), arma(nullptr), altura_jogador(828), pontos(0), fase(0)
-{
+andar_esquerda(false), arma(nullptr), altura_jogador(828), pontos(0), fase(0),nome() {
+
 	pontos = 0;
 	rapidez = 4;
 	num_vidas = 5;
 	olhando_direita = true;
 	no_ar = true;
-	//criarProjetil();
 	if (!Jogador2)
 	{
 		Jogador2 = true;
@@ -207,7 +206,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 			Imagem.setScale(2.0, 2.0);
 			setPosi(0, 500);
 			setNoAr(true);
-			//criarProjetil();
+			criarProjetil();
 		}
 		else
 		{
@@ -226,7 +225,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					//criarProjetil();
+					criarProjetil();
 				}
 				else if (id == "1" && jogador == "1" && sou_jogador2)
 				{
@@ -237,7 +236,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					//criarProjetil();
+					criarProjetil();
 				}
 				id = "";
 			}
@@ -255,7 +254,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 			Imagem.setScale(2.0, 2.0);
 			setPosi(0, 500);
 			setNoAr(true);
-			//criarProjetil();
+			criarProjetil();
 		}
 		else
 		{
@@ -274,7 +273,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					//criarProjetil();
+					criarProjetil();
 				}
 				else if (id == "1" && jogador == "1" && sou_jogador2)
 				{
@@ -285,7 +284,7 @@ void Entidades::Personagens::Jogador::Inicializa()
 					Imagem.setTexture(Textura);
 					Imagem.setScale(2.0, 2.0);
 					pontos = (int)((*it)["pontos"][0]);
-					//criarProjetil();
+					criarProjetil();
 				}
 				id = "";
 			}
@@ -308,7 +307,7 @@ void Entidades::Personagens::Jogador::criarProjetil(){
 	if (fase == 14){
 		std::ifstream arquivo(ARQUIVOF);
 
-		if (arquivof.peek() == -1 || !arquivof)
+		if (arquivo.peek() == -1 || !arquivo)
 		{
 			arquivo.close();
 			arma = new Projetil();
@@ -373,6 +372,14 @@ void Entidades::Personagens::Jogador::criarProjetil(){
 
 void Entidades::Personagens::Jogador::setFase(int f){
 	fase = f;
+}
+
+void Entidades::Personagens::Jogador::setNome(string name){
+	nome = name;
+}
+
+const string Entidades::Personagens::Jogador::getNome(){
+	return nome;
 }
 
 // define o primeiro jogador
