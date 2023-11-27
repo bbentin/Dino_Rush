@@ -27,7 +27,7 @@ void Entidades::Personagens::Personagem::mover_direita(float velo) {
 }
 
 void Entidades::Personagens::Personagem::pular(int altura){
-	multiplica_Rapidez(true);
+	multiplica_Rapidez(4);
 	if (no_chao) {
 		Imagem.move(sf::Vector2f(0, -altura));
 		 no_ar = true;

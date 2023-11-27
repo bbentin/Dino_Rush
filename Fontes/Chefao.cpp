@@ -2,7 +2,7 @@
 
 Entidades::Personagens::Chefao::Chefao(sf::Vector2f pos) :Inimigo(4), arma(nullptr) {
 	criarArma();
-	num_vidas = 10;
+	num_vidas = 4 * nivel_maldade;
 }
 Entidades::Personagens::Chefao::~Chefao() {
 	delete arma;

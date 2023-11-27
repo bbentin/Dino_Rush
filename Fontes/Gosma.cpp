@@ -2,7 +2,7 @@
 #include <sstream>
 
 Entidades::Personagens::Gosma::Gosma(sf::Vector2f pos, float vel):Inimigo(3, pos),num_pulos(10) {
-	num_vidas = 3;
+	num_vidas = 2 * nivel_maldade;
 }
 
 Entidades::Personagens::Gosma::~Gosma() {

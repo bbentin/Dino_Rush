@@ -2,6 +2,7 @@
 #include <sstream>
 
 Entidades::Personagens::Mosca::Mosca(sf::Vector2f pos, float vel):Inimigo(5),pos_x_inicial(getPosicao().x),direita(true),sujeira(20) {
+	num_vidas = nivel_maldade * 3;
 }
 
 Entidades::Personagens::Mosca::~Mosca() {
@@ -44,7 +45,7 @@ void Entidades::Personagens::Mosca::Colisao(Entidade* colidida, sf::Vector2f lim
 void Entidades::Personagens::Mosca::danar(Entidade* Afetada){
 	static_cast<Entidades::Personagens::Personagem*>(Afetada)->operator--();
 	empurrar(Afetada);
-	Afetada->multiplica_Rapidez(false);
+	Afetada->multiplica_Rapidez(0.5);
 }
 
 void Entidades::Personagens::Mosca::Inicializa(){

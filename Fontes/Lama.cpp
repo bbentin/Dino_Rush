@@ -1,7 +1,7 @@
 #include "../Cabecalhos/Lama.h"
 #include <sstream>
 
-Entidades::Obstaculos::Lama::Lama(sf::Vector2f pos, const float limite):Obstaculo(7,limite),viscosidade(0) {
+Entidades::Obstaculos::Lama::Lama(sf::Vector2f pos, const float limite):Obstaculo(7,limite),viscosidade(0.5) {
 }
 
 Entidades::Obstaculos::Lama::~Lama() {
@@ -23,10 +23,8 @@ void Entidades::Obstaculos::Lama::Colisao(Entidade* colidida, sf::Vector2f limit
 }
 
 void Entidades::Obstaculos::Lama::obstacular(Entidade* obstaculada){
-	//empurrar(obstaculada);
-	if (obstaculada->getRapidez() > 2 ) {
-		obstaculada->multiplica_Rapidez(false);
-	}
+	obstaculada->multiplica_Rapidez(viscosidade);	
+	Limitar_Velocidade();
 }
 
 void Entidades::Obstaculos::Lama::salvar(std::ostringstream* entrada){

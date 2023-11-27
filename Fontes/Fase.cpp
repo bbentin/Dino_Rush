@@ -1,6 +1,6 @@
 #include "../Cabecalhos/Fase.h"
 
-Fases::Fase::Fase(const int i, const int k) : Ente(i), relogio_global(), G_Colisoes(), LEs(), k_fase(k), Player1(nullptr), Player2(nullptr), altura_spawn_inimigos(600), altura_spawn_obstaculos(920)
+Fases::Fase::Fase(const int i, const int k) : Ente(i), relogio_global(), G_Colisoes(), LEs(), k_fase(k), Player1(nullptr), Player2(nullptr), altura_spawn_inimigos(600), altura_spawn_obstaculos(600)
 , ativa(false), final(false), num_inimigos(0), recuperada(false){
 }
 
@@ -89,7 +89,7 @@ void Fases::Fase::gerar_fase(int num)
 			arquivoj.close();
 		}
 
-	if (num == 1)
+	if (num == 2)
 	{
 		if (arquivod.peek() == -1 || !arquivod){
 			arquivod.close();

@@ -7,7 +7,6 @@ Fases::Deserto::Deserto() :Fase(11, 2), pos_Moscas{ 5,15,25,40,57,70}, pos_Chefa
 	num_Lamas = 3 + rand() % 4;
 	num_Chefoes = 3 + rand() % 1;
 	gerar_fase(k_fase);
-	ativa = true;
 }
 
 Fases::Deserto::~Deserto(){
