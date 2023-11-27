@@ -20,7 +20,6 @@ namespace Gerenciadores {
 		void addJogador(Entidades::Personagens::Jogador* pJog);
 		void addProjetil(Entidades::Projetil* pArma);
 		void addObstaculo(Entidades::Obstaculos::Obstaculo* pObs);
-		void removeObstaculo(Entidades::Entidade* pRemovido);
 		Entidades::Entidade* VerificaMortos();
 
 		void executar();

@@ -33,20 +33,6 @@ void Gerenciadores::Gerenciador_Colisoes::addObstaculo(Entidades::Obstaculos::Ob
 	}
 }
 
-void Gerenciadores::Gerenciador_Colisoes::removeObstaculo(Entidades::Entidade* pRemovido){
-	if (pRemovido != nullptr) {
-		int i = 0;
-		while (i < LOs.size()) {
-			if (pRemovido == LOs.at(i)) {
-				LOs.erase(LOs.begin() + i);
-				cout << "Entidade removida do vetor no gerenciador de colisoes" << endl;
-				return;
-			}
-			i++;
-		}
-	}
-}
-
 Entidades::Entidade* Gerenciadores::Gerenciador_Colisoes::VerificaMortos(){
 	int i = 0;
 	Entidades::Entidade* pMorto = nullptr;
