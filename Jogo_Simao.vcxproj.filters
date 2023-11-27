@@ -81,9 +81,6 @@
     <ClCompile Include="Fontes\Gosma.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Fontes\Chao_Deserto.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Fontes\Chao_Floresta.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
@@ -171,9 +168,6 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Cabecalhos\Cacto.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Cabecalhos\Chao_Deserto.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Cabecalhos\Chao_Floresta.h">

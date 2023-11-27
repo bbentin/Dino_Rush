@@ -3,6 +3,8 @@
 
 
 Entidades::Projetil::Projetil(sf::Vector2f pos, Entidade* Dono, float vel, bool visi) :Entidade(12), visivel(visi), dono(Dono), pontua(true) {
+	setPosi(pos);
+	Inicializa();
 }
 
 Entidades::Projetil::~Projetil() {
@@ -15,7 +17,6 @@ void Entidades::Projetil::reseta_posicao(){
 void Entidades::Projetil::Colisao(Entidade* colidida, sf::Vector2f limites) {
 	int IdDono = dono->getId();
 	int IdColidida = colidida->getId();
-
 	if (IdDono == 1 || IdDono == 2) {
 		switch (IdColidida) {
 		case 3:
