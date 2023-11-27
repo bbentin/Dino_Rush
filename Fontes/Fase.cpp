@@ -89,7 +89,7 @@ void Fases::Fase::gerar_fase(int num)
 			arquivoj.close();
 		}
 
-	if (num == 1)
+	if (num == 2)
 	{
 		if (arquivod.peek() == -1 || !arquivod){
 			arquivod.close();

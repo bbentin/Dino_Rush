@@ -8,23 +8,13 @@ Entidades::Entidade::Entidade(const int i, sf::Vector2f posi):Ente(i),no_ar(true
 Entidades::Entidade::~Entidade() {
 }
 
-sf::Vector2f Entidades::Entidade::Limitar_Velocidade() {
-	sf::Vector2f Velocidade_condizente(0.0, 0.0);
-
-	Velocidade_condizente = velocidade;
-	if (velocidade.x > 30) {
-		Velocidade_condizente.x = 30;
+void Entidades::Entidade::Limitar_Velocidade() {
+	if (rapidez > 4) {
+		rapidez = 4;
 	}
-	if (velocidade.y > 30) {
-		Velocidade_condizente.y = 30;
+	if (rapidez < 0.5) {
+		rapidez = 0.5;
 	}
-	if (velocidade.x < -30) {
-		Velocidade_condizente.x = -30;
-	}
-	if (velocidade.y < -400) {
-		Velocidade_condizente.y = -400;
-	}
-	return Velocidade_condizente;
 }
 
 const sf::Vector2f Entidades::Entidade::getPosicao(){
@@ -113,13 +103,10 @@ void Entidades::Entidade::empurrar(Entidade* empurrada) {
 	}
 }
 
-void Entidades::Entidade::multiplica_Rapidez(bool sinal){
-	if (sinal) {
-		rapidez = 4;
-	}
-	else {
-		rapidez = 0.5;
-	}
+void Entidades::Entidade::multiplica_Rapidez(float sinal){
+	
+	rapidez *= sinal;
+	
 }
 
 const sf::Vector2f Entidades::Entidade::Gravidade = sf::Vector2f(0.0f,0.5f);

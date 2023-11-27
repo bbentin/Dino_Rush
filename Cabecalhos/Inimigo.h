@@ -3,8 +3,9 @@
 namespace Entidades {
 	namespace Personagens {
 		class Inimigo:public Personagem {
-
+	
 		protected:
+			int nivel_maldade;
 			virtual void padrao_acao() = 0; //função abstrata para padrão de ação
 		public:
 

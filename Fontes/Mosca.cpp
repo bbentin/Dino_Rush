@@ -2,6 +2,7 @@
 #include <sstream>
 
 Entidades::Personagens::Mosca::Mosca(sf::Vector2f pos, float vel):Inimigo(5),pos_x_inicial(getPosicao().x),direita(true),sujeira(20) {
+	num_vidas = nivel_maldade * 3;
 }
 
 Entidades::Personagens::Mosca::~Mosca() {

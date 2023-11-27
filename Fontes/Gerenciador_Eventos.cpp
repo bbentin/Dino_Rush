@@ -35,7 +35,7 @@ int Gerenciadores::Gerenciador_Eventos::getstate() {
 }
 
 void Gerenciadores::Gerenciador_Eventos::finaliza_atual() {
-	if (state.top() == 1 || state.top() == 2) {
+	if (state.top() == 1 || state.top() == 2 || state.top() == 3) {
 		menu_principal->reset();
 	}
 	state.pop();
@@ -207,7 +207,13 @@ void Gerenciadores::Gerenciador_Eventos::executar() {
 				}
 			}
 		}
-
+		if (state.top() == 3) {
+			if (evento.type == sf::Event::KeyPressed) {
+				if (evento.key.code == sf::Keyboard::Escape) {
+					finaliza_atual();
+				}
+			}
+		}
 		else if (evento.type == sf::Event::Closed) {
 			PTela->close();
 		}

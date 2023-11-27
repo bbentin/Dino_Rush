@@ -45,7 +45,6 @@ void Principal::Executar() {
 				Primeira_fase->executar();
 				if (Primeira_fase->verificaFinal())
 				{
-					Primeira_fase->Apagar_save();
 					Primeira_fase = nullptr;
 					delete Primeira_fase;
 					Primeiro.Reseta_Vidas();
@@ -67,7 +66,6 @@ void Principal::Executar() {
 				Segunda_fase->executar();
 				if (Segunda_fase->verificaFinal() || GEventos.getstate() == 0)
 				{
-					Segunda_fase->Apagar_save();
 					Segunda_fase = nullptr;
 					delete Segunda_fase;
 					Primeiro.Reseta_Vidas();
@@ -76,15 +74,8 @@ void Principal::Executar() {
 				}
 			}
 		}
-		if (GEventos.getstate() == 3){
-			
-			
+		if (GEventos.getstate() == 3){						
 				ranking->executar();
-				/*if (GEventos.getstate() == 0)
-				{
-					ranking = nullptr;
-					delete ranking;
-				}*/
 		}
 		if (GEventos.getstate() == 5){
 			menu_pause->executar();
