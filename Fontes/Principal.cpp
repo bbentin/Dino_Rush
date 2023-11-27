@@ -2,8 +2,9 @@
 #include "../Cabecalhos/Menu.h"
 #include "../Cabecalhos/Ranking.h"
 
-Principal::Principal() : GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu_principal(nullptr), ranking(nullptr), menu_pause(nullptr)
-{
+Principal::Principal() : GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullptr), Segunda_fase(nullptr), menu_principal(nullptr), ranking(nullptr),
+menu_pause(nullptr),menu_salvar(nullptr){
+	Primeiro.setNome("Bruno");
 	Ente::setGerenciador(&GGrafico);
 	GEventos.Singleton();
 	menu_principal = new Menu(0);
@@ -14,12 +15,11 @@ Principal::Principal() : GGrafico(), Primeiro(), Segundo(), Primeira_fase(nullpt
 	GEventos.setJogador(&Segundo);
 	GEventos.setMenu(menu_principal);
 	GEventos.setMenu(menu_pause);
+	GEventos.setMenu(menu_salvar);
 }
-Principal::~Principal()
-{
+Principal::~Principal(){
 }
-Gerenciadores::Gerenciador_Grafico *Principal::getGrafico()
-{
+Gerenciadores::Gerenciador_Grafico *Principal::getGrafico(){
 	return &GGrafico;
 }
 
@@ -27,12 +27,10 @@ void Principal::Executar() {
 	while (GGrafico.getTela()->isOpen()) {
 		GGrafico.Limpar_Tela();
 		GEventos.executar();
-		if (GEventos.getstate() == 0)
-		{
+		if (GEventos.getstate() == 0){
 			menu_principal->executar();
 		}
-		if (GEventos.getstate() == 1)
-		{
+		if (GEventos.getstate() == 1){
 			if (Primeira_fase == nullptr)
 			{
 				Primeira_fase = new Fases::Floresta();
@@ -54,8 +52,7 @@ void Principal::Executar() {
 				}
 			}
 		}
-		else if (GEventos.getstate() == 2)
-		{
+		if (GEventos.getstate() == 2){
 			if (Segunda_fase == nullptr)
 			{
 				Segunda_fase = new Fases::Deserto();
@@ -77,8 +74,7 @@ void Principal::Executar() {
 				}
 			}
 		}
-		else if (GEventos.getstate() == 3)
-		{
+		if (GEventos.getstate() == 3){
 			if (ranking == nullptr)
 			{
 				ranking = new Ranking();
@@ -87,67 +83,39 @@ void Principal::Executar() {
 			else
 			{
 				ranking->executar();
-				if (GEventos.getstate() == 0)
+				/*if (GEventos.getstate() == 0)
 				{
 					ranking = nullptr;
 					delete ranking;
-				}
+				}*/
 			}
 		}
-		else if (GEventos.getstate() == 5)
-		{
+		if (GEventos.getstate() == 5){
 			menu_pause->executar();
-			if (menu_pause->isPressed())
-			{
-				GEventos.finaliza_atual();
-				switch (menu_pause->GetItem())
-				{
-				case 1:
-					menu_pause->setPressed(false);
-					break;
+		}
+		if (GEventos.getstate() == 6){
+			
+			menu_salvar->executar();
+			if (menu_salvar->isPressed()) {
+				switch (menu_salvar->GetItem()) {
 				case 2:
-					menu_pause->setPressed(false);
-					break;
-				case 3:
-					menu_pause->setPressed(false);
+					Primeira_fase->salvar();
+					if (GEventos.getstate() == 2)
+					{
+						Segunda_fase->salvar();
+					}
+					menu_salvar->setPressed(false);
 					GEventos.finaliza_atual();
 					break;
+				case 3:
+					menu_salvar->setPressed(false);
+					break;
 				case 4:
-					menu_pause->setPressed(false);
-					GGrafico.getTela()->close();
+					menu_salvar->setPressed(false);
+					break;
 				default:
 					break;
 				}
-			}
-		}
-		else if (GEventos.getstate() == 6)
-		{
-			menu_salvar->executar();
-			switch (menu_salvar->GetItem())
-			{
-			case 2:
-				if (GEventos.getstate() == 1)
-				{
-					Primeira_fase->salvar();
-				}
-				if (GEventos.getstate() == 2)
-				{
-					Segunda_fase->salvar();
-				}
-				menu_salvar->setPressed(false);
-				break;
-			case 3:
-				menu_salvar->setPressed(false);
-				break;
-			case 4:
-				menu_salvar->setPressed(false);
-				while (GEventos.getstate() != 0)
-				{
-					GEventos.finaliza_atual();
-				}
-				break;
-			default:
-				break;
 			}
 		}
 		else if (GEventos.getstate() == 4)

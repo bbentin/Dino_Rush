@@ -222,4 +222,15 @@ void Fases::Floresta::salvar()
 	buffer << "]";
 	arquivo << buffer.str();
 	arquivo.close();
+
+	std::ofstream arquivor(ARQUIVOR);
+	if (!arquivor) {
+		cout << "Erro ao abrir arquivo de Ranking" << endl;
+	}else{
+		arquivor << "\"nome\": \"" << Player1->getNome() << "\"";
+		arquivor << "\"pontos\": [" << (Player1->getPontos() + Player2->getPontos())<<"]";
+		arquivor.close();
+	}
+	
+
 }

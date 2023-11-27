@@ -14,83 +14,43 @@ Ranking::~Ranking()
 {
 }
 
-void Ranking::carregar()
-{
+void Ranking::carregar(){
+	
 	std::ifstream arquivo(ARQUIVO);
 
 	if (arquivo.peek() == -1 || !arquivo) {
 		arquivo.close();
-		cout << "Arquivo vazio" << endl;
+		std::cout << "Arquivo vazio" <<	std::endl;
 	}
 	else {
 		nlohmann::json json = nlohmann::json::parse(arquivo);
 
 		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it)["id"][0]);
-			string jogador = to_string((*it)["jogador2"][0]);
-			if (id == "1")
-			{
-				string aux = to_string((*it)["pontos"][0]);
-				pontos.push_back(aux);
-				if (jogador == "0")
-				{
-					nomes.push_back("Jogador 1");
-				}
-				else if (jogador == "1")
-				{
-					nomes.push_back("Jogador 2");
-				}
+			std::string name = to_string((*it)["nome"]);
+			std::string points = to_string((*it)["pontos"][0]);	
+			pontos.push_back(points);
+			nomes.push_back(name);
 			}
 		}
 		arquivo.close();
 	}
 
-	// abre o arquivo da outra fase e soma as pontuações pros mesmos jogadores:
-	std::ifstream arquivo2(ARQUIVO2);
-
-	if (arquivo2.peek() == -1 || !arquivo2) {
-		arquivo2.close();
-		cout << "Arquivo vazio" << endl;
-	}
-	else {
-		nlohmann::json json = nlohmann::json::parse(arquivo2);
-
-		for (auto it = json.begin(); it != json.end(); ++it) {
-			string id = to_string((*it)["id"][0]);
-			string jogador = to_string((*it)["jogador2"][0]);
-			if (id == "1")
-			{
-				string aux = to_string((*it)["pontos"][0]);
-				pontos.push_back(aux);
-				if (jogador == "0")
-				{
-					nomes.push_back("Jogador 1");
-				}
-				else if (jogador == "1")
-				{
-					nomes.push_back("Jogador 2");
-				}
-			}
-		}
-		arquivo2.close();
-	}
-}
 
 void Ranking::executar()
 {
 	desenha();
 }
 
-void Ranking::desenha()
-{
+void Ranking::desenha(){
 	desenhar();
-	for (int i = 0; i < pontos.size(); i++)
-	{
+	std::list<std::string>::iterator it = pontos.begin();
+	for (int i = 0; i < pontos.size(); i++){
 		std::stringstream ss;
-		ss << nomes[i] << " " << pontos[i];
+		ss << nomes[i] << " " << *it;
 		text.setString(ss.str());
 		text.setPosition(sf::Vector2f(50, (i + 1) * 50));
 		Grafico->getTela()->draw(text);
+		it++;
 	}
 }
 

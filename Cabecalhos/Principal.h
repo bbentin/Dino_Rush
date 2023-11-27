@@ -4,7 +4,6 @@
 #include "ListaEntidades.h"
 #include "Deserto.h"
 #include "Floresta.h"
-#include "Ranking.h"
 #include <iostream>
 
 class Principal {
